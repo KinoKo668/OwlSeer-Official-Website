@@ -1,0 +1,11 @@
+node_modules
+build
+dist
+.git
+.trae
+.log
+.figma
+# Add your App project folder name here to prevent Vercel from uploading/building it
+# Example:
+# OwlSeer_iOS
+# mobile-app
