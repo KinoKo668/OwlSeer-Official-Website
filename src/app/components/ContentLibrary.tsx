@@ -25,6 +25,7 @@ import {
   Code,
 } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
+import { useSimulationTrigger } from './SimulationPageWrapper';
 
 interface ContentLibraryProps {
   onNavigate?: (page: string) => void;
@@ -67,6 +68,16 @@ export function ContentLibrary({
   onSelectConversation,
   onDeleteConversation,
 }: ContentLibraryProps) {
+  const { trigger } = useSimulationTrigger();
+
+  // Simulation Trigger: 30s dwell
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      trigger();
+    }, 30000);
+    return () => clearTimeout(timer);
+  }, [trigger]);
+
   const [timeRange, setTimeRange] = useState<'30' | '60' | '90'>('30');
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);

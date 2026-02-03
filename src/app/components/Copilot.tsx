@@ -40,6 +40,7 @@ import { SidebarPro } from './SidebarPro';
 import { ConversationSidebar } from './ConversationSidebar';
 import { CopilotMobile } from './CopilotMobile';
 import { useIsMobile } from './ui/use-mobile';
+import { useLocation } from 'react-router-dom';
 
 type MessageRole = 'user' | 'assistant';
 
@@ -277,6 +278,7 @@ export function Copilot({
         prefilledQuestion={prefilledQuestion}
         onDeleteConversation={handleDeleteConversation}
         onRenameConversation={handleRenameConversation}
+        onNavigate={onNavigate}
       />
     </div>
   );
@@ -290,6 +292,7 @@ export function CopilotContent({
   prefilledQuestion,
   onDeleteConversation,
   onRenameConversation,
+  onNavigate,
 }: {
   conversations: Conversation[];
   setConversations: React.Dispatch<React.SetStateAction<Conversation[]>>;
@@ -298,6 +301,7 @@ export function CopilotContent({
   prefilledQuestion?: string | null;
   onDeleteConversation: (convId: string) => void;
   onRenameConversation: (convId: string, newTitle: string) => void;
+  onNavigate?: (page: string, question?: string) => void;
 }) {
   const [inputValue, setInputValue] = React.useState('');
   const [isTyping, setIsTyping] = React.useState(false);
@@ -307,6 +311,37 @@ export function CopilotContent({
   const prefilledQuestionRef = React.useRef<string | null>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
+  const location = useLocation();
+  const isSimulation = location.pathname.startsWith('/simulation');
+
+  const handleInteraction = React.useCallback((e: React.SyntheticEvent) => {
+    if (!isSimulation) return;
+
+    // Check for Enter key in input/textarea
+    if (e.type === 'keydown') {
+       const keyEvent = e as React.KeyboardEvent;
+       if (keyEvent.key === 'Enter') {
+          const target = e.target as HTMLElement;
+          if (target.tagName === 'TEXTAREA' || target.tagName === 'INPUT') {
+             // Only if not shift+enter (which adds newline)
+             if (!keyEvent.shiftKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                onNavigate?.('auth');
+             }
+          }
+       }
+    }
+    
+    // Check for clicks on buttons
+    if (e.type === 'click') {
+        if ((e.target as HTMLElement).closest('button')) {
+            e.preventDefault();
+            e.stopPropagation();
+            onNavigate?.('auth');
+        }
+    }
+  }, [isSimulation, onNavigate]);
 
   const currentConversation = conversations.find((c) => c.id === currentConversationId);
   const messages = currentConversation?.messages || [];
@@ -429,7 +464,11 @@ export function CopilotContent({
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden relative">
+    <div 
+      className="flex-1 flex overflow-hidden relative"
+      onClickCapture={handleInteraction}
+      onKeyDownCapture={handleInteraction}
+    >
       {/* Conversation Sidebar */}
       <ConversationSidebar
         conversations={conversations}

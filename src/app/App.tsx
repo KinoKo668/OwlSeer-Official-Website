@@ -46,6 +46,7 @@ const BlogPostPage = React.lazy(() => import('./components/BlogPostPage').then(m
 const FAQPage = React.lazy(() => import('./components/FAQPage').then(m => ({ default: m.FAQPage })));
 const ContactPage = React.lazy(() => import('./components/ContactPage').then(m => ({ default: m.ContactPage })));
 const LegalPage = React.lazy(() => import('./components/LegalPage').then(m => ({ default: m.LegalPage })));
+import { SimulationProvider, SimulationPageWrapper } from './components/SimulationPageWrapper';
 
 // Loading fallback component
 function LoadingFallback() {
@@ -152,10 +153,44 @@ export default function App() {
     // Reset auto open flag for other navigations
     setAutoOpenAddAccountModal(false);
 
-    // Map legacy page names to routes
+    // Determine if we are currently in simulation mode
+    const isSimulation = location.pathname.startsWith('/simulation');
     let route = page;
-    if (page === 'landing') route = '/';
-    else if (!page.startsWith('/')) route = '/' + page;
+
+    if (isSimulation) {
+      // Map navigation to simulation routes where available
+      if (page === 'home') {
+        route = '/simulation';
+      } else if (page === 'dashboard') {
+        route = '/simulation/dashboard';
+      } else if (page === 'hashtag' || page === 'trends') {
+        route = '/simulation/trends';
+      } else if (page === 'studio') {
+        route = '/simulation/studio';
+      } else if (page === 'copilot') {
+        route = '/simulation/copilot';
+      } else if (page === 'intelligence') {
+        route = '/simulation/intelligence';
+      } else if (page === 'library') {
+        route = '/simulation/library';
+      } else if (page === 'scheduling') {
+        route = '/simulation/scheduling';
+      } else if (page === 'settings') {
+        route = '/simulation/settings';
+      } else if (page === 'weekly-report-detail') {
+        route = '/simulation/weekly-report-detail';
+      } else if (page === 'reports-archive') {
+        route = '/simulation/reports-archive';
+      } else {
+        // Fallback for pages without simulation version
+        if (page === 'landing') route = '/';
+        else if (!page.startsWith('/')) route = '/' + page;
+      }
+    } else {
+      // Standard routing
+      if (page === 'landing') route = '/';
+      else if (!page.startsWith('/')) route = '/' + page;
+    }
 
     navigate(route);
     
@@ -165,7 +200,7 @@ export default function App() {
       // Only clear prefilled question when navigating away from copilot
       setCopilotPrefilledQuestion(null);
     }
-  }, [navigate]);
+  }, [navigate, location.pathname]);
 
   const commonProps = {
     onNavigate: handleNavigateWithQuestion,
@@ -176,8 +211,9 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <React.Suspense fallback={<LoadingFallback />}>
-        <Routes>
+      <SimulationProvider>
+        <React.Suspense fallback={<LoadingFallback />}>
+          <Routes>
           {/* Landing & Public Pages */}
           <Route path="/" element={
             <>
@@ -341,7 +377,7 @@ export default function App() {
             <>
               <IPhoneWrapper>
                 <ContentProfile 
-                  onContinue={(data) => {
+                  onContinue={(data: any) => {
                     setUserRole(data.identity);
                     setUserNiches(data.niches);
                     setUserLocation(data.location);
@@ -427,6 +463,139 @@ export default function App() {
                 <Copilot onNavigate={handleNavigateWithQuestion} prefilledQuestion={copilotPrefilledQuestion} />
               </IPhoneWrapper>
               <DevTools currentPage="copilot" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="dashboard">
+                  <Dashboard onNavigate={handleNavigateWithQuestion} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/dashboard" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="dashboard">
+                  <DashboardMonitor onNavigate={handleNavigateWithQuestion} isSimulation={true} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-dashboard" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/trends" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="trend-radar">
+                  <HashtagRadar onNavigate={handleNavigateWithQuestion} isSimulation={true} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-trends" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/studio" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="content-studio">
+                  <ContentStudio onNavigate={handleNavigateWithQuestion} isSimulation={true} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-studio" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/copilot" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <Copilot onNavigate={handleNavigateWithQuestion} prefilledQuestion={copilotPrefilledQuestion} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-copilot" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/intelligence" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <AccountIntelligence 
+                    onNavigate={handleNavigateWithQuestion} 
+                    initialTab={intelligenceTab}
+                  />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-intelligence" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/library" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <ContentLibrary onNavigate={handleNavigateWithQuestion} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-library" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/scheduling" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <SchedulingSlotsNew onNavigate={handleNavigateWithQuestion} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-scheduling" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/settings" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <SettingsLayout 
+                    onNavigate={handleNavigateWithQuestion}
+                    activeSection={settingsSection}
+                    onSectionChange={setSettingsSection}
+                  >
+                    {settingsSection === 'overview' && <SettingsOverview onNavigateToSection={setSettingsSection} />}
+                    {settingsSection === 'account' && <AccountSettings />}
+                    {settingsSection === 'connected' && <ConnectedAccountsSettings autoOpenAddModal={autoOpenAddAccountModal} />}
+                    {settingsSection === 'billing' && <BillingUsageSettings />}
+                    {settingsSection === 'ai' && <AIPreferencesSettings />}
+                    {settingsSection === 'content' && <ContentAutomationSettings />}
+                    {settingsSection === 'notifications' && <NotificationsSettings />}
+                    {settingsSection === 'security' && <SecurityPrivacySettings />}
+                    {settingsSection === 'team' && <TeamSettings />}
+                  </SettingsLayout>
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-settings" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/weekly-report-detail" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <WeeklyReportDetail 
+                    onNavigate={handleNavigateWithQuestion}
+                    onBackToReports={() => {
+                      setIntelligenceTab('reports');
+                      handleNavigateWithQuestion('intelligence');
+                    }} 
+                  />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-weekly-report-detail" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/simulation/reports-archive" element={
+            <>
+              <IPhoneWrapper>
+                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+                  <ReportsArchive onNavigate={handleNavigateWithQuestion} />
+                </SimulationPageWrapper>
+              </IPhoneWrapper>
+              <DevTools currentPage="simulation-reports-archive" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/dashboard" element={
@@ -560,7 +729,8 @@ export default function App() {
           {/* Catch-all redirect */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </React.Suspense>
+        </React.Suspense>
+      </SimulationProvider>
     </ErrorBoundary>
   );
 }

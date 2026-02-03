@@ -281,13 +281,6 @@ export function LatestWeeklyReportCard({
         {/* CTA Buttons - Optimized Hierarchy */}
         <div className="flex items-center gap-3 w-full md:w-auto flex-wrap md:flex-nowrap">
           <button
-            onClick={onViewArchive}
-            className="text-[#666666] hover:text-[#1a1a1a] transition-colors"
-            style={{ fontSize: '13px', fontWeight: '600' }}
-          >
-            View archive →
-          </button>
-          <button
             onClick={onViewPlan}
             className="px-4 py-2 text-[#666666] bg-white border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] hover:text-[#1a1a1a] transition-colors"
             style={{ fontSize: '13px', fontWeight: '600' }}

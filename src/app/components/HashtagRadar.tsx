@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Hash, TrendingUp, TrendingDown, ArrowUpRight, ArrowRight, Minus, Target, Globe, Zap, Shield, AlertTriangle, Sparkles, Activity, Eye, FileText, CheckCircle, Info, ChevronDown, Flame, Rocket, Sprout, Search, X, BarChart3, Users, Clock, Youtube, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
+import { useSimulationTrigger } from './SimulationPageWrapper';
 
 interface HashtagRadarProps {
   onNavigate?: (page: string) => void;
@@ -15,6 +16,7 @@ interface HashtagRadarProps {
   currentConversationId?: string | null;
   onSelectConversation?: (id: string) => void;
   onDeleteConversation?: (id: string) => void;
+  isSimulation?: boolean;
 }
 
 export function HashtagRadar({
@@ -23,7 +25,31 @@ export function HashtagRadar({
   currentConversationId,
   onSelectConversation,
   onDeleteConversation,
+  isSimulation = false,
 }: HashtagRadarProps) {
+  const { trigger } = useSimulationTrigger();
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  // Time Trigger: 30 seconds
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      trigger();
+    }, 30000);
+
+    return () => clearTimeout(timer);
+  }, [trigger]);
+
+  // Scroll Trigger: 2/3 depth
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+      // Trigger if scrolled past 2/3 of the scrollable content
+      if (scrollTop + clientHeight >= scrollHeight * 0.66) {
+        trigger();
+      }
+    }
+  };
+
   return (
     <div className="flex h-screen bg-[#fafafa]">
       <SidebarPro 
@@ -31,7 +57,11 @@ export function HashtagRadar({
         onNavigate={onNavigate}
       />
       
-      <div className="flex-1 overflow-auto">
+      <div 
+        ref={scrollRef}
+        className="flex-1 overflow-auto"
+        onScroll={handleScroll}
+      >
         <HashtagRadarContent />
       </div>
     </div>

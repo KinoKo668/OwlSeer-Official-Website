@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Lock, Eye, EyeOff, Check, CircleAlert, Sparkles, Shield } from 'lucide-react';
 
@@ -10,7 +11,17 @@ type AuthMode = 'login' | 'signup';
 type AuthStep = 'input' | 'verify-email';
 
 export function AuthPage({ onContinue }: AuthPageProps) {
+  const location = useLocation();
   const [mode, setMode] = React.useState<AuthMode>('login');
+
+  React.useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const modeParam = searchParams.get('mode');
+    if (modeParam === 'signup' || modeParam === 'login') {
+      setMode(modeParam);
+    }
+  }, [location.search]);
+
   const [step, setStep] = React.useState<AuthStep>('input');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

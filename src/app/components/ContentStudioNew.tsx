@@ -47,6 +47,7 @@ import {
   Mic,
   RefreshCw,
 } from 'lucide-react';
+import { useSimulationTrigger } from './SimulationPageWrapper';
 
 // Types
 type ContentType = 'Product Review' | 'Tutorial' | 'Entertainment' | 'Education' | 'Story' | 'Challenge';
@@ -126,6 +127,7 @@ interface ContentStudioProps {
   currentConversationId?: string | null;
   onSelectConversation?: (id: string) => void;
   onDeleteConversation?: (id: string) => void;
+  isSimulation?: boolean;
 }
 
 // Mock Data
@@ -1012,11 +1014,13 @@ function ScriptManager({
   onCreateNew,
   onOpenScript,
   onEditScript,
+  onSimulationAction,
 }: {
   scripts: Script[];
   onCreateNew: () => void;
   onOpenScript: (id: string) => void;
   onEditScript: (id: string) => void;
+  onSimulationAction?: () => void;
 }) {
   const [viewMode, setViewMode] = React.useState<'list' | 'grid'>('grid');
   const [density] = React.useState<DensityMode>('compact');
@@ -1142,7 +1146,13 @@ function ScriptManager({
             </div>
             
             <button
-              onClick={onCreateNew}
+              onClick={() => {
+                if (onSimulationAction) {
+                  onSimulationAction();
+                  return;
+                }
+                onCreateNew();
+              }}
               className="flex items-center gap-2 px-5 py-2.5 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors"
               style={{ fontSize: '14px', fontWeight: '600' }}
             >
@@ -1684,10 +1694,12 @@ function ScriptEditor({
   script,
   onBack,
   onSave,
+  onSimulationAction,
 }: {
   script: Script;
   onBack: () => void;
   onSave: (updatedScript: Script) => void;
+  onSimulationAction?: () => void;
 }) {
   const [editedScript, setEditedScript] = React.useState<Script>(script);
   const [previewOpen, setPreviewOpen] = React.useState(true);
@@ -2160,6 +2172,10 @@ function ScriptEditor({
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
+                          if (onSimulationAction) {
+                            onSimulationAction();
+                            return;
+                          }
                           handleGenerateStoryboard(scene.id);
                         }}
                         disabled={generatingStoryboard === scene.id}
@@ -2265,6 +2281,10 @@ function ScriptEditor({
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
+                              if (onSimulationAction) {
+                                onSimulationAction();
+                                return;
+                              }
                               handleGenerateSpokenVersion(scene.id);
                             }}
                             className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-[#e9d5ff] bg-gradient-to-r from-[#faf5ff] to-[#f3e8ff] hover:from-[#f3e8ff] hover:to-[#ede9fe] text-[#7c3aed] transition-all"
@@ -2449,7 +2469,13 @@ function ScriptEditor({
                 style={{ fontSize: '12px' }}
               />
               <button
-                onClick={handleCopilotSend}
+                onClick={() => {
+                  if (onSimulationAction) {
+                    onSimulationAction();
+                    return;
+                  }
+                  handleCopilotSend();
+                }}
                 disabled={!copilotInput.trim()}
                 className="p-2 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors disabled:opacity-50"
               >
@@ -2471,6 +2497,7 @@ export function ContentStudio({
   currentConversationId,
   onSelectConversation,
   onDeleteConversation,
+  isSimulation = false,
 }: ContentStudioProps) {
   const isMobile = useIsMobile();
   const [scripts, setScripts] = React.useState<Script[]>(mockScripts);
@@ -2478,6 +2505,34 @@ export function ContentStudio({
   const [currentScriptId, setCurrentScriptId] = React.useState<string | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
   const [editingScriptId, setEditingScriptId] = React.useState<string | null>(null);
+
+  const { trigger } = useSimulationTrigger();
+
+  // Simulation Triggers
+  React.useEffect(() => {
+    // 1. Dwell 30s
+    const dwellTimer = setTimeout(() => {
+      trigger();
+    }, 30000);
+
+    return () => clearTimeout(dwellTimer);
+  }, [trigger]);
+
+  React.useEffect(() => {
+    // 2. Click script (enter editor) > 10s
+    let editorTimer: ReturnType<typeof setTimeout>;
+    if (currentView === 'editor') {
+      editorTimer = setTimeout(() => {
+        trigger();
+      }, 10000);
+    }
+    return () => clearTimeout(editorTimer);
+  }, [currentView, trigger]);
+
+  const handleSimulationAction = () => {
+    // 3. AI input trigger (called by ScriptEditorNew)
+    trigger();
+  };
 
   // Show mobile version on mobile devices
   if (isMobile) {
@@ -2605,12 +2660,14 @@ export function ContentStudio({
             onCreateNew={handleCreateNew}
             onOpenScript={handleOpenScript}
             onEditScript={handleEditScript}
+            onSimulationAction={handleSimulationAction}
           />
         ) : currentScript ? (
           <ScriptEditorNew
             script={currentScript}
             onBack={handleBackToManager}
             onSave={handleSaveScript}
+            onSimulationAction={handleSimulationAction}
           />
         ) : null}
       </div>

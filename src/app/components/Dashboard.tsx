@@ -53,6 +53,7 @@ import { useIsMobile } from './ui/use-mobile';
 import { QuickWinCard } from './QuickWinCard';
 import { RenderLogger } from './RenderLogger';
 import { usePerformance } from '../contexts';
+import { useSimulationTrigger } from './SimulationPageWrapper';
 
 import { FeaturedOpportunityCard } from './FeaturedOpportunityCard';
 
@@ -550,17 +551,31 @@ export const Dashboard = memo(function Dashboard({ onNavigate }: { onNavigate?: 
   const [language, setLanguage] = React.useState<Language>('en');
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   
+  const { trigger } = useSimulationTrigger();
+
+  // Timer trigger (20s)
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      trigger();
+    }, 20000);
+    return () => clearTimeout(timer);
+  }, [trigger]);
+  
   // Use standard mobile detection hook
   const isMobile = useIsMobile();
 
   // Show mobile version on small screens
   if (isMobile) {
-    return <HomeMobile onNavigate={onNavigate} />;
+    return (
+      <div onClick={() => trigger()}>
+        <HomeMobile onNavigate={onNavigate} />
+      </div>
+    );
   }
 
   // Show desktop version on larger screens
   return (
-    <div className="flex h-screen bg-sidebar">
+    <div className="flex h-screen bg-sidebar" onClick={() => trigger()}>
       {/* Sidebar - Hidden on mobile, shown on desktop */}
       <SidebarPro 
         activeItem="home" 

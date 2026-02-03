@@ -118,6 +118,7 @@ interface ScriptEditorNewProps {
   script: Script;
   onBack: () => void;
   onSave: (updatedScript: Script) => void;
+  onSimulationAction?: () => void;
 }
 
 // Scene Role Badge Component
@@ -141,7 +142,7 @@ function SceneRoleBadge({ role }: { role: string }) {
   );
 }
 
-export function ScriptEditorNew({ script, onBack, onSave }: ScriptEditorNewProps) {
+export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: ScriptEditorNewProps) {
   const [editedScript, setEditedScript] = React.useState<Script>(script);
   const [selectedSceneId, setSelectedSceneId] = React.useState<string | null>(
     script.scenes.length > 0 ? script.scenes[0].id : null
@@ -604,6 +605,10 @@ export function ScriptEditorNew({ script, onBack, onSave }: ScriptEditorNewProps
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
+                          if (onSimulationAction) {
+                            onSimulationAction();
+                            return;
+                          }
                           // Rewrite functionality
                           handleUpdateScene(scene.id, 'lastEditedBy', 'ai');
                         }}
@@ -770,6 +775,10 @@ export function ScriptEditorNew({ script, onBack, onSave }: ScriptEditorNewProps
                           <button 
                             onClick={(e) => {
                               e.stopPropagation();
+                              if (onSimulationAction) {
+                                onSimulationAction();
+                                return;
+                              }
                               // AI generation logic
                             }}
                             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 mb-4 bg-gradient-to-r from-[#7c3aed] to-[#a855f7] text-white rounded-lg hover:from-[#6d28d9] hover:to-[#9333ea] transition-all shadow-sm"
@@ -940,7 +949,13 @@ export function ScriptEditorNew({ script, onBack, onSave }: ScriptEditorNewProps
                   <div className="flex items-center justify-end">
                     <div className="flex items-center gap-2.5">
                       <button
-                        onClick={handleCopilotSend}
+                        onClick={() => {
+                          if (onSimulationAction) {
+                            onSimulationAction();
+                            return;
+                          }
+                          handleCopilotSend();
+                        }}
                         disabled={!copilotInput.trim()}
                         className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition-all ${
                           !copilotInput.trim() 

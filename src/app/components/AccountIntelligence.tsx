@@ -18,6 +18,7 @@ import { ThisWeeksBrief } from './ThisWeeksBrief';
 import { DiagnosisIssuesList } from './DiagnosisIssuesList';
 import { AIGoalsCard } from './AIGoalsCard';
 import { useIsMobile } from './ui/use-mobile';
+import { useSimulationTrigger } from './SimulationPageWrapper';
 
 // Translations for Content Category Insight
 const translations = {
@@ -66,6 +67,15 @@ export function AccountIntelligence({
   const [activeTab, setActiveTab] = React.useState<'overview' | 'reports'>(initialTab);
   const initialTabRef = React.useRef(initialTab);
   const t = translations[language];
+  const { trigger } = useSimulationTrigger();
+
+  // Timer trigger (30s)
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      trigger();
+    }, 30000);
+    return () => clearTimeout(timer);
+  }, [trigger]);
 
   // Update activeTab when initialTab prop changes - only if actually different
   React.useEffect(() => {

@@ -33,6 +33,7 @@ import {
 import { SidebarPro } from './SidebarPro';
 import { BottomTabBar } from './BottomTabBar';
 import { ScriptSelectorModal } from './ScriptSelectorModal';
+import { useSimulationTrigger } from './SimulationPageWrapper';
 
 // ==================== TYPES ====================
 
@@ -2769,6 +2770,7 @@ export function SchedulingSlotsNew({
   onSelectConversation,
   onDeleteConversation,
 }: SchedulingSlotsNewProps) {
+  const { trigger } = useSimulationTrigger();
   const [viewMode, setViewMode] = React.useState<ViewMode>('calendar');
   const [timeGranularity, setTimeGranularity] = React.useState<'week' | 'month'>('week');
   const [currentDate, setCurrentDate] = React.useState(new Date(2026, 0, 27)); // Jan 27, 2026
@@ -2876,6 +2878,11 @@ export function SchedulingSlotsNew({
     }
   };
 
+  const handleItemClick = (item: ContentItem) => {
+    setSelectedItem(item);
+    trigger();
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="flex h-screen bg-[#fafafa]">
@@ -2923,7 +2930,7 @@ export function SchedulingSlotsNew({
                 items={filteredItems}
                 currentDate={currentDate}
                 timeGranularity={timeGranularity}
-                onItemClick={setSelectedItem}
+                onItemClick={handleItemClick}
                 onDateDrop={handleDateDrop}
                 onQuickAdd={handleQuickAdd}
                 timeRange={timeRange}
@@ -2934,12 +2941,12 @@ export function SchedulingSlotsNew({
             {viewMode === 'kanban' && (
               <KanbanView
                 items={filteredItems}
-                onItemClick={setSelectedItem}
+                onItemClick={handleItemClick}
                 onStatusChange={handleStatusChange}
               />
             )}
             {viewMode === 'list' && (
-              <ListView items={filteredItems} onItemClick={setSelectedItem} />
+              <ListView items={filteredItems} onItemClick={handleItemClick} />
             )}
           </div>
         </div>

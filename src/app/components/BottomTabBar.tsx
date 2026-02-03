@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 interface BottomTabBarProps {
-  activeItem?: 'home' | 'copilot' | 'studio' | 'intelligence' | 'me';
+  activeItem?: 'home' | 'copilot' | 'studio' | 'intelligence' | 'me' | 'dashboard';
   onNavigate?: (page: string) => void;
 }
 

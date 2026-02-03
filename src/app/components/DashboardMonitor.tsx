@@ -26,14 +26,50 @@ import { BenchmarkBar } from './BenchmarkBar';
 import { AudienceInsights } from './AudienceInsights';
 import { CustomLineChart } from './CustomLineChart';
 import { CustomBarChart } from './CustomBarChart';
+import { ConversionFab } from './ConversionFab';
+import { useSimulationGlobal } from './SimulationPageWrapper';
 
 interface DashboardMonitorProps {
   onNavigate?: (page: string) => void;
+  isSimulation?: boolean;
 }
 
 export function DashboardMonitor({
   onNavigate,
+  isSimulation = false,
 }: DashboardMonitorProps) {
+  // Simulation Logic
+  const [fabOpen, setFabOpen] = React.useState(false);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const { isTriggered, markTriggered } = useSimulationGlobal();
+  const pageId = '/simulation/dashboard';
+
+  const trigger = React.useCallback(() => {
+    if (isTriggered(pageId)) return;
+    setFabOpen(true);
+    markTriggered(pageId);
+  }, [isTriggered, markTriggered]);
+
+  React.useEffect(() => {
+    if (!isSimulation) return;
+
+    // Time Trigger: 30 seconds
+    const timer = setTimeout(() => {
+      trigger();
+    }, 30000);
+
+    return () => clearTimeout(timer);
+  }, [isSimulation, trigger]);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (!isSimulation) return;
+    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+    // Trigger when scrolled more than 2/3
+    if (scrollTop > (scrollHeight - clientHeight) * 0.66) {
+      trigger();
+    }
+  };
+
   // Mock data - Account Health Snapshot
   const accountSnapshot = {
     followers: 125800,
@@ -264,12 +300,14 @@ export function DashboardMonitor({
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
         {/* Header */}
-        <div className="bg-white border-b border-[#E5E7EB] px-4 md:px-8 py-4 md:py-5">
+        <div className="bg-white border-b border-[#E5E7EB] px-4 md:px-8 py-4 md:py-5 relative overflow-hidden">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
-                Dashboard
-              </h1>
+              <div className="flex items-center gap-2 mb-1">
+                <h1 className="text-[#111827]" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  Dashboard
+                </h1>
+              </div>
               <p className="text-[#9CA3AF]" style={{ fontSize: '13px' }}>
                 Real-time operational monitoring · Account performance overview
               </p>
@@ -299,7 +337,11 @@ export function DashboardMonitor({
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-8">
+        <div 
+          className="flex-1 overflow-y-auto p-8"
+          onScroll={handleScroll}
+          ref={scrollRef}
+        >
           <div className="max-w-[1400px] mx-auto space-y-6">
             {/* 1. ACCOUNT HEALTH SNAPSHOT */}
             <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
@@ -1007,6 +1049,15 @@ export function DashboardMonitor({
         activeItem="dashboard"
         onNavigate={onNavigate}
       />
+
+      {isSimulation && (
+        <ConversionFab 
+          scenario="dashboard" 
+          triggerOpen={fabOpen} 
+          onNavigate={onNavigate || (() => {})}
+          onClose={() => setFabOpen(false)}
+        />
+      )}
     </div>
   );
 }

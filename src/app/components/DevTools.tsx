@@ -3,8 +3,8 @@ import { Code2, X, Zap, Sparkles, Monitor } from 'lucide-react';
 import { usePerformance } from '../contexts';
 
 interface DevToolsProps {
-  currentPage: 'auth' | 'content-profile' | 'account-connection' | 'creator-struggles' | 'goal-setting' | 'ai-processing' | 'insight-checkpoint' | 'home' | 'sidebar-demo' | 'copilot' | 'dashboard' | 'monitor' | 'intelligence' | 'library' | 'hashtag' | 'scheduling' | 'studio' | 'studio-demo' | 'settings' | 'weekly-report' | 'landing' | 'account-selection';
-  onPageChange: (page: 'auth' | 'content-profile' | 'account-connection' | 'creator-struggles' | 'goal-setting' | 'ai-processing' | 'insight-checkpoint' | 'home' | 'sidebar-demo' | 'copilot' | 'dashboard' | 'monitor' | 'intelligence' | 'library' | 'hashtag' | 'scheduling' | 'studio' | 'studio-demo' | 'settings' | 'weekly-report' | 'landing' | 'account-selection') => void;
+  currentPage: string;
+  onPageChange: (page: string) => void;
 }
 
 export function DevTools({ currentPage, onPageChange }: DevToolsProps) {

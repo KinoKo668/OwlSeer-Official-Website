@@ -158,8 +158,6 @@ export const Navbar = memo(({
             {/* Product Mega Menu */}
             <div 
               className="relative group" 
-              onMouseEnter={() => handleMouseEnter('product')}
-              onMouseLeave={handleMouseLeave}
             >
               <button 
                 className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
@@ -174,55 +172,61 @@ export const Navbar = memo(({
               
               <AnimatePresence>
                 {activeDropdown === 'product' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 15, scale: 0.98 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5"
-                  >
-                    <div className="grid grid-cols-5 gap-2">
-                      <div className="col-span-3 p-2 space-y-1">
-                        <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3 mt-2">Platform</div>
-                        
-                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                          <div>
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-emerald-600 dark:group-hover/item:text-emerald-400 transition-colors">{t.howItWorks}</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Understand our AI methodology</div>
-                          </div>
-                        </a>
+                  <>
+                    <div 
+                      className="fixed inset-0 z-0" 
+                      onClick={() => setActiveDropdown(null)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 15, scale: 0.98 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
+                    >
+                      <div className="grid grid-cols-5 gap-2">
+                        <div className="col-span-3 p-2 space-y-1">
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3 mt-2">Platform</div>
+                          
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
+                            <div>
+                              <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-emerald-600 dark:group-hover/item:text-emerald-400 transition-colors">{t.howItWorks}</div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Understand our AI methodology</div>
+                            </div>
+                          </a>
 
-                        <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                          <div>
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400 transition-colors">Interactive Demo</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Try the dashboard with sample data</div>
-                          </div>
-                        </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
+                            <div>
+                              <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400 transition-colors">Interactive Demo</div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Try the dashboard with sample data</div>
+                            </div>
+                          </a>
 
-                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('features'); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                          <div>
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-purple-600 dark:group-hover/item:text-purple-400 transition-colors">Features</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Explore our capabilities</div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div className="col-span-2 bg-gray-50 dark:bg-slate-800/50 rounded-xl p-5 flex flex-col justify-between border border-gray-100 dark:border-slate-700/50">
-                        <div>
-                          <div className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider mb-3">
-                            New Release
-                          </div>
-                          <h4 className="text-base font-bold text-gray-900 dark:text-white mb-2">OwlSeer v2.0</h4>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
-                            Now with multi-platform support and real-time trend prediction.
-                          </p>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('features'); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
+                            <div>
+                              <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-purple-600 dark:group-hover/item:text-purple-400 transition-colors">Features</div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Explore our capabilities</div>
+                            </div>
+                          </a>
                         </div>
-                        <button onClick={() => handleNav('pricing')} className="w-full py-2 bg-white dark:bg-slate-700 rounded-lg text-xs font-bold text-gray-900 dark:text-white shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-slate-600">
-                          View Pricing
-                        </button>
+
+                        <div className="col-span-2 bg-gray-50 dark:bg-slate-800/50 rounded-xl p-5 flex flex-col justify-between border border-gray-100 dark:border-slate-700/50">
+                          <div>
+                            <div className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider mb-3">
+                              New Release
+                            </div>
+                            <h4 className="text-base font-bold text-gray-900 dark:text-white mb-2">OwlSeer v2.0</h4>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
+                              Now with multi-platform support and real-time trend prediction.
+                            </p>
+                          </div>
+                          <button onClick={() => handleNav('pricing')} className="w-full py-2 bg-white dark:bg-slate-700 rounded-lg text-xs font-bold text-gray-900 dark:text-white shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-slate-600">
+                            View Pricing
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  </>
                 )}
               </AnimatePresence>
             </div>
@@ -237,8 +241,6 @@ export const Navbar = memo(({
             {/* Resources Mega Menu */}
             <div 
               className="relative group" 
-              onMouseEnter={() => handleMouseEnter('resources')}
-              onMouseLeave={handleMouseLeave}
             >
               <button 
                 className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
@@ -253,36 +255,42 @@ export const Navbar = memo(({
 
               <AnimatePresence>
                 {activeDropdown === 'resources' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 15, scale: 0.98 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-[400px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5"
-                  >
-                    <div className="p-2 space-y-1">
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                        <div>
-                          <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-orange-600 dark:group-hover/item:text-orange-400 transition-colors">{t.blog}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Latest insights & trends</div>
-                        </div>
-                      </a>
+                  <>
+                    <div 
+                      className="fixed inset-0 z-0" 
+                      onClick={() => setActiveDropdown(null)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 15, scale: 0.98 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-[400px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
+                    >
+                      <div className="p-2 space-y-1">
+                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
+                          <div>
+                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-orange-600 dark:group-hover/item:text-orange-400 transition-colors">{t.blog}</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Latest insights & trends</div>
+                          </div>
+                        </a>
 
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                        <div>
-                          <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-cyan-600 dark:group-hover/item:text-cyan-400 transition-colors">{t.faq}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Common questions answered</div>
-                        </div>
-                      </a>
+                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
+                          <div>
+                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-cyan-600 dark:group-hover/item:text-cyan-400 transition-colors">{t.faq}</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Common questions answered</div>
+                          </div>
+                        </a>
 
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                        <div>
-                          <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-slate-600 dark:group-hover/item:text-slate-400 transition-colors">Legal</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Privacy, Terms, Security & Cookies</div>
-                        </div>
-                      </a>
-                    </div>
-                  </motion.div>
+                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
+                          <div>
+                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-slate-600 dark:group-hover/item:text-slate-400 transition-colors">Legal</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Privacy, Terms, Security & Cookies</div>
+                          </div>
+                        </a>
+                      </div>
+                    </motion.div>
+                  </>
                 )}
               </AnimatePresence>
             </div>
@@ -293,8 +301,6 @@ export const Navbar = memo(({
           {/* Language Switcher */}
           <div 
             className="relative group" 
-            onMouseEnter={() => handleMouseEnter('language')}
-            onMouseLeave={handleMouseLeave}
           >
             <button 
               className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
@@ -305,33 +311,39 @@ export const Navbar = memo(({
 
             <AnimatePresence>
               {activeDropdown === 'language' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute top-full right-0 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5"
-                >
-                  <div className="flex flex-col">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code);
-                          setActiveDropdown(null);
-                        }}
-                        className={`px-4 py-2.5 text-sm text-left rounded-lg transition-colors flex items-center justify-between group ${
-                          language === lang.code 
-                            ? 'bg-emerald-50 dark:bg-emerald-900/20 text-[#1AAE82] font-semibold' 
-                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800'
-                        }`}
-                      >
-                        {lang.name}
-                        {language === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-[#1AAE82]" />}
-                      </button>
-                    ))}
-                  </div>
-                </motion.div>
+                <>
+                  <div 
+                    className="fixed inset-0 z-0" 
+                    onClick={() => setActiveDropdown(null)}
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
+                  >
+                    <div className="flex flex-col">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setLanguage(lang.code);
+                            setActiveDropdown(null);
+                          }}
+                          className={`px-4 py-2.5 text-sm text-left rounded-lg transition-colors flex items-center justify-between group ${
+                            language === lang.code 
+                              ? 'bg-emerald-50 dark:bg-emerald-900/20 text-[#1AAE82] font-semibold' 
+                              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800'
+                          }`}
+                        >
+                          {lang.name}
+                          {language === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-[#1AAE82]" />}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </>
               )}
             </AnimatePresence>
           </div>
@@ -926,9 +938,8 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
   // Removed local useEffect for dark mode class toggling (handled in App.tsx)
 
   const handleTrySample = () => {
-    // Navigate to the dashboard with sample mode flag or just dashboard for now
-    // In a real app, you might pass a state parameter
-    onNavigate('dashboard');
+    // Navigate to the simulation page for Try Sample
+    onNavigate('simulation');
   };
 
   const handleSignUp = () => {

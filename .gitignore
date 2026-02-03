@@ -121,3 +121,17 @@ dist
 
 # Vite
 dist
+.vite
+
+# Vercel
+.vercel
+
+# Implementation Plans & Docs
+*.md
+!README.md
+
+# Scripts & Temp
+color_replace.py
+package-lock 2.json
+.gitignore.bak
+资源 4.svg
