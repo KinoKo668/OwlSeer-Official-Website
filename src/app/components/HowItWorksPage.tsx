@@ -220,79 +220,136 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
 
       {/* 2. Interactive Tabs Section */}
       <section className="px-4 sm:px-6 lg:px-8 pb-24 max-w-7xl mx-auto">
-        {/* Tab Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-white dark:bg-slate-900 p-1.5 rounded-full border border-gray-200 dark:border-slate-800 shadow-sm">
-            {steps.map((step) => (
-              <button
-                key={step.id}
-                onClick={() => setActiveTab(step.id)}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeTab === step.id
-                    ? 'bg-[#111827] dark:bg-white text-white dark:text-[#111827] shadow-md'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                Step 0{step.id}
-              </button>
-            ))}
+        <div className="bg-blue-50 dark:bg-blue-900/10 rounded-[2.5rem] p-8 md:p-12 border border-blue-100 dark:border-blue-900/30">
+          
+          {/* Header */}
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
+              See exactly how we turn your data into strategy—<span className="text-blue-600 dark:text-blue-400">no black boxes</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              We believe in full transparency. Every recommendation is traceable to specific signals and templates, so you understand the "why" behind every suggestion.
+            </p>
           </div>
-        </div>
 
-        {/* Content Area */}
-        <div className="bg-white dark:bg-slate-950 rounded-3xl border border-gray-200 dark:border-slate-800 shadow-xl overflow-hidden min-h-[500px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
-            {/* Left: Text Content */}
-            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-gray-100 dark:border-slate-800">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.4 }}
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex bg-white dark:bg-slate-900 p-1.5 rounded-full border border-gray-200 dark:border-slate-800 shadow-sm">
+              {steps.map((step) => (
+                <button
+                  key={step.id}
+                  onClick={() => setActiveTab(step.id)}
+                  className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    activeTab === step.id
+                      ? 'bg-[#111827] dark:bg-white text-white dark:text-[#111827] shadow-md'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                  }`}
                 >
-                  <div className="text-[#1AAE82] font-bold text-sm uppercase tracking-wider mb-4">Step 0{activeTab}</div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6 font-display">
-                    {steps[activeTab - 1].title}
-                  </h3>
-                  <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
-                    {steps[activeTab - 1].description}
-                  </p>
-                  <ul className="space-y-4">
-                    {steps[activeTab - 1].highlights.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-[#1AAE82]/10 flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3.5 h-3.5 text-[#1AAE82]" strokeWidth={3} />
-                        </div>
-                        <span className="text-gray-700 dark:text-gray-200 font-medium">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </AnimatePresence>
+                  Step 0{step.id}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Right: Visual Content */}
-            <div className="p-8 md:p-12 bg-gray-50 dark:bg-slate-900/50 flex items-center justify-center relative">
-               {/* Pattern Background */}
-               <div className="absolute inset-0 bg-[linear-gradient(45deg,#80808008_1px,transparent_1px)] bg-[size:24px_24px]" />
-               
-               <AnimatePresence mode="wait">
-                 <motion.div
-                   key={activeTab}
-                   initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                   exit={{ opacity: 0, scale: 1.05, y: -20 }}
-                   transition={{ duration: 0.4 }}
-                   className="w-full h-full max-w-md aspect-[4/3]"
-                 >
-                   {activeTab === 1 && <DemoVisual />}
-                   {activeTab === 2 && <ConnectVisual />}
-                   {activeTab === 3 && <PackVisual />}
-                 </motion.div>
-               </AnimatePresence>
+          {/* Content Area */}
+          <div className="bg-white dark:bg-slate-950 rounded-3xl border border-gray-200 dark:border-slate-800 shadow-xl overflow-hidden min-h-[500px] mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
+              {/* Left: Text Content */}
+              <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-gray-100 dark:border-slate-800">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div className="text-[#1AAE82] font-bold text-sm uppercase tracking-wider mb-4">Step 0{activeTab}</div>
+                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6 font-display">
+                      {steps[activeTab - 1].title}
+                    </h3>
+                    <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
+                      {steps[activeTab - 1].description}
+                    </p>
+                    <ul className="space-y-4">
+                      {steps[activeTab - 1].highlights.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-[#1AAE82]/10 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-[#1AAE82]" strokeWidth={3} />
+                          </div>
+                          <span className="text-gray-700 dark:text-gray-200 font-medium">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Right: Visual Content */}
+              <div className="p-8 md:p-12 bg-gray-50 dark:bg-slate-900/50 flex items-center justify-center relative">
+                 {/* Pattern Background */}
+                 <div className="absolute inset-0 bg-[linear-gradient(45deg,#80808008_1px,transparent_1px)] bg-[size:24px_24px]" />
+                 
+                 <AnimatePresence mode="wait">
+                   <motion.div
+                     key={activeTab}
+                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                     animate={{ opacity: 1, scale: 1, y: 0 }}
+                     exit={{ opacity: 0, scale: 1.05, y: -20 }}
+                     transition={{ duration: 0.4 }}
+                     className="w-full h-full max-w-md aspect-[4/3]"
+                   >
+                     {activeTab === 1 && <DemoVisual />}
+                     {activeTab === 2 && <ConnectVisual />}
+                     {activeTab === 3 && <PackVisual />}
+                   </motion.div>
+                 </AnimatePresence>
+              </div>
             </div>
+          </div>
+
+          {/* Trust Features */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8 text-left">
+            <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm">
+              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3">
+                <Search className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Step-by-step Breakdown</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">From your input to your content plan, nothing is hidden.</p>
+            </div>
+            <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm">
+              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3">
+                <Check className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Traceable Logic</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Every recommendation links back to its data source.</p>
+            </div>
+            <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm">
+              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3">
+                <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">No False Promises</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">No hidden logic, no unexplained suggestions.</p>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button 
+              onClick={() => handleNavigate('dashboard')}
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all duration-300 shadow-lg shadow-blue-600/20 flex items-center gap-2"
+            >
+              See It In Action <ArrowRight className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={() => {
+                const faqSection = document.getElementById('faq-section');
+                faqSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-6 py-3 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-900 dark:text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+            >
+              Common Questions <ChevronDown className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
@@ -358,7 +415,7 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
       </section>
 
       {/* 4. Trust Grid & FAQ */}
-      <section className="px-4 sm:px-6 lg:px-8 py-24 max-w-4xl mx-auto">
+      <section id="faq-section" className="px-4 sm:px-6 lg:px-8 py-24 max-w-4xl mx-auto">
         {/* Trust Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {[

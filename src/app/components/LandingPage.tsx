@@ -834,6 +834,98 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
 
 
 
+const ValueProposition = ({ language, onTrySample, onNavigate }: { language: string, onTrySample: () => void, onNavigate: (page: string) => void }) => {
+  const content = {
+    en: {
+      title: "Stop guessing what to post",
+      subtitle: "OwlSeer tells you what to do next on TikTok.",
+      cards: [
+        { title: "Actionable Plans", desc: "Get a complete content plan in under 3 minutes.", icon: <Zap className="w-6 h-6 text-[#1AAE82]" /> },
+        { title: "AI Scripts", desc: "AI-generated scripts ready to shoot today.", icon: <PlayCircle className="w-6 h-6 text-[#1AAE82]" /> },
+        { title: "Data-Driven", desc: "For creators tired of random posting.", icon: <BarChart2 className="w-6 h-6 text-[#1AAE82]" /> }
+      ],
+      trust: ["No miracle promises", "No auto-posting", "No password required"],
+      cta: {
+        primary: "See It In Action",
+        secondary: "How it works"
+      }
+    },
+    zh: {
+      title: "不再猜测该发布什么",
+      subtitle: "OwlSeer 告诉你下一步该做什么。",
+      cards: [
+        { title: "可执行计划", desc: "在3分钟内提供可操作的内容计划", icon: <Zap className="w-6 h-6 text-[#1AAE82]" /> },
+        { title: "AI 脚本", desc: "AI生成的脚本，今天就可以拍摄", icon: <PlayCircle className="w-6 h-6 text-[#1AAE82]" /> },
+        { title: "数据驱动", desc: "为厌倦随机发布的创作者提供方向", icon: <BarChart2 className="w-6 h-6 text-[#1AAE82]" /> }
+      ],
+      trust: ["不做奇迹承诺", "不自动发布", "无需密码"],
+      cta: {
+        primary: "查看实际操作",
+        secondary: "它是如何工作的"
+      }
+    }
+  };
+
+  const t = (content as any)[language] || content.en;
+
+  return (
+    <section className="py-20 bg-white dark:bg-slate-900 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-display tracking-tight">
+            {t.title}
+          </h2>
+          <p className="text-xl text-gray-500 dark:text-gray-400 leading-relaxed mb-10">
+            {t.subtitle}
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <button 
+              onClick={onTrySample}
+              className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-[#1AAE82]/30 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2"
+            >
+              {t.cta.primary} <ArrowRight className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={() => onNavigate('how-it-works')}
+              className="px-8 py-4 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-900 dark:text-white text-lg font-medium rounded-xl transition-all duration-300 flex items-center gap-2"
+            >
+              {t.cta.secondary} <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {t.cards.map((item: any, i: number) => (
+            <div key={i} className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 hover:border-[#1AAE82]/30 transition-colors">
+              <div className="w-12 h-12 bg-[#1AAE82]/10 rounded-xl flex items-center justify-center mb-6">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{item.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-4 md:gap-12 text-sm font-medium text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-slate-800 pt-12">
+          <div className="flex items-center gap-2">
+            <Shield className="w-4 h-4 text-gray-400" />
+            {t.trust[0]}
+          </div>
+          <div className="flex items-center gap-2">
+            <X className="w-4 h-4 text-gray-400" />
+            {t.trust[1]}
+          </div>
+          <div className="flex items-center gap-2">
+            <Shield className="w-4 h-4 text-gray-400" />
+            {t.trust[2]}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export const Footer = ({ t, onNavigate }: { t: any, onNavigate?: (page: string) => void }) => {
   const handleNav = (page: string) => {
     if (onNavigate) {
@@ -994,8 +1086,9 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
         <Hero onTrySample={handleTrySample} t={t.hero} />
         <div className="relative z-10 mt-[-1px]">
           <ProductShowcase t={t.productShowcase} />
-          <CoreFeatures t={t.coreFeatures} />
-          <PricingSection onSignUp={handleSignUp} t={t.pricingSection} />
+        <CoreFeatures t={t.coreFeatures} />
+        <ValueProposition language={language} onTrySample={handleTrySample} onNavigate={onNavigate} />
+        <PricingSection onSignUp={handleSignUp} t={t.pricingSection} />
         </div>
         
         {/* Final CTA Section */}
