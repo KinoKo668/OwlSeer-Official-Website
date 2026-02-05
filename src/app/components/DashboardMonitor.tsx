@@ -647,7 +647,7 @@ export function DashboardMonitor({
             </div>
 
             {/* 4. AUDIENCE INSIGHTS */}
-            <AudienceInsights language="en" />
+            {/* <AudienceInsights language="en" /> */}
 
             {/* 5. CONTENT SUPPLY & RHYTHM */}
             <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
