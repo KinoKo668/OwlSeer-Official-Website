@@ -284,7 +284,11 @@ export function ProductShowcase({ t }: { t: any }) {
                         className="overflow-hidden"
                       >
                         <div className="pt-6">
-                          <button className="flex items-center gap-2 text-sm font-bold transition-colors hover:underline" style={{ color: feature.color }}>
+                          <button 
+                            className="flex items-center gap-2 text-sm font-bold transition-colors hover:underline" 
+                            style={{ color: feature.color }}
+                            aria-label={`Learn more about ${feature.title}`}
+                          >
                             Learn more <ArrowRight className="w-4 h-4" />
                           </button>
                         </div>

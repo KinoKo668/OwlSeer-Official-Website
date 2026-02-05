@@ -122,6 +122,8 @@ export function TikTokPreviewInline({ scene }: TikTokPreviewInlineProps) {
           <img
             src={storyboard[currentFrameIndex].imageUrl}
             alt={`Frame ${currentFrameIndex + 1}`}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover opacity-90"
           />
           {/* Gradients */}
@@ -147,7 +149,7 @@ export function TikTokPreviewInline({ scene }: TikTokPreviewInlineProps) {
            {/* Avatar */}
            <div className="relative mb-0.5">
              <div className="w-[36px] h-[36px] rounded-full border border-white p-[1px]">
-               <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=kinoko`} alt="Avatar" className="w-full h-full rounded-full bg-black object-cover" />
+               <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=kinoko`} alt="Avatar" loading="lazy" decoding="async" className="w-full h-full rounded-full bg-black object-cover" />
              </div>
              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[#fe2c55] flex items-center justify-center border-2 border-white/20">
                <Plus className="w-2 h-2 text-white" strokeWidth={4} />
@@ -184,7 +186,7 @@ export function TikTokPreviewInline({ scene }: TikTokPreviewInlineProps) {
            <div className="mt-1 animate-[spin_5s_linear_infinite]">
              <div className="w-[36px] h-[36px] rounded-full bg-[#262626] border-[5px] border-[#1a1a1a] flex items-center justify-center overflow-hidden relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-gray-800 to-gray-900"></div>
-                <img src={storyboard[currentFrameIndex].imageUrl} className="w-4 h-4 rounded-full object-cover z-10" />
+                <img src={storyboard[currentFrameIndex].imageUrl} alt="Music disc artwork" loading="lazy" decoding="async" className="w-4 h-4 rounded-full object-cover z-10" />
              </div>
            </div>
         </div>

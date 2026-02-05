@@ -240,7 +240,7 @@ export function DashboardMonitor({
       likes: 1880,
       comments: 330,
       shares: 141,
-    },
+      },
     {
       date: '12/06',
       title: 'API design rules (don\'t ship chaos) #APIDesign #Backend #REST #Engineering #DevTips',
@@ -289,7 +289,7 @@ export function DashboardMonitor({
   };
 
   return (
-    <div className="flex h-screen bg-[#F8F9FA]">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Sidebar */}
       <SidebarPro
         activeItem="dashboard"
@@ -300,22 +300,22 @@ export function DashboardMonitor({
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
         {/* Header */}
-        <div className="bg-white border-b border-[#E5E7EB] px-4 md:px-8 py-4 md:py-5 relative overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 px-4 md:px-8 py-4 md:py-5 relative overflow-hidden transition-colors duration-300">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-[#111827]" style={{ fontSize: '24px', fontWeight: '700' }}>
+                <h1 className="text-gray-900 dark:text-white" style={{ fontSize: '24px', fontWeight: '700' }}>
                   Dashboard
                 </h1>
               </div>
-              <p className="text-[#9CA3AF]" style={{ fontSize: '13px' }}>
+              <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px' }}>
                 Real-time operational monitoring · Account performance overview
               </p>
             </div>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onNavigate?.('intelligence')}
-                className="px-4 py-2.5 rounded-lg border border-[#E5E7EB] text-[#111827] hover:bg-[#F8F9FA] transition-colors flex items-center gap-2"
+                className="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
                 View Diagnosis
@@ -344,29 +344,29 @@ export function DashboardMonitor({
         >
           <div className="max-w-[1400px] mx-auto space-y-6">
             {/* 1. ACCOUNT HEALTH SNAPSHOT */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
               <div className="grid grid-cols-5 gap-6">
                 {/* Followers */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Users className="w-4 h-4 text-[#374151]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <Users className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Followers
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {formatNumber(accountSnapshot.followers)}
                   </div>
                   <div className="flex items-center gap-1">
                     {accountSnapshot.growthStatus === 'normal' ? (
                       <>
-                        <TrendingUp className="w-3.5 h-3.5 text-[#059669]" />
-                        <span className="text-[#374151]" style={{ fontSize: '12px' }}>Normal</span>
+                        <TrendingUp className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
+                        <span className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>Normal</span>
                       </>
                     ) : (
                       <>
-                        <TrendingDown className="w-3.5 h-3.5 text-[#D97706]" />
-                        <span className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>Slowing</span>
+                        <TrendingDown className="w-3.5 h-3.5 text-amber-600 dark:text-amber-500" />
+                        <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>Slowing</span>
                       </>
                     )}
                   </div>
@@ -375,15 +375,15 @@ export function DashboardMonitor({
                 {/* 30-day Growth Rate */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="w-4 h-4 text-[#059669]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       30-Day Growth
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     +{accountSnapshot.followerGrowth30d}%
                   </div>
-                  <div className="text-[#374151]" style={{ fontSize: '12px' }}>
+                  <div className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>
                     ~{Math.round((accountSnapshot.followers * accountSnapshot.followerGrowth30d) / 100)} followers
                   </div>
                 </div>
@@ -391,24 +391,24 @@ export function DashboardMonitor({
                 {/* 30-day Video Count */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Video className="w-4 h-4 text-[#374151]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <Video className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       30-Day Videos
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {accountSnapshot.videoCount30d}
                   </div>
                   <div className="flex items-center gap-1">
                     {accountSnapshot.activityStatus === 'active' ? (
                       <>
-                        <Activity className="w-3.5 h-3.5 text-[#059669]" />
-                        <span className="text-[#374151]" style={{ fontSize: '12px' }}>Active</span>
+                        <Activity className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
+                        <span className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>Active</span>
                       </>
                     ) : (
                       <>
-                        <Activity className="w-3.5 h-3.5 text-[#D97706]" />
-                        <span className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>Low Supply</span>
+                        <Activity className="w-3.5 h-3.5 text-amber-600 dark:text-amber-500" />
+                        <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>Low Supply</span>
                       </>
                     )}
                   </div>
@@ -417,33 +417,33 @@ export function DashboardMonitor({
                 {/* Views per Follower */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Eye className="w-4 h-4 text-[#374151]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Views/Follower
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     257
                   </div>
                   <div className="flex items-center gap-1">
-                    <ArrowDownRight className="w-3.5 h-3.5 text-[#059669]" />
-                    <span className="text-[#059669]" style={{ fontSize: '12px' }}>-12% (30d)</span>
+                    <ArrowDownRight className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
+                    <span className="text-emerald-600 dark:text-emerald-500" style={{ fontSize: '12px' }}>-12% (30d)</span>
                   </div>
                 </div>
 
                 {/* Account Tier */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Account Tier
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0F766E]">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-700 dark:bg-teal-800">
                     <span className="text-white" style={{ fontSize: '20px', fontWeight: '700' }}>
                       {accountSnapshot.tier}
                     </span>
                   </div>
-                  <div className="text-[#374151] mt-1" style={{ fontSize: '12px' }}>
+                  <div className="text-gray-600 dark:text-gray-400 mt-1" style={{ fontSize: '12px' }}>
                     Established Creator
                   </div>
                 </div>
@@ -451,19 +451,19 @@ export function DashboardMonitor({
             </div>
 
             {/* 2. TRAFFIC & GROWTH MONITOR */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
               <div className="flex items-center justify-between mb-5">
                 <div>
-                  <h3 className="text-[#111827] mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
+                  <h3 className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
                     Traffic & Growth Monitor
                   </h3>
-                  <p className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>
+                  <p className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                     Algorithm distribution and follower acquisition trends
                   </p>
                 </div>
                 <button
                   onClick={() => onNavigate?.('intelligence')}
-                  className="text-[#374151] hover:text-[#111827] transition-colors flex items-center gap-1"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-1"
                   style={{ fontSize: '12px', fontWeight: '600' }}
                 >
                   View diagnosis
@@ -475,17 +475,17 @@ export function DashboardMonitor({
                 {/* Views per Video */}
                 <div>
                   <div className="mb-4">
-                    <div className="text-[#111827] mb-1" style={{ fontSize: '14px', fontWeight: '700' }}>
+                    <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '14px', fontWeight: '700' }}>
                       Views per Video (Last 15)
                     </div>
                     <div className="flex items-baseline gap-3">
-                      <span className="text-[#111827]" style={{ fontSize: '20px', fontWeight: '700' }}>
+                      <span className="text-gray-900 dark:text-white" style={{ fontSize: '20px', fontWeight: '700' }}>
                         {formatNumber(medianViews)}
                       </span>
-                      <span className="text-[#374151]" style={{ fontSize: '12px' }}>
+                      <span className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>
                         median
                       </span>
-                      <span className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>
+                      <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                         · Efficiency: {trafficEfficiency}%
                       </span>
                     </div>
@@ -500,14 +500,14 @@ export function DashboardMonitor({
                 {/* Follower Growth */}
                 <div>
                   <div className="mb-4">
-                    <div className="text-[#111827] mb-1" style={{ fontSize: '14px', fontWeight: '700' }}>
+                    <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '14px', fontWeight: '700' }}>
                       Follower Growth (Daily)
                     </div>
                     <div className="flex items-baseline gap-3">
-                      <span className="text-[#111827]" style={{ fontSize: '20px', fontWeight: '700' }}>
+                      <span className="text-gray-900 dark:text-white" style={{ fontSize: '20px', fontWeight: '700' }}>
                         {followerGrowthData[followerGrowthData.length - 1].growth}
                       </span>
-                      <span className="text-[#374151]" style={{ fontSize: '12px' }}>
+                      <span className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>
                         today
                       </span>
                     </div>
@@ -518,19 +518,19 @@ export function DashboardMonitor({
             </div>
 
             {/* 3. ENGAGEMENT QUALITY MONITOR */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
               <div className="flex items-center justify-between mb-5">
                 <div>
-                  <h3 className="text-[#111827] mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
+                  <h3 className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
                     Engagement Quality Monitor
                   </h3>
-                  <p className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>
+                  <p className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                     User response metrics · Last 10 videos average
                   </p>
                 </div>
                 <button
                   onClick={() => onNavigate?.('intelligence')}
-                  className="text-[#374151] hover:text-[#111827] transition-colors flex items-center gap-1"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-1"
                   style={{ fontSize: '12px', fontWeight: '600' }}
                 >
                   View diagnosis
@@ -540,106 +540,106 @@ export function DashboardMonitor({
 
               <div className="grid grid-cols-4 gap-4">
                 {/* AER */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center justify-between mb-3">
-                    <div className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Active Engagement
                     </div>
                     {getEngagementTrend(engagementMetrics.current.aer, engagementMetrics.previous.aer) === 'up' && (
-                      <TrendingUp className="w-4 h-4 text-[#374151]" />
+                      <TrendingUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.aer, engagementMetrics.previous.aer) === 'down' && (
-                      <TrendingDown className="w-4 h-4 text-[#9CA3AF]" />
+                      <TrendingDown className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.aer, engagementMetrics.previous.aer) === 'flat' && (
-                      <Minus className="w-4 h-4 text-[#9CA3AF]" />
+                      <Minus className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {engagementMetrics.current.aer}%
                   </div>
-                  <div className={`${engagementMetrics.current.aer > engagementMetrics.previous.aer ? 'text-[#059669]' : engagementMetrics.current.aer < engagementMetrics.previous.aer ? 'text-[#dc2626]' : 'text-[#9CA3AF]'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className={`${engagementMetrics.current.aer > engagementMetrics.previous.aer ? 'text-emerald-600 dark:text-emerald-500' : engagementMetrics.current.aer < engagementMetrics.previous.aer ? 'text-red-600 dark:text-red-500' : 'text-gray-400 dark:text-gray-500'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
                     {engagementMetrics.current.aer > engagementMetrics.previous.aer ? '+' : ''}{(engagementMetrics.current.aer - engagementMetrics.previous.aer).toFixed(1)}% vs prev 10
                   </div>
                 </div>
 
                 {/* Like Rate */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Heart className="w-3.5 h-3.5 text-[#9CA3AF]" />
-                      <div className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                      <Heart className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
+                      <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                         Like Rate
                       </div>
                     </div>
                     {getEngagementTrend(engagementMetrics.current.likeRate, engagementMetrics.previous.likeRate) === 'up' && (
-                      <TrendingUp className="w-4 h-4 text-[#374151]" />
+                      <TrendingUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.likeRate, engagementMetrics.previous.likeRate) === 'down' && (
-                      <TrendingDown className="w-4 h-4 text-[#9CA3AF]" />
+                      <TrendingDown className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.likeRate, engagementMetrics.previous.likeRate) === 'flat' && (
-                      <Minus className="w-4 h-4 text-[#9CA3AF]" />
+                      <Minus className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {engagementMetrics.current.likeRate}%
                   </div>
-                  <div className={`${engagementMetrics.current.likeRate > engagementMetrics.previous.likeRate ? 'text-[#059669]' : engagementMetrics.current.likeRate < engagementMetrics.previous.likeRate ? 'text-[#dc2626]' : 'text-[#9CA3AF]'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className={`${engagementMetrics.current.likeRate > engagementMetrics.previous.likeRate ? 'text-emerald-600 dark:text-emerald-500' : engagementMetrics.current.likeRate < engagementMetrics.previous.likeRate ? 'text-red-600 dark:text-red-500' : 'text-gray-400 dark:text-gray-500'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
                     {engagementMetrics.current.likeRate > engagementMetrics.previous.likeRate ? '+' : ''}{(engagementMetrics.current.likeRate - engagementMetrics.previous.likeRate).toFixed(1)}% vs prev 10
                   </div>
                 </div>
 
                 {/* Comment Rate */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <MessageCircle className="w-3.5 h-3.5 text-[#9CA3AF]" />
-                      <div className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                      <MessageCircle className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
+                      <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                         Comment Rate
                       </div>
                     </div>
                     {getEngagementTrend(engagementMetrics.current.commentRate, engagementMetrics.previous.commentRate) === 'up' && (
-                      <TrendingUp className="w-4 h-4 text-[#374151]" />
+                      <TrendingUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.commentRate, engagementMetrics.previous.commentRate) === 'down' && (
-                      <TrendingDown className="w-4 h-4 text-[#9CA3AF]" />
+                      <TrendingDown className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.commentRate, engagementMetrics.previous.commentRate) === 'flat' && (
-                      <Minus className="w-4 h-4 text-[#9CA3AF]" />
+                      <Minus className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {engagementMetrics.current.commentRate}%
                   </div>
-                  <div className={`${engagementMetrics.current.commentRate > engagementMetrics.previous.commentRate ? 'text-[#059669]' : engagementMetrics.current.commentRate < engagementMetrics.previous.commentRate ? 'text-[#dc2626]' : 'text-[#9CA3AF]'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className={`${engagementMetrics.current.commentRate > engagementMetrics.previous.commentRate ? 'text-emerald-600 dark:text-emerald-500' : engagementMetrics.current.commentRate < engagementMetrics.previous.commentRate ? 'text-red-600 dark:text-red-500' : 'text-gray-400 dark:text-gray-500'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
                     {engagementMetrics.current.commentRate > engagementMetrics.previous.commentRate ? '+' : ''}{(engagementMetrics.current.commentRate - engagementMetrics.previous.commentRate).toFixed(1)}% vs prev 10
                   </div>
                 </div>
 
                 {/* Share Rate */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Share2 className="w-3.5 h-3.5 text-[#9CA3AF]" />
-                      <div className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                      <Share2 className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
+                      <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                         Share Rate
                       </div>
                     </div>
                     {getEngagementTrend(engagementMetrics.current.shareRate, engagementMetrics.previous.shareRate) === 'up' && (
-                      <TrendingUp className="w-4 h-4 text-[#374151]" />
+                      <TrendingUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.shareRate, engagementMetrics.previous.shareRate) === 'down' && (
-                      <TrendingDown className="w-4 h-4 text-[#9CA3AF]" />
+                      <TrendingDown className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                     {getEngagementTrend(engagementMetrics.current.shareRate, engagementMetrics.previous.shareRate) === 'flat' && (
-                      <Minus className="w-4 h-4 text-[#9CA3AF]" />
+                      <Minus className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                     )}
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {engagementMetrics.current.shareRate}%
                   </div>
-                  <div className={`${engagementMetrics.current.shareRate > engagementMetrics.previous.shareRate ? 'text-[#059669]' : engagementMetrics.current.shareRate < engagementMetrics.previous.shareRate ? 'text-[#dc2626]' : 'text-[#9CA3AF]'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className={`${engagementMetrics.current.shareRate > engagementMetrics.previous.shareRate ? 'text-emerald-600 dark:text-emerald-500' : engagementMetrics.current.shareRate < engagementMetrics.previous.shareRate ? 'text-red-600 dark:text-red-500' : 'text-gray-400 dark:text-gray-500'}`} style={{ fontSize: '11px', fontWeight: '600' }}>
                     {engagementMetrics.current.shareRate > engagementMetrics.previous.shareRate ? '+' : ''}{(engagementMetrics.current.shareRate - engagementMetrics.previous.shareRate).toFixed(1)}% vs prev 10
                   </div>
                 </div>
@@ -650,19 +650,19 @@ export function DashboardMonitor({
             <AudienceInsights language="en" />
 
             {/* 5. CONTENT SUPPLY & RHYTHM */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
               <div className="flex items-center justify-between mb-5">
                 <div>
-                  <h3 className="text-[#111827] mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
+                  <h3 className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
                     Content Supply & Rhythm
                   </h3>
-                  <p className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>
+                  <p className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                     Production stability and posting consistency
                   </p>
                 </div>
                 <button
                   onClick={() => onNavigate?.('scheduling')}
-                  className="text-[#374151] hover:text-[#111827] transition-colors flex items-center gap-1"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-1"
                   style={{ fontSize: '12px', fontWeight: '600' }}
                 >
                   View calendar
@@ -672,49 +672,49 @@ export function DashboardMonitor({
 
               <div className="grid grid-cols-3 gap-6 mb-6">
                 {/* Posting Frequency */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center gap-2 mb-2">
-                    <Video className="w-4 h-4 text-[#9CA3AF]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <Video className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Posting Frequency
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {contentSupply.videosPerWeek}
                   </div>
-                  <div className="text-[#374151]" style={{ fontSize: '12px' }}>
+                  <div className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>
                     videos per week
                   </div>
                 </div>
 
                 {/* Days Since Last Post */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-[#9CA3AF]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <Clock className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Last Post
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {contentSupply.daysSinceLastPost}
                   </div>
-                  <div className="text-[#374151]" style={{ fontSize: '12px' }}>
+                  <div className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>
                     days ago
                   </div>
                 </div>
 
                 {/* Consistency Status */}
-                <div className="p-4 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center gap-2 mb-2">
-                    <Activity className="w-4 h-4 text-[#9CA3AF]" />
-                    <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    <Activity className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                       Consistency
                     </span>
                   </div>
-                  <div className="text-[#111827] mb-1 capitalize" style={{ fontSize: '24px', fontWeight: '700' }}>
+                  <div className="text-gray-900 dark:text-white mb-1 capitalize" style={{ fontSize: '24px', fontWeight: '700' }}>
                     {contentSupply.consistency}
                   </div>
-                  <div className="text-[#374151]" style={{ fontSize: '12px' }}>
+                  <div className="text-gray-600 dark:text-gray-400" style={{ fontSize: '12px' }}>
                     Regular pattern
                   </div>
                 </div>
@@ -722,7 +722,7 @@ export function DashboardMonitor({
 
               {/* Calendar Strip */}
               <div>
-                <div className="text-[#9CA3AF] mb-3" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                <div className="text-gray-400 dark:text-gray-500 mb-3" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                   Recent Posting Days (Last 14 days)
                 </div>
                 <div className="flex gap-1">
@@ -731,12 +731,12 @@ export function DashboardMonitor({
                       key={idx}
                       className={`flex-1 h-12 rounded-lg border ${
                         day.posted
-                          ? 'bg-[#111827] border-[#111827]'
-                          : 'bg-white border-[#E5E7EB]'
+                          ? 'bg-gray-900 dark:bg-emerald-600 border-gray-900 dark:border-emerald-600'
+                          : 'bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700'
                       } flex flex-col items-center justify-center`}
                     >
                       <div
-                        className={day.posted ? 'text-white' : 'text-[#374151]'}
+                        className={day.posted ? 'text-white' : 'text-gray-600 dark:text-gray-400'}
                         style={{ fontSize: '10px', fontWeight: '600' }}
                       >
                         {day.date.split('/')[1]}
@@ -751,15 +751,15 @@ export function DashboardMonitor({
             </div>
 
             {/* BENCHMARK CONTEXT */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
-              <h3 className="text-[#111827] mb-6" style={{ fontSize: '16px', fontWeight: '700' }}>
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
+              <h3 className="text-gray-900 dark:text-white mb-6" style={{ fontSize: '16px', fontWeight: '700' }}>
                 Benchmark Context
               </h3>
               
               {/* Peer Group Context */}
-              <div className="mb-8 pb-6 border-b border-[#E5E7EB]">
+              <div className="mb-8 pb-6 border-b border-gray-200 dark:border-slate-800">
                 <div className="flex items-center gap-3">
-                  <div className="text-[#9CA3AF]" style={{ fontSize: '13px' }}>
+                  <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '13px' }}>
                     Compared to similar creators
                   </div>
                 </div>
@@ -796,19 +796,19 @@ export function DashboardMonitor({
             </div>
 
             {/* 6. RECENT CONTENT PERFORMANCE */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
               <div className="flex items-center justify-between mb-5">
                 <div>
-                  <h3 className="text-[#111827] mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
+                  <h3 className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
                     Recent Content Performance
                   </h3>
-                  <p className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>
+                  <p className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                     Last 10 videos · Median: {formatNumber(medianViews)} views
                   </p>
                 </div>
                 <button
                   onClick={() => onNavigate?.('studio')}
-                  className="text-[#374151] hover:text-[#111827] transition-colors flex items-center gap-1"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-1"
                   style={{ fontSize: '12px', fontWeight: '600' }}
                 >
                   View all content
@@ -818,23 +818,23 @@ export function DashboardMonitor({
 
               <div className="space-y-2">
                 {/* Header */}
-                <div className="grid grid-cols-[1fr_100px_80px_80px_80px_100px] gap-4 px-4 py-2 border-b border-[#E5E7EB]">
-                  <div className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                <div className="grid grid-cols-[1fr_100px_80px_80px_80px_100px] gap-4 px-4 py-2 border-b border-gray-200 dark:border-slate-800">
+                  <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                     Date
                   </div>
-                  <div className="text-[#9CA3AF] text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  <div className="text-gray-400 dark:text-gray-500 text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                     Views
                   </div>
-                  <div className="text-[#9CA3AF] text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  <div className="text-gray-400 dark:text-gray-500 text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                     Likes
                   </div>
-                  <div className="text-[#9CA3AF] text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  <div className="text-gray-400 dark:text-gray-500 text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                     Comments
                   </div>
-                  <div className="text-[#9CA3AF] text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  <div className="text-gray-400 dark:text-gray-500 text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                     Shares
                   </div>
-                  <div className="text-[#9CA3AF] text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  <div className="text-gray-400 dark:text-gray-500 text-right" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                     Status
                   </div>
                 </div>
@@ -846,35 +846,35 @@ export function DashboardMonitor({
                   return (
                     <div
                       key={idx}
-                      className="grid grid-cols-[1fr_100px_80px_80px_80px_100px] gap-4 px-4 py-3 rounded-lg hover:bg-[#F8F9FA] transition-colors"
+                      className="grid grid-cols-[1fr_100px_80px_80px_80px_100px] gap-4 px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
                     >
                       <div>
                         <div className="mb-0.5" style={{ fontSize: '13px', fontWeight: '600' }}>
-                          <span className="text-[#111827]">{text}</span>
-                          <span className="text-[#3B82F6] hover:text-[#2563EB] hover:underline cursor-pointer transition-colors">{hashtags}</span>
+                          <span className="text-gray-900 dark:text-white">{text}</span>
+                          <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline cursor-pointer transition-colors">{hashtags}</span>
                         </div>
-                        <div className="text-[#9CA3AF]" style={{ fontSize: '11px' }}>
+                        <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px' }}>
                           {content.date}
                         </div>
                       </div>
-                      <div className="text-[#111827] text-right" style={{ fontSize: '14px', fontWeight: '600' }}>
+                      <div className="text-gray-900 dark:text-white text-right" style={{ fontSize: '14px', fontWeight: '600' }}>
                         {formatNumber(content.views)}
                       </div>
-                      <div className="text-[#374151] text-right" style={{ fontSize: '13px' }}>
+                      <div className="text-gray-600 dark:text-gray-400 text-right" style={{ fontSize: '13px' }}>
                         {formatNumber(content.likes)}
                       </div>
-                      <div className="text-[#374151] text-right" style={{ fontSize: '13px' }}>
+                      <div className="text-gray-600 dark:text-gray-400 text-right" style={{ fontSize: '13px' }}>
                         {content.comments}
                       </div>
-                      <div className="text-[#374151] text-right" style={{ fontSize: '13px' }}>
+                      <div className="text-gray-600 dark:text-gray-400 text-right" style={{ fontSize: '13px' }}>
                         {content.shares}
                       </div>
                       <div className="text-right">
                         <span
                           className={`inline-block px-2 py-1 rounded ${
                             isAboveMedian
-                              ? 'bg-[#111827] text-white'
-                              : 'bg-[#F8F9FA] text-[#374151]'
+                              ? 'bg-gray-900 dark:bg-emerald-600 text-white'
+                              : 'bg-gray-50 dark:bg-slate-800 text-gray-600 dark:text-gray-400'
                           }`}
                           style={{ fontSize: '10px', fontWeight: '600' }}
                         >
@@ -888,13 +888,13 @@ export function DashboardMonitor({
             </div>
 
             {/* 7. CONTENT STRUCTURE ANALYSIS */}
-            <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-gray-200 dark:border-slate-800 p-6 shadow-sm transition-colors duration-300">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-[#111827] mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>
+                  <h2 className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '18px', fontWeight: '600' }}>
                     Content Structure Analysis
                   </h2>
-                  <p className="text-[#9CA3AF]" style={{ fontSize: '13px' }}>
+                  <p className="text-gray-400 dark:text-gray-500" style={{ fontSize: '13px' }}>
                     Video structure patterns from your last 30 videos
                   </p>
                 </div>
@@ -904,66 +904,66 @@ export function DashboardMonitor({
                 {/* Left: Top 3 Most Used */}
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <PieChart className="w-5 h-5 text-[#9CA3AF]" />
-                    <h3 className="text-[#111827]" style={{ fontSize: '16px', fontWeight: '600' }}>
+                    <PieChart className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+                    <h3 className="text-gray-900 dark:text-white" style={{ fontSize: '16px', fontWeight: '600' }}>
                       Most Used Top 3
                     </h3>
                   </div>
 
                   <div className="space-y-3">
                     {/* #1 Three Segments */}
-                    <div className="p-4 rounded-lg border-2 border-[#111827] bg-[#F8F9FA]">
+                    <div className="p-4 rounded-lg border-2 border-gray-900 dark:border-slate-600 bg-gray-50 dark:bg-slate-800">
                       <div className="flex items-center justify-between mb-2">
                         <div>
-                          <span className="text-[#111827]" style={{ fontSize: '15px', fontWeight: '700' }}>
+                          <span className="text-gray-900 dark:text-white" style={{ fontSize: '15px', fontWeight: '700' }}>
                             1. Three Segments
                           </span>
                         </div>
-                        <span className="px-2.5 py-1 rounded-full bg-[#111827] text-white" style={{ fontSize: '11px', fontWeight: '700' }}>
+                        <span className="px-2.5 py-1 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900" style={{ fontSize: '11px', fontWeight: '700' }}>
                           52%
                         </span>
                       </div>
-                      <p className="text-[#374151] mb-3" style={{ fontSize: '12px', lineHeight: '1.5' }}>
+                      <p className="text-gray-600 dark:text-gray-300 mb-3" style={{ fontSize: '12px', lineHeight: '1.5' }}>
                         Hook → Body → Ending (90% of NA creators)
                       </p>
-                      <div className="p-2 rounded bg-white">
-                        <div className="text-[#9CA3AF]" style={{ fontSize: '10px' }}>Usage Rate</div>
-                        <div className="text-[#111827]" style={{ fontSize: '14px', fontWeight: '600' }}>16 videos</div>
+                      <div className="p-2 rounded bg-white dark:bg-slate-700">
+                        <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '10px' }}>Usage Rate</div>
+                        <div className="text-gray-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>16 videos</div>
                       </div>
                     </div>
 
                     {/* #2 Two Segments */}
-                    <div className="p-4 rounded-lg border border-[#E5E7EB]">
+                    <div className="p-4 rounded-lg border border-gray-200 dark:border-slate-700">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[#111827]" style={{ fontSize: '14px', fontWeight: '600' }}>
+                        <span className="text-gray-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>
                           2. Two Segments
                         </span>
-                        <span className="px-2.5 py-1 rounded-full bg-[#F8F9FA] text-[#374151]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                        <span className="px-2.5 py-1 rounded-full bg-gray-50 dark:bg-slate-800 text-gray-600 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                           28%
                         </span>
                       </div>
-                      <p className="text-[#374151] mb-2" style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                      <p className="text-gray-600 dark:text-gray-400 mb-2" style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         Problem/Phenomenon → Solution/Result
                       </p>
-                      <div className="text-[#9CA3AF]" style={{ fontSize: '11px' }}>
+                      <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px' }}>
                         <span>9 videos</span>
                       </div>
                     </div>
 
                     {/* #3 Single Segment */}
-                    <div className="p-4 rounded-lg border border-[#E5E7EB]">
+                    <div className="p-4 rounded-lg border border-gray-200 dark:border-slate-700">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[#111827]" style={{ fontSize: '14px', fontWeight: '600' }}>
+                        <span className="text-gray-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>
                           3. Single Segment
                         </span>
-                        <span className="px-2.5 py-1 rounded-full bg-[#F8F9FA] text-[#374151]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                        <span className="px-2.5 py-1 rounded-full bg-gray-50 dark:bg-slate-800 text-gray-600 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                           12%
                         </span>
                       </div>
-                      <p className="text-[#374151] mb-2" style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                      <p className="text-gray-600 dark:text-gray-400 mb-2" style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         No division, suitable for 15s shorts/ASMR
                       </p>
-                      <div className="text-[#9CA3AF]" style={{ fontSize: '11px' }}>
+                      <div className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px' }}>
                         <span>4 videos</span>
                       </div>
                     </div>
@@ -973,25 +973,25 @@ export function DashboardMonitor({
                 {/* Right: Top Performer */}
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <TrendingUp className="w-5 h-5 text-[#059669]" />
-                    <h3 className="text-[#111827]" style={{ fontSize: '16px', fontWeight: '600' }}>
+                    <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
+                    <h3 className="text-gray-900 dark:text-white" style={{ fontSize: '16px', fontWeight: '600' }}>
                       Top Performer
                     </h3>
                   </div>
 
                   {/* Winner: Three Segments */}
-                  <div className="p-5 rounded-lg border-2 border-[#059669] bg-[#f0fdf4] mb-4">
+                  <div className="p-5 rounded-lg border-2 border-emerald-600 dark:border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 mb-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-[#059669] flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-emerald-600 dark:bg-emerald-500 flex items-center justify-center">
                         <span className="text-white" style={{ fontSize: '14px', fontWeight: '800' }}>1</span>
                       </div>
                       <div>
-                        <span className="text-[#166534]" style={{ fontSize: '16px', fontWeight: '700' }}>
+                        <span className="text-emerald-800 dark:text-emerald-300" style={{ fontSize: '16px', fontWeight: '700' }}>
                           Three Segments
                         </span>
                         <div className="flex items-center gap-1 mt-0.5">
-                          <TrendingUp className="w-3.5 h-3.5 text-[#059669]" />
-                          <span className="text-[#059669]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                          <TrendingUp className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                          <span className="text-emerald-700 dark:text-emerald-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                             Best Overall Performance
                           </span>
                         </div>
@@ -999,24 +999,24 @@ export function DashboardMonitor({
                     </div>
 
                     <div className="mb-3">
-                      <div className="p-3 rounded-lg bg-white border border-[#bbf7d0]">
-                        <div className="text-[#166534] mb-1" style={{ fontSize: '11px', fontWeight: '600' }}>
+                      <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800">
+                        <div className="text-emerald-800 dark:text-emerald-400 mb-1" style={{ fontSize: '11px', fontWeight: '600' }}>
                           Avg Engagement
                         </div>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-[#166534]" style={{ fontSize: '24px', fontWeight: '700' }}>5.8%</span>
+                          <span className="text-emerald-700 dark:text-emerald-300" style={{ fontSize: '24px', fontWeight: '700' }}>5.8%</span>
                           <div className="flex items-center gap-0.5">
-                            <ArrowUpRight className="w-3 h-3 text-[#059669]" />
-                            <span className="text-[#059669]" style={{ fontSize: '11px', fontWeight: '600' }}>+22%</span>
+                            <ArrowUpRight className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                            <span className="text-emerald-600 dark:text-emerald-400" style={{ fontSize: '11px', fontWeight: '600' }}>+22%</span>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-lg bg-white/60 border border-[#bbf7d0]">
+                    <div className="p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-emerald-200 dark:border-emerald-800">
                       <div className="flex items-start gap-2">
-                        <Lightbulb className="w-4 h-4 text-[#166534] flex-shrink-0 mt-0.5" />
-                        <p className="text-[#166534]" style={{ fontSize: '11px', fontWeight: '500', lineHeight: '1.5' }}>
+                        <Lightbulb className="w-4 h-4 text-emerald-700 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <p className="text-emerald-800 dark:text-emerald-300" style={{ fontSize: '11px', fontWeight: '500', lineHeight: '1.5' }}>
                           Hook  Body → Ending structure drives 22% higher engagement. This is your proven format.
                         </p>
                       </div>
@@ -1025,14 +1025,14 @@ export function DashboardMonitor({
 
                   {/* Other structures quick view */}
                   <div className="space-y-2">
-                    <div className="p-3 rounded-lg bg-[#F8F9FA] border border-[#E5E7EB]">
+                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[#111827]" style={{ fontSize: '13px', fontWeight: '600' }}>
+                        <span className="text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '600' }}>
                           Loop Segment
                         </span>
-                        <span className="text-[#9CA3AF]" style={{ fontSize: '11px' }}>2 videos</span>
+                        <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px' }}>2 videos</span>
                       </div>
-                      <div className="text-[#374151]" style={{ fontSize: '11px' }}>
+                      <div className="text-gray-600 dark:text-gray-400" style={{ fontSize: '11px' }}>
                         <span>4.1% engagement</span>
                       </div>
                     </div>

@@ -51,7 +51,7 @@ export function HashtagRadar({
   };
 
   return (
-    <div className="flex h-screen bg-[#fafafa]">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950">
       <SidebarPro 
         activeItem="hashtag" 
         onNavigate={onNavigate}
@@ -946,16 +946,16 @@ function HashtagRadarContent() {
   const paginatedDeclining = getPaginatedData(decliningHashtags, decliningPage);
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       {/* Page Header */}
-      <div className="bg-white border-b border-[#e4e4e7] sticky top-0 z-30 bg-white/80 backdrop-blur-md">
+      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
         <div className="max-w-[1600px] mx-auto px-8 py-6">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <h1 className="text-[#18181b] mb-2 tracking-tight" style={{ fontSize: '28px', fontWeight: '800' }}>
+              <h1 className="text-gray-900 dark:text-white mb-2 tracking-tight" style={{ fontSize: '28px', fontWeight: '800' }}>
                 Trend Radar
               </h1>
-              <p className="text-[#71717a] max-w-lg leading-relaxed" style={{ fontSize: '14px' }}>
+              <p className="text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed" style={{ fontSize: '14px' }}>
                 AI-powered analysis of {filteredCategories.length} categories to identify your next viral opportunity.
               </p>
             </div>
@@ -974,15 +974,15 @@ function HashtagRadarContent() {
                 onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
                 className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl transition-all duration-200 border shadow-sm hover:shadow ${
                   isAutoMode 
-                    ? 'bg-white border-[#e4e4e7] text-[#18181b] hover:border-[#d4d4d8]'
-                    : 'bg-[#18181b] border-[#18181b] text-white'
+                    ? 'bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:border-gray-300 dark:hover:border-slate-700'
+                    : 'bg-gray-900 dark:bg-white border-gray-900 dark:border-white text-white dark:text-gray-900'
                 }`}
               >
-                <BarChart3 className={`w-4 h-4 ${isAutoMode ? 'text-[#71717a]' : 'text-white'}`} />
+                <BarChart3 className={`w-4 h-4 ${isAutoMode ? 'text-gray-500 dark:text-gray-400' : 'text-white dark:text-gray-900'}`} />
                 <span style={{ fontSize: '13px', fontWeight: '600' }}>
                   {selectedCategory}
                 </span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${categoryDropdownOpen ? 'rotate-180' : ''} ${isAutoMode ? 'text-[#a1a1aa]' : 'text-white/70'}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${categoryDropdownOpen ? 'rotate-180' : ''} ${isAutoMode ? 'text-gray-400 dark:text-gray-500' : 'text-white/70 dark:text-gray-900/70'}`} />
               </button>
 
               {categoryDropdownOpen && (
@@ -994,7 +994,7 @@ function HashtagRadarContent() {
                       setCategorySearchQuery('');
                     }}
                   ></div>
-                  <div className="absolute left-0 top-full mt-2 w-[320px] bg-white rounded-xl border border-[#e4e4e7] shadow-xl shadow-black/5 z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
+                  <div className="absolute left-0 top-full mt-2 w-[320px] bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 shadow-xl shadow-black/5 z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
                     {/* Auto Option */}
                     <button
                       onClick={() => {
@@ -1002,36 +1002,36 @@ function HashtagRadarContent() {
                         setCategoryDropdownOpen(false);
                         setCategorySearchQuery('');
                       }}
-                      className="w-full px-4 py-3.5 text-left hover:bg-[#fafafa] transition-colors border-b border-[#f4f4f5] group/item"
+                      className="w-full px-4 py-3.5 text-left hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors border-b border-gray-100 dark:border-slate-800 group/item"
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`mt-0.5 p-1.5 rounded-md ${selectedCategory === 'Auto (Based on your account)' ? 'bg-[#dcfce7] text-[#16a34a]' : 'bg-[#f4f4f5] text-[#a1a1aa] group-hover/item:text-[#71717a]'}`}>
+                        <div className={`mt-0.5 p-1.5 rounded-md ${selectedCategory === 'Auto (Based on your account)' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-slate-800 text-gray-400 dark:text-gray-500 group-hover/item:text-gray-500 dark:group-hover/item:text-gray-400'}`}>
                           <Sparkles className="w-3.5 h-3.5" />
                         </div>
                         <div>
-                          <span className={`block mb-0.5 ${selectedCategory === 'Auto (Based on your account)' ? 'text-[#16a34a]' : 'text-[#18181b]'}`} style={{ fontSize: '13px', fontWeight: '600' }}>
+                          <span className={`block mb-0.5 ${selectedCategory === 'Auto (Based on your account)' ? 'text-green-600 dark:text-green-400' : 'text-gray-900 dark:text-white'}`} style={{ fontSize: '13px', fontWeight: '600' }}>
                             Auto-Detect
                           </span>
-                          <p className="text-[#71717a]" style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                          <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', lineHeight: '1.4' }}>
                             AI analyzes your profile to match trends
                           </p>
                         </div>
                         {selectedCategory === 'Auto (Based on your account)' && (
-                          <CheckCircle className="w-4 h-4 text-[#16a34a] ml-auto mt-1" />
+                          <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 ml-auto mt-1" />
                         )}
                       </div>
                     </button>
 
                     {/* Search */}
-                    <div className="p-3 border-b border-[#f4f4f5] bg-white">
+                    <div className="p-3 border-b border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900">
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#a1a1aa]" />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
                         <input
                           type="text"
                           value={categorySearchQuery}
                           onChange={(e) => setCategorySearchQuery(e.target.value)}
                           placeholder="Search categories..."
-                          className="w-full pl-9 pr-8 py-2 rounded-lg bg-[#f4f4f5] border-transparent text-[#18181b] placeholder:text-[#a1a1aa] focus:bg-white focus:border-[#e4e4e7] focus:ring-2 focus:ring-[#18181b]/5 transition-all outline-none"
+                          className="w-full pl-9 pr-8 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 border-transparent text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-slate-900 focus:border-gray-200 dark:focus:border-slate-700 focus:ring-2 focus:ring-gray-900/5 dark:focus:ring-white/10 transition-all outline-none"
                           style={{ fontSize: '12px' }}
                           autoFocus
                         />
@@ -1050,17 +1050,17 @@ function HashtagRadarContent() {
                               setCategorySearchQuery('');
                             }}
                             className={`w-full px-3 py-2 text-left rounded-lg transition-colors flex items-center justify-between group/opt ${
-                              selectedCategory === category ? 'bg-[#f4f4f5] text-[#18181b]' : 'text-[#52525b] hover:bg-[#fafafa] hover:text-[#18181b]'
+                              selectedCategory === category ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white'
                             }`}
                           >
                             <span style={{ fontSize: '13px', fontWeight: selectedCategory === category ? '600' : '500' }}>
                               {category}
                             </span>
-                            {selectedCategory === category && <CheckCircle className="w-3.5 h-3.5 text-[#18181b]" />}
+                            {selectedCategory === category && <CheckCircle className="w-3.5 h-3.5 text-gray-900 dark:text-white" />}
                           </button>
                         ))
                       ) : (
-                        <div className="px-4 py-8 text-center text-[#a1a1aa] text-[12px]">
+                        <div className="px-4 py-8 text-center text-gray-400 dark:text-gray-500 text-[12px]">
                           No categories found
                         </div>
                       )}
@@ -1076,15 +1076,15 @@ function HashtagRadarContent() {
                 onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
                 className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl transition-all duration-200 border shadow-sm hover:shadow ${
                   isAutoRegion
-                    ? 'bg-white border-[#e4e4e7] text-[#18181b] hover:border-[#d4d4d8]'
-                    : 'bg-[#18181b] border-[#18181b] text-white'
+                    ? 'bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:border-gray-300 dark:hover:border-slate-700'
+                    : 'bg-gray-900 dark:bg-white border-gray-900 dark:border-white text-white dark:text-gray-900'
                 }`}
               >
-                <Globe className={`w-4 h-4 ${isAutoRegion ? 'text-[#71717a]' : 'text-white'}`} />
+                <Globe className={`w-4 h-4 ${isAutoRegion ? 'text-gray-500 dark:text-gray-400' : 'text-white dark:text-gray-900'}`} />
                 <span style={{ fontSize: '13px', fontWeight: '600' }}>
                   {selectedCountry}
                 </span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${countryDropdownOpen ? 'rotate-180' : ''} ${isAutoRegion ? 'text-[#a1a1aa]' : 'text-white/70'}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${countryDropdownOpen ? 'rotate-180' : ''} ${isAutoRegion ? 'text-gray-400 dark:text-gray-500' : 'text-white/70 dark:text-gray-900/70'}`} />
               </button>
 
               {countryDropdownOpen && (
@@ -1096,7 +1096,7 @@ function HashtagRadarContent() {
                       setCountrySearchQuery('');
                     }}
                   ></div>
-                  <div className="absolute left-0 top-full mt-2 w-[320px] bg-white rounded-xl border border-[#e4e4e7] shadow-xl shadow-black/5 z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
+                  <div className="absolute left-0 top-full mt-2 w-[320px] bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 shadow-xl shadow-black/5 z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
                     {/* Auto Option */}
                     <button
                       onClick={() => {
@@ -1104,36 +1104,36 @@ function HashtagRadarContent() {
                         setCountryDropdownOpen(false);
                         setCountrySearchQuery('');
                       }}
-                      className="w-full px-4 py-3.5 text-left hover:bg-[#fafafa] transition-colors border-b border-[#f4f4f5] group/item"
+                      className="w-full px-4 py-3.5 text-left hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors border-b border-gray-100 dark:border-slate-800 group/item"
                     >
                       <div className="flex items-start gap-3">
-                         <div className={`mt-0.5 p-1.5 rounded-md ${selectedCountry === 'Auto (Based on your audience)' ? 'bg-[#dcfce7] text-[#16a34a]' : 'bg-[#f4f4f5] text-[#a1a1aa] group-hover/item:text-[#71717a]'}`}>
+                         <div className={`mt-0.5 p-1.5 rounded-md ${selectedCountry === 'Auto (Based on your audience)' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-gray-100 dark:bg-slate-800 text-gray-400 dark:text-gray-500 group-hover/item:text-gray-500 dark:group-hover/item:text-gray-400'}`}>
                           <Users className="w-3.5 h-3.5" />
                         </div>
                         <div>
-                          <span className={`block mb-0.5 ${selectedCountry === 'Auto (Based on your audience)' ? 'text-[#16a34a]' : 'text-[#18181b]'}`} style={{ fontSize: '13px', fontWeight: '600' }}>
+                          <span className={`block mb-0.5 ${selectedCountry === 'Auto (Based on your audience)' ? 'text-green-600 dark:text-green-400' : 'text-gray-900 dark:text-white'}`} style={{ fontSize: '13px', fontWeight: '600' }}>
                             Audience Match
                           </span>
-                          <p className="text-[#71717a]" style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                          <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', lineHeight: '1.4' }}>
                             Target where your viewers are active
                           </p>
                         </div>
                         {selectedCountry === 'Auto (Based on your audience)' && (
-                          <CheckCircle className="w-4 h-4 text-[#16a34a] ml-auto mt-1" />
+                          <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 ml-auto mt-1" />
                         )}
                       </div>
                     </button>
 
                     {/* Search */}
-                    <div className="p-3 border-b border-[#f4f4f5] bg-white">
+                    <div className="p-3 border-b border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900">
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#a1a1aa]" />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
                         <input
                           type="text"
                           value={countrySearchQuery}
                           onChange={(e) => setCountrySearchQuery(e.target.value)}
                           placeholder="Search regions..."
-                          className="w-full pl-9 pr-8 py-2 rounded-lg bg-[#f4f4f5] border-transparent text-[#18181b] placeholder:text-[#a1a1aa] focus:bg-white focus:border-[#e4e4e7] focus:ring-2 focus:ring-[#18181b]/5 transition-all outline-none"
+                          className="w-full pl-9 pr-8 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 border-transparent text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-slate-900 focus:border-gray-200 dark:focus:border-slate-700 focus:ring-2 focus:ring-gray-900/5 dark:focus:ring-white/10 transition-all outline-none"
                           style={{ fontSize: '12px' }}
                         />
                       </div>
@@ -1145,7 +1145,7 @@ function HashtagRadarContent() {
                        {!countrySearchQuery ? (
                             <>
                               <div className="px-3 py-2">
-                                <span className="text-[#a1a1aa] text-[10px] font-bold tracking-wider uppercase">Core Regions</span>
+                                <span className="text-gray-400 dark:text-gray-500 text-[10px] font-bold tracking-wider uppercase">Core Regions</span>
                               </div>
                               {CORE_REGIONS.map(country => (
                                 <button
@@ -1155,16 +1155,16 @@ function HashtagRadarContent() {
                                     setCountryDropdownOpen(false);
                                   }}
                                   className={`w-full px-3 py-2 text-left rounded-lg transition-colors flex items-center justify-between group/opt ${
-                                    selectedCountry === country ? 'bg-[#f4f4f5] text-[#18181b]' : 'text-[#52525b] hover:bg-[#fafafa] hover:text-[#18181b]'
+                                    selectedCountry === country ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white'
                                   }`}
                                 >
                                   <span style={{ fontSize: '13px', fontWeight: selectedCountry === country ? '600' : '500' }}>{country}</span>
-                                  {selectedCountry === country && <CheckCircle className="w-3.5 h-3.5 text-[#18181b]" />}
+                                  {selectedCountry === country && <CheckCircle className="w-3.5 h-3.5 text-gray-900 dark:text-white" />}
                                 </button>
                               ))}
                               
-                              <div className="px-3 py-2 mt-2 border-t border-[#f4f4f5]">
-                                <span className="text-[#a1a1aa] text-[10px] font-bold tracking-wider uppercase">All Regions</span>
+                              <div className="px-3 py-2 mt-2 border-t border-gray-100 dark:border-slate-800">
+                                <span className="text-gray-400 dark:text-gray-500 text-[10px] font-bold tracking-wider uppercase">All Regions</span>
                               </div>
                               {ALL_SUPPORTED_REGIONS.map(country => (
                                 <button
@@ -1174,11 +1174,11 @@ function HashtagRadarContent() {
                                     setCountryDropdownOpen(false);
                                   }}
                                   className={`w-full px-3 py-2 text-left rounded-lg transition-colors flex items-center justify-between group/opt ${
-                                    selectedCountry === country ? 'bg-[#f4f4f5] text-[#18181b]' : 'text-[#52525b] hover:bg-[#fafafa] hover:text-[#18181b]'
+                                    selectedCountry === country ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white'
                                   }`}
                                 >
                                   <span style={{ fontSize: '13px', fontWeight: selectedCountry === country ? '600' : '500' }}>{country}</span>
-                                  {selectedCountry === country && <CheckCircle className="w-3.5 h-3.5 text-[#18181b]" />}
+                                  {selectedCountry === country && <CheckCircle className="w-3.5 h-3.5 text-gray-900 dark:text-white" />}
                                 </button>
                               ))}
                             </>
@@ -1193,11 +1193,11 @@ function HashtagRadarContent() {
                                     setCountrySearchQuery('');
                                   }}
                                   className={`w-full px-3 py-2 text-left rounded-lg transition-colors flex items-center justify-between group/opt ${
-                                    selectedCountry === country ? 'bg-[#f4f4f5] text-[#18181b]' : 'text-[#52525b] hover:bg-[#fafafa] hover:text-[#18181b]'
+                                    selectedCountry === country ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white'
                                   }`}
                                 >
                                   <span style={{ fontSize: '13px', fontWeight: selectedCountry === country ? '600' : '500' }}>{country}</span>
-                                  {selectedCountry === country && <CheckCircle className="w-3.5 h-3.5 text-[#18181b]" />}
+                                  {selectedCountry === country && <CheckCircle className="w-3.5 h-3.5 text-gray-900 dark:text-white" />}
                                 </button>
                             ))
                           )}
@@ -1216,7 +1216,7 @@ function HashtagRadarContent() {
           <div>
             {/* Tab Navigation */}
             <div className="mb-6">
-              <div className="flex items-center gap-2 p-1 bg-[#f4f4f5] rounded-xl w-fit">
+              <div className="flex items-center gap-2 p-1 bg-gray-100 dark:bg-slate-900 rounded-xl w-fit">
                 <TabButton
                   icon={<Rocket className="w-4 h-4" />}
                   label="Rising"
@@ -1327,28 +1327,28 @@ function HashtagRadarContent() {
           {/* RIGHT SIDEBAR */}
           <div className="space-y-6">
             {/* Velocity Guide */}
-            <div className="bg-white rounded-xl border border-[#e4e4e7] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 bg-blue-50 rounded-lg text-blue-600">
+                <div className="p-1.5 bg-blue-50 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
                   <Activity className="w-4 h-4" />
                 </div>
-                <h3 className="text-[#18181b] text-[14px] font-bold">
+                <h3 className="text-gray-900 dark:text-white text-[14px] font-bold">
                   Velocity Guide
                 </h3>
               </div>
               <div className="space-y-3">
                 <VelocityLegendItem
-                  icon={<TrendingUp className="w-3.5 h-3.5 text-[#f59e0b]" />}
+                  icon={<TrendingUp className="w-3.5 h-3.5 text-amber-500" />}
                   label="Fast"
                   description="Rapid growth trajectory (>50% WoW)"
                 />
                 <VelocityLegendItem
-                  icon={<ArrowRight className="w-3.5 h-3.5 text-[#3b82f6]" />}
+                  icon={<ArrowRight className="w-3.5 h-3.5 text-blue-500" />}
                   label="Steady"
                   description="Consistent growth pattern (10-50% WoW)"
                 />
                 <VelocityLegendItem
-                  icon={<Minus className="w-3.5 h-3.5 text-[#a1a1aa]" />}
+                  icon={<Minus className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />}
                   label="Slow"
                   description="Minimal movement (<10% WoW)"
                 />
@@ -1356,12 +1356,12 @@ function HashtagRadarContent() {
             </div>
 
             {/* Competition Pressure Guide */}
-            <div className="bg-white rounded-xl border border-[#e4e4e7] p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 bg-purple-50 rounded-lg text-purple-600">
+                <div className="p-1.5 bg-purple-50 dark:bg-purple-900/30 rounded-lg text-purple-600 dark:text-purple-400">
                   <Users className="w-4 h-4" />
                 </div>
-                <h3 className="text-[#18181b] text-[14px] font-bold">
+                <h3 className="text-gray-900 dark:text-white text-[14px] font-bold">
                   Competition Level
                 </h3>
               </div>
@@ -1369,17 +1369,17 @@ function HashtagRadarContent() {
                 <CompetitionLegendItem
                   level="Low"
                   description="Less saturated, easier to stand out"
-                  color="text-[#16a34a]"
+                  color="text-green-600 dark:text-green-400"
                 />
                 <CompetitionLegendItem
                   level="Medium"
                   description="Moderate saturation, needs quality"
-                  color="text-[#f59e0b]"
+                  color="text-amber-500"
                 />
                 <CompetitionLegendItem
                   level="High"
                   description="Very crowded, requires high production"
-                  color="text-[#dc2626]"
+                  color="text-red-600 dark:text-red-400"
                 />
               </div>
             </div>
@@ -1403,8 +1403,8 @@ interface PaginationProps {
 function Pagination({ currentPage, totalPages, onPageChange, startIndex, endIndex, totalItems }: PaginationProps) {
   return (
     <div className="py-4 flex items-center justify-between">
-      <div className="text-[#71717a] text-[13px]">
-        Showing <span className="font-medium text-[#18181b]">{startIndex}-{endIndex}</span> of <span className="font-medium text-[#18181b]">{totalItems}</span> results
+      <div className="text-gray-500 dark:text-gray-400 text-[13px]">
+        Showing <span className="font-medium text-gray-900 dark:text-white">{startIndex}-{endIndex}</span> of <span className="font-medium text-gray-900 dark:text-white">{totalItems}</span> results
       </div>
       <div className="flex items-center gap-2">
         <button
@@ -1412,8 +1412,8 @@ function Pagination({ currentPage, totalPages, onPageChange, startIndex, endInde
           disabled={currentPage === 1}
           className={`p-2 rounded-lg border transition-all ${
             currentPage === 1
-              ? 'border-transparent text-[#d4d4d8] cursor-not-allowed'
-              : 'border-[#e4e4e7] text-[#18181b] hover:bg-white hover:shadow-sm bg-white'
+              ? 'border-transparent text-gray-300 dark:text-gray-700 cursor-not-allowed'
+              : 'border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm bg-white dark:bg-slate-900'
           }`}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -1425,8 +1425,8 @@ function Pagination({ currentPage, totalPages, onPageChange, startIndex, endInde
               onClick={() => onPageChange(page)}
               className={`w-8 h-8 rounded-lg transition-all text-[13px] font-medium ${
                 currentPage === page
-                  ? 'bg-[#18181b] text-white shadow-sm'
-                  : 'text-[#71717a] hover:bg-white hover:text-[#18181b]'
+                  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-sm'
+                  : 'text-gray-500 dark:text-gray-400 hover:bg-white dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               {page}
@@ -1438,8 +1438,8 @@ function Pagination({ currentPage, totalPages, onPageChange, startIndex, endInde
           disabled={currentPage === totalPages}
           className={`p-2 rounded-lg border transition-all ${
             currentPage === totalPages
-              ? 'border-transparent text-[#d4d4d8] cursor-not-allowed'
-              : 'border-[#e4e4e7] text-[#18181b] hover:bg-white hover:shadow-sm bg-white'
+              ? 'border-transparent text-gray-300 dark:text-gray-700 cursor-not-allowed'
+              : 'border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm bg-white dark:bg-slate-900'
           }`}
         >
           <ChevronRight className="w-4 h-4" />
@@ -1463,19 +1463,19 @@ function TabButton({ icon, label, count, isActive, onClick }: TabButtonProps) {
     <button
       className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
         isActive
-          ? 'bg-white text-[#18181b] shadow-sm'
-          : 'text-[#71717a] hover:text-[#18181b] hover:bg-black/[0.03]'
+          ? 'bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-sm'
+          : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.03]'
       }`}
       onClick={onClick}
     >
-      <div className={isActive ? 'text-[#18181b]' : 'text-[#a1a1aa]'}>{icon}</div>
+      <div className={isActive ? 'text-gray-900 dark:text-white' : 'text-gray-400 dark:text-gray-500'}>{icon}</div>
       <span style={{ fontSize: '13px', fontWeight: '600' }}>
         {label}
       </span>
       {count > 0 && (
         <span
           className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-            isActive ? 'bg-[#f4f4f5] text-[#18181b]' : 'bg-[#e4e4e7]/50 text-[#a1a1aa]'
+            isActive ? 'bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-white' : 'bg-gray-200/50 dark:bg-slate-800/50 text-gray-400 dark:text-gray-500'
           }`}
         >
           {count}
@@ -1500,11 +1500,11 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
     switch (hashtag.intelligence.decisionStatus) {
       case 'Recommended':
         return {
-          containerClass: 'bg-white hover:border-[#16a34a]/30',
-          badgeClass: 'bg-[#16a34a]/10 text-[#16a34a]',
-          scoreClass: 'text-[#16a34a]',
+          containerClass: 'bg-white dark:bg-slate-900 hover:border-green-600/30',
+          badgeClass: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+          scoreClass: 'text-green-600 dark:text-green-400',
           indicatorColor: '#16a34a',
-          buttonClass: 'bg-[#1a1a1a] text-white hover:bg-[#333]',
+          buttonClass: 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200',
           labelText: 'Recommended',
           gradientId: 'gradientGreen',
           gradientColors: { start: '#16a34a', end: '#16a34a' },
@@ -1512,11 +1512,11 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
         };
       case 'Use with Caution':
         return {
-          containerClass: 'bg-white hover:border-[#f59e0b]/30',
-          badgeClass: 'bg-[#f59e0b]/10 text-[#f59e0b]',
-          scoreClass: 'text-[#d97706]',
+          containerClass: 'bg-white dark:bg-slate-900 hover:border-amber-500/30',
+          badgeClass: 'bg-amber-100 dark:bg-amber-900/30 text-amber-500',
+          scoreClass: 'text-amber-600 dark:text-amber-500',
           indicatorColor: '#f59e0b',
-          buttonClass: 'bg-[#1a1a1a] text-white hover:bg-[#333]',
+          buttonClass: 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200',
           labelText: 'Caution',
           gradientId: 'gradientOrange',
           gradientColors: { start: '#f59e0b', end: '#f59e0b' },
@@ -1524,11 +1524,11 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
         };
       case 'Avoid for Now':
         return {
-          containerClass: 'bg-white opacity-80',
-          badgeClass: 'bg-[#71717a]/10 text-[#71717a]',
-          scoreClass: 'text-[#71717a]',
+          containerClass: 'bg-white dark:bg-slate-900 opacity-80',
+          badgeClass: 'bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400',
+          scoreClass: 'text-gray-500 dark:text-gray-400',
           indicatorColor: '#71717a',
-          buttonClass: 'bg-[#f4f4f5] text-[#a1a1aa] cursor-not-allowed',
+          buttonClass: 'bg-gray-100 dark:bg-slate-800 text-gray-400 dark:text-gray-500 cursor-not-allowed',
           labelText: 'Avoid',
           gradientId: 'gradientGray',
           gradientColors: { start: '#71717a', end: '#71717a' },
@@ -1536,11 +1536,11 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
         };
       default:
         return {
-          containerClass: 'bg-white hover:border-[#e4e4e7]',
+          containerClass: 'bg-white dark:bg-slate-900 hover:border-gray-200 dark:hover:border-slate-700',
           badgeClass: 'hidden',
-          scoreClass: 'text-[#71717a]',
+          scoreClass: 'text-gray-500 dark:text-gray-400',
           indicatorColor: '#d4d4d8',
-          buttonClass: 'bg-[#18181b] text-white hover:bg-[#333]',
+          buttonClass: 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200',
           labelText: '',
           gradientId: 'gradientNeutral',
           gradientColors: { start: '#71717a', end: '#71717a' },
@@ -1613,17 +1613,17 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
 
   const getCompetitionColor = (level: string) => {
     switch (level.toLowerCase()) {
-      case 'low': return 'text-[#16a34a]';
-      case 'medium': return 'text-[#f59e0b]';
-      case 'high': return 'text-[#ef4444]';
-      default: return 'text-[#71717a]';
+      case 'low': return 'text-green-600 dark:text-green-400';
+      case 'medium': return 'text-amber-500';
+      case 'high': return 'text-red-500 dark:text-red-400';
+      default: return 'text-gray-500 dark:text-gray-400';
     }
   };
 
   return (
     <div className="w-full">
       <div 
-        className={`group relative rounded-xl border border-[#e4e4e7] bg-white transition-all duration-200 hover:shadow-lg hover:shadow-black/[0.02] hover:-translate-y-0.5 ${styles.containerClass} overflow-hidden`}
+        className={`group relative rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all duration-200 hover:shadow-lg hover:shadow-black/[0.02] dark:hover:shadow-black/20 hover:-translate-y-0.5 ${styles.containerClass} overflow-hidden`}
       >
         <div className="flex items-center p-5 gap-6">
           {/* LEFT: Main Info & Stats */}
@@ -1633,13 +1633,13 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
               <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase ${styles.badgeClass}`}>
                 {styles.labelText}
               </span>
-              <span className="text-[#71717a] text-[11px] font-medium truncate">
+              <span className="text-gray-500 dark:text-gray-400 text-[11px] font-medium truncate">
                 {hashtag.api.category}
               </span>
-              <div className="w-1 h-1 rounded-full bg-[#d4d4d8]"></div>
+              <div className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-700"></div>
               <div className="flex items-center gap-1.5" title="Growth rate">
-                <TrendingUp className={`w-3 h-3 ${hashtag.api.rankChange > 0 ? 'text-[#16a34a]' : 'text-[#ef4444]'}`} />
-                <span className={`text-[11px] font-bold ${hashtag.api.rankChange > 0 ? 'text-[#16a34a]' : 'text-[#ef4444]'}`}>
+                <TrendingUp className={`w-3 h-3 ${hashtag.api.rankChange > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`} />
+                <span className={`text-[11px] font-bold ${hashtag.api.rankChange > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
                   {hashtag.api.rankChange > 0 ? '+' : ''}{hashtag.api.rankChange * 3}%
                 </span>
               </div>
@@ -1648,40 +1648,40 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
             {/* Title & Description */}
             <div className="mb-3">
                <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-[#18181b] text-[18px] font-bold tracking-tight group-hover:text-black transition-colors truncate">
+                <h3 className="text-gray-900 dark:text-white text-[18px] font-bold tracking-tight group-hover:text-black dark:group-hover:text-white transition-colors truncate">
                   {hashtag.name}
                 </h3>
-                 <div className="flex items-center gap-1 bg-[#fafafa] px-1.5 py-0.5 rounded border border-[#f4f4f5]">
+                 <div className="flex items-center gap-1 bg-gray-50 dark:bg-slate-800 px-1.5 py-0.5 rounded border border-gray-100 dark:border-slate-700">
                     <div className="w-1 h-1 rounded-full" style={{ backgroundColor: styles.indicatorColor }}></div>
                     <span className={`text-[10px] font-bold ${styles.scoreClass}`}>
                       {matchScore}% Match
                     </span>
                   </div>
                </div>
-              <p className="text-[#52525b] text-[13px] leading-snug line-clamp-1 max-w-[90%]">
+              <p className="text-gray-600 dark:text-gray-300 text-[13px] leading-snug line-clamp-1 max-w-[90%]">
                 {hashtag.intelligence.usageHint}
               </p>
             </div>
 
             {/* Quick Stats Row */}
             <div className="flex items-center gap-4">
-               <div className="flex items-center gap-1.5 p-1.5 rounded-md hover:bg-[#fafafa] transition-colors">
-                  <div className="text-[#a1a1aa] text-[10px] font-bold uppercase tracking-wider">Posts</div>
-                  <div className="text-[#18181b] text-[12px] font-bold">{hashtag.api.publishCount}</div>
+               <div className="flex items-center gap-1.5 p-1.5 rounded-md hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                  <div className="text-gray-400 dark:text-gray-500 text-[10px] font-bold uppercase tracking-wider">Posts</div>
+                  <div className="text-gray-900 dark:text-white text-[12px] font-bold">{hashtag.api.publishCount}</div>
                </div>
-               <div className="w-px h-3 bg-[#e4e4e7]"></div>
-               <div className="flex items-center gap-1.5 p-1.5 rounded-md hover:bg-[#fafafa] transition-colors">
-                  <div className="text-[#a1a1aa] text-[10px] font-bold uppercase tracking-wider">Views</div>
-                  <div className="text-[#18181b] text-[12px] font-bold">{hashtag.api.totalViews}</div>
+               <div className="w-px h-3 bg-gray-200 dark:bg-slate-700"></div>
+               <div className="flex items-center gap-1.5 p-1.5 rounded-md hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                  <div className="text-gray-400 dark:text-gray-500 text-[10px] font-bold uppercase tracking-wider">Views</div>
+                  <div className="text-gray-900 dark:text-white text-[12px] font-bold">{hashtag.api.totalViews}</div>
                </div>
-               <div className="w-px h-3 bg-[#e4e4e7]"></div>
-               <div className="flex items-center gap-1.5 text-[#71717a]" title="Optimal posting window">
-                <Clock className="w-3.5 h-3.5 text-[#a1a1aa]" />
+               <div className="w-px h-3 bg-gray-200 dark:bg-slate-700"></div>
+               <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400" title="Optimal posting window">
+                <Clock className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
                 <span className="text-[11px] font-medium">{timeWindow.days}d left</span>
               </div>
-               <div className="w-px h-3 bg-[#e4e4e7]"></div>
+               <div className="w-px h-3 bg-gray-200 dark:bg-slate-700"></div>
                <div className="flex items-center gap-1.5" title="Competition Level">
-                  <Users className="w-3.5 h-3.5 text-[#a1a1aa]" />
+                  <Users className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
                   <span className={`text-[11px] font-bold capitalize ${getCompetitionColor(hashtag.derived.competitionPressure)}`}>
                     {hashtag.derived.competitionPressure} Comp.
                   </span>
@@ -1755,7 +1755,7 @@ function HashtagLeaderboardCard({ hashtag }: HashtagLeaderboardCardProps) {
           </div>
 
           {/* ACTION: Expand/Action Button */}
-           <div className="flex flex-col items-end gap-2 self-center pl-4 border-l border-[#f4f4f5]">
+           <div className="flex flex-col items-end gap-2 self-center pl-4 border-l border-gray-100 dark:border-slate-800">
              <button 
               className={`px-4 py-2 rounded-lg text-[12px] font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5 active:scale-95 whitespace-nowrap ${styles.buttonClass}`}
               onClick={(e) => {
@@ -1822,10 +1822,10 @@ function DataLayerItem({ label, description, color }: DataLayerItemProps) {
     <div className="flex items-start gap-2.5">
       <div className={`w-3 h-3 rounded ${color} flex-shrink-0 mt-1`} />
       <div>
-        <div className="text-[#1a1a1a] mb-0.5" style={{ fontSize: '12px', fontWeight: '600' }}>
+        <div className="text-gray-900 dark:text-white mb-0.5" style={{ fontSize: '12px', fontWeight: '600' }}>
           {label}
         </div>
-        <p className="text-[#666666]" style={{ fontSize: '11px', lineHeight: '1.3' }}>
+        <p className="text-gray-600 dark:text-gray-400" style={{ fontSize: '11px', lineHeight: '1.3' }}>
           {description}
         </p>
       </div>
@@ -1845,10 +1845,10 @@ function AffinityLegendItem({ color, label, description }: AffinityLegendItemPro
     <div className="flex items-start gap-2.5">
       <div className={`w-4 h-4 rounded ${color} flex-shrink-0 mt-0.5`} />
       <div>
-        <div className="text-[#1a1a1a] mb-0.5" style={{ fontSize: '12px', fontWeight: '600' }}>
+        <div className="text-gray-900 dark:text-white mb-0.5" style={{ fontSize: '12px', fontWeight: '600' }}>
           {label}
         </div>
-        <p className="text-[#666666]" style={{ fontSize: '11px', lineHeight: '1.3' }}>
+        <p className="text-gray-600 dark:text-gray-400" style={{ fontSize: '11px', lineHeight: '1.3' }}>
           {description}
         </p>
       </div>
@@ -1870,10 +1870,10 @@ function VelocityLegendItem({ icon, label, description }: VelocityLegendItemProp
         {icon}
       </div>
       <div>
-        <div className="text-[#1a1a1a] mb-0.5" style={{ fontSize: '12px', fontWeight: '600' }}>
+        <div className="text-gray-900 dark:text-white mb-0.5" style={{ fontSize: '12px', fontWeight: '600' }}>
           {label}
         </div>
-        <p className="text-[#666666]" style={{ fontSize: '11px', lineHeight: '1.3' }}>
+        <p className="text-gray-600 dark:text-gray-400" style={{ fontSize: '11px', lineHeight: '1.3' }}>
           {description}
         </p>
       </div>
@@ -1898,7 +1898,7 @@ function CompetitionLegendItem({ level, description, color }: CompetitionLegendI
         <div className={`mb-0.5 ${color}`} style={{ fontSize: '12px', fontWeight: '600' }}>
           {level}
         </div>
-        <p className="text-[#666666]" style={{ fontSize: '11px', lineHeight: '1.3' }}>
+        <p className="text-gray-600 dark:text-gray-400" style={{ fontSize: '11px', lineHeight: '1.3' }}>
           {description}
         </p>
       </div>

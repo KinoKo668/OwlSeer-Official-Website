@@ -1,4 +1,17 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * @page Legal Pages - Privacy, Terms, Security, Cookies
+ * 
+ * SEO Keywords: OwlSeer privacy policy | TikTok tool terms of service | data security policy
+ * cookie policy | user data protection | GDPR compliance | creator data privacy
+ * 
+ * Long-tail Keywords: how OwlSeer protects user data | TikTok tool privacy practices
+ * OwlSeer data retention policy | is my TikTok data safe with OwlSeer | OwlSeer GDPR compliance
+ * 
+ * 中文关键词: OwlSeer隐私政策 | 服务条款 | 数据安全 | Cookie政策 | 用户数据保护 | GDPR合规
+ */
+
+import React, { useEffect, useMemo } from 'react';
+import { useLanguage } from '../contexts';
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
 import { PrivacyPolicy } from './legal/PrivacyPolicy';
@@ -6,6 +19,8 @@ import { TermsOfService } from './legal/TermsOfService';
 import { SecurityPolicy } from './legal/SecurityPolicy';
 import { CookiePolicy } from './legal/CookiePolicy';
 import { Shield, FileText, Lock, Cookie, ChevronRight } from 'lucide-react';
+import { SEO } from './SEO';
+import { seoConfig, generateAlternates } from '../data/seoConfig';
 
 export type LegalSection = 'privacy' | 'terms' | 'security' | 'cookies';
 
@@ -24,9 +39,9 @@ const LEGAL_NAV = [
 ];
 
 export function LegalPage({ onNavigate, activeSection, isDarkMode, setIsDarkMode }: LegalPageProps) {
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
-  const t = translations.en;
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language as keyof typeof translations] || translations.en;
 
   const handleNavigate = (page: string) => {
     onNavigate(page);
@@ -49,13 +64,30 @@ export function LegalPage({ onNavigate, activeSection, isDarkMode, setIsDarkMode
     }
   };
 
+  // Get SEO config based on active section
+  const seo = useMemo(() => {
+    const seoMap: Record<LegalSection, any> = {
+      privacy: seoConfig.privacy,
+      terms: seoConfig.terms,
+      security: seoConfig.security,
+      cookies: seoConfig.cookies
+    };
+    const config = seoMap[activeSection] || seoConfig.privacy;
+    return config[language as 'en' | 'zh'] || config.en;
+  }, [activeSection, language]);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans text-gray-900 dark:text-gray-100 selection:bg-[#1AAE82]/30">
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
-
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates(`/${activeSection}`)}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}

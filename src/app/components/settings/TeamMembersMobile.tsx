@@ -206,7 +206,7 @@ export function TeamMembersMobile({ onBack }: TeamMembersMobileProps) {
                 {/* Avatar */}
                 <div className="w-12 h-12 rounded-lg bg-[#f5f5f5] border border-[#e0e0e0] flex items-center justify-center flex-shrink-0">
                   {member.avatar ? (
-                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover rounded-lg" />
+                    <img src={member.avatar} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover rounded-lg" />
                   ) : (
                     <Users className="w-6 h-6 text-[#999999]" />
                   )}

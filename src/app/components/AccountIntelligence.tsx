@@ -171,28 +171,24 @@ export function AccountIntelligence({
   const isMobile = useIsMobile();
 
   return (
-    <div className="flex h-screen bg-[#fafafa]">
+    <div className="flex h-screen bg-slate-50 dark:bg-slate-950">
       {/* Sidebar */}
       <SidebarPro
         activeItem="intelligence"
         onNavigate={onNavigate}
-        conversations={conversations}
-        currentConversationId={currentConversationId}
-        onSelectConversation={onSelectConversation}
-        onDeleteConversation={onDeleteConversation}
       />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
         {/* Header */}
-        <div className="bg-white border-b border-[#e0e0e0]">
-          <div className="px-4 md:px-8 py-4 md:py-5 border-b border-[#e0e0e0]">
+        <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+          <div className="px-4 md:px-8 py-4 md:py-5 border-b border-slate-200 dark:border-slate-800">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-[#1a1a1a] mb-1" style={{ fontSize: '20px', fontWeight: '700' }}>
+                <h1 className="text-slate-900 dark:text-white mb-1" style={{ fontSize: '20px', fontWeight: '700' }}>
                   Account Intelligence
                 </h1>
-                <p className="text-[#666666] hidden md:block" style={{ fontSize: '13px' }}>
+                <p className="text-slate-500 dark:text-slate-400 hidden md:block" style={{ fontSize: '13px' }}>
                   System evaluation and current status
                 </p>
               </div>
@@ -206,8 +202,8 @@ export function AccountIntelligence({
                 onClick={() => setActiveTab('overview')}
                 className={`py-3 border-b-2 transition-colors ${
                   activeTab === 'overview'
-                    ? 'border-[#10b981] text-[#1a1a1a]'
-                    : 'border-transparent text-[#666666] hover:text-[#1a1a1a]'
+                    ? 'border-emerald-500 text-slate-900 dark:text-white'
+                    : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 style={{ fontSize: '14px', fontWeight: activeTab === 'overview' ? '600' : '500' }}
               >
@@ -217,8 +213,8 @@ export function AccountIntelligence({
                 onClick={() => setActiveTab('reports')}
                 className={`py-3 border-b-2 transition-colors ${
                   activeTab === 'reports'
-                    ? 'border-[#10b981] text-[#1a1a1a]'
-                    : 'border-transparent text-[#666666] hover:text-[#1a1a1a]'
+                    ? 'border-emerald-500 text-slate-900 dark:text-white'
+                    : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 style={{ fontSize: '14px', fontWeight: activeTab === 'reports' ? '600' : '500' }}
               >
@@ -251,64 +247,67 @@ export function AccountIntelligence({
                 />
 
                 {/* THIS WEEK'S BRIEF */}
-                <ThisWeeksBrief onNavigate={onNavigate} />
+                <ThisWeeksBrief 
+                  onNavigateToCopilot={onNavigate}
+                  onNavigateToWeeklyReport={(page) => onNavigate?.(page)}
+                />
 
                 {/* 1.5. KEY CHANGES - Full Width Grid */}
                 <div>
-                  <h3 className={`text-[#1a1a1a] ${isMobile ? 'mb-2.5 px-1' : 'mb-4'}`} style={{ fontSize: isMobile ? '15px' : '16px', fontWeight: '600' }}>
+                  <h3 className={`text-slate-900 dark:text-white ${isMobile ? 'mb-2.5 px-1' : 'mb-4'}`} style={{ fontSize: isMobile ? '15px' : '16px', fontWeight: '600' }}>
                     Key Changes (Last 7 vs 30 Videos)
                   </h3>
                   <div className={`grid grid-cols-1 md:grid-cols-3 ${isMobile ? 'gap-2.5' : 'gap-4 md:gap-5'}`}>
                     {/* Engagement Trend */}
-                    <div className={`bg-white ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-[#e0e0e0] p-6'} shadow-sm`}>
+                    <div className={`bg-white dark:bg-slate-900 ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-slate-200 dark:border-slate-800 p-6'} shadow-sm`}>
                       <div className="flex items-center gap-2 mb-3">
-                        <TrendingUp className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-[#16a34a]`} />
-                        <span className="text-[#1a1a1a]" style={{ fontSize: isMobile ? '14px' : '13px', fontWeight: '600' }}>
+                        <TrendingUp className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-emerald-600`} />
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: isMobile ? '14px' : '13px', fontWeight: '600' }}>
                           Engagement Trend
                         </span>
                       </div>
-                      <div className="text-[#16a34a] mb-2" style={{ fontSize: isMobile ? '32px' : '28px', fontWeight: '700' }}>
+                      <div className="text-emerald-600 mb-2" style={{ fontSize: isMobile ? '32px' : '28px', fontWeight: '700' }}>
                         +2.3%
                       </div>
-                      <p className="text-[#666666]" style={{ fontSize: isMobile ? '13px' : '12px', lineHeight: '1.4' }}>
+                      <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: isMobile ? '13px' : '12px', lineHeight: '1.4' }}>
                         Likes and comments up this week
                       </p>
                     </div>
 
                     {/* Views Trend */}
-                    <div className={`bg-white ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-[#e0e0e0] p-6'} shadow-sm`}>
+                    <div className={`bg-white dark:bg-slate-900 ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-slate-200 dark:border-slate-800 p-6'} shadow-sm`}>
                       <div className="flex items-center gap-2 mb-3">
-                        <TrendingUp className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-[#16a34a]`} />
-                        <span className="text-[#1a1a1a]" style={{ fontSize: isMobile ? '14px' : '13px', fontWeight: '600' }}>
+                        <TrendingUp className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-emerald-600`} />
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: isMobile ? '14px' : '13px', fontWeight: '600' }}>
                           Avg Views
                         </span>
                         <div className="relative group">
-                          <Info className="w-3.5 h-3.5 text-[#999999] cursor-help" />
-                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-[#1a1a1a] text-white rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                          <Info className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 cursor-help" />
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-900 text-white rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
                             Videos published within 3 days are excluded from this metric
                           </div>
                         </div>
                       </div>
-                      <div className="text-[#16a34a] mb-2" style={{ fontSize: isMobile ? '32px' : '28px', fontWeight: '700' }}>
+                      <div className="text-emerald-600 mb-2" style={{ fontSize: isMobile ? '32px' : '28px', fontWeight: '700' }}>
                         +125K
                       </div>
-                      <p className="text-[#666666]" style={{ fontSize: isMobile ? '13px' : '12px', lineHeight: '1.4' }}>
+                      <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: isMobile ? '13px' : '12px', lineHeight: '1.4' }}>
                         Weekly views increasing
                       </p>
                     </div>
 
                     {/* Posting Consistency */}
-                    <div className={`bg-white ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-[#e0e0e0] p-6'} shadow-sm`}>
+                    <div className={`bg-white dark:bg-slate-900 ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-slate-200 dark:border-slate-800 p-6'} shadow-sm`}>
                       <div className="flex items-center gap-2 mb-3">
-                        <ArrowRight className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-[#666666]`} />
-                        <span className="text-[#1a1a1a]" style={{ fontSize: isMobile ? '14px' : '13px', fontWeight: '600' }}>
+                        <ArrowRight className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-slate-500 dark:text-slate-400`} />
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: isMobile ? '14px' : '13px', fontWeight: '600' }}>
                           Posting Consistency
                         </span>
                       </div>
-                      <div className="text-[#1a1a1a] mb-2" style={{ fontSize: isMobile ? '32px' : '28px', fontWeight: '700' }}>
+                      <div className="text-slate-900 dark:text-white mb-2" style={{ fontSize: isMobile ? '32px' : '28px', fontWeight: '700' }}>
                         3.2/wk
                       </div>
-                      <p className="text-[#666666]" style={{ fontSize: isMobile ? '13px' : '12px', lineHeight: '1.4' }}>
+                      <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: isMobile ? '13px' : '12px', lineHeight: '1.4' }}>
                         Maintaining steady cadence
                       </p>
                     </div>
@@ -317,12 +316,12 @@ export function AccountIntelligence({
 
                 {/* BEST TIME TO POST - Heatmap */}
                 <div>
-                  <div className={`bg-white ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-[#e0e0e0] p-6 md:p-8'} shadow-sm`}>
+                  <div className={`bg-white dark:bg-slate-900 ${isMobile ? 'rounded-[8px] border-0 p-4' : 'rounded-[12px] border border-slate-200 dark:border-slate-800 p-6 md:p-8'} shadow-sm`}>
                     {/* Header */}
                     <div className={`${isMobile ? 'mb-5' : 'mb-6'} flex items-center justify-between`}>
                       <div className="flex items-center gap-2">
-                        <Clock className={`${isMobile ? 'w-5 h-5' : 'w-5 h-5'} text-[#10b981]`} />
-                        <h3 className="text-[#1a1a1a]" style={{ fontSize: isMobile ? '15px' : '16px', fontWeight: '600' }}>
+                        <Clock className={`${isMobile ? 'w-5 h-5' : 'w-5 h-5'} text-emerald-500`} />
+                        <h3 className="text-slate-900 dark:text-white" style={{ fontSize: isMobile ? '15px' : '16px', fontWeight: '600' }}>
                           Best Time to Post
                         </h3>
                       </div>
@@ -333,124 +332,50 @@ export function AccountIntelligence({
                       {/* Mobile: Horizontal scroll container */}
                       {isMobile ? (
                         <div className="overflow-x-auto -mx-4 px-4">
-                          <div className="min-w-[420px]">
+                          <div className="min-w-[680px]">
                             {/* Time Labels */}
-                            <div className="grid grid-cols-[40px_repeat(12,1fr)] gap-1.5 mb-3">
+                            <div className="grid grid-cols-[40px_repeat(24,1fr)] gap-1 mb-3">
                               <div /> {/* Empty cell for day labels */}
-                              {['6AM', '', '10AM', '', '2PM', '', '6PM', '', '10PM', '', '2AM', ''].map((time, index) => (
-                                <div key={index} className="text-center text-[#999999]" style={{ fontSize: '10px', fontWeight: '500' }}>
-                                  {time}
-                                </div>
-                              ))}
+                              {Array.from({ length: 24 }).map((_, index) => {
+                                const hour = (index + 6) % 24;
+                                const showLabel = index % 4 === 0;
+                                const ampm = hour >= 12 ? 'PM' : 'AM';
+                                const h = hour % 12 || 12;
+                                return (
+                                  <div key={index} className="text-center text-slate-400 dark:text-slate-500" style={{ fontSize: '10px', fontWeight: '500' }}>
+                                    {showLabel ? `${h}${ampm}` : ''}
+                                  </div>
+                                );
+                              })}
                             </div>
 
                             {/* Heatmap Rows */}
                             {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dayIndex) => (
-                              <div key={day} className="grid grid-cols-[40px_repeat(12,1fr)] gap-1.5 mb-2">
-                                <div className="flex items-center text-[#999999]" style={{ fontSize: '11px', fontWeight: '500' }}>
+                              <div key={day} className="grid grid-cols-[40px_repeat(24,1fr)] gap-1 mb-2">
+                                <div className="flex items-center text-slate-400 dark:text-slate-500" style={{ fontSize: '11px', fontWeight: '500' }}>
                                   {day}
                                 </div>
-                                {Array.from({ length: 12 }, (_, blockIndex) => {
-                                  let intensity = 'bg-[#e6f7f1]';
+                                {Array.from({ length: 24 }, (_, hourIndex) => {
+                                  // Mock logic for Recommended vs Not Recommended
+                                  let isRecommended = false;
+                                  if (dayIndex <= 3) { // Mon-Thu
+                                    if (hourIndex >= 12 && hourIndex <= 16) isRecommended = true; // 6PM-10PM
+                                  } else if (dayIndex === 4) { // Fri
+                                    if (hourIndex >= 10 && hourIndex <= 17) isRecommended = true; // 4PM-11PM
+                                  } else if (dayIndex === 5) { // Sat
+                                    if ((hourIndex >= 4 && hourIndex <= 7) || (hourIndex >= 13 && hourIndex <= 17)) isRecommended = true;
+                                  } else if (dayIndex === 6) { // Sun
+                                    if (hourIndex >= 4 && hourIndex <= 10) isRecommended = true;
+                                  }
 
-                                  if (dayIndex === 5 && blockIndex === 6) {
-                                    intensity = 'bg-[#2ca87f]';
-                                  }
-                                  else if (dayIndex === 5 && (blockIndex === 5 || blockIndex === 7)) {
-                                    intensity = 'bg-[#4ec9a0]';
-                                  }
-                                  else if (dayIndex === 5 && (blockIndex === 4 || blockIndex === 8)) {
-                                    intensity = 'bg-[#8dd9c0]';
-                                  }
-                                  else if (dayIndex === 6 && blockIndex >= 4 && blockIndex <= 7) {
-                                    intensity = 'bg-[#8dd9c0]';
-                                  }
-                                  else if (dayIndex >= 0 && dayIndex <= 4 && (blockIndex === 6 || blockIndex === 7)) {
-                                    intensity = 'bg-[#8dd9c0]';
-                                  }
-                                  else if ((dayIndex === 5 || dayIndex === 6) && blockIndex >= 2 && blockIndex <= 3) {
-                                    intensity = 'bg-[#c7ede0]';
-                                  }
-                                  else if (dayIndex >= 0 && dayIndex <= 4 && blockIndex >= 3 && blockIndex <= 5) {
-                                    intensity = 'bg-[#c7ede0]';
-                                  }
+                                  const intensity = isRecommended 
+                                    ? 'bg-emerald-500 dark:bg-emerald-600 shadow-sm' 
+                                    : 'bg-slate-100 dark:bg-slate-800/50';
 
                                   return (
                                     <div
-                                      key={blockIndex}
-                                      className={`h-7 rounded ${intensity} transition-colors`}
-                                    />
-                                  );
-                                })}
-                              </div>
-                            ))}
-
-                            {/* Legend */}
-                            <div className="flex items-center justify-center gap-2 mt-5 pt-4 border-t border-[#e0e0e0]">
-                              <span className="text-[#999999]" style={{ fontSize: '10px', fontWeight: '500' }}>
-                                Low
-                              </span>
-                              <div className="flex items-center gap-1">
-                                <div className="w-3.5 h-3.5 rounded-sm bg-[#e6f7f1]" />
-                                <div className="w-3.5 h-3.5 rounded-sm bg-[#c7ede0]" />
-                                <div className="w-3.5 h-3.5 rounded-sm bg-[#8dd9c0]" />
-                                <div className="w-3.5 h-3.5 rounded-sm bg-[#4ec9a0]" />
-                                <div className="w-3.5 h-3.5 rounded-sm bg-[#2ca87f]" />
-                              </div>
-                              <span className="text-[#999999]" style={{ fontSize: '10px', fontWeight: '500' }}>
-                                High
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        // Desktop version
-                        <div>
-                          {/* Time Labels - 6 labels for 12 blocks (each label spans 2 blocks = 4 hours) */}
-                          <div className="grid grid-cols-[50px_repeat(12,1fr)] gap-2 mb-3">
-                            <div /> {/* Empty cell for day labels */}
-                            {['6AM', '', '10AM', '', '2PM', '', '6PM', '', '10PM', '', '2AM', ''].map((time, index) => (
-                              <div key={index} className="text-center text-[#999999]" style={{ fontSize: '11px', fontWeight: '500' }}>
-                                {time}
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Heatmap Rows - 7 days × 12 blocks (each block = 2 hours) */}
-                          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dayIndex) => (
-                            <div key={day} className="grid grid-cols-[50px_repeat(12,1fr)] gap-2 mb-2">
-                              <div className="flex items-center text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                                {day}
-                              </div>
-                              {Array.from({ length: 12 }, (_, blockIndex) => {
-                                let intensity = 'bg-[#e6f7f1]';
-
-                                if (dayIndex === 5 && blockIndex === 6) {
-                                  intensity = 'bg-[#2ca87f]';
-                                }
-                                else if (dayIndex === 5 && (blockIndex === 5 || blockIndex === 7)) {
-                                  intensity = 'bg-[#4ec9a0]';
-                                }
-                                else if (dayIndex === 5 && (blockIndex === 4 || blockIndex === 8)) {
-                                  intensity = 'bg-[#8dd9c0]';
-                                }
-                                else if (dayIndex === 6 && blockIndex >= 4 && blockIndex <= 7) {
-                                  intensity = 'bg-[#8dd9c0]';
-                                }
-                                else if (dayIndex >= 0 && dayIndex <= 4 && (blockIndex === 6 || blockIndex === 7)) {
-                                  intensity = 'bg-[#8dd9c0]';
-                                }
-                                else if ((dayIndex === 5 || dayIndex === 6) && blockIndex >= 2 && blockIndex <= 3) {
-                                  intensity = 'bg-[#c7ede0]';
-                                }
-                                else if (dayIndex >= 0 && dayIndex <= 4 && blockIndex >= 3 && blockIndex <= 5) {
-                                  intensity = 'bg-[#c7ede0]';
-                                }
-
-                                return (
-                                  <div
-                                    key={blockIndex}
-                                    className={`h-8 rounded ${intensity} transition-colors hover:opacity-80 cursor-pointer`}
+                                      key={hourIndex}
+                                    className={`h-7 rounded-sm ${intensity} transition-all`}
                                   />
                                 );
                               })}
@@ -458,23 +383,92 @@ export function AccountIntelligence({
                           ))}
 
                           {/* Legend */}
-                          <div className="flex items-center justify-center gap-2 mt-6 pt-4 border-t border-[#e0e0e0]">
-                            <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '500' }}>
-                              Low
-                            </span>
-                            <div className="flex items-center gap-1">
-                              <div className="w-4 h-4 rounded-sm bg-[#e6f7f1]" />
-                              <div className="w-4 h-4 rounded-sm bg-[#c7ede0]" />
-                              <div className="w-4 h-4 rounded-sm bg-[#8dd9c0]" />
-                              <div className="w-4 h-4 rounded-sm bg-[#4ec9a0]" />
-                              <div className="w-4 h-4 rounded-sm bg-[#2ca87f]" />
+                          <div className="flex items-center justify-center gap-6 mt-5 pt-4 border-t border-slate-200 dark:border-slate-800">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-sm bg-slate-100 dark:bg-slate-800/50" />
+                              <span className="text-slate-400 dark:text-slate-500" style={{ fontSize: '11px', fontWeight: '500' }}>
+                                Off-Peak
+                              </span>
                             </div>
-                            <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '500' }}>
-                              High
+                            <div className="flex items-center gap-2">
+                              <div className="w-3.5 h-3.5 rounded-sm bg-emerald-500 dark:bg-emerald-600" />
+                              <span className="text-slate-900 dark:text-white" style={{ fontSize: '11px', fontWeight: '500' }}>
+                                Recommended
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      // Desktop version
+                      <div>
+                        {/* Time Labels */}
+                        <div className="grid grid-cols-[50px_repeat(24,1fr)] gap-1 mb-3">
+                          <div /> {/* Empty cell for day labels */}
+                          {Array.from({ length: 24 }).map((_, index) => {
+                            const hour = (index + 6) % 24;
+                            const showLabel = index % 4 === 0;
+                            const ampm = hour >= 12 ? 'PM' : 'AM';
+                            const h = hour % 12 || 12;
+                            return (
+                              <div key={index} className="text-center text-slate-400 dark:text-slate-500" style={{ fontSize: '11px', fontWeight: '500' }}>
+                                {showLabel ? `${h}${ampm}` : ''}
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Heatmap Rows */}
+                        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dayIndex) => (
+                          <div key={day} className="grid grid-cols-[50px_repeat(24,1fr)] gap-1 mb-2">
+                            <div className="flex items-center text-slate-400 dark:text-slate-500" style={{ fontSize: '12px', fontWeight: '500' }}>
+                              {day}
+                            </div>
+                            {Array.from({ length: 24 }, (_, hourIndex) => {
+                              // Mock logic for Recommended vs Not Recommended
+                              let isRecommended = false;
+                              if (dayIndex <= 3) { // Mon-Thu
+                                if (hourIndex >= 12 && hourIndex <= 16) isRecommended = true; // 6PM-10PM
+                              } else if (dayIndex === 4) { // Fri
+                                if (hourIndex >= 10 && hourIndex <= 17) isRecommended = true; // 4PM-11PM
+                              } else if (dayIndex === 5) { // Sat
+                                if ((hourIndex >= 4 && hourIndex <= 7) || (hourIndex >= 13 && hourIndex <= 17)) isRecommended = true;
+                              } else if (dayIndex === 6) { // Sun
+                                if (hourIndex >= 4 && hourIndex <= 10) isRecommended = true;
+                              }
+
+                              const intensity = isRecommended 
+                                ? 'bg-emerald-500 dark:bg-emerald-600 shadow-sm' 
+                                : 'bg-slate-100 dark:bg-slate-800/50 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer';
+
+                              return (
+                                <div
+                                  key={hourIndex}
+                                  className={`h-8 rounded-sm ${intensity}`}
+                                  title={isRecommended ? 'Recommended Time' : 'Off-Peak'}
+                                />
+                              );
+                            })}
+                          </div>
+                        ))}
+
+                        {/* Legend */}
+                        <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-sm bg-slate-100 dark:bg-slate-800/50" />
+                            <span className="text-slate-400 dark:text-slate-500" style={{ fontSize: '12px', fontWeight: '500' }}>
+                              Off-Peak
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-sm bg-emerald-500 dark:bg-emerald-600" />
+                            <span className="text-slate-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '500' }}>
+                              Recommended
                             </span>
                           </div>
                         </div>
-                      )}
+                      </div>
+                    )}
                     </div>
                   </div>
                 </div>
@@ -507,7 +501,7 @@ export function AccountIntelligence({
 
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-6 py-3 rounded-lg shadow-xl z-50 animate-fade-in">
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-lg shadow-xl z-50 animate-fade-in">
           <p style={{ fontSize: '14px', fontWeight: '500' }}>
             Got it — we'll regenerate using your suggestions.
           </p>

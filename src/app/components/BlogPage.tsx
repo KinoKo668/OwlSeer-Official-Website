@@ -1,4 +1,17 @@
+/**
+ * @page Blog Page - TikTok Strategy Resources
+ * 
+ * SEO Keywords: TikTok strategy blog | content creator tips | TikTok marketing insights
+ * viral video tips | TikTok growth strategies | creator education | social media tips
+ * 
+ * Long-tail Keywords: how to go viral on TikTok 2026 | TikTok algorithm tips for creators
+ * best posting times for TikTok | TikTok content ideas for beginners | TikTok trend predictions
+ * 
+ * 中文关键词: TikTok策略博客 | 创作者技巧 | 短视频营销洞察 | 病毒视频技巧 | 内容创作者教育
+ */
+
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, 
@@ -14,6 +27,8 @@ import {
 } from 'lucide-react';
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, generateAlternates } from '../data/seoConfig';
 
 // --- Types ---
 
@@ -121,12 +136,13 @@ const CATEGORIES = ["All", "Strategy", "Data Insights", "AI & Tech", "Case Studi
 // --- Components ---
 
 const FeaturedPost = ({ post, onClick }: { post: BlogPost; onClick?: () => void }) => (
-  <motion.div 
+  <motion.article 
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
     onClick={onClick}
     className="group relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 shadow-xl border border-gray-100 dark:border-slate-800 hover:shadow-2xl transition-all duration-500 cursor-pointer"
+    aria-label={`Featured article: ${post.title}`}
   >
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
       <div className="relative h-64 lg:h-auto overflow-hidden">
@@ -134,6 +150,8 @@ const FeaturedPost = ({ post, onClick }: { post: BlogPost; onClick?: () => void 
         <img 
           src={post.image} 
           alt={post.title} 
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/60 opacity-60" />
@@ -163,28 +181,34 @@ const FeaturedPost = ({ post, onClick }: { post: BlogPost; onClick?: () => void 
             </div>
           </div>
           
-          <button className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all">
+          <button 
+            className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold hover:gap-3 transition-all"
+            aria-label={`Read article: ${post.title}`}
+          >
             Read Article <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>
     </div>
-  </motion.div>
+  </motion.article>
 );
 
 const BlogCard = ({ post, index, onClick }: { post: BlogPost; index: number; onClick?: () => void }) => (
-  <motion.div
+  <motion.article
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
     onClick={onClick}
     className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-slate-800 hover:shadow-xl hover:border-emerald-500/20 transition-all duration-300 cursor-pointer"
+    aria-label={`Article: ${post.title}`}
   >
     <div className="relative h-48 overflow-hidden">
       <img 
         src={post.image} 
         alt={post.title} 
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div className="absolute top-4 left-4">
@@ -209,11 +233,14 @@ const BlogCard = ({ post, index, onClick }: { post: BlogPost; index: number; onC
         {post.excerpt}
       </p>
     </div>
-  </motion.div>
+  </motion.article>
 );
 
 const NewsletterSignup = () => (
-  <section className="relative my-24 rounded-3xl overflow-hidden bg-[#111827] dark:bg-black text-white p-12 text-center">
+  <section 
+    className="relative my-24 rounded-3xl overflow-hidden bg-[#111827] dark:bg-black text-white p-12 text-center"
+    aria-label="Newsletter subscription"
+  >
     <div className="absolute inset-0 opacity-10 mix-blend-soft-light" 
          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E\")" }}
     />
@@ -257,10 +284,9 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   
-  // Minimal state for Navbar compatibility
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
-  const t = translations.en;
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language as keyof typeof translations] || translations.en;
 
   const handleNavigate = (page: string) => {
     if (onNavigate) {
@@ -284,13 +310,21 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
   const featuredPost = BLOG_POSTS.find(p => p.featured) || BLOG_POSTS[0];
   const otherPosts = filteredPosts.filter(p => p.id !== featuredPost.id);
 
+  // Get SEO config
+  const seo = seoConfig.blog[language as 'en' | 'zh'] || seoConfig.blog.en;
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans selection:bg-emerald-500/30">
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
-
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/blog')}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}
@@ -304,7 +338,10 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
 
       <main className="pt-[72px]">
         {/* Header */}
-        <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <section 
+          className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+          aria-label="Blog header - Free TikTok strategy tips"
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -324,7 +361,10 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
         </section>
 
         {/* Filters & Search */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12"
+          aria-label="Blog categories and search"
+        >
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-gray-200 dark:border-slate-800">
             {/* Categories */}
             <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
@@ -358,7 +398,10 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
         </section>
 
         {/* Post Grid */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-24"
+          aria-label="Blog articles list"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {otherPosts.map((post, index) => (
               <BlogCard key={post.id} post={post} index={index} onClick={handlePostClick} />

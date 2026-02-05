@@ -414,7 +414,7 @@ export function ContentLibrary({
               >
                 {/* Thumbnail */}
                 <div className="relative aspect-[9/16] bg-[#F8F9FA]">
-                  <img src={video.thumbnail} alt="" className="w-full h-full object-cover" />
+                  <img src={video.thumbnail} alt={`Video thumbnail: ${video.title}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   
                   {/* Performance Badge - Top Left (Restrained Style) */}
                   {video.performance === 'viral' && (
@@ -1031,6 +1031,8 @@ export function ContentLibrary({
                       <img
                         src="https://images.unsplash.com/photo-1566915896913-549d796d2166?w=600"
                         alt="Demo video"
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
 

@@ -93,7 +93,7 @@ export function TeamOverviewMobile({ onBack }: TeamOverviewMobileProps) {
           >
             <div className="w-24 h-24 rounded-full bg-[#f5f5f5] border-2 border-[#e0e0e0] overflow-hidden flex items-center justify-center">
               {teamLogo ? (
-                <img src={teamLogo} alt="Team Logo" className="w-full h-full object-cover" />
+                <img src={teamLogo} alt="Team Logo" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               ) : (
                 <Users className="w-12 h-12 text-[#999999]" />
               )}
@@ -192,7 +192,7 @@ export function TeamOverviewMobile({ onBack }: TeamOverviewMobileProps) {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-12 rounded-lg bg-[#f5f5f5] border border-[#e0e0e0] flex items-center justify-center flex-shrink-0">
             {owner.avatar ? (
-              <img src={owner.avatar} alt={owner.name} className="w-full h-full object-cover rounded-lg" />
+              <img src={owner.avatar} alt={owner.name} loading="lazy" decoding="async" className="w-full h-full object-cover rounded-lg" />
             ) : (
               <Users className="w-6 h-6 text-[#999999]" />
             )}

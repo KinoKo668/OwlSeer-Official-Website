@@ -1,4 +1,17 @@
+/**
+ * @page Pricing Page - OwlSeer Plans & Pricing
+ * 
+ * SEO Keywords: TikTok tool pricing | content creator subscription plans | AI strategy tool cost
+ * TikTok analytics pricing | creator tool subscription | social media tool plans
+ * 
+ * Long-tail Keywords: best free TikTok analytics tool | affordable TikTok growth platform
+ * creator tool with free trial | TikTok strategy tool monthly pricing | 7-day free trial TikTok tool
+ * 
+ * 中文关键词: TikTok工具价格 | 创作者订阅计划 | AI策略工具费用 | 免费试用 | 内容创作者工具定价
+ */
+
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Check, 
@@ -17,6 +30,8 @@ import {
 } from 'lucide-react';
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
 
 // --- Components ---
 
@@ -119,9 +134,8 @@ const FaqItem = ({ question, answer }: { question: string; answer: string }) => 
 export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate?: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
   const [isAnnual, setIsAnnual] = useState(true);
   
-  // Minimal state for Navbar compatibility
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
   
   const t = translations[language as keyof typeof translations] || translations.en;
   
@@ -137,13 +151,22 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
     }
   };
 
+  // Get SEO config
+  const seo = seoConfig.pricing[language as 'en' | 'zh'] || seoConfig.pricing.en;
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans selection:bg-emerald-500/30">
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
-
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/pricing')}
+        structuredData={structuredDataSchemas.product}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}
@@ -157,7 +180,10 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
 
       <main className="pt-[72px]">
         {/* Header */}
-        <section className="px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center max-w-7xl mx-auto">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center max-w-7xl mx-auto"
+          aria-label="Pricing plans and free trial information"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 mb-8">
             <Sparkles className="w-4 h-4 text-emerald-500" />
             <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">{pricingT.title}</span>
@@ -171,6 +197,31 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
           <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-12">
             {pageT.hero.subtitle}
           </p>
+
+          {/* Risk-free Trial Banner */}
+          <div className="max-w-4xl mx-auto mb-16 bg-gradient-to-r from-emerald-50/50 to-blue-50/50 dark:from-emerald-900/10 dark:to-blue-900/10 border border-emerald-100 dark:border-emerald-900/30 rounded-2xl p-6 md:p-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-left space-y-2">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Risk-free 7-day trial of our full platform</h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300">No long-term commitment required. 7 days of unlimited access to strategy tools and scripts.</p>
+                <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  <span className="flex items-center gap-1"><Check className="w-4 h-4 text-emerald-500" /> Clear tier-based pricing</span>
+                  <span className="flex items-center gap-1"><Check className="w-4 h-4 text-emerald-500" /> No automatic billing until trial ends</span>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <button 
+                  onClick={() => handleNavigate('auth')}
+                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-lg shadow-emerald-600/20 transition-all duration-300 flex items-center gap-2 whitespace-nowrap"
+                >
+                  Start 7-Day Trial <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
 
           {/* Toggle */}
           <div className="flex items-center justify-center gap-4 mb-16">
@@ -427,7 +478,10 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
         </section>
 
           {/* Social Proof */}
-          <section className="py-12 border-y border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+          <section 
+            className="py-12 border-y border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900/50"
+            aria-label="Trusted by creators and brands"
+          >
             <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-8">Trusted by 10,000+ Creators & Brands</p>
               <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale">
@@ -442,7 +496,10 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
           </section>
 
           {/* FAQ */}
-          <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+          <section 
+            className="py-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto"
+            aria-label="Frequently asked questions about pricing"
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white font-display mb-12">
               {pageT.faq.title}
             </h2>
@@ -458,7 +515,10 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
           </section>
 
           {/* CTA */}
-          <section className="px-4 sm:px-6 lg:px-8 pb-24">
+          <section 
+            className="px-4 sm:px-6 lg:px-8 pb-24"
+            aria-label="Start your free trial"
+          >
             <div className="max-w-5xl mx-auto bg-[#111827] dark:bg-black rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-emerald-500/20 via-transparent to-transparent" />
               

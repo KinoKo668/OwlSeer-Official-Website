@@ -62,6 +62,8 @@ export function TikTokPreviewModal({ isOpen, onClose, scene }: TikTokPreviewModa
               <img
                 src={storyboard[currentFrameIndex].imageUrl}
                 alt={`Frame ${currentFrameIndex + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               

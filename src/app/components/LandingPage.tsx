@@ -1,6 +1,20 @@
-import React, { useEffect, useState, useMemo, memo } from 'react';
+/**
+ * @page Landing Page - OwlSeer Homepage
+ * 
+ * SEO Keywords: TikTok content strategy platform | AI video script generator | TikTok analytics alternative
+ * TikTok growth tool | content planning for creators | viral video strategy | TikTok marketing automation
+ * best TikTok tool 2026 | AI content creator tools | TikTok engagement optimizer
+ * 
+ * Long-tail Keywords: best AI tool for TikTok creators 2026 | how to grow TikTok followers with AI
+ * TikTok script writing tool | automated TikTok content planning | data-driven TikTok strategy
+ * 
+ * 中文关键词: TikTok内容策略 | AI脚本生成器 | 短视频营销工具 | 抖音运营助手 | 创作者增长工具
+ * TikTok数据分析 | AI视频脚本 | 内容规划平台 | 短视频创作者工具
+ */
+
+import React, { useState, useEffect, useMemo, memo } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { usePerformance } from '../contexts';
+import { usePerformance, useLanguage } from '../contexts';
 import { 
   ArrowRight, 
   BarChart2, 
@@ -33,6 +47,8 @@ import { CoreFeatures } from './CoreFeatures';
 import { PricingSection } from './PricingSection';
 import { OwlSeerLogo } from './OwlSeerLogo';
 import { translations, languages } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
 
 // --- Types & Interfaces ---
 
@@ -661,7 +677,10 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
   };
 
   return (
-    <section className="relative min-h-[100vh] pt-[72px] flex items-center justify-center overflow-hidden z-0">
+    <section 
+      className="relative min-h-[100vh] pt-[72px] flex items-center justify-center overflow-hidden z-0"
+      aria-label="Hero section - AI TikTok Content Strategy Platform"
+    >
       
       {/* --- Floating Elements (Only show when animations enabled) --- */}
       {enableAnimations && (
@@ -869,7 +888,10 @@ const ValueProposition = ({ language, onTrySample, onNavigate }: { language: str
   const t = (content as any)[language] || content.en;
 
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 relative overflow-hidden">
+    <section 
+      className="py-20 bg-white dark:bg-slate-900 relative overflow-hidden"
+      aria-label="Value proposition - Why choose OwlSeer"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-display tracking-tight">
@@ -998,8 +1020,7 @@ export const Footer = ({ t, onNavigate }: { t: any, onNavigate?: (page: string) 
 };
 
 export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
+  const { language, setLanguage } = useLanguage();
   const t = translations[language as keyof typeof translations] || translations.en;
 
   useEffect(() => {
@@ -1038,14 +1059,28 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
     onNavigate('auth');
   };
 
+  // Get SEO config based on language
+  const seo = seoConfig.home[language as 'en' | 'zh'] || seoConfig.home.en;
+  const homeStructuredData = [
+    structuredDataSchemas.organization,
+    structuredDataSchemas.softwareApplication,
+    structuredDataSchemas.webSite
+  ];
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-[#1AAE82]/20 selection:text-[#1AAE82]">
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/')}
+        structuredData={homeStructuredData}
+      />
+      
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
-        
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-        
         @keyframes scroll-down {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(100%); }
@@ -1092,7 +1127,10 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
         </div>
         
         {/* Final CTA Section */}
-        <section className="py-24 bg-[#111827] relative overflow-hidden">
+        <section 
+          className="py-24 bg-[#111827] relative overflow-hidden"
+          aria-label="Call to action - Start your free trial"
+        >
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#1AAE82]/10 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
           

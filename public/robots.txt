@@ -1,0 +1,55 @@
+# OwlSeer Robots.txt
+# https://owlseer.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Public marketing pages - Allow
+Allow: /
+Allow: /how-it-works
+Allow: /features
+Allow: /pricing
+Allow: /blog
+Allow: /blog-post
+Allow: /faq
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+Allow: /security
+Allow: /cookies
+
+# Sample dashboard - Allow for product showcase
+Allow: /sample/dashboard
+
+# App pages - Disallow (requires authentication)
+Disallow: /simulation/
+Disallow: /auth
+Disallow: /account-selection
+Disallow: /account-connection
+Disallow: /content-profile
+Disallow: /creator-struggles
+Disallow: /goal-setting
+Disallow: /ai-processing
+Disallow: /insight-checkpoint
+Disallow: /home
+Disallow: /copilot
+Disallow: /dashboard
+Disallow: /monitor
+Disallow: /intelligence
+Disallow: /library
+Disallow: /hashtag
+Disallow: /trends
+Disallow: /scheduling
+Disallow: /studio
+Disallow: /studio-demo
+Disallow: /settings
+Disallow: /weekly-report
+Disallow: /weekly-report-detail
+Disallow: /reports-archive
+Disallow: /sidebar-demo
+
+# Sitemap location
+Sitemap: https://owlseer.com/sitemap.xml
+
+# Crawl delay (optional, effective for some crawlers)
+Crawl-delay: 1

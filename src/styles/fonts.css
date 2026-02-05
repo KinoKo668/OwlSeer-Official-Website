@@ -1,0 +1,26 @@
+/**
+ * Font Definitions for OwlSeer
+ * Fonts are loaded from Google Fonts in index.html
+ */
+
+/* Display font - Plus Jakarta Sans (for headings) */
+.font-display {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Sans font - Inter (for body text) */
+.font-sans {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Default body font */
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure font-display: swap behavior with system font fallback */
+html {
+  font-display: swap;
+}

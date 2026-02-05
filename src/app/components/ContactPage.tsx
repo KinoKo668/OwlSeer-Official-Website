@@ -1,4 +1,17 @@
+/**
+ * @page Contact Page - Get in Touch with OwlSeer
+ * 
+ * SEO Keywords: contact OwlSeer | TikTok tool support | creator tool help | OwlSeer customer service
+ * TikTok strategy consultation | content creator support | AI tool assistance
+ * 
+ * Long-tail Keywords: how to contact OwlSeer support | TikTok tool customer service email
+ * OwlSeer response time | get help with TikTok strategy tool | OwlSeer support hours
+ * 
+ * 中文关键词: 联系OwlSeer | TikTok工具支持 | 创作者工具帮助 | 客户服务 | 策略咨询
+ */
+
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts';
 import { motion } from 'motion/react';
 import { 
   Mail, 
@@ -32,6 +45,8 @@ import {
 } from "./ui/accordion";
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
 
 interface ContactPageProps {
   onNavigate: (page: any) => void;
@@ -49,10 +64,9 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
-  // Shared state for Navbar compatibility
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
-  const t = translations.en; // Default to English for now
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language as keyof typeof translations] || translations.en;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,13 +81,22 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
     onNavigate(page);
   };
 
+  // Get SEO config
+  const seo = seoConfig.contact[language as 'en' | 'zh'] || seoConfig.contact.en;
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans text-gray-900 dark:text-gray-100 selection:bg-[#1AAE82]/30">
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
-
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/contact')}
+        structuredData={structuredDataSchemas.contactPage}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}

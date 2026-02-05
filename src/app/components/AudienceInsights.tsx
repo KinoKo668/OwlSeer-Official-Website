@@ -156,7 +156,7 @@ export function AudienceInsights({ language = 'en' }: AudienceInsightsProps) {
                   <div className="flex gap-2 justify-center flex-wrap">
                     {uploadedImages.map((img, i) => (
                       <div key={i} className="relative group">
-                        <img src={URL.createObjectURL(img)} className="w-12 h-12 rounded-lg object-cover border border-gray-200 dark:border-slate-700" />
+                        <img src={URL.createObjectURL(img)} alt="Uploaded image" loading="lazy" decoding="async" className="w-12 h-12 rounded-lg object-cover border border-gray-200 dark:border-slate-700" />
                         <button onClick={() => handleRemoveImage(i)} className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                           <X className="w-2.5 h-2.5" />
                         </button>

@@ -1,4 +1,17 @@
+/**
+ * @page FAQ Page - Frequently Asked Questions
+ * 
+ * SEO Keywords: TikTok tool FAQ | OwlSeer questions | AI content tool help | TikTok strategy questions
+ * content creator FAQ | TikTok analytics help | AI script generator support
+ * 
+ * Long-tail Keywords: is OwlSeer safe for my TikTok account | how does TikTok AI tool work
+ * can I try OwlSeer without signup | TikTok tool privacy questions | OwlSeer free trial FAQ
+ * 
+ * 中文关键词: TikTok工具常见问题 | OwlSeer帮助 | AI内容工具问答 | 创作者工具FAQ | 隐私安全问题
+ */
+
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ChevronDown, 
@@ -13,10 +26,14 @@ import {
   Layout,
   FileText,
   Activity,
-  AlertCircle
+  AlertCircle,
+  Link2,
+  ExternalLink
 } from 'lucide-react';
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, generateAlternates } from '../data/seoConfig';
 
 // --- Types ---
 
@@ -65,13 +82,18 @@ const RichTextRenderer = ({ content, onNavigate }: { content: string, onNavigate
           const verifyContent = part.replace(prefix, '').trim();
           
           return (
-            <div key={index} className="mt-4 p-3 bg-[#1AAE82]/5 border border-[#1AAE82]/10 rounded-lg flex gap-2 items-start">
-              <div className="mt-0.5 text-blue-600">
-                <span className="text-lg">🔗</span>
+            <div key={index} className="mt-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/30 rounded-xl p-4 md:p-5 flex flex-col sm:flex-row gap-4 items-start shadow-sm transition-all hover:shadow-md">
+              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400 flex-shrink-0">
+                <Link2 className="w-5 h-5" />
               </div>
-              <span className="text-sm text-gray-700 dark:text-gray-300">
-                {prefix} {parseLinks(verifyContent, onNavigate)}
-              </span>
+              <div className="flex-1">
+                <h4 className="text-sm font-bold text-blue-900 dark:text-blue-100 uppercase tracking-wider mb-1.5 flex items-center gap-2">
+                  Verify This Claim
+                </h4>
+                <div className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed flex flex-wrap">
+                  {parseLinks(verifyContent, onNavigate, true)}
+                </div>
+              </div>
             </div>
           );
         }
@@ -86,7 +108,7 @@ const RichTextRenderer = ({ content, onNavigate }: { content: string, onNavigate
   );
 };
 
-const parseLinks = (text: string, onNavigate: (page: string) => void) => {
+const parseLinks = (text: string, onNavigate: (page: string) => void, isButton: boolean = false) => {
   // Regex to match [text](link)
   const regex = /\[(.*?)\]\((.*?)\)/g;
   const parts = [];
@@ -96,7 +118,11 @@ const parseLinks = (text: string, onNavigate: (page: string) => void) => {
   while ((match = regex.exec(text)) !== null) {
     // Add text before the link
     if (match.index > lastIndex) {
-      parts.push(text.substring(lastIndex, match.index));
+       // Filter out isolated "🔗" or commas if they appear as plain text before buttons
+      const textBefore = text.substring(lastIndex, match.index).replace(/🔗/g, '').replace(/,/g, '').trim();
+      if (textBefore) {
+        parts.push(<span key={`text-${lastIndex}`}>{textBefore}</span>);
+      }
     }
     
     // Add the link component
@@ -114,22 +140,30 @@ const parseLinks = (text: string, onNavigate: (page: string) => void) => {
           const path = linkUrl.startsWith('/') ? linkUrl.substring(1) : linkUrl;
           onNavigate(path);
         }}
-        className="text-blue-600 hover:text-blue-800 underline font-medium mx-1 focus:outline-none cursor-pointer"
+        className={isButton 
+          ? "inline-flex items-center gap-1 px-3 py-1.5 mt-2 mr-2 bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-bold hover:bg-blue-50 dark:hover:bg-blue-900/50 hover:border-blue-300 transition-all shadow-sm group"
+          : "text-blue-600 hover:text-blue-800 underline font-medium mx-1 focus:outline-none cursor-pointer"
+        }
       >
         {linkText}
+        {isButton && <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />}
       </a>
     );
     
     lastIndex = regex.lastIndex;
   }
 
-  // Add remaining text
-  if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex));
-  }
-
-  return <>{parts}</>;
-};
+    // Add remaining text
+    if (lastIndex < text.length) {
+      // Filter out isolated "🔗" or commas if they appear as plain text between buttons
+      const remaining = text.substring(lastIndex).replace(/🔗/g, '').replace(/,/g, '').trim();
+      if (remaining) {
+        parts.push(<span key={`text-${lastIndex}`}>{remaining}</span>);
+      }
+    }
+  
+    return <>{parts}</>;
+  };
 
 const parseBoldText = (text: string) => {
   const parts = text.split(/(\*\*.*?\*\*)/g);
@@ -208,7 +242,8 @@ export function FAQPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate:
   const [searchQuery, setSearchQuery] = useState('');
   const [openItems, setOpenItems] = useState<string[]>(['q1']); 
   
-  const [language, setLanguage] = useState('en');
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
   
   // Safe access to translations
   const currentT = translations[language as keyof typeof translations] || translations.en;
@@ -239,8 +274,11 @@ export function FAQPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate:
     item.answer.toLowerCase().includes(searchQuery.toLowerCase())
   ) : filteredFAQs;
 
-  // SEO: Structured Data
-  const structuredData = {
+  // SEO: Get config and generate structured data
+  const seo = seoConfig.faq[language as 'en' | 'zh'] || seoConfig.faq.en;
+  
+  // Dynamic FAQ structured data
+  const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqT.items.map((faq: FAQItem) => ({
@@ -248,21 +286,24 @@ export function FAQPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate:
       "name": faq.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": faq.answer.replace(/\n/g, '<br/>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+        "text": faq.answer.replace(/\n/g, ' ').replace(/\*\*(.*?)\*\*/g, '$1')
       }
     }))
   };
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans selection:bg-[#1AAE82]/30">
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
-
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/faq')}
+        structuredData={faqStructuredData}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}
@@ -276,7 +317,10 @@ export function FAQPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate:
 
       <main className="pt-[72px]">
         {/* Header Section */}
-        <section className="bg-white dark:bg-slate-900 pt-20 pb-16 px-4 sm:px-6 lg:px-8 border-b border-gray-200 dark:border-slate-800">
+        <section 
+          className="bg-white dark:bg-slate-900 pt-20 pb-16 px-4 sm:px-6 lg:px-8 border-b border-gray-200 dark:border-slate-800"
+          aria-label="FAQ header and search"
+        >
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -324,7 +368,10 @@ export function FAQPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate:
         </section>
 
         {/* Content Section */}
-        <section className="px-4 sm:px-6 lg:px-8 py-16 max-w-5xl mx-auto">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 py-16 max-w-5xl mx-auto"
+          aria-label="Frequently asked questions and answers"
+        >
           
           {/* Category Tabs */}
           {!searchQuery && (

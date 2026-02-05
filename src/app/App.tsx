@@ -296,6 +296,132 @@ export default function App() {
             </>
           } />
           
+          {/* Chinese versions of public pages */}
+          <Route path="/zh" element={
+            <>
+              <LandingPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="landing" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/how-it-works" element={
+            <>
+              <HowItWorksPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="how-it-works" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/features" element={
+            <>
+              <FeaturesPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="features" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/pricing" element={
+            <>
+              <PricingPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="pricing" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/blog" element={
+            <>
+              <BlogPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="blog" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/blog-post" element={
+            <>
+              <BlogPostPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="blog-post" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/faq" element={
+            <>
+              <FAQPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="faq" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/contact" element={
+            <>
+              <ContactPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="contact" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/privacy" element={
+            <>
+              <LegalPage 
+                {...commonProps}
+                activeSection="privacy"
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="privacy" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/terms" element={
+            <>
+              <LegalPage 
+                {...commonProps}
+                activeSection="terms"
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="terms" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/security" element={
+            <>
+              <LegalPage 
+                {...commonProps}
+                activeSection="security"
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="security" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/cookies" element={
+            <>
+              <LegalPage 
+                {...commonProps}
+                activeSection="cookies"
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="cookies" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+
           {/* Legal Pages */}
           <Route path="/privacy" element={
             <>

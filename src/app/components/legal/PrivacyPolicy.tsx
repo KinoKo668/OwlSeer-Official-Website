@@ -1,9 +1,62 @@
 import React from 'react';
+import { Shield, Lock, Trash2, EyeOff } from 'lucide-react';
 
 export const PrivacyPolicy = () => (
   <div className="prose dark:prose-invert prose-lg max-w-none text-gray-700 dark:text-gray-300">
     <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Privacy Policy</h1>
     <p className="text-sm text-gray-500 mb-8">Last Updated: January 31, 2026</p>
+
+    {/* SEO Optimized Trust Block */}
+    <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 rounded-2xl p-8 mb-12 not-prose">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+        <Shield className="w-6 h-6 text-[#1AAE82]" />
+        Your data stays yours—we analyze it, we don't own it.
+      </h2>
+      <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
+        We believe privacy shouldn't be complicated. Here is our promise in plain language:
+      </p>
+      
+      <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+              <EyeOff className="w-5 h-5 text-[#1AAE82]" />
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">No Hidden Collection</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">We never sell your data, share it with third parties, or collect anything without your explicit permission.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Lock className="w-5 h-5 text-[#1AAE82]" />
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1">Sample Mode First</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Try our platform with sample data. We don't touch your real account until you choose to connect.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col sm:flex-row items-center gap-4 border-t border-emerald-100 dark:border-emerald-900/30 pt-6">
+        <button 
+          onClick={() => window.location.href = '/sample/dashboard'}
+          className="px-6 py-2.5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-lg font-bold shadow-lg shadow-[#1AAE82]/20 transition-all text-sm w-full sm:w-auto text-center"
+        >
+          Try Sample Without Connecting
+        </button>
+        <button 
+          onClick={() => document.getElementById('security-section')?.scrollIntoView({ behavior: 'smooth' })}
+          className="px-6 py-2.5 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-900 dark:text-white rounded-lg font-medium transition-colors text-sm w-full sm:w-auto text-center"
+        >
+          Read Security Details
+        </button>
+      </div>
+    </div>
 
     <section className="mb-10">
       <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">1. Introduction</h2>

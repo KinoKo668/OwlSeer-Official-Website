@@ -252,7 +252,7 @@ export function AccountSettings() {
             <div className="relative mb-3">
               <div className="w-20 h-20 rounded-full bg-[#f5f5f5] border-2 border-[#e0e0e0] overflow-hidden flex items-center justify-center">
                 {avatar ? (
-                  <img src={avatar} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={avatar} alt="Profile" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 ) : (
                   <User className="w-10 h-10 text-[#999999]" />
                 )}
@@ -442,6 +442,8 @@ export function AccountSettings() {
                     <img 
                       src={avatar} 
                       alt="Profile" 
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                   ) : (

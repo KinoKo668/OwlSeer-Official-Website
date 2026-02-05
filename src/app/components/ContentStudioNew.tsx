@@ -990,11 +990,11 @@ const mockScripts: Script[] = [
 // Scene Role Badge
 function SceneRoleBadge({ role }: { role: SceneRole }) {
   const config = {
-    'Hook': { bg: 'bg-[#fee2e2]', text: 'text-[#dc2626]' },
-    'Context': { bg: 'bg-[#fef3c7]', text: 'text-[#d97706]' },
-    'Value / Main Point': { bg: 'bg-[#dbeafe]', text: 'text-[#2563eb]' },
-    'Proof / Example': { bg: 'bg-[#dcfce7]', text: 'text-[#16a34a]' },
-    'CTA / Ending': { bg: 'bg-[#ede9fe]', text: 'text-[#7c3aed]' },
+    'Hook': { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-600 dark:text-red-400' },
+    'Context': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-600 dark:text-amber-400' },
+    'Value / Main Point': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-600 dark:text-blue-400' },
+    'Proof / Example': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-600 dark:text-green-400' },
+    'CTA / Ending': { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-600 dark:text-violet-400' },
   };
 
   const { bg, text } = config[role];
@@ -1065,39 +1065,39 @@ function ScriptManager({
   const getCardTheme = (contentType: ContentType) => {
     const themes: Record<ContentType, { bg: string; text: string; icon: React.ElementType; accent: string }> = {
       'Product Review': { 
-        bg: 'bg-[#eff6ff]', // blue-50
-        text: 'text-[#1e3a8a]', // blue-900
-        accent: 'bg-[#bfdbfe]', // blue-200
+        bg: 'bg-blue-50 dark:bg-blue-950/30',
+        text: 'text-blue-900 dark:text-blue-100',
+        accent: 'bg-blue-200 dark:bg-blue-800/50',
         icon: Smartphone 
       },
       'Tutorial': { 
-        bg: 'bg-[#f5f3ff]', // violet-50
-        text: 'text-[#4c1d95]', // violet-900
-        accent: 'bg-[#ddd6fe]', // violet-200
+        bg: 'bg-violet-50 dark:bg-violet-950/30',
+        text: 'text-violet-900 dark:text-violet-100',
+        accent: 'bg-violet-200 dark:bg-violet-800/50',
         icon: Lightbulb 
       },
       'Entertainment': { 
-        bg: 'bg-[#fdf2f8]', // pink-50
-        text: 'text-[#831843]', // pink-900
-        accent: 'bg-[#fbcfe8]', // pink-200
+        bg: 'bg-pink-50 dark:bg-pink-950/30',
+        text: 'text-pink-900 dark:text-pink-100',
+        accent: 'bg-pink-200 dark:bg-pink-800/50',
         icon: Sparkles 
       },
       'Education': { 
-        bg: 'bg-[#f0fdf4]', // green-50
-        text: 'text-[#14532d]', // green-900
-        accent: 'bg-[#bbf7d0]', // green-200
+        bg: 'bg-green-50 dark:bg-green-950/30',
+        text: 'text-green-900 dark:text-green-100',
+        accent: 'bg-green-200 dark:bg-green-800/50',
         icon: Zap 
       },
       'Story': { 
-        bg: 'bg-[#fffbeb]', // amber-50
-        text: 'text-[#78350f]', // amber-900
-        accent: 'bg-[#fde68a]', // amber-200
+        bg: 'bg-amber-50 dark:bg-amber-950/30',
+        text: 'text-amber-900 dark:text-amber-100',
+        accent: 'bg-amber-200 dark:bg-amber-800/50',
         icon: MessageSquare 
       },
       'Challenge': { 
-        bg: 'bg-[#fff7ed]', // orange-50
-        text: 'text-[#7c2d12]', // orange-900
-        accent: 'bg-[#fed7aa]', // orange-200
+        bg: 'bg-orange-50 dark:bg-orange-950/30',
+        text: 'text-orange-900 dark:text-orange-100',
+        accent: 'bg-orange-200 dark:bg-orange-800/50',
         icon: Target 
       },
     };
@@ -1105,26 +1105,26 @@ function ScriptManager({
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-[#fafafa] h-full">
-      <div className="bg-white border-b border-[#e0e0e0] px-4 md:px-8 py-4 md:py-6 flex-shrink-0">
+    <div className="flex-1 flex flex-col bg-gray-50 dark:bg-slate-950 h-full">
+      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 px-4 md:px-8 py-4 md:py-6 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-[#1a1a1a]" style={{ fontSize: '20px md:28px', fontWeight: '700' }}>
+            <h1 className="text-gray-900 dark:text-white" style={{ fontSize: '20px md:28px', fontWeight: '700' }}>
               Content Studio
             </h1>
-            <p className="text-[#666666] mt-1" style={{ fontSize: '14px' }}>
+            <p className="text-gray-500 dark:text-gray-400 mt-1" style={{ fontSize: '14px' }}>
               Scene-based script workspace
             </p>
           </div>
           <div className="flex items-center gap-3">
             {/* View Switcher */}
-            <div className="flex items-center bg-[#f5f5f5] rounded-lg p-1">
+            <div className="flex items-center bg-gray-100 dark:bg-slate-800 rounded-lg p-1">
               <button
                 onClick={() => setViewMode('list')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${
                   viewMode === 'list'
-                    ? 'bg-white text-[#1a1a1a] shadow-sm'
-                    : 'text-[#666666] hover:text-[#1a1a1a]'
+                    ? 'bg-white dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
@@ -1135,8 +1135,8 @@ function ScriptManager({
                 onClick={() => setViewMode('grid')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${
                   viewMode === 'grid'
-                    ? 'bg-white text-[#1a1a1a] shadow-sm'
-                    : 'text-[#666666] hover:text-[#1a1a1a]'
+                    ? 'bg-white dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
@@ -1153,7 +1153,7 @@ function ScriptManager({
                 }
                 onCreateNew();
               }}
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               style={{ fontSize: '14px', fontWeight: '600' }}
             >
               <Plus className="w-4 h-4" />
@@ -1166,11 +1166,11 @@ function ScriptManager({
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 pb-2">
           {/* Left: Search */}
           <div className="relative w-full md:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999999]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
             <input 
               type="text" 
               placeholder="Search scripts..." 
-              className="w-full pl-10 pr-4 py-2 bg-white border border-[#e0e0e0] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900/10 dark:focus:ring-white/10 transition-all"
               style={{ fontSize: '13px' }}
             />
           </div>
@@ -1184,7 +1184,7 @@ function ScriptManager({
                   setStatusFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="appearance-none pl-4 pr-10 py-2 bg-white border border-[#e0e0e0] rounded-lg text-[#1a1a1a] text-sm focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 cursor-pointer hover:bg-[#fafafa] transition-colors"
+                className="appearance-none pl-4 pr-10 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
               >
                 <option>All Status</option>
                 <option>Ready</option>
@@ -1192,7 +1192,7 @@ function ScriptManager({
                 <option>Used</option>
                 <option>Archived</option>
               </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#666666] pointer-events-none" />
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400 pointer-events-none" />
             </div>
 
             <div className="relative">
@@ -1202,14 +1202,14 @@ function ScriptManager({
                   setSortBy(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="appearance-none pl-4 pr-10 py-2 bg-white border border-[#e0e0e0] rounded-lg text-[#1a1a1a] text-sm focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 cursor-pointer hover:bg-[#fafafa] transition-colors"
+                className="appearance-none pl-4 pr-10 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
               >
                 <option>Recent</option>
                 <option>Oldest</option>
                 <option>A-Z</option>
                 <option>Z-A</option>
               </select>
-              <ArrowUpDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#666666] pointer-events-none" />
+              <ArrowUpDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-500 dark:text-gray-400 pointer-events-none" />
             </div>
           </div>
         </div>
@@ -1225,57 +1225,57 @@ function ScriptManager({
         return (
           <div className="flex-1 flex flex-col overflow-hidden">
             <div className="flex-1 overflow-y-auto">
-              <div className="bg-white mx-8 mt-6 rounded-xl border border-[#e0e0e0]">
+              <div className="bg-white dark:bg-slate-900 mx-8 mt-6 rounded-xl border border-gray-200 dark:border-slate-800">
             {/* Table Header */}
-            <div className="grid grid-cols-[1fr_80px_140px_140px_80px_80px_120px_50px] gap-4 px-6 py-3 border-b border-[#e0e0e0] bg-[#fafafa]">
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div className="grid grid-cols-[1fr_80px_140px_140px_80px_80px_120px_50px] gap-4 px-6 py-3 border-b border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50">
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Script Title
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Scenes
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Category
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Creator
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Status
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Duration
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Modified
               </div>
               <div></div>
             </div>
 
             {/* Table Rows */}
-            <div className="divide-y divide-[#e0e0e0]">
+            <div className="divide-y divide-gray-200 dark:divide-slate-800">
               {paginatedScripts.map((script) => (
                 <div
                   key={script.id}
-                  className="grid grid-cols-[1fr_80px_140px_140px_80px_80px_120px_50px] gap-4 px-6 py-4 hover:bg-[#fafafa] transition-colors cursor-pointer group"
+                  className="grid grid-cols-[1fr_80px_140px_140px_80px_80px_120px_50px] gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer group"
                   onClick={() => onOpenScript(script.id)}
                 >
                   {/* Script Title */}
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-[#1a1a1a] truncate" style={{ fontSize: '14px', fontWeight: '600' }}>
+                    <span className="text-gray-900 dark:text-white truncate" style={{ fontSize: '14px', fontWeight: '600' }}>
                       {script.title}
                     </span>
                   </div>
 
                   {/* Scene Count */}
-                  <div className="flex items-center text-[#666666]" style={{ fontSize: '14px' }}>
+                  <div className="flex items-center text-gray-500 dark:text-gray-400" style={{ fontSize: '14px' }}>
                     {script.scenes.length}
                   </div>
 
                   {/* Category Tag */}
                   <div className="flex items-center">
-                    <div className="px-2.5 py-1 bg-[#f5f5f5] rounded-md">
-                      <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                    <div className="px-2.5 py-1 bg-gray-100 dark:bg-slate-800 rounded-md">
+                      <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                         {script.contentType}
                       </span>
                     </div>
@@ -1283,7 +1283,7 @@ function ScriptManager({
 
                   {/* Creator */}
                   <div className="flex items-center">
-                    <span className="text-[#666666]" style={{ fontSize: '13px', fontWeight: '500' }}>
+                    <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px', fontWeight: '500' }}>
                       {script.creator || 'You'}
                     </span>
                   </div>
@@ -1291,22 +1291,22 @@ function ScriptManager({
                   {/* Status Badge */}
                   <div className="flex items-center">
                     <div className={`px-2.5 py-1 rounded-md ${
-                      script.status === 'Ready' ? 'bg-[#dcfce7] text-[#16a34a]' :
-                      script.status === 'Draft' ? 'bg-[#fef3c7] text-[#d97706]' :
-                      script.status === 'Used' ? 'bg-[#e0e0e0] text-[#666666]' :
-                      'bg-[#f5f5f5] text-[#999999]'
+                      script.status === 'Ready' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
+                      script.status === 'Draft' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' :
+                      script.status === 'Used' ? 'bg-gray-200 dark:bg-slate-700 text-gray-500 dark:text-gray-400' :
+                      'bg-gray-100 dark:bg-slate-800 text-gray-400 dark:text-gray-500'
                     }`}>
                       <span style={{ fontSize: '12px', fontWeight: '600' }}>{script.status}</span>
                     </div>
                   </div>
 
                   {/* Estimated Duration */}
-                  <div className="flex items-center text-[#666666]" style={{ fontSize: '14px', fontWeight: '500' }}>
+                  <div className="flex items-center text-gray-500 dark:text-gray-400" style={{ fontSize: '14px', fontWeight: '500' }}>
                     {getEstimatedDuration(script)}
                   </div>
 
                   {/* Last Modified */}
-                  <div className="flex items-center text-[#999999]" style={{ fontSize: '13px' }}>
+                  <div className="flex items-center text-gray-400 dark:text-gray-500" style={{ fontSize: '13px' }}>
                     {script.updatedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </div>
 
@@ -1317,28 +1317,28 @@ function ScriptManager({
                         e.stopPropagation();
                         setMenuOpenId(menuOpenId === script.id ? null : script.id);
                       }}
-                      className="p-1.5 rounded-lg hover:bg-[#e0e0e0] opacity-0 group-hover:opacity-100 transition-all"
+                      className="p-1.5 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 opacity-0 group-hover:opacity-100 transition-all"
                     >
-                      <MoreVertical className="w-4 h-4 text-[#666666]" />
+                      <MoreVertical className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                     </button>
 
                     {/* Dropdown Menu */}
                     {menuOpenId === script.id && (
-                      <div className="absolute right-0 top-8 w-48 bg-white rounded-lg border border-[#e0e0e0] shadow-lg py-1 z-10">
-                        <button className="w-full px-4 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2 text-[#1a1a1a]" style={{ fontSize: '13px' }}>
+                      <div className="absolute right-0 top-8 w-48 bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-800 shadow-lg py-1 z-10">
+                        <button className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2 text-gray-900 dark:text-white" style={{ fontSize: '13px' }}>
                           <Edit3 className="w-3.5 h-3.5" />
                           Edit
                         </button>
-                        <button className="w-full px-4 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2 text-[#1a1a1a]" style={{ fontSize: '13px' }}>
+                        <button className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2 text-gray-900 dark:text-white" style={{ fontSize: '13px' }}>
                           <Copy className="w-3.5 h-3.5" />
                           Duplicate
                         </button>
-                        <div className="my-1 h-px bg-[#e0e0e0]" />
-                        <button className="w-full px-4 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2 text-[#1a1a1a]" style={{ fontSize: '13px' }}>
+                        <div className="my-1 h-px bg-gray-200 dark:bg-slate-800" />
+                        <button className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2 text-gray-900 dark:text-white" style={{ fontSize: '13px' }}>
                           <Archive className="w-3.5 h-3.5" />
                           Archive
                         </button>
-                        <button className="w-full px-4 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2 text-[#dc2626]" style={{ fontSize: '13px' }}>
+                        <button className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2 text-red-600 dark:text-red-400" style={{ fontSize: '13px' }}>
                           <Trash2 className="w-3.5 h-3.5" />
                           Delete
                         </button>
@@ -1352,9 +1352,9 @@ function ScriptManager({
         </div>
 
         {/* Pagination */}
-        <div className="flex-shrink-0 border-t border-[#e0e0e0] bg-white px-4 md:px-8 py-4">
+        <div className="flex-shrink-0 border-t border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 md:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-[#666666]" style={{ fontSize: '13px' }}>
+            <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px' }}>
               Showing {startIndex + 1}-{Math.min(endIndex, scripts.length)} of {scripts.length} scripts
             </div>
             
@@ -1365,8 +1365,8 @@ function ScriptManager({
                 disabled={currentPage === 1}
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border transition-all ${
                   currentPage === 1
-                    ? 'border-[#e0e0e0] text-[#cccccc] cursor-not-allowed'
-                    : 'border-[#e0e0e0] text-[#1a1a1a] hover:border-[#1a1a1a] hover:bg-[#fafafa]'
+                    ? 'border-gray-200 dark:border-slate-800 text-gray-300 dark:text-slate-700 cursor-not-allowed'
+                    : 'border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:border-gray-900 dark:hover:border-white hover:bg-gray-50 dark:hover:bg-slate-800'
                 }`}
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
@@ -1389,7 +1389,7 @@ function ScriptManager({
 
                   if (showEllipsis) {
                     return (
-                      <span key={page} className="px-2 text-[#999999]" style={{ fontSize: '13px' }}>
+                      <span key={page} className="px-2 text-gray-400 dark:text-gray-500" style={{ fontSize: '13px' }}>
                         ...
                       </span>
                     );
@@ -1403,8 +1403,8 @@ function ScriptManager({
                       onClick={() => setCurrentPage(page)}
                       className={`w-8 h-8 rounded-lg transition-all ${
                         currentPage === page
-                          ? 'bg-[#1a1a1a] text-white'
-                          : 'text-[#666666] hover:bg-[#f5f5f5]'
+                          ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                          : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800'
                       }`}
                       style={{ fontSize: '13px', fontWeight: '600' }}
                     >
@@ -1420,8 +1420,8 @@ function ScriptManager({
                 disabled={currentPage === totalPages}
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border transition-all ${
                   currentPage === totalPages
-                    ? 'border-[#e0e0e0] text-[#cccccc] cursor-not-allowed'
-                    : 'border-[#e0e0e0] text-[#1a1a1a] hover:border-[#1a1a1a] hover:bg-[#fafafa]'
+                    ? 'border-gray-200 dark:border-slate-800 text-gray-300 dark:text-slate-700 cursor-not-allowed'
+                    : 'border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:border-gray-900 dark:hover:border-white hover:bg-gray-50 dark:hover:bg-slate-800'
                 }`}
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
@@ -1452,7 +1452,7 @@ function ScriptManager({
                   return (
                   <div
                     key={script.id}
-                    className="bg-white rounded-xl border border-[#e0e0e0] overflow-hidden hover:border-[#1a1a1a] hover:shadow-lg transition-all cursor-pointer group relative"
+                    className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 overflow-hidden hover:border-gray-900 dark:hover:border-white hover:shadow-lg transition-all cursor-pointer group relative"
                     onClick={() => onOpenScript(script.id)}
                   >
                     {/* Text-based Context Card (Replaces Image Thumbnail) */}
@@ -1485,7 +1485,7 @@ function ScriptManager({
                       
                       {/* Aspect Ratio Chip - Top Left */}
                       <div className="absolute top-3 left-3 z-20">
-                        <div className="px-2 py-0.5 bg-white/90 backdrop-blur-sm rounded-md text-[#1a1a1a] shadow-sm border border-black/5" style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '0.5px' }}>
+                        <div className="px-2 py-0.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-md text-gray-900 dark:text-white shadow-sm border border-black/5 dark:border-white/5" style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '0.5px' }}>
                           {script.aspectRatio || '9:16'}
                         </div>
                       </div>
@@ -1493,10 +1493,10 @@ function ScriptManager({
                       {/* Status Badge - Top Right */}
                       <div className="absolute top-3 right-3 z-20 group-hover:opacity-0 transition-opacity">
                         <div className={`px-2 py-0.5 rounded shadow-sm border border-black/5 ${
-                          script.status === 'Ready' ? 'bg-[#dcfce7] text-[#166534]' :
-                          script.status === 'Draft' ? 'bg-[#fef3c7] text-[#92400e]' :
-                          script.status === 'Used' ? 'bg-[#f3f4f6] text-[#4b5563]' :
-                          'bg-[#f3f4f6] text-[#4b5563]'
+                          script.status === 'Ready' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' :
+                          script.status === 'Draft' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' :
+                          script.status === 'Used' ? 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400' :
+                          'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400'
                         }`}>
                           <span style={{ fontSize: '10px', fontWeight: '700' }}>{script.status}</span>
                         </div>
@@ -1509,7 +1509,7 @@ function ScriptManager({
                             e.stopPropagation();
                             setMenuOpenId(menuOpenId === script.id ? null : script.id);
                           }}
-                          className="p-1.5 bg-white rounded-lg hover:bg-[#fafafa] shadow-md border border-[#e0e0e0] text-[#1a1a1a]"
+                          className="p-1.5 bg-white dark:bg-slate-900 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 shadow-md border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white"
                         >
                           <MoreVertical className="w-4 h-4" />
                         </button>
@@ -1519,7 +1519,7 @@ function ScriptManager({
                     {/* Dropdown Menu */}
                     {menuOpenId === script.id && (
                       <div 
-                        className="absolute right-2 w-48 bg-white rounded-xl border border-[#e0e0e0] shadow-xl py-1.5 z-[100] animate-in fade-in zoom-in-95 duration-100"
+                        className="absolute right-2 w-48 bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 shadow-xl py-1.5 z-[100] animate-in fade-in zoom-in-95 duration-100"
                         style={{ top: '40px' }}
                         onClick={(e) => e.stopPropagation()}
                       >
@@ -1529,10 +1529,10 @@ function ScriptManager({
                             onOpenScript(script.id);
                             setMenuOpenId(null);
                           }}
-                          className="w-full px-3 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2.5 text-[#1a1a1a]" 
+                          className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2.5 text-gray-900 dark:text-white" 
                           style={{ fontSize: '13px', fontWeight: '500' }}
                         >
-                          <Edit3 className="w-4 h-4 text-[#666666]" />
+                          <Edit3 className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                           Open Editor
                         </button>
                         <button 
@@ -1541,18 +1541,18 @@ function ScriptManager({
                             onEditScript(script.id);
                             setMenuOpenId(null);
                           }}
-                          className="w-full px-3 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2.5 text-[#1a1a1a]" 
+                          className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2.5 text-gray-900 dark:text-white" 
                           style={{ fontSize: '13px', fontWeight: '500' }}
                         >
-                          <FileText className="w-4 h-4 text-[#666666]" />
+                          <FileText className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                           Edit Details
                         </button>
-                        <button className="w-full px-3 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2.5 text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '500' }}>
-                          <Copy className="w-4 h-4 text-[#666666]" />
+                        <button className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2.5 text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '500' }}>
+                          <Copy className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                           Duplicate
                         </button>
-                        <div className="my-1 h-px bg-[#f0f0f0]" />
-                        <button className="w-full px-3 py-2 text-left hover:bg-[#fafafa] flex items-center gap-2.5 text-[#dc2626]" style={{ fontSize: '13px', fontWeight: '500' }}>
+                        <div className="my-1 h-px bg-gray-100 dark:bg-slate-800" />
+                        <button className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center gap-2.5 text-red-600 dark:text-red-400" style={{ fontSize: '13px', fontWeight: '500' }}>
                           <Trash2 className="w-4 h-4" />
                           Delete
                         </button>
@@ -1563,7 +1563,7 @@ function ScriptManager({
                     <div className={density === 'comfortable' ? 'p-4' : 'p-3'}>
                       {/* Title */}
                       <h3 
-                        className="text-[#1a1a1a] mb-1.5 line-clamp-1 group-hover:text-[#2563eb] transition-colors" 
+                        className="text-gray-900 dark:text-white mb-1.5 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" 
                         style={{ 
                           fontSize: density === 'comfortable' ? '15px' : '14px', 
                           fontWeight: '700', 
@@ -1584,15 +1584,15 @@ function ScriptManager({
 
                       {/* Metadata Row */}
                       <div 
-                        className="flex items-center justify-between pt-3 border-t border-[#f0f0f0]"
+                        className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-800"
                         style={{ fontSize: '11px' }}
                       >
-                        <span className="text-[#999999] font-medium">
+                        <span className="text-gray-400 dark:text-gray-500 font-medium">
                           {script.updatedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                         </span>
-                        <div className="flex items-center gap-1.5 text-[#666666]">
+                        <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400">
                           <span className="font-semibold">{script.scenes.length}</span>
-                          <span className="text-[#999999]">scenes</span>
+                          <span className="text-gray-400 dark:text-gray-500">scenes</span>
                         </div>
                       </div>
                     </div>
@@ -1603,9 +1603,9 @@ function ScriptManager({
             </div>
 
             {/* Pagination */}
-            <div className="flex-shrink-0 border-t border-[#e0e0e0] bg-white px-4 md:px-8 py-4">
+            <div className="flex-shrink-0 border-t border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 md:px-8 py-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-[#666666]" style={{ fontSize: '13px' }}>
+                  <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px' }}>
                     Showing {startIndex + 1}-{Math.min(endIndex, scripts.length)} of {scripts.length} scripts
                   </div>
                   
@@ -1616,8 +1616,8 @@ function ScriptManager({
                       disabled={currentPage === 1}
                       className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border transition-all ${
                         currentPage === 1
-                          ? 'border-[#e0e0e0] text-[#cccccc] cursor-not-allowed'
-                          : 'border-[#e0e0e0] text-[#1a1a1a] hover:border-[#1a1a1a] hover:bg-[#fafafa]'
+                          ? 'border-gray-200 dark:border-slate-800 text-gray-300 dark:text-slate-700 cursor-not-allowed'
+                          : 'border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:border-gray-900 dark:hover:border-white hover:bg-gray-50 dark:hover:bg-slate-800'
                       }`}
                       style={{ fontSize: '13px', fontWeight: '600' }}
                     >
@@ -1640,7 +1640,7 @@ function ScriptManager({
 
                         if (showEllipsis) {
                           return (
-                            <span key={page} className="px-2 text-[#999999]" style={{ fontSize: '13px' }}>
+                            <span key={page} className="px-2 text-gray-400 dark:text-gray-500" style={{ fontSize: '13px' }}>
                               ...
                             </span>
                           );
@@ -1654,8 +1654,8 @@ function ScriptManager({
                             onClick={() => setCurrentPage(page)}
                             className={`w-8 h-8 rounded-lg transition-all ${
                               currentPage === page
-                                ? 'bg-[#1a1a1a] text-white'
-                                : 'text-[#666666] hover:bg-[#f5f5f5]'
+                                ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                                : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800'
                             }`}
                             style={{ fontSize: '13px', fontWeight: '600' }}
                           >
@@ -1671,8 +1671,8 @@ function ScriptManager({
                       disabled={currentPage === totalPages}
                       className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border transition-all ${
                         currentPage === totalPages
-                          ? 'border-[#e0e0e0] text-[#cccccc] cursor-not-allowed'
-                          : 'border-[#e0e0e0] text-[#1a1a1a] hover:border-[#1a1a1a] hover:bg-[#fafafa]'
+                          ? 'border-gray-200 dark:border-slate-800 text-gray-300 dark:text-slate-700 cursor-not-allowed'
+                          : 'border-gray-200 dark:border-slate-800 text-gray-900 dark:text-white hover:border-gray-900 dark:hover:border-white hover:bg-gray-50 dark:hover:bg-slate-800'
                       }`}
                       style={{ fontSize: '13px', fontWeight: '600' }}
                     >
@@ -1686,807 +1686,6 @@ function ScriptManager({
         );
       })()}
     </div>
-  );
-}
-
-// Script Editor - Scene Card Based
-function ScriptEditor({
-  script,
-  onBack,
-  onSave,
-  onSimulationAction,
-}: {
-  script: Script;
-  onBack: () => void;
-  onSave: (updatedScript: Script) => void;
-  onSimulationAction?: () => void;
-}) {
-  const [editedScript, setEditedScript] = React.useState<Script>(script);
-  const [previewOpen, setPreviewOpen] = React.useState(true);
-  const [showPublishModal, setShowPublishModal] = React.useState(false);
-  const [selectedSceneId, setSelectedSceneId] = React.useState<string | null>(
-    script.scenes.length > 0 ? script.scenes[0].id : null
-  );
-  const [generatingStoryboard, setGeneratingStoryboard] = React.useState<string | null>(null);
-  const [copilotMessages, setCopilotMessages] = React.useState<CopilotMessage[]>([
-    {
-      id: 'm1',
-      role: 'assistant',
-      content: 'Hi! I can help you build your script scene by scene. I can:\n\n• Insert a new scene at any position\n• Rewrite a selected scene\n• Split one scene into two\n• Merge adjacent scenes\n• Suggest scene reordering\n\nWhat would you like to work on?',
-      timestamp: new Date(),
-    },
-  ]);
-  const [copilotInput, setCopilotInput] = React.useState('');
-
-  // Add new scene
-  const handleAddScene = (afterIndex: number) => {
-    const newScene: SceneCard = {
-      id: `s${Date.now()}`,
-      index: afterIndex + 1,
-      role: 'Context',
-      intent: 'Build context',
-      scriptContent: '',
-      executionNotes: '',
-      isAIGenerated: false,
-      lastEditedBy: 'user',
-      editedAt: new Date(),
-    };
-
-    const updatedScenes = [
-      ...editedScript.scenes.slice(0, afterIndex),
-      newScene,
-      ...editedScript.scenes.slice(afterIndex),
-    ].map((scene, idx) => ({ ...scene, index: idx + 1 }));
-
-    setEditedScript(prev => ({
-      ...prev,
-      scenes: updatedScenes,
-      updatedAt: new Date(),
-      version: prev.version + 1,
-    }));
-  };
-
-  // Delete scene
-  const handleDeleteScene = (sceneId: string) => {
-    if (editedScript.scenes.length <= 1) return;
-
-    const updatedScenes = editedScript.scenes
-      .filter(s => s.id !== sceneId)
-      .map((scene, idx) => ({ ...scene, index: idx + 1 }));
-
-    setEditedScript(prev => ({
-      ...prev,
-      scenes: updatedScenes,
-      updatedAt: new Date(),
-      version: prev.version + 1,
-    }));
-  };
-
-  // Duplicate scene
-  const handleDuplicateScene = (sceneId: string) => {
-    const sceneIndex = editedScript.scenes.findIndex(s => s.id === sceneId);
-    if (sceneIndex === -1) return;
-
-    const originalScene = editedScript.scenes[sceneIndex];
-    const duplicatedScene: SceneCard = {
-      ...originalScene,
-      id: `s${Date.now()}`,
-      index: sceneIndex + 2,
-    };
-
-    const updatedScenes = [
-      ...editedScript.scenes.slice(0, sceneIndex + 1),
-      duplicatedScene,
-      ...editedScript.scenes.slice(sceneIndex + 1),
-    ].map((scene, idx) => ({ ...scene, index: idx + 1 }));
-
-    setEditedScript(prev => ({
-      ...prev,
-      scenes: updatedScenes,
-      updatedAt: new Date(),
-      version: prev.version + 1,
-    }));
-  };
-
-  // Move scene
-  const handleMoveScene = (sceneId: string, direction: 'up' | 'down') => {
-    const sceneIndex = editedScript.scenes.findIndex(s => s.id === sceneId);
-    if (sceneIndex === -1) return;
-    if (direction === 'up' && sceneIndex === 0) return;
-    if (direction === 'down' && sceneIndex === editedScript.scenes.length - 1) return;
-
-    const newScenes = [...editedScript.scenes];
-    const targetIndex = direction === 'up' ? sceneIndex - 1 : sceneIndex + 1;
-    [newScenes[sceneIndex], newScenes[targetIndex]] = [newScenes[targetIndex], newScenes[sceneIndex]];
-
-    const updatedScenes = newScenes.map((scene, idx) => ({ ...scene, index: idx + 1 }));
-
-    setEditedScript(prev => ({
-      ...prev,
-      scenes: updatedScenes,
-      updatedAt: new Date(),
-      version: prev.version + 1,
-    }));
-  };
-
-  // Update scene field
-  const handleUpdateScene = (sceneId: string, field: keyof SceneCard, value: any) => {
-    setEditedScript(prev => ({
-      ...prev,
-      scenes: prev.scenes.map(s =>
-        s.id === sceneId
-          ? { ...s, [field]: value, lastEditedBy: 'user' as const, editedAt: new Date() }
-          : s
-      ),
-      updatedAt: new Date(),
-    }));
-  };
-
-  // Generate spoken version for a scene
-  const handleGenerateSpokenVersion = (sceneId: string) => {
-    const scene = editedScript.scenes.find(s => s.id === sceneId);
-    if (!scene || !scene.scriptContent) return;
-
-    // Simulate AI generation - in production this would call an AI service
-    setTimeout(() => {
-      // Simple transformation: make it more conversational
-      const spokenText = scene.scriptContent
-        // Add natural pauses and conversational connectors
-        .replace(/\. /g, '... ')
-        .replace(/\?/g, '? Well,')
-        .replace(/!/g, '! And')
-        // Make it sound more natural
-        .replace(/^/, 'So, ')
-        .replace(/You should/g, "you'll want to")
-        .replace(/It is/g, "it's")
-        .replace(/cannot/g, "can't")
-        .replace(/will not/g, "won't");
-
-      setEditedScript(prev => ({
-        ...prev,
-        scenes: prev.scenes.map(s =>
-          s.id === sceneId
-            ? { ...s, spokenVersion: spokenText }
-            : s
-        ),
-        updatedAt: new Date(),
-      }));
-    }, 800);
-  };
-
-  // Toggle spoken version visibility
-  const handleToggleSpokenVersion = (sceneId: string) => {
-    setEditedScript(prev => ({
-      ...prev,
-      scenes: prev.scenes.map(s =>
-        s.id === sceneId
-          ? { ...s, showSpokenVersion: !s.showSpokenVersion }
-          : s
-      ),
-    }));
-  };
-
-  // Generate storyboard for a scene
-  const handleGenerateStoryboard = (sceneId: string) => {
-    setGeneratingStoryboard(sceneId);
-    
-    // Simulate AI generation
-    setTimeout(() => {
-      const mockStoryboard = [
-        {
-          id: 'f1',
-          imageUrl: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=700&fit=crop',
-          caption: 'Opening shot',
-          timestamp: '0:00',
-        },
-        {
-          id: 'f2',
-          imageUrl: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=700&fit=crop',
-          caption: 'Mid scene',
-          timestamp: '0:02',
-        },
-        {
-          id: 'f3',
-          imageUrl: 'https://images.unsplash.com/photo-1526948531399-320e7e40f0ca?w=400&h=700&fit=crop',
-          caption: 'Closing shot',
-          timestamp: '0:04',
-        },
-      ];
-
-      setEditedScript(prev => ({
-        ...prev,
-        scenes: prev.scenes.map(s =>
-          s.id === sceneId
-            ? { ...s, storyboard: mockStoryboard }
-            : s
-        ),
-      }));
-      
-      setGeneratingStoryboard(null);
-    }, 2000);
-  };
-
-  const handleCopilotSend = () => {
-    if (!copilotInput.trim()) return;
-
-    const userMessage: CopilotMessage = {
-      id: `m${Date.now()}`,
-      role: 'user',
-      content: copilotInput,
-      timestamp: new Date(),
-    };
-
-    setCopilotMessages(prev => [...prev, userMessage]);
-
-    setTimeout(() => {
-      const aiMessage: CopilotMessage = {
-        id: `m${Date.now() + 1}`,
-        role: 'assistant',
-        content: 'I can help with that! Here\'s what I suggest:\n\n**Scene-level changes:**\n• I can insert a new "Proof" scene after your current Hook\n• Or rewrite Scene 2 to be more concise\n• Or split Scene 3 into two separate beats\n\nWhich approach would you prefer?',
-        timestamp: new Date(),
-      };
-      setCopilotMessages(prev => [...prev, aiMessage]);
-    }, 1000);
-
-    setCopilotInput('');
-  };
-
-  // Handle publish to schedule plan
-  const handlePublish = (planId: string, scheduleData?: any) => {
-    // Save the script first
-    onSave(editedScript);
-    
-    // Then handle the scheduling logic
-    if (planId === 'new') {
-      console.log('Creating new schedule plan:', scheduleData);
-      // TODO: Implement create new schedule plan logic
-    } else {
-      console.log('Adding to existing plan:', planId);
-      // TODO: Implement add to existing plan logic
-    }
-    
-    // Close modal and show success
-    setShowPublishModal(false);
-    
-    // Optional: Show success notification or redirect
-    // For now, just log success
-    console.log('Script published successfully!');
-  };
-
-  return (
-    <>
-      {showPublishModal && (
-        <PublishPlanModal
-          script={editedScript}
-          onClose={() => setShowPublishModal(false)}
-          onPublish={handlePublish}
-        />
-      )}
-    <div className="flex h-screen bg-[#fafafa] overflow-hidden">
-      {/* LEFT: Scene Flow Panel */}
-      <div className="w-64 bg-white border-r border-[#e0e0e0] flex flex-col">
-        <div className="px-4 py-4 border-b border-[#e0e0e0]">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-2 text-[#666666] hover:text-[#1a1a1a] transition-colors mb-3"
-            style={{ fontSize: '13px', fontWeight: '500' }}
-          >
-            <ChevronRight className="w-3.5 h-3.5 rotate-180" />
-            Back to Scripts
-          </button>
-          <h3 className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '700' }}>
-            Scene Flow
-          </h3>
-          <p className="text-[#999999] mt-1" style={{ fontSize: '12px' }}>
-            {editedScript.scenes.length} {editedScript.scenes.length === 1 ? 'scene' : 'scenes'}
-          </p>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-3">
-          <div className="space-y-2">
-            {editedScript.scenes.map((scene) => (
-              <button
-                key={scene.id}
-                onClick={() => {
-                  setSelectedSceneId(scene.id);
-                  document.getElementById(`scene-${scene.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }}
-                className={`w-full text-left p-3 rounded-lg border transition-all ${
-                  selectedSceneId === scene.id
-                    ? 'bg-[#f5f5f5] border-[#1a1a1a]'
-                    : 'bg-white border-[#e0e0e0] hover:border-[#999999]'
-                }`}
-              >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '700' }}>
-                    {String(scene.index).padStart(2, '0')}
-                  </span>
-                  <SceneRoleBadge role={scene.role} />
-                </div>
-                <p className="text-[#666666] line-clamp-2" style={{ fontSize: '12px' }}>
-                  {scene.scriptContent || <em>Empty scene</em>}
-                </p>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-3 border-t border-[#e0e0e0]">
-          <button
-            onClick={() => handleAddScene(editedScript.scenes.length)}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors"
-            style={{ fontSize: '13px', fontWeight: '600' }}
-          >
-            <Plus className="w-4 h-4" />
-            Add Scene
-          </button>
-        </div>
-      </div>
-
-      {/* CENTER: Scene Card Workspace */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="bg-white border-b border-[#e0e0e0] px-6 py-4">
-          <div className="flex items-center justify-between mb-3">
-            <input
-              type="text"
-              value={editedScript.title}
-              onChange={(e) => setEditedScript(prev => ({ ...prev, title: e.target.value }))}
-              className="flex-1 text-[#1a1a1a] bg-transparent border-none outline-none"
-              style={{ fontSize: '22px', fontWeight: '700' }}
-              placeholder="Script Title"
-            />
-            <div className="flex items-center gap-2">
-              <button className="p-2 rounded-lg hover:bg-[#f5f5f5] transition-colors text-[#666666]">
-                <Undo className="w-4 h-4" />
-              </button>
-              <button className="p-2 rounded-lg hover:bg-[#f5f5f5] transition-colors text-[#666666]">
-                <Redo className="w-4 h-4" />
-              </button>
-              <div className="w-px h-6 bg-[#e0e0e0] mx-1" />
-              <button
-                onClick={() => {
-                  // Save functionality
-                  alert('Script saved!');
-                }}
-                className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors"
-                style={{ fontSize: '14px', fontWeight: '600' }}
-              >
-                <Save className="w-4 h-4" />
-                Save
-              </button>
-              <button
-                onClick={() => {
-                  // Export functionality
-                  alert('Exporting script...');
-                }}
-                className="flex items-center gap-2 px-4 py-2 bg-white text-[#1a1a1a] border border-[#e0e0e0] rounded-lg hover:bg-[#fafafa] transition-colors"
-                style={{ fontSize: '14px', fontWeight: '600' }}
-              >
-                <FileText className="w-4 h-4" />
-                Export
-              </button>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#f5f5f5] rounded-lg">
-              <FileText className="w-3.5 h-3.5 text-[#666666]" />
-              <span className="text-[#1a1a1a]" style={{ fontSize: '12px', fontWeight: '600' }}>
-                {editedScript.contentType}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#f5f5f5] rounded-lg">
-              <Target className="w-3.5 h-3.5 text-[#666666]" />
-              <span className="text-[#1a1a1a]" style={{ fontSize: '12px', fontWeight: '600' }}>
-                {editedScript.targetGoal}
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5 text-[#999999] ml-auto">
-              <span style={{ fontSize: '11px' }}>v{editedScript.version}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Scene Cards */}
-        <div className="flex-1 overflow-y-auto px-6 py-6">
-          <div className="max-w-4xl mx-auto space-y-4">
-            {editedScript.scenes.map((scene, idx) => (
-              <div key={scene.id} className="space-y-4">
-                {/* Scene Card */}
-                <div
-                  id={`scene-${scene.id}`}
-                  className={`bg-white rounded-xl border-2 transition-all ${
-                    selectedSceneId === scene.id
-                      ? 'border-[#1a1a1a] shadow-lg'
-                      : 'border-[#e0e0e0] hover:border-[#999999]'
-                  }`}
-                  onClick={() => setSelectedSceneId(scene.id)}
-                >
-                  {/* Scene Header */}
-                  <div className="flex items-center justify-between px-5 py-3 bg-[#fafafa] border-b border-[#e0e0e0]">
-                    <div className="flex items-center gap-3">
-                      <button className="p-1 text-[#999999] hover:text-[#1a1a1a] cursor-grab active:cursor-grabbing">
-                        <GripVertical className="w-4 h-4" />
-                      </button>
-
-                      <span className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '700' }}>
-                        Scene {String(scene.index).padStart(2, '0')}
-                      </span>
-
-                      <select
-                        value={scene.role}
-                        onChange={(e) => handleUpdateScene(scene.id, 'role', e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        className="px-2.5 py-1 bg-white border border-[#e0e0e0] rounded-md text-[#1a1a1a] text-[11px] font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
-                      >
-                        <option value="Hook">Hook</option>
-                        <option value="Context">Context</option>
-                        <option value="Value / Main Point">Value / Main Point</option>
-                        <option value="Proof / Example">Proof / Example</option>
-                        <option value="CTA / Ending">CTA / Ending</option>
-                      </select>
-
-                      <input
-                        type="text"
-                        value={scene.durationHint || ''}
-                        onChange={(e) => handleUpdateScene(scene.id, 'durationHint', e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        placeholder="2-4s"
-                        className="w-16 px-2 py-1 bg-white border border-[#e0e0e0] rounded-md text-[#666666] text-[11px] text-center focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
-                      />
-
-                      {scene.lastEditedBy === 'ai' && (
-                        <div className="flex items-center gap-1 px-2 py-0.5 bg-[#ede9fe] rounded-md">
-                          <Sparkles className="w-3 h-3 text-[#7c3aed]" />
-                          <span className="text-[#7c3aed]" style={{ fontSize: '10px', fontWeight: '600' }}>
-                            AI
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-1">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleMoveScene(scene.id, 'up');
-                        }}
-                        disabled={idx === 0}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666] disabled:opacity-30"
-                        title="Move up"
-                      >
-                        <ChevronUp className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleMoveScene(scene.id, 'down');
-                        }}
-                        disabled={idx === editedScript.scenes.length - 1}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666] disabled:opacity-30"
-                        title="Move down"
-                      >
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      <div className="w-px h-4 bg-[#e0e0e0] mx-1" />
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (onSimulationAction) {
-                            onSimulationAction();
-                            return;
-                          }
-                          handleGenerateStoryboard(scene.id);
-                        }}
-                        disabled={generatingStoryboard === scene.id}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#7c3aed] disabled:opacity-50"
-                        title="Generate Storyboard"
-                      >
-                        {generatingStoryboard === scene.id ? (
-                          <Sparkles className="w-4 h-4 animate-pulse" />
-                        ) : (
-                          <Film className="w-4 h-4" />
-                        )}
-                      </button>
-
-                      <button
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666]"
-                        title="Regenerate"
-                      >
-                        <Wand2 className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDuplicateScene(scene.id);
-                        }}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666]"
-                        title="Duplicate"
-                      >
-                        <Copy className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteScene(scene.id);
-                        }}
-                        disabled={editedScript.scenes.length === 1}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#dc2626] disabled:opacity-30"
-                        title="Delete"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Scene Content */}
-                  <div className="p-5 space-y-4">
-                    {/* Scene Intent */}
-                    <div>
-                      <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
-                        <Lightbulb className="w-3.5 h-3.5" />
-                        Scene Intent
-                        <span className="text-[#dc2626]">*</span>
-                      </label>
-                      <select
-                        value={scene.intent}
-                        onChange={(e) => handleUpdateScene(scene.id, 'intent', e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        className="w-full px-3 py-2 bg-[#f5f5f5] border-none rounded-lg text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
-                        style={{ fontSize: '14px', fontWeight: '500' }}
-                      >
-                        <option value="Grab attention">Grab attention</option>
-                        <option value="Explain problem">Explain problem</option>
-                        <option value="Build context">Build context</option>
-                        <option value="Deliver value">Deliver value</option>
-                        <option value="Provide proof">Provide proof</option>
-                        <option value="Drive action">Drive action</option>
-                      </select>
-                    </div>
-
-                    {/* Script Content */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="flex items-center gap-2 text-[#666666]" style={{ fontSize: '12px', fontWeight: '600' }}>
-                          <MessageSquare className="w-3.5 h-3.5" />
-                          Script Content
-                        </label>
-                        <div className="text-[#999999]" style={{ fontSize: '11px' }}>
-                          Ideas, logic, key points to communicate
-                        </div>
-                      </div>
-                      <textarea
-                        value={scene.scriptContent}
-                        onChange={(e) => handleUpdateScene(scene.id, 'scriptContent', e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        placeholder="What should be communicated in this scene? (ideas, logic, key points)"
-                        className="w-full px-4 py-3 bg-[#f5f5f5] border-none rounded-lg text-[#1a1a1a] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 resize-none"
-                        style={{ fontSize: '15px', fontWeight: '500', lineHeight: '1.7', minHeight: '120px' }}
-                      />
-
-                    </div>
-
-                    {/* Spoken Lines - Always Visible */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="flex items-center gap-2 text-[#666666]" style={{ fontSize: '12px', fontWeight: '600' }}>
-                          <Mic className="w-3.5 h-3.5" />
-                          Spoken Lines
-                          <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '400' }}>
-                            (optional)
-                          </span>
-                        </label>
-                        {scene.scriptContent && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (onSimulationAction) {
-                                onSimulationAction();
-                                return;
-                              }
-                              handleGenerateSpokenVersion(scene.id);
-                            }}
-                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-[#e9d5ff] bg-gradient-to-r from-[#faf5ff] to-[#f3e8ff] hover:from-[#f3e8ff] hover:to-[#ede9fe] text-[#7c3aed] transition-all"
-                            style={{ fontSize: '11px', fontWeight: '600' }}
-                            title="Generate conversational spoken lines from script content"
-                          >
-                            <Sparkles className="w-3 h-3" />
-                            Generate
-                          </button>
-                        )}
-                      </div>
-                      <textarea
-                        value={scene.spokenVersion || ''}
-                        onChange={(e) => handleUpdateScene(scene.id, 'spokenVersion', e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        placeholder="Type or generate conversational spoken lines..."
-                        className="w-full px-4 py-3 bg-gradient-to-br from-[#faf5ff] to-[#f3e8ff] border border-[#e9d5ff] rounded-lg text-[#1a1a1a] placeholder:text-[#a78bfa] focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/30 resize-none"
-                        style={{ fontSize: '14px', fontWeight: '500', lineHeight: '1.7', minHeight: '100px' }}
-                      />
-                      <div className="flex items-start gap-2 mt-2 text-[#7c3aed]" style={{ fontSize: '11px', lineHeight: '1.5' }}>
-                        <Lightbulb className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
-                        <span>
-                          Use this as guidance. You don't need to read it word for word.
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Execution Notes */}
-                    <div>
-                      <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
-                        <Eye className="w-3.5 h-3.5" />
-                        Execution Notes
-                        <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '400' }}>
-                          (optional)
-                        </span>
-                      </label>
-                      <textarea
-                        value={scene.executionNotes}
-                        onChange={(e) => handleUpdateScene(scene.id, 'executionNotes', e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        placeholder="Visual suggestions, on-screen text, camera angles, actions..."
-                        className="w-full px-4 py-3 bg-[#f5f5f5] border-none rounded-lg text-[#666666] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 resize-none"
-                        style={{ fontSize: '13px', lineHeight: '1.6', minHeight: '80px' }}
-                      />
-                    </div>
-
-                    {/* Storyboard Preview */}
-                    {scene.storyboard && scene.storyboard.length > 0 && (
-                      <div>
-                        <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
-                          <Film className="w-3.5 h-3.5" />
-                          Storyboard ({scene.storyboard.length} frames)
-                        </label>
-                        <div className="flex gap-2 overflow-x-auto pb-2">
-                          {scene.storyboard.map((frame) => (
-                            <div key={frame.id} className="flex-shrink-0 w-20 h-36 rounded-lg overflow-hidden border border-[#e0e0e0] relative group">
-                              <img
-                                src={frame.imageUrl}
-                                alt={frame.caption}
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <PlayCircle className="w-6 h-6 text-white" />
-                              </div>
-                              <div className="absolute bottom-0 left-0 right-0 px-1.5 py-1 bg-black/70 text-white text-[9px] font-semibold">
-                                {frame.timestamp}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Add Scene Button */}
-                <button
-                  onClick={() => handleAddScene(idx + 1)}
-                  className="group w-full py-3 border-2 border-dashed border-[#e0e0e0] rounded-xl hover:border-[#1a1a1a] hover:bg-[#fafafa] transition-all"
-                >
-                  <div className="flex items-center justify-center gap-2 text-[#999999] group-hover:text-[#1a1a1a] transition-colors">
-                    <Plus className="w-4 h-4" />
-                    <span style={{ fontSize: '13px', fontWeight: '600' }}>Add Scene</span>
-                  </div>
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* RIGHT: TikTok Preview + Copilot Panel */}
-      <div className="w-[420px] bg-white border-l border-[#e0e0e0] flex flex-col overflow-hidden">
-        {/* TikTok Preview Section - Collapsible */}
-        {previewOpen && (
-          <div className="border-b border-[#e0e0e0]">
-            <div className="flex items-center justify-between px-4 py-3 bg-[#fafafa] border-b border-[#e0e0e0]">
-              <div className="flex items-center gap-2">
-                <Smartphone className="w-4 h-4 text-[#666666]" />
-                <h3 className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '700' }}>
-                  TikTok Preview
-                </h3>
-              </div>
-              <div className="flex items-center gap-2">
-                {selectedSceneId && (
-                  <div className="flex items-center gap-1.5 px-2 py-1 bg-white rounded-md border border-[#e0e0e0]">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
-                    <span className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
-                      Live
-                    </span>
-                  </div>
-                )}
-                <button
-                  onClick={() => setPreviewOpen(false)}
-                  className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666]"
-                  title="Hide preview"
-                >
-                  <ChevronUp className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-            <div style={{ height: '500px' }}>
-              <TikTokPreviewInline 
-                scene={selectedSceneId 
-                  ? editedScript.scenes.find(s => s.id === selectedSceneId) || null
-                  : null
-                } 
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Copilot Section - Always Visible, Expands When Preview Closed */}
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 bg-[#fafafa] border-b border-[#e0e0e0]">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-gradient-to-br from-[#7c3aed] to-[#a855f7] flex items-center justify-center">
-                <Sparkles className="w-3.5 h-3.5 text-white" />
-              </div>
-              <h3 className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '700' }}>
-                Script Copilot
-              </h3>
-            </div>
-            {!previewOpen && (
-              <button
-                onClick={() => setPreviewOpen(true)}
-                className="flex items-center gap-1.5 px-2 py-1 bg-white rounded-md border border-[#e0e0e0] hover:bg-[#fafafa] transition-colors"
-                title="Show TikTok Preview"
-              >
-                <Smartphone className="w-3 h-3 text-[#666666]" />
-                <span className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
-                  Show Preview
-                </span>
-              </button>
-            )}
-          </div>
-
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
-            {copilotMessages.map((message) => (
-              <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] rounded-lg px-3 py-2 ${message.role === 'user' ? 'bg-[#1a1a1a] text-white' : 'bg-[#f5f5f5] text-[#1a1a1a]'}`}>
-                  <p style={{ fontSize: '12px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{message.content}</p>
-                  {message.suggestionType && (
-                    <button className="mt-2 px-2.5 py-1 bg-[#1a1a1a] text-white rounded-md hover:bg-[#404040] transition-colors" style={{ fontSize: '11px', fontWeight: '600' }}>
-                      Apply Suggestion
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="p-3 border-t border-[#e0e0e0]">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={copilotInput}
-                onChange={(e) => setCopilotInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleCopilotSend()}
-                placeholder="Ask about scenes..."
-                className="flex-1 px-3 py-2 bg-[#f5f5f5] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] outline-none focus:ring-2 focus:ring-[#1a1a1a]/10"
-                style={{ fontSize: '12px' }}
-              />
-              <button
-                onClick={() => {
-                  if (onSimulationAction) {
-                    onSimulationAction();
-                    return;
-                  }
-                  handleCopilotSend();
-                }}
-                disabled={!copilotInput.trim()}
-                className="p-2 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors disabled:opacity-50"
-              >
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </>
   );
 }
 
@@ -2646,7 +1845,7 @@ export function ContentStudio({
   const editingScript = editingScriptId ? scripts.find(s => s.id === editingScriptId) : null;
 
   return (
-    <div className="flex h-screen bg-[#fafafa]">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950">
       <SidebarPro 
         activeItem="studio" 
         onNavigate={onNavigate}

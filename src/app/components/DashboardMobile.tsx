@@ -170,7 +170,7 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
   const allTasksCompleted = todayTasks.every(task => completedTasks.has(task.id));
 
   return (
-    <div className="flex flex-col h-screen bg-[#fafafa]">
+    <div className="flex flex-col h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Top Header */}
       <MobileHeader
         currentAccount={currentAccount}
@@ -190,76 +190,76 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 gap-3">
             {/* Followers */}
-            <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-[#eff6ff] flex items-center justify-center">
-                  <Users className="w-4 h-4 text-[#3b82f6]" />
+                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+                  <Users className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                 </div>
-                <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                   {t.followers}
                 </span>
               </div>
-              <div className="text-[#1a1a1a] mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
+              <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
                 125.6K
               </div>
-              <div className="flex items-center gap-1 text-[#16a34a]" style={{ fontSize: '11px', fontWeight: '600' }}>
+              <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                 <ArrowUpRight className="w-3 h-3" />
                 +2.4%
               </div>
             </div>
 
             {/* Views */}
-            <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-[#fef3c7] flex items-center justify-center">
-                  <Eye className="w-4 h-4 text-[#f59e0b]" />
+                <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center">
+                  <Eye className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                 </div>
-                <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                   {t.views}
                 </span>
               </div>
-              <div className="text-[#1a1a1a] mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
+              <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
                 3.2M
               </div>
-              <div className="flex items-center gap-1 text-[#16a34a]" style={{ fontSize: '11px', fontWeight: '600' }}>
+              <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                 <ArrowUpRight className="w-3 h-3" />
                 +15.8%
               </div>
             </div>
 
             {/* Likes */}
-            <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-[#fce7f3] flex items-center justify-center">
-                  <Heart className="w-4 h-4 text-[#ec4899]" />
+                <div className="w-8 h-8 rounded-lg bg-pink-50 dark:bg-pink-900/30 flex items-center justify-center">
+                  <Heart className="w-4 h-4 text-pink-500 dark:text-pink-400" />
                 </div>
-                <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                   {t.likes}
                 </span>
               </div>
-              <div className="text-[#1a1a1a] mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
+              <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
                 890K
               </div>
-              <div className="flex items-center gap-1 text-[#16a34a]" style={{ fontSize: '11px', fontWeight: '600' }}>
+              <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                 <ArrowUpRight className="w-3 h-3" />
                 +8.2%
               </div>
             </div>
 
             {/* Engagement */}
-            <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-[#e9d5ff] flex items-center justify-center">
-                  <Activity className="w-4 h-4 text-[#a855f7]" />
+                <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center">
+                  <Activity className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                 </div>
-                <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                   {t.engagement}
                 </span>
               </div>
-              <div className="text-[#1a1a1a] mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
+              <div className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '24px', fontWeight: '700', lineHeight: '1' }}>
                 4.2%
               </div>
-              <div className="flex items-center gap-1 text-[#dc2626]" style={{ fontSize: '11px', fontWeight: '600' }}>
+              <div className="flex items-center gap-1 text-red-600 dark:text-red-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                 <ArrowDownRight className="w-3 h-3" />
                 -0.3%
               </div>
@@ -267,9 +267,9 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
           </div>
 
           {/* AI Diagnosis Card */}
-          <div className="bg-gradient-to-br from-[#1a1a1a] to-[#404040] rounded-xl p-4 text-white">
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-slate-800 dark:to-slate-900 rounded-xl p-4 text-white shadow-lg border border-gray-800 dark:border-slate-700">
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-5 h-5 text-[#fbbf24]" />
+              <Sparkles className="w-5 h-5 text-amber-400" />
               <h3 style={{ fontSize: '16px', fontWeight: '700' }}>{t.aiDiagnosis}</h3>
             </div>
 
@@ -280,7 +280,7 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
                   Current Stage
                 </div>
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-[#4ade80]" />
+                  <TrendingUp className="w-4 h-4 text-emerald-400" />
                   <span style={{ fontSize: '15px', fontWeight: '600' }}>{t.currentStage}</span>
                 </div>
               </div>
@@ -296,10 +296,10 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
               </div>
 
               {/* This Week's Action */}
-              <div className="bg-[#fbbf24]/20 rounded-lg p-3 border border-[#fbbf24]/30">
+              <div className="bg-amber-500/20 rounded-lg p-3 border border-amber-500/30">
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <Zap className="w-4 h-4 text-[#fbbf24]" />
-                  <div className="text-[#fbbf24]" style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <Zap className="w-4 h-4 text-amber-400" />
+                  <div className="text-amber-400" style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                     {t.thisWeekAction}
                   </div>
                 </div>
@@ -320,25 +320,25 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
           </div>
 
           {/* Today's Tasks */}
-          <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Target className="w-5 h-5 text-[#3b82f6]" />
-                <h3 className="text-[#1a1a1a]" style={{ fontSize: '16px', fontWeight: '700' }}>
+                <Target className="w-5 h-5 text-blue-500" />
+                <h3 className="text-gray-900 dark:text-white" style={{ fontSize: '16px', fontWeight: '700' }}>
                   {t.todayTasks}
                 </h3>
               </div>
-              <div className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '600' }}>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '600' }}>
                 {completedTasks.size}/{todayTasks.length}
               </div>
             </div>
 
             {allTasksCompleted ? (
               <div className="py-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-[#dcfce7] flex items-center justify-center">
-                  <CheckCircle2 className="w-8 h-8 text-[#16a34a]" />
+                <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                  <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <p className="text-[#1a1a1a]" style={{ fontSize: '15px', fontWeight: '600' }}>
+                <p className="text-gray-900 dark:text-white" style={{ fontSize: '15px', fontWeight: '600' }}>
                   {t.taskCompleted}
                 </p>
               </div>
@@ -350,15 +350,15 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
                     onClick={() => toggleTask(task.id)}
                     className={`w-full flex items-start gap-3 p-3 rounded-lg border transition-all ${
                       completedTasks.has(task.id)
-                        ? 'bg-[#f5f5f5] border-[#e0e0e0]'
-                        : 'bg-white border-[#e0e0e0] hover:border-[#3b82f6]'
+                        ? 'bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-slate-700'
+                        : 'bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500'
                     }`}
                   >
                     <div
                       className={`w-5 h-5 mt-0.5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
                         completedTasks.has(task.id)
-                          ? 'bg-[#16a34a] border-[#16a34a]'
-                          : 'border-[#d0d0d0]'
+                          ? 'bg-emerald-600 border-emerald-600 dark:bg-emerald-500 dark:border-emerald-500'
+                          : 'border-gray-300 dark:border-slate-600'
                       }`}
                     >
                       {completedTasks.has(task.id) && (
@@ -368,15 +368,17 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
                     <div className="flex-1 text-left">
                       <p
                         className={`${
-                          completedTasks.has(task.id) ? 'text-[#999999] line-through' : 'text-[#1a1a1a]'
+                          completedTasks.has(task.id) 
+                            ? 'text-gray-400 dark:text-gray-500 line-through' 
+                            : 'text-gray-900 dark:text-white'
                         }`}
                         style={{ fontSize: '14px', fontWeight: '500', lineHeight: '1.4' }}
                       >
                         {task.text}
                       </p>
                       {task.priority === 'high' && !completedTasks.has(task.id) && (
-                        <div className="mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#fee2e2]">
-                          <span className="text-[#dc2626]" style={{ fontSize: '10px', fontWeight: '700' }}>
+                        <div className="mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30">
+                          <span className="text-red-600 dark:text-red-400" style={{ fontSize: '10px', fontWeight: '700' }}>
                             HIGH PRIORITY
                           </span>
                         </div>
@@ -389,17 +391,17 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
           </div>
 
           {/* Content Pipeline Preview */}
-          <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-[#8b5cf6]" />
-                <h3 className="text-[#1a1a1a]" style={{ fontSize: '16px', fontWeight: '700' }}>
+                <Calendar className="w-5 h-5 text-violet-500" />
+                <h3 className="text-gray-900 dark:text-white" style={{ fontSize: '16px', fontWeight: '700' }}>
                   {t.contentPipeline}
                 </h3>
               </div>
               <button
                 onClick={() => onNavigate?.('scheduling')}
-                className="text-[#3b82f6] flex items-center gap-1 hover:text-[#2563eb]"
+                className="text-blue-500 flex items-center gap-1 hover:text-blue-600"
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
                 {t.viewCalendar}
@@ -409,27 +411,27 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
 
             <div className="space-y-2">
               {/* Today - Posted */}
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-[#dcfce7] border border-[#86efac]">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800">
                 <div className="text-center">
-                  <div className="text-[#1a1a1a]" style={{ fontSize: '20px', fontWeight: '700', lineHeight: '1' }}>
+                  <div className="text-gray-900 dark:text-white" style={{ fontSize: '20px', fontWeight: '700', lineHeight: '1' }}>
                     Wed
                   </div>
-                  <div className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                     Today
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-1.5 mb-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></div>
-                    <span className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                    <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                       {t.coreContent}
                     </span>
                   </div>
-                  <p className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
+                  <p className="text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
                     iPhone 16 Pro vs Samsung Galaxy S24
                   </p>
                 </div>
-                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-[#16a34a]">
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-600 dark:bg-emerald-500">
                   <CheckCircle2 className="w-3 h-3 text-white" />
                   <span className="text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
                     {t.posted}
@@ -438,57 +440,57 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
               </div>
 
               {/* Friday - Scheduled */}
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-[#e0e0e0]">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
                 <div className="text-center">
-                  <div className="text-[#1a1a1a]" style={{ fontSize: '20px', fontWeight: '700', lineHeight: '1' }}>
+                  <div className="text-gray-900 dark:text-white" style={{ fontSize: '20px', fontWeight: '700', lineHeight: '1' }}>
                     Fri
                   </div>
-                  <div className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                     2 days
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-1.5 mb-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#10b981]"></div>
-                    <span className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                    <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                       {t.monetized}
                     </span>
                   </div>
-                  <p className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
+                  <p className="text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
                     Best Budget Earbuds Under $50
                   </p>
                 </div>
-                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-[#eff6ff]">
-                  <Clock className="w-3 h-3 text-[#3b82f6]" />
-                  <span className="text-[#3b82f6]" style={{ fontSize: '10px', fontWeight: '700' }}>
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30">
+                  <Clock className="w-3 h-3 text-blue-500 dark:text-blue-400" />
+                  <span className="text-blue-500 dark:text-blue-400" style={{ fontSize: '10px', fontWeight: '700' }}>
                     {t.scheduled}
                   </span>
                 </div>
               </div>
 
               {/* Sunday - Draft */}
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-white border border-dashed border-[#d0d0d0]">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-slate-800 border border-dashed border-gray-300 dark:border-slate-600">
                 <div className="text-center">
-                  <div className="text-[#1a1a1a]" style={{ fontSize: '20px', fontWeight: '700', lineHeight: '1' }}>
+                  <div className="text-gray-900 dark:text-white" style={{ fontSize: '20px', fontWeight: '700', lineHeight: '1' }}>
                     Sun
                   </div>
-                  <div className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                  <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                     4 days
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-1.5 mb-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></div>
-                    <span className="text-[#666666]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                    <span className="text-gray-500 dark:text-gray-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                       {t.experiment}
                     </span>
                   </div>
-                  <p className="text-[#666666]" style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
+                  <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
                     Unboxing + First Impressions Format
                   </p>
                 </div>
-                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-[#fef3c7]">
-                  <span className="text-[#f59e0b]" style={{ fontSize: '10px', fontWeight: '700' }}>
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-amber-50 dark:bg-amber-900/30">
+                  <span className="text-amber-500 dark:text-amber-400" style={{ fontSize: '10px', fontWeight: '700' }}>
                     {t.draft}
                   </span>
                 </div>
@@ -497,17 +499,17 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
           </div>
 
           {/* Trending Opportunities */}
-          <div className="bg-white rounded-xl border border-[#e0e0e0] p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Flame className="w-5 h-5 text-[#f97316]" />
-                <h3 className="text-[#1a1a1a]" style={{ fontSize: '16px', fontWeight: '700' }}>
+                <Flame className="w-5 h-5 text-orange-500" />
+                <h3 className="text-gray-900 dark:text-white" style={{ fontSize: '16px', fontWeight: '700' }}>
                   {t.trendingOpportunities}
                 </h3>
               </div>
               <button
                 onClick={() => onNavigate?.('hashtag-radar')}
-                className="text-[#3b82f6] flex items-center gap-1 hover:text-[#2563eb]"
+                className="text-blue-500 flex items-center gap-1 hover:text-blue-600"
                 style={{ fontSize: '13px', fontWeight: '600' }}
               >
                 {t.viewAll}
@@ -518,66 +520,66 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
             {/* Horizontal Scroll Cards */}
             <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
               {/* Perfect Fit Card */}
-              <div className="flex-shrink-0 w-[280px] rounded-xl border-2 border-[#16a34a] bg-[#f0fdf4] p-4">
+              <div className="flex-shrink-0 w-[280px] rounded-xl border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="px-2 py-0.5 rounded-full bg-[#16a34a] text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-600 dark:bg-emerald-500 text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
                     {t.perfectFit}
                   </span>
-                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#dcfce7]">
-                    <span className="text-[#166534]" style={{ fontSize: '12px', fontWeight: '700' }}>94%</span>
+                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/50">
+                    <span className="text-emerald-800 dark:text-emerald-300" style={{ fontSize: '12px', fontWeight: '700' }}>94%</span>
                   </div>
                 </div>
-                <h4 className="text-[#1a1a1a] mb-2" style={{ fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>
+                <h4 className="text-gray-900 dark:text-white mb-2" style={{ fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>
                   Budget Smartphone Comparisons
                 </h4>
-                <p className="text-[#166534] mb-3" style={{ fontSize: '12px', lineHeight: '1.4' }}>
+                <p className="text-emerald-800 dark:text-emerald-300 mb-3" style={{ fontSize: '12px', lineHeight: '1.4' }}>
                   High demand for value-focused phone reviews in your niche
                 </p>
-                <div className="flex items-center gap-2 text-[#166534]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                   <TrendingUp className="w-3.5 h-3.5" />
                   <span>Peaking in 3-5 days</span>
                 </div>
               </div>
 
               {/* Good Match Card */}
-              <div className="flex-shrink-0 w-[280px] rounded-xl border border-[#3b82f6] bg-[#eff6ff] p-4">
+              <div className="flex-shrink-0 w-[280px] rounded-xl border border-blue-500 bg-blue-50 dark:bg-blue-900/20 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="px-2 py-0.5 rounded-full bg-[#3b82f6] text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
+                  <span className="px-2 py-0.5 rounded-full bg-blue-600 dark:bg-blue-500 text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
                     {t.goodMatch}
                   </span>
-                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#dbeafe]">
-                    <span className="text-[#1e40af]" style={{ fontSize: '12px', fontWeight: '700' }}>78%</span>
+                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50">
+                    <span className="text-blue-800 dark:text-blue-300" style={{ fontSize: '12px', fontWeight: '700' }}>78%</span>
                   </div>
                 </div>
-                <h4 className="text-[#1a1a1a] mb-2" style={{ fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>
+                <h4 className="text-gray-900 dark:text-white mb-2" style={{ fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>
                   Smart Home Setup Guides
                 </h4>
-                <p className="text-[#1e40af] mb-3" style={{ fontSize: '12px', lineHeight: '1.4' }}>
+                <p className="text-blue-800 dark:text-blue-300 mb-3" style={{ fontSize: '12px', lineHeight: '1.4' }}>
                   Growing interest in beginner-friendly smart home content
                 </p>
-                <div className="flex items-center gap-2 text-[#1e40af]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                <div className="flex items-center gap-2 text-blue-700 dark:text-blue-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                   <Activity className="w-3.5 h-3.5" />
                   <span>Steady growth</span>
                 </div>
               </div>
 
               {/* Emerging Card */}
-              <div className="flex-shrink-0 w-[280px] rounded-xl border border-[#f59e0b] bg-[#fffbeb] p-4">
+              <div className="flex-shrink-0 w-[280px] rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-900/20 p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="px-2 py-0.5 rounded-full bg-[#f59e0b] text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
+                  <span className="px-2 py-0.5 rounded-full bg-amber-500 text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
                     {t.emerging}
                   </span>
-                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#fef3c7]">
-                    <span className="text-[#92400e]" style={{ fontSize: '12px', fontWeight: '700' }}>65%</span>
+                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50">
+                    <span className="text-amber-800 dark:text-amber-300" style={{ fontSize: '12px', fontWeight: '700' }}>65%</span>
                   </div>
                 </div>
-                <h4 className="text-[#1a1a1a] mb-2" style={{ fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>
+                <h4 className="text-gray-900 dark:text-white mb-2" style={{ fontSize: '15px', fontWeight: '700', lineHeight: '1.3' }}>
                   Foldable Phone Reviews
                 </h4>
-                <p className="text-[#92400e] mb-3" style={{ fontSize: '12px', lineHeight: '1.4' }}>
+                <p className="text-amber-800 dark:text-amber-300 mb-3" style={{ fontSize: '12px', lineHeight: '1.4' }}>
                   New trend gaining traction in tech community
                 </p>
-                <div className="flex items-center gap-2 text-[#92400e]" style={{ fontSize: '11px', fontWeight: '600' }}>
+                <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400" style={{ fontSize: '11px', fontWeight: '600' }}>
                   <Zap className="w-3.5 h-3.5" />
                   <span>Early opportunity</span>
                 </div>
@@ -589,14 +591,14 @@ export function DashboardMobile({ onNavigate }: DashboardMobileProps) {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => onNavigate?.('content-studio')}
-              className="p-4 rounded-xl bg-gradient-to-br from-[#3b82f6] to-[#2563eb] text-white flex flex-col items-center gap-2 hover:opacity-90 transition-opacity"
+              className="p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex flex-col items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-blue-500/20"
             >
               <Plus className="w-6 h-6" />
               <span style={{ fontSize: '14px', fontWeight: '600' }}>New Content</span>
             </button>
             <button
               onClick={() => onNavigate?.('copilot')}
-              className="p-4 rounded-xl bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] text-white flex flex-col items-center gap-2 hover:opacity-90 transition-opacity"
+              className="p-4 rounded-xl bg-gradient-to-br from-violet-500 to-violet-600 text-white flex flex-col items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/20"
             >
               <Sparkles className="w-6 h-6" />
               <span style={{ fontSize: '14px', fontWeight: '600' }}>Ask Copilot</span>

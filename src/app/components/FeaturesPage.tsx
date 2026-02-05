@@ -1,4 +1,17 @@
-import React, { useState } from 'react';
+/**
+ * @page Features Page - OwlSeer Platform Capabilities
+ * 
+ * SEO Keywords: TikTok AI features | content strategy tools | AI script generator features
+ * TikTok analytics features | video content planning tools | creator growth features
+ * 
+ * Long-tail Keywords: AI TikTok script generator features | TikTok trend analysis tool capabilities
+ * content calendar features for TikTok | automated content recommendation features | TikTok performance tracking tools
+ * 
+ * 中文关键词: TikTok AI功能 | 内容策略工具 | AI脚本生成功能 | 视频分析功能 | 创作者工具特性
+ */
+
+import React from 'react';
+import { useLanguage } from '../contexts';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { 
   Sparkles, 
@@ -18,6 +31,8 @@ import {
 } from 'lucide-react';
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, generateAlternates } from '../data/seoConfig';
 
 // --- Visual Components ---
 
@@ -179,9 +194,10 @@ const AnalyticsVisual = () => (
 // --- Main Page ---
 
 export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate?: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
-  const [language, setLanguage] = useState('en');
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
   // Fallback translation
-  const t = translations.en.featuresPage || {
+  const t = (translations[language as keyof typeof translations]?.featuresPage) || translations.en.featuresPage || {
     hero: { title: "Features", subtitle: "Explore our capabilities" },
     bento: { title: "Overview", items: [] },
     deepDive: { strategy: {}, trends: {}, analytics: {} },
@@ -196,13 +212,21 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
     }
   };
 
+  // Get SEO config
+  const seo = seoConfig.features[language as 'en' | 'zh'] || seoConfig.features.en;
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans selection:bg-emerald-500/30 text-gray-900 dark:text-white">
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
-
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/features')}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}
@@ -216,7 +240,10 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
 
       <main className="pt-[72px]">
         {/* Hero */}
-        <section className="relative px-4 sm:px-6 lg:px-8 pt-20 pb-32 overflow-hidden">
+        <section 
+          className="relative px-4 sm:px-6 lg:px-8 pt-20 pb-32 overflow-hidden"
+          aria-label="Features overview - AI-powered TikTok strategy tools"
+        >
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -239,7 +266,10 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
         </section>
 
         {/* Bento Grid */}
-        <section className="px-4 sm:px-6 lg:px-8 py-24 bg-white dark:bg-black/20">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 py-24 bg-white dark:bg-black/20"
+          aria-label="Feature categories"
+        >
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">{t.bento.title}</h2>
@@ -284,7 +314,10 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
         </section>
 
         {/* Deep Dive Sections */}
-        <section className="px-4 sm:px-6 lg:px-8 py-24 max-w-7xl mx-auto space-y-24">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 py-24 max-w-7xl mx-auto space-y-24"
+          aria-label="Detailed feature explanations"
+        >
           <FeatureShowcase 
             title={t.deepDive.strategy.title}
             desc={t.deepDive.strategy.desc}
@@ -310,7 +343,10 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
         </section>
 
         {/* CTA */}
-        <section className="px-4 sm:px-6 lg:px-8 pb-32">
+        <section 
+          className="px-4 sm:px-6 lg:px-8 pb-32"
+          aria-label="Get started with OwlSeer features"
+        >
           <div className="max-w-5xl mx-auto bg-[#111827] dark:bg-black rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-emerald-500/20 via-transparent to-transparent opacity-50" />
             

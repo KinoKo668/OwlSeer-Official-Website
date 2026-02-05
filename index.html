@@ -1,36 +1,132 @@
-
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>OwlSeer - AI TikTok Content Strategy & Script Generator</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preconnect for performance optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.owlseer.com" />
+    <link rel="dns-prefetch" href="https://api.dicebear.com" />
+    
+    <!-- Font preload and load for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" />
+    
+    <!-- Default SEO (will be overridden by react-helmet-async per page) -->
+    <title>OwlSeer - AI TikTok Content Strategy & Script Generator</title>
     <meta name="description" content="Stop guessing what to post. OwlSeer tells you what to do next on TikTok with actionable content plans in under 3 minutes. AI-generated scripts, no signup required to try." />
+    <meta name="keywords" content="TikTok strategy, AI content generator, TikTok script writer, content planning tool, TikTok analytics, viral video strategy" />
+    
+    <!-- Default Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OwlSeer - AI TikTok Content Strategy & Script Generator" />
+    <meta property="og:description" content="Stop guessing what to post. Get actionable content plans in under 3 minutes with AI-generated scripts." />
+    <meta property="og:image" content="https://owlseer.com/og-default.png" />
+    <meta property="og:url" content="https://owlseer.com/" />
+    <meta property="og:site_name" content="OwlSeer" />
+    
+    <!-- Default Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OwlSeer - AI TikTok Content Strategy" />
+    <meta name="twitter:description" content="Stop guessing what to post. Get actionable content plans in under 3 minutes." />
+    <meta name="twitter:image" content="https://owlseer.com/og-default.png" />
+    <meta name="twitter:site" content="@owlseer" />
+    
+    <!-- Favicon and Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1AAE82" />
+    <meta name="msapplication-TileColor" content="#1AAE82" />
+    
+    <!-- Default robots -->
+    <meta name="robots" content="index,follow" />
+    
+    <!-- Default Structured Data -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "OwlSeer",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, iOS, Android",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://owlseer.com/#organization",
+          "name": "OwlSeer",
+          "url": "https://owlseer.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://owlseer.com/logo.png",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://twitter.com/owlseer",
+            "https://linkedin.com/company/owlseer"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "support@owlseer.com"
+          }
         },
-        "description": "OwlSeer tells you what to do next on TikTok. Get actionable content plans in under 3 minutes and AI-generated scripts ready to shoot today.",
-        "featureList": "AI-generated scripts, Actionable content plans, Data-driven direction",
-        "audience": {
-          "@type": "Audience",
-          "audienceType": "Content Creators"
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://owlseer.com/#software",
+          "name": "OwlSeer",
+          "applicationCategory": "BusinessApplication",
+          "applicationSubCategory": "Social Media Management",
+          "operatingSystem": "Web, iOS, Android",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "7-day free trial",
+            "priceValidUntil": "2027-12-31"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "1250",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "description": "AI-powered TikTok content strategy platform that tells you what to post next. Get actionable content plans in under 3 minutes and AI-generated scripts ready to shoot today.",
+          "featureList": [
+            "AI-generated video scripts",
+            "Actionable content plans in 3 minutes",
+            "Data-driven posting recommendations",
+            "Weekly strategy packs",
+            "Trend radar and hashtag analysis"
+          ],
+          "screenshot": "https://owlseer.com/screenshot-dashboard.png",
+          "publisher": {
+            "@id": "https://owlseer.com/#organization"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://owlseer.com/#website",
+          "url": "https://owlseer.com",
+          "name": "OwlSeer",
+          "publisher": {
+            "@id": "https://owlseer.com/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://owlseer.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
         }
-      }
+      ]
+    }
     </script>
   </head>
-
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

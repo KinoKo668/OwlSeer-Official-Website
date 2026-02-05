@@ -124,11 +124,11 @@ interface ScriptEditorNewProps {
 // Scene Role Badge Component
 function SceneRoleBadge({ role }: { role: string }) {
   const colors: Record<string, { bg: string; text: string; border: string }> = {
-    'Hook': { bg: 'bg-[#fef3c7]', text: 'text-[#92400e]', border: 'border-[#fde68a]' },
-    'Context': { bg: 'bg-[#dbeafe]', text: 'text-[#1e40af]', border: 'border-[#bfdbfe]' },
-    'Value / Main Point': { bg: 'bg-[#f0fdf4]', text: 'text-[#166534]', border: 'border-[#bbf7d0]' },
-    'Proof / Example': { bg: 'bg-[#f5f3ff]', text: 'text-[#6b21a8]', border: 'border-[#e9d5ff]' },
-    'CTA / Ending': { bg: 'bg-[#fce7f3]', text: 'text-[#9f1239]', border: 'border-[#fbcfe8]' },
+    'Hook': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-800 dark:text-amber-300', border: 'border-amber-200 dark:border-amber-800/50' },
+    'Context': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-800 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-800/50' },
+    'Value / Main Point': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-800 dark:text-green-300', border: 'border-green-200 dark:border-green-800/50' },
+    'Proof / Example': { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-800 dark:text-violet-300', border: 'border-violet-200 dark:border-violet-800/50' },
+    'CTA / Ending': { bg: 'bg-pink-100 dark:bg-pink-900/30', text: 'text-pink-800 dark:text-pink-300', border: 'border-pink-200 dark:border-pink-800/50' },
   };
 
   const color = colors[role] || colors['Context'];
@@ -327,35 +327,35 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
   };
 
   return (
-    <div className="flex h-screen bg-[#fafafa] overflow-hidden">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950 overflow-hidden">
       {/* LEFT: Scene Flow Panel - Narrower */}
       <div 
-        className={`bg-white border-r border-[#e0e0e0] flex flex-col transition-all duration-300 ${
+        className={`bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 flex flex-col transition-all duration-300 ${
           isSceneFlowCollapsed ? 'w-14' : 'w-72'
         }`}
       >
-        <div className={`px-4 py-4 border-b border-[#e0e0e0] flex items-center ${isSceneFlowCollapsed ? 'justify-center' : 'justify-between'}`}>
+        <div className={`px-4 py-4 border-b border-gray-200 dark:border-slate-800 flex items-center ${isSceneFlowCollapsed ? 'justify-center' : 'justify-between'}`}>
           {!isSceneFlowCollapsed && (
             <div>
               <button
                 onClick={onBack}
-                className="flex items-center gap-2 text-[#666666] hover:text-[#1a1a1a] transition-colors mb-4"
+                className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-4"
                 style={{ fontSize: '13px', fontWeight: '500' }}
               >
                 <ChevronRight className="w-3.5 h-3.5 rotate-180" />
                 Back to Scripts
               </button>
-              <h3 className="text-[#1a1a1a] mb-1" style={{ fontSize: '15px', fontWeight: '700' }}>
+              <h3 className="text-gray-900 dark:text-white mb-1" style={{ fontSize: '15px', fontWeight: '700' }}>
                 Scene Flow
               </h3>
-              <p className="text-[#999999]" style={{ fontSize: '12px' }}>
+              <p className="text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                 {editedScript.scenes.length} {editedScript.scenes.length === 1 ? 'scene' : 'scenes'}
               </p>
             </div>
           )}
           <button
             onClick={() => setIsSceneFlowCollapsed(!isSceneFlowCollapsed)}
-            className="p-1.5 rounded-lg hover:bg-[#f5f5f5] text-[#666666] transition-colors"
+            className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-500 dark:text-gray-400 transition-colors"
             title={isSceneFlowCollapsed ? "Expand Scene Flow" : "Collapse Scene Flow"}
           >
             <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${isSceneFlowCollapsed ? '' : 'rotate-180'}`} />
@@ -384,26 +384,26 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                 }}
                 className={`w-full text-left rounded-lg border transition-all cursor-pointer ${
                   selectedSceneId === scene.id
-                    ? 'bg-[#f5f5f5] border-[#1a1a1a] shadow-sm'
-                    : 'bg-white border-[#e0e0e0] hover:border-[#999999]'
+                    ? 'bg-gray-100 dark:bg-slate-800 border-gray-900 dark:border-white shadow-sm'
+                    : 'bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 hover:border-gray-400 dark:hover:border-slate-600'
                 } ${isSceneFlowCollapsed ? 'p-2 flex justify-center' : 'p-3'}`}
                 title={isSceneFlowCollapsed ? `Scene ${scene.index}: ${scene.role}` : undefined}
               >
                 {isSceneFlowCollapsed ? (
-                  <span className="text-[#1a1a1a]" style={{ fontSize: '12px', fontWeight: '700' }}>
+                  <span className="text-gray-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '700' }}>
                     {String(scene.index).padStart(2, '0')}
                   </span>
                 ) : (
                   <>
                     <div className="flex items-center gap-2 mb-2">
-                      <GripVertical className="w-3.5 h-3.5 text-[#999999] flex-shrink-0 cursor-grab active:cursor-grabbing" />
-                      <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '700' }}>
+                      <GripVertical className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 flex-shrink-0 cursor-grab active:cursor-grabbing" />
+                      <span className="text-gray-400 dark:text-gray-500" style={{ fontSize: '11px', fontWeight: '700' }}>
                         {String(scene.index).padStart(2, '0')}
                       </span>
                       <SceneRoleBadge role={scene.role} />
                     </div>
-                    <p className="text-[#666666] line-clamp-1 pl-5" style={{ fontSize: '12px' }}>
-                      {scene.scriptContent || <em className="text-[#999999]">Empty scene</em>}
+                    <p className="text-gray-500 dark:text-gray-400 line-clamp-1 pl-5" style={{ fontSize: '12px' }}>
+                      {scene.scriptContent || <em className="text-gray-400 dark:text-gray-500">Empty scene</em>}
                     </p>
                   </>
                 )}
@@ -412,10 +412,10 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
           </div>
         </div>
 
-        <div className="p-3 border-t border-[#e0e0e0]">
+        <div className="p-3 border-t border-gray-200 dark:border-slate-800">
           <button
             onClick={() => handleAddScene(editedScript.scenes.length)}
-            className={`flex items-center justify-center gap-2 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors ${
+            className={`flex items-center justify-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors ${
               isSceneFlowCollapsed ? 'w-8 h-8 p-0' : 'w-full px-4 py-2.5'
             }`}
             style={{ fontSize: '13px', fontWeight: '600' }}
@@ -430,22 +430,22 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
       {/* CENTER: Scene Card Workspace - Wider */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Status Bar */}
-        <div className="bg-[#f5f5f5] border-b border-[#e0e0e0] px-6 py-3">
+        <div className="bg-gray-100 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-800 px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="text-[#666666]" style={{ fontSize: '13px' }}>
-                <span className="font-semibold text-[#1a1a1a]">{editedScript.scenes.length} scenes</span>
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px' }}>
+                <span className="font-semibold text-gray-900 dark:text-white">{editedScript.scenes.length} scenes</span>
               </div>
-              <div className="w-px h-4 bg-[#e0e0e0]" />
-              <div className="text-[#666666]" style={{ fontSize: '13px' }}>
-                Editing: <span className="font-semibold text-[#1a1a1a]">Scene {String(selectedScene?.index || 1).padStart(2, '0')}</span>
+              <div className="w-px h-4 bg-gray-200 dark:bg-slate-700" />
+              <div className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px' }}>
+                Editing: <span className="font-semibold text-gray-900 dark:text-white">Scene {String(selectedScene?.index || 1).padStart(2, '0')}</span>
                 {selectedScene && (
-                  <span className="ml-2">· <span className="text-[#1a1a1a]">{selectedScene.role}</span></span>
+                  <span className="ml-2">· <span className="text-gray-900 dark:text-white">{selectedScene.role}</span></span>
                 )}
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <button className="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#e0e0e0] rounded-lg hover:bg-[#fafafa] transition-colors text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+              <button className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors text-gray-500 dark:text-gray-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                 <ArrowUpDown className="w-3.5 h-3.5" />
                 Reorder Scenes
               </button>
@@ -454,29 +454,29 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
         </div>
 
         {/* Header with Title and Actions */}
-        <div className="bg-white border-b border-[#e0e0e0] px-6 py-4">
+        <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 px-6 py-4">
           <div className="flex items-center justify-between mb-3">
             <input
               type="text"
               value={editedScript.title}
               onChange={(e) => setEditedScript(prev => ({ ...prev, title: e.target.value }))}
-              className="flex-1 text-[#1a1a1a] bg-transparent border-none outline-none"
+              className="flex-1 text-gray-900 dark:text-white bg-transparent border-none outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
               style={{ fontSize: '20px', fontWeight: '700' }}
               placeholder="Script Title"
             />
             <div className="flex items-center gap-2">
-              <button className="p-2 rounded-lg hover:bg-[#f5f5f5] transition-colors text-[#666666]">
+              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors text-gray-500 dark:text-gray-400">
                 <Undo className="w-4 h-4" />
               </button>
-              <button className="p-2 rounded-lg hover:bg-[#f5f5f5] transition-colors text-[#666666]">
+              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors text-gray-500 dark:text-gray-400">
                 <Redo className="w-4 h-4" />
               </button>
-              <div className="w-px h-6 bg-[#e0e0e0] mx-1" />
+              <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-1" />
               
               {/* Save Button */}
               <button
                 onClick={handleSave}
-                className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] text-white rounded-lg hover:bg-[#404040] transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
                 style={{ fontSize: '14px', fontWeight: '600' }}
               >
                 <Save className="w-4 h-4" />
@@ -487,7 +487,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
               <div className="relative">
                 <button
                   onClick={() => setShowExportMenu(!showExportMenu)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white text-[#1a1a1a] border border-[#e0e0e0] rounded-lg hover:bg-[#fafafa] transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-800 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
                   style={{ fontSize: '14px', fontWeight: '600' }}
                 >
                   <Download className="w-4 h-4" />
@@ -495,13 +495,13 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
                 {showExportMenu && (
-                  <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-[#e0e0e0] rounded-lg shadow-lg py-1 z-10">
-                    <button className="w-full px-4 py-2 text-left text-[#1a1a1a] hover:bg-[#f5f5f5] transition-colors flex items-center gap-2" style={{ fontSize: '13px' }}>
-                      <Copy className="w-3.5 h-3.5 text-[#666666]" />
+                  <div className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg shadow-lg py-1 z-10">
+                    <button className="w-full px-4 py-2 text-left text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2" style={{ fontSize: '13px' }}>
+                      <Copy className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
                       Copy Script
                     </button>
-                    <button className="w-full px-4 py-2 text-left text-[#1a1a1a] hover:bg-[#f5f5f5] transition-colors flex items-center gap-2" style={{ fontSize: '13px' }}>
-                      <FileText className="w-3.5 h-3.5 text-[#666666]" />
+                    <button className="w-full px-4 py-2 text-left text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2" style={{ fontSize: '13px' }}>
+                      <FileText className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
                       Export PDF
                     </button>
                     <button 
@@ -509,10 +509,10 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                         setShowExportMenu(false);
                         setShowSlotSelector(true);
                       }}
-                      className="w-full px-4 py-2 text-left text-[#1a1a1a] hover:bg-[#f5f5f5] transition-colors flex items-center gap-2" 
+                      className="w-full px-4 py-2 text-left text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2" 
                       style={{ fontSize: '13px' }}
                     >
-                      <Calendar className="w-3.5 h-3.5 text-[#666666]" />
+                      <Calendar className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
                       Export to Scheduling
                     </button>
                   </div>
@@ -523,48 +523,48 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-[#f5f5f5] rounded-lg">
-                <FileText className="w-3.5 h-3.5 text-[#666666]" />
-                <span className="text-[#1a1a1a]" style={{ fontSize: '12px', fontWeight: '600' }}>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-slate-800 rounded-lg">
+                <FileText className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+                <span className="text-gray-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '600' }}>
                   {editedScript.contentType}
                 </span>
               </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-[#f5f5f5] rounded-lg">
-                <Target className="w-3.5 h-3.5 text-[#666666]" />
-                <span className="text-[#1a1a1a]" style={{ fontSize: '12px', fontWeight: '600' }}>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-slate-800 rounded-lg">
+                <Target className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+                <span className="text-gray-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '600' }}>
                   {editedScript.targetGoal}
                 </span>
               </div>
             </div>
-            <div className="flex items-center gap-3 text-[#999999]" style={{ fontSize: '11px' }}>
+            <div className="flex items-center gap-3 text-gray-400 dark:text-gray-500" style={{ fontSize: '11px' }}>
               <span>Last saved: {lastSaved.toLocaleTimeString()}</span>
             </div>
           </div>
         </div>
 
         {/* Scene Cards - Scrollable */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 bg-[#f0f0f0]">
+        <div className="flex-1 overflow-y-auto px-6 py-6 bg-gray-50 dark:bg-slate-950">
           <div className="max-w-4xl mx-auto space-y-6">
             {editedScript.scenes.map((scene, idx) => (
               <div key={scene.id}>
                 {/* Scene Card */}
                 <div
                   id={`scene-${scene.id}`}
-                  className={`bg-white rounded-xl border transition-all ${
+                  className={`bg-white dark:bg-slate-900 rounded-xl border transition-all ${
                     selectedSceneId === scene.id
-                      ? 'border-[#1a1a1a] shadow-lg ring-1 ring-[#1a1a1a]/5'
-                      : 'border-[#e0e0e0] hover:border-[#999999]'
+                      ? 'border-gray-900 dark:border-white shadow-lg ring-1 ring-gray-900/5 dark:ring-white/5'
+                      : 'border-gray-200 dark:border-slate-800 hover:border-gray-400 dark:hover:border-slate-600'
                   }`}
                   onClick={() => setSelectedSceneId(scene.id)}
                 >
                   {/* Scene Header - Simplified to 3 Main Actions */}
-                  <div className="flex items-center justify-between px-5 py-3 bg-[#fafafa] border-b border-[#e0e0e0] rounded-t-xl">
+                  <div className="flex items-center justify-between px-5 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-800 rounded-t-xl">
                     <div className="flex items-center gap-3">
-                      <button className="p-1 text-[#999999] hover:text-[#1a1a1a] cursor-grab active:cursor-grabbing">
+                      <button className="p-1 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white cursor-grab active:cursor-grabbing">
                         <GripVertical className="w-4 h-4" />
                       </button>
 
-                      <span className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '700' }}>
+                      <span className="text-gray-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '700' }}>
                         Scene {String(scene.index).padStart(2, '0')}
                       </span>
 
@@ -572,7 +572,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                         value={scene.role}
                         onChange={(e) => handleUpdateScene(scene.id, 'role', e.target.value)}
                         onClick={(e) => e.stopPropagation()}
-                        className="px-2.5 py-1 bg-white border border-[#e0e0e0] rounded-md text-[#1a1a1a] text-[11px] font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 cursor-pointer hover:border-[#999999] transition-colors"
+                        className="px-2.5 py-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-md text-gray-900 dark:text-white text-[11px] font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20 cursor-pointer hover:border-gray-400 dark:hover:border-slate-600 transition-colors"
                       >
                         <option value="Hook">Hook</option>
                         <option value="Context">Context</option>
@@ -587,13 +587,13 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                         onChange={(e) => handleUpdateScene(scene.id, 'durationHint', e.target.value)}
                         onClick={(e) => e.stopPropagation()}
                         placeholder="2-4s"
-                        className="w-16 px-2 py-1 bg-white border border-[#e0e0e0] rounded-md text-[#666666] text-[11px] text-center focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                        className="w-16 px-2 py-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-md text-gray-500 dark:text-gray-400 text-[11px] text-center focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20"
                       />
 
                       {scene.lastEditedBy === 'ai' && (
-                        <div className="flex items-center gap-1 px-2 py-0.5 bg-[#ede9fe] rounded-md">
-                          <Sparkles className="w-3 h-3 text-[#7c3aed]" />
-                          <span className="text-[#7c3aed]" style={{ fontSize: '10px', fontWeight: '600' }}>
+                        <div className="flex items-center gap-1 px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 rounded-md">
+                          <Sparkles className="w-3 h-3 text-violet-600 dark:text-violet-400" />
+                          <span className="text-violet-600 dark:text-violet-400" style={{ fontSize: '10px', fontWeight: '600' }}>
                             AI
                           </span>
                         </div>
@@ -612,7 +612,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                           // Rewrite functionality
                           handleUpdateScene(scene.id, 'lastEditedBy', 'ai');
                         }}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#7c3aed]"
+                        className="p-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-violet-600 dark:text-violet-400"
                         title="Rewrite with AI"
                       >
                         <Wand2 className="w-4 h-4" />
@@ -622,7 +622,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                           e.stopPropagation();
                           handleDuplicateScene(scene.id);
                         }}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666]"
+                        className="p-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-gray-500 dark:text-gray-400"
                         title="Duplicate"
                       >
                         <Copy className="w-4 h-4" />
@@ -633,15 +633,15 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                           handleDeleteScene(scene.id);
                         }}
                         disabled={editedScript.scenes.length === 1}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#dc2626] disabled:opacity-30"
+                        className="p-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-red-600 dark:text-red-400 disabled:opacity-30"
                         title="Delete"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
-                      <div className="w-px h-4 bg-[#e0e0e0] mx-1" />
+                      <div className="w-px h-4 bg-gray-200 dark:bg-slate-800 mx-1" />
                       <button
                         onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 rounded-lg hover:bg-white transition-colors text-[#666666]"
+                        className="p-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-gray-500 dark:text-gray-400"
                         title="More options"
                       >
                         <MoreVertical className="w-4 h-4" />
@@ -652,24 +652,24 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                   {/* Scene Content - Grouped Fields */}
                   <div className="p-5 space-y-4">
                     {/* Group A: Core */}
-                    <div className="border border-[#e0e0e0] rounded-lg">
+                    <div className="border border-gray-200 dark:border-slate-800 rounded-lg">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleSection(scene.id, 'core');
                         }}
-                        className="w-full flex items-center justify-between px-4 py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] transition-colors rounded-t-lg"
+                        className="w-full flex items-center justify-between px-4 py-2.5 bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors rounded-t-lg"
                       >
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '600' }}>
+                        <span className="text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '600' }}>
                           Core
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-[#666666] transition-transform ${expandedSections[scene.id]?.core ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${expandedSections[scene.id]?.core ? 'rotate-180' : ''}`} />
                       </button>
                       {expandedSections[scene.id]?.core && (
                         <div className="p-4 space-y-4">
                           {/* Scene Intent */}
                           <div>
-                            <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
+                            <label className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
                               <Lightbulb className="w-3.5 h-3.5" />
                               Scene Intent
                             </label>
@@ -679,14 +679,14 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                               onChange={(e) => handleUpdateScene(scene.id, 'intent', e.target.value)}
                               onClick={(e) => e.stopPropagation()}
                               placeholder="What is this scene's purpose?"
-                              className="w-full px-3 py-2 bg-[#fafafa] border border-[#e0e0e0] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                              className="w-full px-3 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20"
                               style={{ fontSize: '13px' }}
                             />
                           </div>
 
                           {/* Script Content */}
                           <div>
-                            <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
+                            <label className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
                               <MessageSquare className="w-3.5 h-3.5" />
                               Script Content
                             </label>
@@ -695,7 +695,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                               onChange={(e) => handleUpdateScene(scene.id, 'scriptContent', e.target.value)}
                               onClick={(e) => e.stopPropagation()}
                               placeholder="What will you say in this scene?"
-                              className="w-full px-3 py-3 bg-[#fafafa] border border-[#e0e0e0] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 resize-none"
+                              className="w-full px-3 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20 resize-none"
                               style={{ fontSize: '14px', lineHeight: '1.6', minHeight: '120px' }}
                             />
                           </div>
@@ -704,24 +704,24 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                     </div>
 
                     {/* Group B: Direction */}
-                    <div className="border border-[#e0e0e0] rounded-lg">
+                    <div className="border border-gray-200 dark:border-slate-800 rounded-lg">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleSection(scene.id, 'direction');
                         }}
-                        className="w-full flex items-center justify-between px-4 py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] transition-colors rounded-t-lg"
+                        className="w-full flex items-center justify-between px-4 py-2.5 bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors rounded-t-lg"
                       >
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '600' }}>
+                        <span className="text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '600' }}>
                           Direction
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-[#666666] transition-transform ${expandedSections[scene.id]?.direction ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${expandedSections[scene.id]?.direction ? 'rotate-180' : ''}`} />
                       </button>
                       {expandedSections[scene.id]?.direction && (
                         <div className="p-4 space-y-4">
                           {/* Execution Notes */}
                           <div>
-                            <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
+                            <label className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
                               <Film className="w-3.5 h-3.5" />
                               Execution Notes
                             </label>
@@ -730,14 +730,14 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                               onChange={(e) => handleUpdateScene(scene.id, 'executionNotes', e.target.value)}
                               onClick={(e) => e.stopPropagation()}
                               placeholder="Shot composition, camera angles, props..."
-                              className="w-full px-3 py-2 bg-[#fafafa] border border-[#e0e0e0] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 resize-none"
+                              className="w-full px-3 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20 resize-none"
                               style={{ fontSize: '13px', lineHeight: '1.5', minHeight: '80px' }}
                             />
                           </div>
 
                           {/* On-screen Text */}
                           <div>
-                            <label className="flex items-center gap-2 text-[#666666] mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
+                            <label className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mb-2" style={{ fontSize: '12px', fontWeight: '600' }}>
                               <FileText className="w-3.5 h-3.5" />
                               On-screen Text
                             </label>
@@ -747,7 +747,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                               onChange={(e) => handleUpdateScene(scene.id, 'onScreenText', e.target.value)}
                               onClick={(e) => e.stopPropagation()}
                               placeholder="Captions, overlays, text animations..."
-                              className="w-full px-3 py-2 bg-[#fafafa] border border-[#e0e0e0] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                              className="w-full px-3 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900/20 dark:focus:ring-white/20"
                               style={{ fontSize: '13px' }}
                             />
                           </div>
@@ -756,18 +756,18 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                     </div>
 
                     {/* Group C: Storyboard */}
-                    <div className="border border-[#e0e0e0] rounded-lg">
+                    <div className="border border-gray-200 dark:border-slate-800 rounded-lg">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleSection(scene.id, 'storyboard');
                         }}
-                        className="w-full flex items-center justify-between px-4 py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] transition-colors rounded-t-lg"
+                        className="w-full flex items-center justify-between px-4 py-2.5 bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors rounded-t-lg"
                       >
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '600' }}>
+                        <span className="text-gray-900 dark:text-white" style={{ fontSize: '13px', fontWeight: '600' }}>
                           Storyboard
                         </span>
-                        <ChevronDown className={`w-4 h-4 text-[#666666] transition-transform ${expandedSections[scene.id]?.storyboard ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform ${expandedSections[scene.id]?.storyboard ? 'rotate-180' : ''}`} />
                       </button>
                       {expandedSections[scene.id]?.storyboard && (
                         <div className="p-4">
@@ -781,7 +781,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                               }
                               // AI generation logic
                             }}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 mb-4 bg-gradient-to-r from-[#7c3aed] to-[#a855f7] text-white rounded-lg hover:from-[#6d28d9] hover:to-[#9333ea] transition-all shadow-sm"
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 mb-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-lg hover:from-violet-600 hover:to-purple-600 transition-all shadow-sm"
                             style={{ fontSize: '13px', fontWeight: '600' }}
                           >
                             <Sparkles className="w-4 h-4" />
@@ -791,17 +791,17 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                           <div className="grid grid-cols-3 gap-3">
                             {scene.storyboardFrames && scene.storyboardFrames.length > 0 ? (
                               scene.storyboardFrames.map((frame, fIdx) => (
-                                <div key={fIdx} className="aspect-video bg-[#f5f5f5] rounded-lg border border-[#e0e0e0]" />
+                                <div key={fIdx} className="aspect-video bg-gray-100 dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700" />
                               ))
                             ) : (
-                              <div className="col-span-3 text-center py-8 text-[#999999]" style={{ fontSize: '12px' }}>
+                              <div className="col-span-3 text-center py-8 text-gray-400 dark:text-gray-500" style={{ fontSize: '12px' }}>
                                 No storyboard frames yet
                               </div>
                             )}
                           </div>
                           <button 
                             onClick={(e) => e.stopPropagation()}
-                            className="mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#fafafa] border border-[#e0e0e0] rounded-lg hover:bg-white transition-colors text-[#666666]" 
+                            className="mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-gray-500 dark:text-gray-400" 
                             style={{ fontSize: '12px', fontWeight: '500' }}
                           >
                             <Plus className="w-3.5 h-3.5" />
@@ -818,12 +818,12 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                   <div className="flex items-center gap-3 px-12 py-3 justify-center">
                     <button
                       onClick={() => handleAddScene(idx + 1)}
-                      className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white border border-[#e0e0e0] rounded-full hover:border-[#1a1a1a] hover:bg-[#1a1a1a] transition-all group"
+                      className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-full hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white transition-all group"
                       title="Insert scene"
                     >
-                      <Plus className="w-3.5 h-3.5 text-[#999999] group-hover:text-white transition-colors" />
+                      <Plus className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 group-hover:text-white dark:group-hover:text-gray-900 transition-colors" />
                     </button>
-                    <div className="flex-1 border-t border-dashed border-[#e0e0e0]" />
+                    <div className="flex-1 border-t border-dashed border-gray-200 dark:border-slate-700" />
                   </div>
                 )}
               </div>
@@ -833,9 +833,9 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
       </div>
 
       {/* RIGHT: Preview + Copilot Panel */}
-      <div className="w-96 bg-white border-l border-[#e0e0e0] flex flex-col">
+      <div className="w-96 bg-white dark:bg-slate-900 border-l border-gray-200 dark:border-slate-800 flex flex-col">
         {/* TikTok Preview */}
-        <div className="flex-1 overflow-y-auto p-4 bg-[#fafafa]">
+        <div className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-slate-950">
           <TikTokPreviewInline
             scene={selectedScene ? {
               ...selectedScene,
@@ -851,30 +851,30 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
         </div>
 
         {/* Copilot Section */}
-        <div className={`border-t border-[#e0e0e0] bg-white transition-all duration-300 ease-in-out shadow-[0_-4px_20px_rgba(0,0,0,0.03)] ${copilotExpanded ? 'h-[500px]' : 'h-auto'}`}>
+        <div className={`border-t border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all duration-300 ease-in-out shadow-[0_-4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.2)] ${copilotExpanded ? 'h-[500px]' : 'h-auto'}`}>
           {/* Copilot Header - Collapsible */}
           <button
             onClick={() => setCopilotExpanded(!copilotExpanded)}
-            className="w-full flex items-center justify-between px-4 py-3 hover:bg-[#fafafa] transition-colors border-b border-transparent hover:border-[#e0e0e0]"
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors border-b border-transparent hover:border-gray-200 dark:hover:border-slate-700"
           >
             <div className="flex items-center gap-2.5">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#a855f7] flex items-center justify-center shadow-sm">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-white" />
               </div>
               <div className="flex flex-col items-start">
-                <span className="text-[#1a1a1a] leading-none mb-0.5" style={{ fontSize: '13px', fontWeight: '600' }}>
+                <span className="text-gray-900 dark:text-white leading-none mb-0.5" style={{ fontSize: '13px', fontWeight: '600' }}>
                   OwlSeer Copilot
                 </span>
                 {selectedScene && (
-                  <span className="text-[#999999] leading-none" style={{ fontSize: '10px' }}>
+                  <span className="text-gray-400 dark:text-gray-500 leading-none" style={{ fontSize: '10px' }}>
                     Context: Scene {String(selectedScene.index).padStart(2, '0')}
                   </span>
                 )}
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-medium px-1.5 py-0.5 bg-[#f5f5f5] text-[#666666] rounded">Beta</span>
-              <ChevronDown className={`w-4 h-4 text-[#666666] transition-transform duration-300 ${copilotExpanded ? 'rotate-180' : ''}`} />
+              <span className="text-[10px] font-medium px-1.5 py-0.5 bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 rounded">Beta</span>
+              <ChevronDown className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform duration-300 ${copilotExpanded ? 'rotate-180' : ''}`} />
             </div>
           </button>
 
@@ -887,7 +887,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                 onChange={(e) => setCopilotInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleCopilotSend()}
                 placeholder="Ask about this scene..."
-                className="w-full px-3 py-2 bg-[#f5f5f5] rounded-lg text-[#1a1a1a] placeholder:text-[#999999] outline-none focus:ring-2 focus:ring-[#7c3aed]/20"
+                className="w-full px-3 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-violet-500/20"
                 style={{ fontSize: '12px' }}
               />
             </div>
@@ -897,25 +897,25 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
           {copilotExpanded && (
             <div className="flex flex-col h-[calc(100%-48px)]">
               {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#fafafa]/50">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 dark:bg-slate-900/50">
                 {copilotMessages.map((message) => (
                   <div key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {message.role === 'assistant' && (
-                       <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#a855f7] flex items-center justify-center shadow-sm flex-shrink-0 mt-1">
+                       <div className="w-6 h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-sm flex-shrink-0 mt-1">
                           <Sparkles className="w-3.5 h-3.5 text-white" />
                        </div>
                     )}
                     <div 
                       className={`max-w-[85%] rounded-2xl px-4 py-2.5 shadow-sm ${
                         message.role === 'user' 
-                          ? 'bg-[#1a1a1a] text-white rounded-tr-sm' 
-                          : 'bg-white border border-[#e0e0e0] text-[#1a1a1a] rounded-tl-sm'
+                          ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-tr-sm' 
+                          : 'bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white rounded-tl-sm'
                       }`}
                     >
                       <p style={{ fontSize: '12px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{message.content}</p>
                     </div>
                     {message.role === 'user' && (
-                       <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#6B7280] to-[#4B5563] flex items-center justify-center shadow-sm flex-shrink-0 mt-1">
+                       <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gray-500 to-gray-600 flex items-center justify-center shadow-sm flex-shrink-0 mt-1">
                           <span className="text-white text-[9px] font-bold">CA</span>
                        </div>
                     )}
@@ -924,7 +924,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
               </div>
 
               {/* Input Area */}
-              <div className="px-5 pt-4 pb-3.5 bg-white border-t border-[#e0e0e0]">
+              <div className="px-5 pt-4 pb-3.5 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
                 <div className="relative">
                   <textarea
                     value={copilotInput}
@@ -936,7 +936,7 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                       }
                     }}
                     placeholder="Ask anything about your content strategy..."
-                    className="w-full bg-transparent text-[#1F2937] placeholder:text-[#B8BDC6] focus:outline-none resize-none scrollbar-hide mb-3"
+                    className="w-full bg-transparent text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none resize-none scrollbar-hide mb-3"
                     rows={1}
                     style={{
                       fontSize: '15px',
@@ -959,17 +959,17 @@ export function ScriptEditorNew({ script, onBack, onSave, onSimulationAction }: 
                         disabled={!copilotInput.trim()}
                         className={`flex items-center gap-1.5 px-4 py-2 rounded-full transition-all ${
                           !copilotInput.trim() 
-                            ? 'bg-[#E5E7EB] cursor-not-allowed' 
-                            : 'bg-[#1a1a1a] hover:bg-[#404040] cursor-pointer'
+                            ? 'bg-gray-200 dark:bg-slate-800 cursor-not-allowed' 
+                            : 'bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 cursor-pointer'
                         }`}
                       >
                         <span 
-                          className={!copilotInput.trim() ? 'text-[#9CA3AF]' : 'text-white'} 
+                          className={!copilotInput.trim() ? 'text-gray-400 dark:text-gray-500' : 'text-white dark:text-gray-900'} 
                           style={{ fontSize: '13px', fontWeight: '600' }}
                         >
                           Send
                         </span>
-                        <Send className={`w-3.5 h-3.5 ${!copilotInput.trim() ? 'text-[#9CA3AF]' : 'text-white'}`} />
+                        <Send className={`w-3.5 h-3.5 ${!copilotInput.trim() ? 'text-gray-400 dark:text-gray-500' : 'text-white dark:text-gray-900'}`} />
                       </button>
                     </div>
                   </div>

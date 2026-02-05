@@ -1,4 +1,17 @@
-import React, { useEffect, useState } from 'react';
+/**
+ * @page Blog Post Page - Individual Article View
+ * 
+ * SEO Keywords: TikTok tips article | content strategy guide | TikTok tutorial | creator insights
+ * viral video guide | TikTok marketing article | social media strategy content
+ * 
+ * Long-tail Keywords: detailed TikTok strategy guide | in-depth content creator tutorial
+ * TikTok algorithm explained article | step-by-step TikTok growth guide | expert TikTok tips
+ * 
+ * 中文关键词: TikTok技巧文章 | 内容策略指南 | 创作者教程 | 短视频营销文章 | 详细增长攻略
+ */
+
+import React, { useEffect } from 'react';
+import { useLanguage } from '../contexts';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { 
   ArrowLeft, 
@@ -154,7 +167,7 @@ const SocialShare = () => (
 
 const AuthorCard = ({ author }: { author: Article['author'] }) => (
   <div className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 flex items-start gap-4 my-12">
-    <img src={author.avatar} alt={author.name} className="w-16 h-16 rounded-full border-2 border-white dark:border-slate-700" />
+    <img src={author.avatar} alt={author.name} loading="lazy" decoding="async" className="w-16 h-16 rounded-full border-2 border-white dark:border-slate-700" />
     <div>
       <div className="text-lg font-bold text-gray-900 dark:text-white mb-1">{author.name}</div>
       <div className="text-sm font-medium text-[#1AAE82] mb-3">{author.role}</div>
@@ -195,9 +208,9 @@ const CTA = ({ onSignUp }: { onSignUp: () => void }) => (
 // --- Main Page ---
 
 export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
-  const t = translations.en;
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language as keyof typeof translations] || translations.en;
   
   const article = SAMPLE_ARTICLE;
 
@@ -209,10 +222,6 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] font-sans selection:bg-[#1AAE82]/30 text-gray-900 dark:text-gray-100">
-      <style>{`
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-sans { font-family: 'Inter', sans-serif; }
-      `}</style>
       
       <ProgressBar />
 
@@ -250,7 +259,7 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
 
             <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400 border-t border-b border-gray-100 dark:border-slate-800 py-6">
               <div className="flex items-center gap-2">
-                <img src={article.author.avatar} alt={article.author.name} className="w-8 h-8 rounded-full" />
+                <img src={article.author.avatar} alt={article.author.name} loading="lazy" decoding="async" className="w-8 h-8 rounded-full" />
                 <span className="font-medium text-gray-900 dark:text-white">{article.author.name}</span>
               </div>
               <div className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-700" />
@@ -267,7 +276,7 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
 
         {/* Featured Image */}
         <div className="w-full h-[400px] md:h-[600px] overflow-hidden">
-          <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+          <img src={article.image} alt={article.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
         </div>
 
         {/* Content Layout */}
@@ -297,7 +306,7 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
                     case 'image':
                       return (
                         <figure key={idx} className="my-10">
-                          <img src={block.content as string} alt={block.caption} className="w-full rounded-2xl shadow-lg" />
+                          <img src={block.content as string} alt={block.caption} loading="lazy" decoding="async" className="w-full rounded-2xl shadow-lg" />
                           {block.caption && <figcaption className="text-center text-sm text-gray-500 mt-3">{block.caption}</figcaption>}
                         </figure>
                       );
@@ -333,7 +342,7 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
                   {article.relatedPosts.map(post => (
                     <a key={post.id} href="#" onClick={(e) => { e.preventDefault(); /* Navigate to post */ }} className="group block">
                       <div className="aspect-video rounded-lg overflow-hidden mb-3">
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                        <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                       </div>
                       <h5 className="font-bold text-gray-900 dark:text-white leading-tight group-hover:text-[#1AAE82] transition-colors mb-2">
                         {post.title}

@@ -1,4 +1,17 @@
-import React, { useState } from 'react';
+/**
+ * @page How It Works - OwlSeer Methodology
+ * 
+ * SEO Keywords: how TikTok AI tool works | TikTok content strategy methodology | AI video analysis process
+ * TikTok data analysis explained | content recommendation algorithm | TikTok growth process
+ * 
+ * Long-tail Keywords: how does AI TikTok tool analyze content | step-by-step TikTok strategy process
+ * understanding TikTok analytics AI | how OwlSeer generates video scripts | TikTok data to strategy workflow
+ * 
+ * 中文关键词: TikTok AI工具原理 | 内容策略方法论 | AI视频分析流程 | 数据驱动内容规划 | TikTok算法分析
+ */
+
+import React from 'react';
+import { useLanguage } from '../contexts';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Play, 
@@ -17,6 +30,8 @@ import {
 } from 'lucide-react';
 import { Navbar, Footer } from './LandingPage';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
 
 
 const steps = [
@@ -161,10 +176,9 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
   const [activeTab, setActiveTab] = useState(1);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   
-  // Minimal state for Navbar compatibility
-  const [language, setLanguage] = useState('en');
-  // Removed local isDarkMode state
-  const t = translations.en; // Default to EN for now on this page
+  // Use global language context
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language as keyof typeof translations] || translations.en;
 
   const handleNavigate = (page: string) => {
     if (onNavigate) {
@@ -178,8 +192,22 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  // Get SEO config
+  const seo = seoConfig.howItWorks[language as 'en' | 'zh'] || seoConfig.howItWorks.en;
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617]">
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={seo.canonicalUrl}
+        lang={language}
+        alternates={generateAlternates('/how-it-works')}
+        structuredData={structuredDataSchemas.howTo}
+      />
+      
       <Navbar 
         onTrySample={() => handleNavigate('landing')} 
         onSignUp={() => handleNavigate('auth')}
@@ -192,7 +220,10 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
       />
       <div className="pt-[72px]">
       {/* 1. Hero Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 md:py-32 max-w-7xl mx-auto text-center">
+      <section 
+        className="px-4 sm:px-6 lg:px-8 py-20 md:py-32 max-w-7xl mx-auto text-center"
+        aria-label="How OwlSeer works - Transform your TikTok data into strategy"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -219,7 +250,10 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
       </section>
 
       {/* 2. Interactive Tabs Section */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-24 max-w-7xl mx-auto">
+      <section 
+        className="px-4 sm:px-6 lg:px-8 pb-24 max-w-7xl mx-auto"
+        aria-label="Step-by-step process breakdown"
+      >
         <div className="bg-blue-50 dark:bg-blue-900/10 rounded-[2.5rem] p-8 md:p-12 border border-blue-100 dark:border-blue-900/30">
           
           {/* Header */}
@@ -355,7 +389,10 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
       </section>
 
       {/* 3. Before & After Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-24 max-w-7xl mx-auto">
+      <section 
+        className="px-4 sm:px-6 lg:px-8 py-24 max-w-7xl mx-auto"
+        aria-label="Before and after comparison"
+      >
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-display mb-4">
             The Creator Life: <span className="text-gray-400">Before</span> & <span className="text-[#1AAE82]">After</span>
@@ -415,7 +452,11 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
       </section>
 
       {/* 4. Trust Grid & FAQ */}
-      <section id="faq-section" className="px-4 sm:px-6 lg:px-8 py-24 max-w-4xl mx-auto">
+      <section 
+        id="faq-section" 
+        className="px-4 sm:px-6 lg:px-8 py-24 max-w-4xl mx-auto"
+        aria-label="Trust indicators and frequently asked questions"
+      >
         {/* Trust Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {[
@@ -468,7 +509,10 @@ export function HowItWorksPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNa
       </section>
 
       {/* 5. Bottom CTA */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-24">
+      <section 
+        className="px-4 sm:px-6 lg:px-8 pb-24"
+        aria-label="Get started with OwlSeer"
+      >
         <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#1AAE82]/10 to-blue-500/10 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#1AAE82] to-transparent opacity-20" />
           <div className="relative z-10">
