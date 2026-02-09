@@ -242,9 +242,25 @@ export function SidebarPro({
 }: SidebarProProps) {
   const [isPricingModalOpen, setIsPricingModalOpen] = React.useState(false);
   const [isCreditsPurchaseModalOpen, setIsCreditsPurchaseModalOpen] = React.useState(false);
-  const [isCollapsed, setIsCollapsed] = React.useState(true); // Default to collapsed
+  
+  // Initialize from localStorage or default to true
+  const [isCollapsed, setIsCollapsed] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('sidebar_collapsed');
+      if (saved !== null) {
+        return saved === 'true';
+      }
+    }
+    return true;
+  });
+  
   const [isCollapsedStable, setIsCollapsedStable] = React.useState(true);
   const [isLogoHovered, setIsLogoHovered] = React.useState(false); // Track logo hover state
+
+  // Save to localStorage whenever state changes
+  React.useEffect(() => {
+    localStorage.setItem('sidebar_collapsed', String(isCollapsed));
+  }, [isCollapsed]);
   
   // Stable timer for animation cleanup
   const stableTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
