@@ -64,16 +64,6 @@ export function AdjustedGoalRow({
           {reason}
         </span>
       </div>
-
-      {/* Why link */}
-      <button
-        onClick={onWhyClick}
-        className="flex-shrink-0 text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-        style={{ fontSize: '12px', fontWeight: '600' }}
-      >
-        <span>Why</span>
-        <ArrowRight className="w-3 h-3" />
-      </button>
     </div>
   );
 }

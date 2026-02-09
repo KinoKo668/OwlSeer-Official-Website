@@ -38,14 +38,28 @@ const ReportsArchive = React.lazy(() => import('./components/ReportsArchive').th
 const WeeklyReportDetail = React.lazy(() => import('./components/WeeklyReportDetail').then(m => ({ default: m.WeeklyReportDetail })));
 const AccountSelection = React.lazy(() => import('./components/AccountSelection').then(m => ({ default: m.AccountSelection })));
 const LandingPage = React.lazy(() => import('./components/LandingPage').then(m => ({ default: m.LandingPage })));
+const SignalsPage = React.lazy(() => import('./components/SignalsPage').then(m => ({ default: m.SignalsPage })));
 const HowItWorksPage = React.lazy(() => import('./components/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
 const FeaturesPage = React.lazy(() => import('./components/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
 const PricingPage = React.lazy(() => import('./components/PricingPage').then(m => ({ default: m.PricingPage })));
 const BlogPage = React.lazy(() => import('./components/BlogPage').then(m => ({ default: m.BlogPage })));
+const GuidesPage = React.lazy(() => import('./components/GuidesPage').then(m => ({ default: m.GuidesPage })));
 const BlogPostPage = React.lazy(() => import('./components/BlogPostPage').then(m => ({ default: m.BlogPostPage })));
 const FAQPage = React.lazy(() => import('./components/FAQPage').then(m => ({ default: m.FAQPage })));
 const ContactPage = React.lazy(() => import('./components/ContactPage').then(m => ({ default: m.ContactPage })));
 const LegalPage = React.lazy(() => import('./components/LegalPage').then(m => ({ default: m.LegalPage })));
+const MethodologyPage = React.lazy(() => import('./components/MethodologyPage').then(m => ({ default: m.MethodologyPage })));
+const ContentDiagnosisPage = React.lazy(() => import('./components/ContentDiagnosisPage').then(m => ({ default: m.ContentDiagnosisPage })));
+const ContentCreatorsPage = React.lazy(() => import('./components/solutions/ContentCreatorsPage').then(m => ({ default: m.ContentCreatorsPage })));
+const TrendPredictionPage = React.lazy(() => import('./components/use-cases/TrendPredictionPage').then(m => ({ default: m.TrendPredictionPage })));
+const EcommerceSellersPage = React.lazy(() => import('./components/solutions/EcommerceSellersPage').then(m => ({ default: m.EcommerceSellersPage })));
+const BrandsPage = React.lazy(() => import('./components/solutions/BrandsPage').then(m => ({ default: m.BrandsPage })));
+const AiToolsComparisonPage = React.lazy(() => import('./components/compare/AiToolsComparisonPage').then(m => ({ default: m.AiToolsComparisonPage })));
+const TubeSpannerComparePage = React.lazy(() => import('./components/compare/TubeSpannerComparePage').then(m => ({ default: m.TubeSpannerComparePage })));
+const CompareVidIQPage = React.lazy(() => import('./components/compare/CompareVidIQPage').then(m => ({ default: m.CompareVidIQPage })));
+const LocalBusinessPage = React.lazy(() => import('./components/solutions/LocalBusinessPage').then(m => ({ default: m.LocalBusinessPage })));
+const AgenciesPage = React.lazy(() => import('./components/solutions/AgenciesPage').then(m => ({ default: m.AgenciesPage })));
+const HashtagStrategyPage = React.lazy(() => import('./components/use-cases/HashtagStrategyPage').then(m => ({ default: m.HashtagStrategyPage })));
 import { SimulationProvider, SimulationPageWrapper } from './components/SimulationPageWrapper';
 
 // Loading fallback component
@@ -60,22 +74,22 @@ function LoadingFallback() {
   );
 }
 
+import { useTheme } from 'next-themes';
+
 export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [userRole, setUserRole] = React.useState<'creator' | 'brand' | null>(null);
 
-  // Global Theme State
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
-
-  // Apply dark mode class globally
-  React.useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
+  // Global Theme State via next-themes
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  // We use resolvedTheme to determine if it's currently dark, which handles 'system' preference too
+  const isDarkMode = resolvedTheme === 'dark';
+  
+  // Wrapper for setIsDarkMode to be compatible with existing props interface
+  const setIsDarkMode = React.useCallback((isDark: boolean) => {
+    setTheme(isDark ? 'dark' : 'light');
+  }, [setTheme]);
 
   const [userNiches, setUserNiches] = React.useState<string[]>([]);
   const [userLocation, setUserLocation] = React.useState<string | null>(null);
@@ -225,6 +239,16 @@ export default function App() {
               <DevTools currentPage="landing" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
+          <Route path="/signals" element={
+            <>
+              <SignalsPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="signals" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
           <Route path="/how-it-works" element={
             <>
               <HowItWorksPage 
@@ -265,6 +289,16 @@ export default function App() {
               <DevTools currentPage="blog" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
+          <Route path="/guides" element={
+            <>
+              <GuidesPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="guides" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
           <Route path="/blog-post" element={
             <>
               <BlogPostPage 
@@ -295,6 +329,136 @@ export default function App() {
               <DevTools currentPage="contact" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
+          <Route path="/methodology" element={
+            <>
+              <MethodologyPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="methodology" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/use-cases/content-diagnosis" element={
+            <>
+              <ContentDiagnosisPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="content-diagnosis" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/solutions/ecommerce" element={
+            <>
+              <EcommerceSellersPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-ecommerce" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/solutions/content-creators" element={
+            <>
+              <ContentCreatorsPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-content-creators" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/solutions/agencies" element={
+            <>
+              <AgenciesPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-agencies" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/compare/tubespanner" element={
+            <>
+              <TubeSpannerComparePage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-tubespanner" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/use-cases/trend-prediction" element={
+            <>
+              <TrendPredictionPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="use-cases-trend-prediction" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/use-cases/hashtag-strategy" element={
+            <>
+              <HashtagStrategyPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="use-cases-hashtag-strategy" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/solutions/brands" element={
+            <>
+              <BrandsPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-brands" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/compare/all" element={
+            <>
+              <AiToolsComparisonPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-all" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/compare/ai-tools-comparison" element={
+            <>
+              <AiToolsComparisonPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-ai-tools-comparison" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/solutions/local-business" element={
+            <>
+              <LocalBusinessPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-local-business" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/compare/owlseer-vs-vidiq" element={
+            <>
+              <CompareVidIQPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-vidiq" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
           
           {/* Chinese versions of public pages */}
           <Route path="/zh" element={
@@ -305,6 +469,16 @@ export default function App() {
                 setIsDarkMode={setIsDarkMode}
               />
               <DevTools currentPage="landing" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/signals" element={
+            <>
+              <SignalsPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="signals" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/how-it-works" element={
@@ -347,6 +521,16 @@ export default function App() {
               <DevTools currentPage="blog" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
+          <Route path="/zh/guides" element={
+            <>
+              <GuidesPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="guides" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
           <Route path="/zh/blog-post" element={
             <>
               <BlogPostPage 
@@ -375,6 +559,136 @@ export default function App() {
                 setIsDarkMode={setIsDarkMode}
               />
               <DevTools currentPage="contact" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/methodology" element={
+            <>
+              <MethodologyPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="methodology" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/use-cases/content-diagnosis" element={
+            <>
+              <ContentDiagnosisPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="content-diagnosis" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/use-cases/trend-prediction" element={
+            <>
+              <TrendPredictionPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="use-cases-trend-prediction" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/use-cases/hashtag-strategy" element={
+            <>
+              <HashtagStrategyPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="use-cases-hashtag-strategy" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/solutions/brands" element={
+            <>
+              <BrandsPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-brands" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/compare/all" element={
+            <>
+              <AiToolsComparisonPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-all" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/compare/ai-tools-comparison" element={
+            <>
+              <AiToolsComparisonPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-ai-tools-comparison" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/solutions/ecommerce" element={
+            <>
+              <EcommerceSellersPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-ecommerce" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/solutions/content-creators" element={
+            <>
+              <ContentCreatorsPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-content-creators" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/solutions/agencies" element={
+            <>
+              <AgenciesPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-agencies" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/compare/tubespanner" element={
+            <>
+              <TubeSpannerComparePage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-tubespanner" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/solutions/local-business" element={
+            <>
+              <LocalBusinessPage 
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="solutions-local-business" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/compare/owlseer-vs-vidiq" element={
+            <>
+              <CompareVidIQPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+              <DevTools currentPage="compare-vidiq" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/privacy" element={

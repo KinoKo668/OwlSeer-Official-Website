@@ -27,15 +27,15 @@ export const seoConfig = {
   // How It Works Page
   howItWorks: {
     en: {
-      title: 'How OwlSeer Works - TikTok Data to Actionable Strategy',
-      description: 'See exactly how we turn your TikTok data into actionable strategy—no black boxes. Step-by-step breakdown from your input to your content plan, every recommendation traceable.',
-      keywords: ['TikTok AI methodology', 'transparent analytics', 'content strategy workflow', 'data-driven TikTok', 'how TikTok algorithm works', 'AI content recommendation system', 'TikTok strategy explained'],
+      title: 'How OwlSeer Works: TikTok Strategy in 3 Steps',
+      description: 'Connect your TikTok in 30 seconds. Get AI-powered strategy in under 3 minutes. Trend predictions, content diagnosis, scripts, and weekly plans. Free trial.',
+      keywords: ['how to use tiktok ai tool', 'owlseer onboarding', 'tiktok strategy tool setup', 'connect tiktok to ai', 'tiktok content planning ai', 'owlseer getting started'],
       canonicalUrl: `${BASE_URL}/how-it-works`,
     },
     zh: {
-      title: '工作原理 - TikTok 数据转化为可操作策略 | OwlSeer',
-      description: '精确看到我们如何将你的TikTok数据转化为可操作的策略——没有黑箱操作。逐步分解：从您的输入到内容计划。',
-      keywords: ['TikTok AI方法论', '透明分析', '内容策略工作流程', '数据驱动TikTok'],
+      title: '三步拥有你的 TikTok 策略 | OwlSeer',
+      description: '30秒连接账号，3分钟获取AI策略。包含趋势预测、内容诊断、脚本和每周计划。免费试用。',
+      keywords: ['如何使用TikTok AI工具', 'OwlSeer入门', 'TikTok策略工具设置', '连接TikTok到AI', 'TikTok内容规划AI'],
       canonicalUrl: `${BASE_URL}/zh/how-it-works`,
     }
   },
@@ -120,6 +120,54 @@ export const seoConfig = {
     }
   },
 
+  // Content Diagnosis Page
+  contentDiagnosis: {
+    en: {
+      title: 'TikTok Content Diagnosis with AI | OwlSeer',
+      description: 'Find out why your TikTok videos underperform. OwlSeer diagnoses content issues across 12 engagement signals and provides specific fixes.',
+      keywords: ['tiktok content diagnosis ai', 'tiktok content analysis', 'tiktok engagement diagnosis', 'tiktok video diagnosis', 'content performance analysis tiktok'],
+      canonicalUrl: `${BASE_URL}/use-cases/content-diagnosis`,
+    },
+    zh: {
+      title: 'TikTok 内容 AI 诊断 | OwlSeer',
+      description: '找出您的 TikTok 视频表现不佳的原因。OwlSeer 通过 12 个互动信号诊断内容问题并提供具体修复建议。',
+      keywords: ['tiktok内容诊断ai', 'tiktok内容分析', 'tiktok互动诊断', 'tiktok视频诊断', '内容表现分析tiktok'],
+      canonicalUrl: `${BASE_URL}/zh/use-cases/content-diagnosis`,
+    }
+  },
+
+  // Glossary Index Page
+  glossary: {
+    en: {
+      title: 'TikTok Glossary — 50+ Terms Explained | OwlSeer',
+      description: 'Plain-language definitions of 50+ TikTok terms. Hook rate, FYP, sound velocity, engagement decay, and more — organized A-Z with signal definition links.',
+      keywords: ['tiktok glossary', 'tiktok terms explained', 'fyp meaning', 'hook rate definition'],
+      canonicalUrl: `${BASE_URL}/glossary`
+    },
+    zh: {
+      title: 'TikTok 术语表 — 50+ 术语详解 | OwlSeer',
+      description: '50+ TikTok 术语的通俗释义。从钩子率到 FYP，按字母顺序排列，附带信号定义链接。',
+      keywords: ['tiktok术语表', 'tiktok术语解释', 'fyp是什么意思', '钩子率定义'],
+      canonicalUrl: `${BASE_URL}/zh/glossary`
+    }
+  },
+
+  // FYP Glossary Page
+  glossaryFyp: {
+    en: {
+      title: 'What Does FYP Mean on TikTok? | OwlSeer Glossary',
+      description: 'FYP stands for For You Page — TikTok\'s algorithmic feed that determines video reach. Learn how FYP works and how to optimize for it.',
+      keywords: ['fyp meaning tiktok', 'for you page tiktok', 'what is fyp', 'tiktok fyp algorithm'],
+      canonicalUrl: `${BASE_URL}/glossary/fyp`
+    },
+    zh: {
+      title: 'FYP 在 TikTok 上是什么意思？| OwlSeer 术语表',
+      description: 'FYP 代表 For You Page（为你推荐页）——决定视频触达范围的 TikTok 算法信息流。了解 FYP 如何运作以及如何对其进行优化。',
+      keywords: ['tiktok fyp意思', 'tiktok为你推荐页', 'fyp是什么', 'tiktok fyp算法'],
+      canonicalUrl: `${BASE_URL}/zh/glossary/fyp`
+    }
+  },
+
   // Privacy Policy Page
   privacy: {
     en: {
@@ -181,6 +229,70 @@ export const seoConfig = {
       description: '了解OwlSeer如何使用Cookie来改善您的体验。我们的Cookie政策解释了我们使用的Cookie及其原因。',
       keywords: ['Cookie政策', 'cookies', '跟踪', '隐私'],
       canonicalUrl: `${BASE_URL}/zh/cookies`,
+    }
+  },
+
+  // Content Creators Page
+  contentCreators: {
+    en: {
+      title: 'TikTok Tool for Content Creators | OwlSeer',
+      description: 'Get a weekly TikTok content plan with trend alerts, AI script generation, and optimized scheduling.',
+      keywords: ['tiktok tool for content creators', 'tiktok content plan', 'tiktok growth tool'],
+      canonicalUrl: `${BASE_URL}/solutions/content-creators`,
+    },
+    zh: {
+      title: '内容创作者 TikTok 工具 | OwlSeer',
+      description: '获取包含趋势提醒、AI 脚本生成和优化发布计划的每周 TikTok 内容计划。',
+      keywords: ['tiktok创作者工具', 'tiktok内容计划', 'tiktok增长工具'],
+      canonicalUrl: `${BASE_URL}/zh/solutions/content-creators`,
+    }
+  },
+
+  // Local Business Page
+  localBusiness: {
+    en: {
+      title: 'TikTok Tool for Local Businesses | OwlSeer',
+      description: 'Turn TikTok views into walk-in customers. OwlSeer creates local-audience content with trending formats, service scripts, and posting times for your community.',
+      keywords: ['tiktok marketing tool for local business', 'tiktok for local business', 'local tiktok marketing', 'tiktok foot traffic', 'tiktok for restaurants', 'tiktok for salons', 'local business social media'],
+      canonicalUrl: `${BASE_URL}/solutions/local-business`,
+    },
+    zh: {
+      title: '本地商家 TikTok 营销工具 | OwlSeer',
+      description: '将 TikTok 浏览量转化为上门顾客。OwlSeer 为您的社区创建具有趋势格式、服务脚本和发布时间的本地受众内容。',
+      keywords: ['本地商家tiktok营销', '实体店tiktok推广', '同城引流工具', '餐厅tiktok营销', '美容院tiktok推广'],
+      canonicalUrl: `${BASE_URL}/zh/solutions/local-business`,
+    }
+  },
+
+  // Brands Page
+  brands: {
+    en: {
+      title: 'TikTok Strategy for Brands | OwlSeer',
+      description: 'Build a TikTok presence that feels authentic, not awkward. Trend matching with brand safety scoring and data-driven scripts.',
+      keywords: ['tiktok for brands', 'brand safety tiktok', 'tiktok brand strategy', 'authentic brand content'],
+      canonicalUrl: `${BASE_URL}/solutions/brands`,
+    },
+    zh: {
+      title: '品牌 TikTok 策略 | OwlSeer',
+      description: '打造真实而不尴尬的 TikTok 品牌形象。带有品牌安全评分的趋势匹配和数据驱动的脚本。',
+      keywords: ['品牌tiktok策略', 'tiktok品牌安全', '真实品牌内容'],
+      canonicalUrl: `${BASE_URL}/zh/solutions/brands`,
+    }
+  },
+
+  // Agencies Page
+  agencies: {
+    en: {
+      title: 'TikTok Strategy Tool for Agencies | OwlSeer',
+      description: 'Scale your agency\'s TikTok services. Multi-account management, white-label reporting, and AI script generation for all your clients.',
+      keywords: ['tiktok agency tool', 'social media agency software', 'tiktok reporting tool', 'multi-account tiktok management'],
+      canonicalUrl: `${BASE_URL}/solutions/agencies`,
+    },
+    zh: {
+      title: '代理商 TikTok 策略工具 | OwlSeer',
+      description: '扩展您的代理商 TikTok 服务。多账号管理、白标报告和为所有客户提供的 AI 脚本生成。',
+      keywords: ['tiktok代理商工具', '社媒代理商软件', 'tiktok报告工具', '多账号tiktok管理'],
+      canonicalUrl: `${BASE_URL}/zh/solutions/agencies`,
     }
   },
 

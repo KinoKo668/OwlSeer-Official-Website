@@ -78,34 +78,6 @@ export function ActionRow({
               <StatusIcon className="w-3 h-3" />
               <span>{currentStatus.label}</span>
             </span>
-
-            {/* Linked goal chip */}
-            <span
-              className="px-2 py-0.5 rounded-full border bg-[#eff6ff] text-[#1e40af] border-[#bfdbfe]"
-              style={{ fontSize: '11px', fontWeight: '600' }}
-            >
-              {linkedGoal}
-            </span>
-
-            {/* Time estimate chip (optional) */}
-            {timeEstimate && (
-              <span
-                className="px-2 py-0.5 rounded-full border bg-[#f5f5f5] text-[#666666] border-[#e0e0e0]"
-                style={{ fontSize: '11px', fontWeight: '500' }}
-              >
-                Est. {timeEstimate}
-              </span>
-            )}
-
-            {/* Evidence chip (optional) */}
-            {hasEvidence && (
-              <span
-                className="px-2 py-0.5 rounded-full border bg-[#f0fdf4] text-[#065f46] border-[#d1fae5]"
-                style={{ fontSize: '11px', fontWeight: '600' }}
-              >
-                Evidence available
-              </span>
-            )}
           </div>
 
           {/* Skip reason (if applicable) */}
@@ -113,27 +85,6 @@ export function ActionRow({
             <p className="text-[#999999] mt-2" style={{ fontSize: '11px', fontWeight: '500' }}>
               Reason: {skipReason}
             </p>
-          )}
-        </div>
-
-        {/* RIGHT: Actions */}
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <button
-            onClick={onAddToPlan}
-            className="px-3 py-1.5 border border-[#e0e0e0] rounded-lg hover:border-[#10b981] hover:bg-[#f0fdf4] transition-colors"
-            style={{ fontSize: '12px', fontWeight: '600', color: '#666666' }}
-          >
-            Add to plan
-          </button>
-          {hasEvidence && (
-            <button
-              onClick={onViewEvidence}
-              className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-              style={{ fontSize: '12px', fontWeight: '600' }}
-            >
-              <span>View evidence</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
           )}
         </div>
       </div>

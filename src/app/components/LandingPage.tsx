@@ -41,7 +41,8 @@ import {
   Chrome
 } from 'lucide-react';
 
-// Import the new ProductShowcase component
+import { Navbar } from './layout/Navbar';
+import { Footer } from './layout/Footer';
 import { ProductShowcase } from './ProductShowcase';
 import { CoreFeatures } from './CoreFeatures';
 import { PricingSection } from './PricingSection';
@@ -63,464 +64,6 @@ interface StatProps {
 
 // --- Components ---
 
-interface NavbarProps {
-  onTrySample: () => void;
-  onSignUp: () => void;
-  onNavigate?: (page: string) => void;
-  language: string;
-  setLanguage: (lang: string) => void;
-  isDarkMode: boolean;
-  setIsDarkMode: (isDark: boolean) => void;
-  t: any;
-}
-
-export const Navbar = memo(({ 
-  onTrySample, 
-  onSignUp, 
-  onNavigate,
-  language, 
-  setLanguage, 
-  isDarkMode, 
-  setIsDarkMode,
-  t 
-}: NavbarProps) => {
-  const { enableBlur, reduceMotion } = usePerformance();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const timeoutRef = React.useRef<any>(null);
-
-  const handleNav = (page: string) => {
-    if (onNavigate) {
-      // Map legacy page names to routes for internal navigation
-      let route = page;
-      if (page === 'landing') route = '/';
-      else if (!page.startsWith('/')) route = '/' + page;
-      onNavigate(route);
-    } else {
-      // Fallback for window globals
-      if (page === 'pricing') (window as any).navigateToPricing?.();
-      if (page === 'features') (window as any).navigateToFeatures?.();
-      if (page === 'how-it-works') (window as any).navigateToHowItWorks?.();
-      if (page === 'blog') (window as any).navigateToBlog?.();
-       if (page === 'faq') (window as any).navigateToFAQ?.();
-       if (page === 'contact') (window as any).navigateToContact?.();
-       if (page === 'security') (window as any).navigateToSecurity?.();
-       if (page === 'privacy') (window as any).navigateToPrivacy?.();
-       if (page === 'terms') (window as any).navigateToTerms?.();
-       if (page === 'cookies') (window as any).navigateToCookies?.();
-       if (page === 'landing') window.location.href = '/'; 
-    }
-    setActiveDropdown(null);
-    setMobileMenuOpen(false);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleMouseEnter = (name: string) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    setActiveDropdown(name);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setActiveDropdown(null);
-    }, 150); // 150ms delay to prevent accidental closing
-  };
-
-  const toggleDropdown = (name: string) => {
-    if (activeDropdown === name) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(name);
-    }
-  };
-
-  // Performance-aware background classes
-  const navBgClass = useMemo(() => {
-    if (scrolled || mobileMenuOpen) {
-      return enableBlur
-        ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-b border-gray-100/40 dark:border-slate-800/40'
-        : 'bg-white/95 dark:bg-slate-900/95 border-b border-gray-100/50 dark:border-slate-800/50';
-    }
-    return enableBlur
-      ? 'bg-white/30 dark:bg-slate-900/40 backdrop-blur-md border-b border-transparent'
-      : 'bg-white/90 dark:bg-slate-900/90 border-b border-transparent';
-  }, [scrolled, mobileMenuOpen, enableBlur]);
-
-  return (
-    <motion.nav
-      initial={reduceMotion ? false : { y: -100 }}
-      animate={{ y: 0 }}
-      transition={reduceMotion ? { duration: 0 } : undefined}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBgClass}`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative flex justify-between items-center h-[72px]">
-          {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNav('landing')}>
-            <OwlSeerLogo className="h-8 w-auto text-gray-900 dark:text-white" />
-          </div>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            
-            {/* Product Mega Menu */}
-            <div 
-              className="relative group" 
-            >
-              <button 
-                className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
-                  activeDropdown === 'product' 
-                    ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
-                }`}
-                onClick={() => toggleDropdown('product')}
-              >
-                {t.product} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'product' ? 'rotate-180' : ''}`} />
-              </button>
-              
-              <AnimatePresence>
-                {activeDropdown === 'product' && (
-                  <>
-                    <div 
-                      className="fixed inset-0 z-0" 
-                      onClick={() => setActiveDropdown(null)}
-                    />
-                    <motion.div
-                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 15, scale: 0.98 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
-                    >
-                      <div className="grid grid-cols-5 gap-2">
-                        <div className="col-span-3 p-2 space-y-1">
-                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3 mt-2">Platform</div>
-                          
-                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                            <div>
-                              <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-emerald-600 dark:group-hover/item:text-emerald-400 transition-colors">{t.howItWorks}</div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Understand our AI methodology</div>
-                            </div>
-                          </a>
-
-                          <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                            <div>
-                              <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400 transition-colors">Interactive Demo</div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Try the dashboard with sample data</div>
-                            </div>
-                          </a>
-
-                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('features'); }} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                            <div>
-                              <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-purple-600 dark:group-hover/item:text-purple-400 transition-colors">Features</div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Explore our capabilities</div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <div className="col-span-2 bg-gray-50 dark:bg-slate-800/50 rounded-xl p-5 flex flex-col justify-between border border-gray-100 dark:border-slate-700/50">
-                          <div>
-                            <div className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider mb-3">
-                              New Release
-                            </div>
-                            <h4 className="text-base font-bold text-gray-900 dark:text-white mb-2">OwlSeer v2.0</h4>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
-                              Now with multi-platform support and real-time trend prediction.
-                            </p>
-                          </div>
-                          <button onClick={() => handleNav('pricing')} className="w-full py-2 bg-white dark:bg-slate-700 rounded-lg text-xs font-bold text-gray-900 dark:text-white shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-slate-600">
-                            View Pricing
-                          </button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <button 
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-all px-4 py-2 rounded-full"
-              onClick={() => handleNav('pricing')}
-            >
-              {t.pricing}
-            </button>
-
-            {/* Resources Mega Menu */}
-            <div 
-              className="relative group" 
-            >
-              <button 
-                className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
-                  activeDropdown === 'resources' 
-                    ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
-                }`}
-                onClick={() => toggleDropdown('resources')}
-              >
-                {t.resources} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
-              </button>
-
-              <AnimatePresence>
-                {activeDropdown === 'resources' && (
-                  <>
-                    <div 
-                      className="fixed inset-0 z-0" 
-                      onClick={() => setActiveDropdown(null)}
-                    />
-                    <motion.div
-                      initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 15, scale: 0.98 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 w-[400px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
-                    >
-                      <div className="p-2 space-y-1">
-                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                          <div>
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-orange-600 dark:group-hover/item:text-orange-400 transition-colors">{t.blog}</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Latest insights & trends</div>
-                          </div>
-                        </a>
-
-                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                          <div>
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-cyan-600 dark:group-hover/item:text-cyan-400 transition-colors">{t.faq}</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Common questions answered</div>
-                          </div>
-                        </a>
-
-                        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors group/item">
-                          <div>
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-slate-600 dark:group-hover/item:text-slate-400 transition-colors">Legal</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Privacy, Terms, Security & Cookies</div>
-                          </div>
-                        </a>
-                      </div>
-                    </motion.div>
-                  </>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-
-        {/* Actions */}
-        <div className="hidden md:flex items-center gap-3">
-          {/* Language Switcher */}
-          <div 
-            className="relative group" 
-          >
-            <button 
-              className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
-              onClick={() => toggleDropdown('language')}
-            >
-              <Globe className="w-5 h-5" />
-            </button>
-
-            <AnimatePresence>
-              {activeDropdown === 'language' && (
-                <>
-                  <div 
-                    className="fixed inset-0 z-0" 
-                    onClick={() => setActiveDropdown(null)}
-                  />
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full right-0 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
-                  >
-                    <div className="flex flex-col">
-                      {languages.map((lang) => (
-                        <button
-                          key={lang.code}
-                          onClick={() => {
-                            setLanguage(lang.code);
-                            setActiveDropdown(null);
-                          }}
-                          className={`px-4 py-2.5 text-sm text-left rounded-lg transition-colors flex items-center justify-between group ${
-                            language === lang.code 
-                              ? 'bg-emerald-50 dark:bg-emerald-900/20 text-[#1AAE82] font-semibold' 
-                              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800'
-                          }`}
-                        >
-                          {lang.name}
-                          {language === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-[#1AAE82]" />}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Dark Mode Toggle */}
-          <button 
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
-            title="Toggle Dark Mode"
-          >
-            {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
-
-          <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-2" />
-
-          <button 
-            className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-[#1AAE82] transition-colors px-2"
-            onClick={() => handleNav('auth')}
-          >
-            {t.login}
-          </button>
-          
-          <button 
-            onClick={onSignUp}
-            className="group relative px-6 py-2.5 bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-sm font-bold rounded-full overflow-hidden shadow-lg shadow-gray-200 dark:shadow-none hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1AAE82] to-[#15956F] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <span className="relative flex items-center gap-2">
-              {t.signup} <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </span>
-          </button>
-        </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 text-gray-600 dark:text-gray-300"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 overflow-hidden"
-          >
-            <div className="px-4 py-6 space-y-4 h-[80vh] overflow-y-auto">
-              {/* Product Section */}
-              <div className="space-y-2">
-                <button 
-                  onClick={() => toggleDropdown('mobile-product')}
-                  className="flex items-center justify-between w-full py-2 text-base font-medium text-gray-900 dark:text-white"
-                >
-                  {t.product}
-                  <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'mobile-product' ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {activeDropdown === 'mobile-product' && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden pl-4 space-y-2"
-                    >
-                      <a href="#" className="block py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82]">{t.whatIs}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="block py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82]">{t.howItWorks}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="block py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82]">{t.faq}</a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Pricing Link */}
-              <a href="#" onClick={(e) => { e.preventDefault(); handleNav('pricing'); }} className="block py-2 text-base font-medium text-gray-900 dark:text-white">{t.pricing}</a>
-
-              {/* Resources Section */}
-              <div className="space-y-2">
-                <button 
-                  onClick={() => toggleDropdown('mobile-resources')}
-                  className="flex items-center justify-between w-full py-2 text-base font-medium text-gray-900 dark:text-white"
-                >
-                  {t.resources}
-                  <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'mobile-resources' ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {activeDropdown === 'mobile-resources' && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden pl-4 space-y-2"
-                    >
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="block py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82]">{t.security}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="block py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82]">{t.blog}</a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Language Section */}
-              <div className="pt-4 border-t border-gray-100 dark:border-slate-800">
-                <button 
-                  onClick={() => toggleDropdown('mobile-lang')}
-                  className="flex items-center justify-between w-full py-2 text-base font-medium text-gray-900 dark:text-white"
-                >
-                  <span className="flex items-center gap-2"><Globe className="w-4 h-4" /> Language</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'mobile-lang' ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {activeDropdown === 'mobile-lang' && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden pl-4 grid grid-cols-2 gap-2 pt-2"
-                    >
-                      {languages.map((lang) => (
-                        <button
-                          key={lang.code}
-                          onClick={() => {
-                            setLanguage(lang.code);
-                            setMobileMenuOpen(false);
-                          }}
-                          className={`px-3 py-2 text-sm text-left rounded-lg transition-colors ${
-                            language === lang.code 
-                              ? 'bg-[#1AAE82]/10 text-[#1AAE82] font-medium' 
-                              : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800'
-                          }`}
-                        >
-                          {lang.name}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <div className="pt-4 space-y-4">
-                <button className="w-full py-3 text-center font-medium text-gray-900 dark:text-white bg-gray-50 dark:bg-slate-800 rounded-lg">
-                  {t.login}
-                </button>
-                <button 
-                  onClick={onSignUp}
-                  className="w-full py-3 text-center font-medium text-white bg-[#1AAE82] rounded-lg shadow-md"
-                >
-                  {t.signup}
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
-  );
-});
 
 const AppleLogo = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -585,19 +128,19 @@ const SharedBackground = memo(() => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {/* Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]" />
       
       {/* Aurora Gradients */}
       <div 
-        className={`absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-gradient-to-br from-[#1AAE82]/20 via-purple-500/10 to-transparent rounded-full ${
+        className={`absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-gradient-to-br from-[#1AAE82]/10 via-purple-500/5 to-transparent rounded-full ${
           enableBlur ? 'blur-[80px]' : 'blur-[40px]'
-        } opacity-70`}
+        } opacity-50`}
       />
       
       <div 
-        className={`absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-gradient-to-tl from-[#06B6D4]/20 via-blue-500/10 to-transparent rounded-full ${
+        className={`absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-gradient-to-tl from-[#06B6D4]/10 via-blue-500/5 to-transparent rounded-full ${
           enableBlur ? 'blur-[60px]' : 'blur-[30px]'
-        } opacity-60`}
+        } opacity-40`}
       />
     </div>
   );
@@ -612,7 +155,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
   const heroContentOpacity = useTransform(
     scrollY, 
     [0, 400], 
-    enableParallax ? [1, 0] : [1, 1]
+    [1, 1] // Disable opacity fade-out on scroll
   );
   const heroContentScale = useTransform(
     scrollY, 
@@ -624,13 +167,19 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
   const [currentPlatformIndex, setCurrentPlatformIndex] = useState(0);
 
   useEffect(() => {
+    // Force reset to TikTok (index 0) to ensure it starts there
+    setCurrentPlatformIndex(0);
+
     // Skip platform rotation animation in reduced motion mode
     if (reduceMotion) return;
     
+    // TEMPORARY: Fixed to TikTok as requested. Uncomment to restore rolling behavior.
+    /*
     const interval = setInterval(() => {
       setCurrentPlatformIndex((prev) => (prev + 1) % platforms.length);
     }, 2500);
     return () => clearInterval(interval);
+    */
   }, [reduceMotion]);
 
   const currentPlatform = platforms[currentPlatformIndex];
@@ -948,77 +497,6 @@ const ValueProposition = ({ language, onTrySample, onNavigate }: { language: str
   );
 };
 
-export const Footer = ({ t, onNavigate }: { t: any, onNavigate?: (page: string) => void }) => {
-  const handleNav = (page: string) => {
-    if (onNavigate) {
-      onNavigate(page);
-    } else {
-       if (page === 'pricing') (window as any).navigateToPricing?.();
-       if (page === 'how-it-works') (window as any).navigateToHowItWorks?.();
-       if (page === 'blog') (window as any).navigateToBlog?.();
-       if (page === 'faq') (window as any).navigateToFAQ?.();
-       if (page === 'security') (window as any).navigateToSecurity?.();
-       if (page === 'landing') window.location.href = '/'; 
-    }
-  };
-
-  return (
-  <footer className="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 pt-16 pb-8 transition-colors duration-300">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-        <div className="col-span-1 md:col-span-1">
-          <div className="flex items-center gap-2 mb-6">
-            <OwlSeerLogo className="h-8 w-auto text-gray-900 dark:text-white" />
-          </div>
-          <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed whitespace-pre-line">
-            {t.tagline}
-          </p>
-        </div>
-        
-        <div>
-          <h4 className="font-bold text-gray-900 dark:text-white mb-6">{t.product}</h4>
-          <ul className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.howItWorks || 'How It Works'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('pricing'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.pricing || 'Pricing'}</a></li>
-            <li><a href="#" className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.trySample || 'Try Sample'}</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 className="font-bold text-gray-900 dark:text-white mb-6">{t.resources}</h4>
-          <ul className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.blog || 'Blog'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.faq || 'FAQ'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.contact || 'Contact'}</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 className="font-bold text-gray-900 dark:text-white mb-6">{t.legal}</h4>
-          <ul className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.privacy || 'Privacy Policy'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('terms'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.terms || 'Terms of Service'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.security || 'Security'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">{t.footer?.links?.cookies || 'Cookie Policy'}</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div className="border-t border-gray-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          {t.rights}
-        </div>
-        <div className="flex gap-6">
-          <a href="#" className="text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors"><span className="sr-only">Twitter</span>𝕏</a>
-          <a href="#" className="text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">LinkedIn</a>
-          <a href="#" className="text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors">Discord</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-);
-};
-
 export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
   const { language, setLanguage } = useLanguage();
   const t = translations[language as keyof typeof translations] || translations.en;
@@ -1116,7 +594,7 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
         t={t}
       />
       
-      <main className="relative bg-[#F8FAFC] dark:bg-[#020617]">
+      <main className="relative bg-white dark:bg-[#020617]">
         <SharedBackground />
         <Hero onTrySample={handleTrySample} t={t.hero} />
         <div className="relative z-10 mt-[-1px]">

@@ -118,21 +118,25 @@ export function InsightAccordion({
 
           {/* Actions */}
           <div className="flex items-center gap-3 pt-3 border-t border-[#e0e0e0]">
-            <button
-              onClick={onUsePlan}
-              className="px-4 py-2 bg-[#10b981] text-white rounded-lg hover:bg-[#059669] transition-colors"
-              style={{ fontSize: '13px', fontWeight: '600' }}
-            >
-              Use in plan
-            </button>
-            <button
-              onClick={onViewEvidence}
-              className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-              style={{ fontSize: '12px', fontWeight: '600' }}
-            >
-              <span>View evidence</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            {onUsePlan && (
+              <button
+                onClick={onUsePlan}
+                className="px-4 py-2 bg-[#10b981] text-white rounded-lg hover:bg-[#059669] transition-colors"
+                style={{ fontSize: '13px', fontWeight: '600' }}
+              >
+                Use in plan
+              </button>
+            )}
+            {onViewEvidence && (
+              <button
+                onClick={onViewEvidence}
+                className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
+                style={{ fontSize: '12px', fontWeight: '600' }}
+              >
+                <span>View evidence</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         </div>
       )}

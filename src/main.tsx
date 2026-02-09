@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <LanguageProvider>
         <PerformanceProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} storageKey="owlseer-theme-v2">
             <App />
           </ThemeProvider>
         </PerformanceProvider>

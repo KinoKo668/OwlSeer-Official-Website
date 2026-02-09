@@ -20,7 +20,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure font-display: swap behavior with system font fallback */
-html {
-  font-display: swap;
-}
+/* Ensure consistent font rendering */
+/* We use display=block in Google Fonts URL to prevent FOUC/layout shifts */

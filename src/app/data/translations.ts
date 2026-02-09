@@ -13,6 +13,7 @@ export const translations = {
     product: 'Product',
     pricing: 'Pricing',
     resources: 'Resources',
+    methodology: 'Methodology',
     login: 'Log in',
     signup: 'Try Free',
     whatIs: 'What is OwlSeer',
@@ -274,6 +275,175 @@ export const translations = {
         }
       ]
     },
+    howItWorksPage: {
+      hero: {
+        title: "Your TikTok Strategy in",
+        titleHighlight: "3 Steps",
+        lead: "OwlSeer connects to your TikTok account, analyzes your data through 30+ signals, and delivers a personalized content strategy — all in under three minutes. Here is exactly what to expect.",
+        cta: "Try Free Demo",
+        video: "Watch 1 Min Overview"
+      },
+      step1: {
+        title: "Step 1: Connect Your TikTok Account",
+        desc: "You connect your TikTok account through TikTok's official login flow. OwlSeer does not ask for your password — you authenticate directly with TikTok, and we receive a read-only access token. The entire connection process takes under 30 seconds.",
+        readOnlyTitle: "What \"read-only\" means:",
+        readOnlyList: [
+          "OwlSeer can view your public video metrics, posting history, and audience engagement data",
+          "OwlSeer cannot post, edit, delete, or modify anything on your account",
+          "OwlSeer cannot access your private messages, drafts, or payment information",
+          "You can revoke access at any time from your TikTok account settings"
+        ],
+        securityNote: "The connection uses the same official API that TikTok provides to all authorized third-party tools. For full details on how we handle your data, see our data security practices.",
+        action: "Learn more about our security approach — read our data security page."
+      },
+      step2: {
+        title: "Step 2: AI Analyzes Your Data",
+        desc: "Once connected, OwlSeer's AI processes your account data through our five-step methodology. The analysis covers three signal categories:",
+        signals: [
+          { title: "Engagement signals", desc: "12 factors including hook rate, watch-through rate, share rate, and comment sentiment — measuring how your audience interacts with your content" },
+          { title: "Trend signals", desc: "10 factors including sound velocity, hashtag momentum, and trend saturation — identifying what is gaining traction in your niche" },
+          { title: "Audience signals", desc: "8+ factors including follower growth velocity, active hour mapping, and audience overlap — mapping who watches and when" }
+        ],
+        process: "The AI compares your signal profile against patterns from millions of analyzed TikTok videos to identify your content strengths, growth opportunities, and optimal posting strategy. The full analysis completes in under three minutes.",
+        action: "Dive into the technical process — read the full methodology."
+      },
+      step3: {
+        title: "Step 3: Get Your Personalized Strategy",
+        desc: "After analysis completes, you land in your personalized dashboard with everything you need to plan, create, and optimize your TikTok content:",
+        outputs: [
+          { title: "Trend alerts", desc: "Emerging trends in your niche with optimal participation timing and confidence scores." },
+          { title: "Content recommendations", desc: "Weekly topic, format, and hook suggestions tailored to your audience's current preferences" },
+          { title: "Posting schedule", desc: "AI-recommended posting times based on your audience's active hours" },
+          { title: "Performance diagnosis", desc: "A breakdown of your recent videos — what worked, what did not, and why" },
+          { title: "Ready-to-shoot scripts", desc: "Complete video scripts with hook, body, CTA, and recommended sounds/hashtags." },
+          { title: "AI Copilot", desc: "Ask questions about your strategy in natural language. The Copilot draws from your account data." }
+        ],
+        note: "Your strategy updates every seven days as new data flows in. You also receive a Weekly Intelligence Report summarizing your performance, key insights, and recommended next steps.",
+        action: "See a full strategy output on sample data — explore the interactive demo."
+      },
+      whatYouGet: {
+        title: "What You Get",
+        items: [
+          { title: "Trend Predictions", desc: "Emerging trends matched to your niche, with timing windows and confidence scores" },
+          { title: "Content Diagnosis", desc: "Video-by-video analysis showing why content succeeds or falls short" },
+          { title: "AI Scripts", desc: "Ready-to-shoot scripts with hooks, body content, CTAs, and sound/hashtag recommendations" },
+          { title: "Weekly Reports", desc: "Performance summaries with KPI tracking, insights, and next-week action plans" }
+        ]
+      },
+      roi: {
+        title: "Calculate How Much Time You'll Save",
+        desc: "Answer 3 questions to see how much OwlSeer can compress your content planning time.",
+        q1: "Weekly time researching content?",
+        q2: "Weekly time tracking trends?",
+        q3: "Weekly time writing scripts?",
+        result: {
+          current: "Current: {{total}} hours/week",
+          saved: "With OwlSeer: Free up {{saved}} hours/week",
+          monthly: "Monthly Savings: ~{{monthly}} hours",
+          value: "Monthly Value: ${{value}} (@ $50/hr)",
+          cta: "Start Saving Time — Try Free"
+        }
+      },
+      deeper: {
+        title: "Want to Go Deeper?",
+        desc: "OwlSeer's AI follows a transparent, five-step process. If you want to understand the technical details — how signals are weighted, how patterns are identified, how scripts are generated — explore our complete methodology. For definitions of every signal we track, visit the Signals page."
+      },
+      boundary: {
+        dataUse: "Data we use: Public TikTok account metrics accessed through the official API. OwlSeer receives a read-only access token — we can view your metrics but cannot modify your account.",
+        limitations: "What we do not do: OwlSeer does not post, edit, or delete content. We do not access private messages, drafts, or payment data. We do not guarantee specific growth outcomes.",
+        note: "Variability note: Analysis accuracy and recommendation quality depend on account history, posting frequency, and niche. New accounts with fewer than 10 published videos may receive less precise initial recommendations."
+      },
+      cta: {
+        title: "Ready to Start?",
+        desc: "Connect your TikTok account and receive your personalized strategy in under three minutes. Free trial, no credit card required. Or explore sample data first.",
+        primary: "Start Free Trial",
+        secondary: "Explore Interactive Demo"
+      }
+    },
+    contentDiagnosisPage: {
+      hero: {
+        title: "Find Out Why Your TikTok Content",
+        titleHighlight: "Underperforms",
+        lead: "OwlSeer analyzes every video across 12 engagement signals to show exactly where you gain or lose your audience — and what to do about it."
+      },
+      tldr: {
+        text: "Low views have a cause. OwlSeer's Intelligence module diagnoses content issues by analyzing 12 engagement signals including hook rate, watch-through rate, share rate, and comment sentiment. Each issue is surfaced with severity, explanation, and a specific recommended fix. Content diagnosis turns vague frustration into actionable improvement.",
+        link1: "Intelligence module",
+        link2: "12 engagement signals",
+        link3: "issue is surfaced"
+      },
+      problem: {
+        title: "The Guessing Cycle",
+        task: "Understand why creators repeat the same content mistakes.",
+        desc1: "When a video underperforms, most creators default to guessing: \"Maybe the topic was wrong\" or \"Maybe I posted at a bad time.\" Without data, they change things randomly — sometimes fixing the wrong variable, sometimes making things worse.",
+        desc2: "The pattern looks like this: post a video, see low views, change something, post again, see inconsistent results, change something else. This guessing cycle wastes content production effort and erodes confidence.",
+        desc3: "The root cause is usually specific and fixable. It might be a weak hook (viewers scroll past in the first 2 seconds), a long intro (watch-through drops at the 8-second mark), or poor timing (posting when your audience is asleep). But without signal-level diagnosis, you cannot distinguish between these causes.",
+        action: "Understand the signals involved — read about engagement signals."
+      },
+      solution: {
+        title: "How OwlSeer Diagnoses Content",
+        task: "See the diagnosis workflow from detection to fix.",
+        layer1: {
+          title: "Layer 1 — Issue Detection",
+          desc: "The Issues Found panel scans your recent videos and flags problems with severity badges (High or Medium). Example: \"Weak Hook Performance\" (High) — \"Your video openings use slow intros. Viewers scroll away before seeing your content.\""
+        },
+        layer2: {
+          title: "Layer 2 — Signal Breakdown",
+          desc: "For each issue, OwlSeer shows which signals are involved. A weak hook issue links to your hook rate data with specific numbers — your current rate, your niche average, and the trend over your last 10 videos."
+        },
+        layer3: {
+          title: "Layer 3 — Recommended Fix",
+          desc: "Each issue includes a specific, actionable fix. Not \"improve your hooks\" but \"Try a 'Product-First' hook — show the finished result in the first second to grab attention.\" Fixes are drawn from patterns that work in your niche."
+        },
+        structure: "The Content Structure Analysis adds another dimension: it reveals which video formats (three-segment, two-segment, single) perform best for your account, so you can align future content with your strongest structure.",
+        action: "See a diagnosis on sample data — open the Intelligence demo."
+      },
+      evidence: {
+        title: "What a Diagnosis Looks Like",
+        task: "See specific diagnosis output from a real account.",
+        intro: "From the sample account:",
+        issue1: {
+          title: "Weak Hook Performance",
+          severity: "HIGH",
+          why: "Why this matters: \"Your video openings use slow intros like 'Hey everyone, today I'll show you...' Viewers scroll away before seeing your content.\"",
+          fix: "Recommended fix: \"Try 'Product-First' hook — show the finished dish in the first second to grab attention.\""
+        },
+        issue2: {
+          title: "Suboptimal Posting Time",
+          severity: "MEDIUM",
+          why: "Why this matters: \"You consistently post at 2 PM when your audience peaks at 5-7 PM.\"",
+          fix: "Recommended fix: \"Shift posting to the 5-6 PM window. See your best-time heatmap for day-specific recommendations.\""
+        },
+        supporting: "Supporting data: Content Structure Analysis shows three-segment videos averaging 5.8% AER versus 4.1% for single-segment — a structural insight that feeds into script recommendations.",
+        action: "See the full diagnostic view — explore the Dashboard."
+      },
+      conversion: {
+        title: "Check Your Signals Instantly",
+        desc: "Paste a TikTok video link to get a free 3-signal check.",
+        placeholder: "Paste TikTok video URL...",
+        button: "Diagnose My Content",
+        note: "Free 3-signal check. Full 12-signal diagnosis requires account connection.",
+        resultTitle: "Diagnosis Preview",
+        signals: {
+          hook: "Hook Rate",
+          pacing: "Pacing Score",
+          structure: "Structure"
+        },
+        cta: "Connect account for full diagnosis"
+      },
+      boundary: {
+        title: "Boundary Box",
+        dataUse: "Data we use: Diagnosis draws from your video performance metrics, 12 engagement signals, posting history, and audience behavior data — all accessed through the TikTok API.",
+        limitations: "What we do not do: Diagnosis identifies patterns and suggests fixes, but does not guarantee that implementing fixes will produce specific results. Content performance is influenced by factors beyond signal data, including video production quality, algorithm changes, and audience mood.",
+        note: "Variability note: Diagnosis accuracy improves with more data. Accounts with fewer than 10 published videos may receive less specific diagnoses. All examples shown are from the sample account."
+      },
+      cta: {
+        title: "Diagnose Your Content",
+        desc: "Connect your account and find out exactly what to fix.",
+        primary: "Start Free Trial",
+        secondary: "Try Intelligence Demo"
+      }
+    },
     footer: {
       tagline: "The AI-powered foresight platform for TikTok creators. See what's next before everyone else.",
       product: "Product",
@@ -292,12 +462,430 @@ export const translations = {
         security: "Security",
         cookies: "Cookie Policy"
       }
-    }
-  },
+    },
+    signalsPage: {
+      ctaButton: "Analyze this signal",
+      hero: {
+        title: "Decode the TikTok Algorithm: 30+ AI Signals for Viral Growth",
+        lead: "OwlSeer goes beyond vanity metrics. We analyze 30+ weighted signals—from Hook Rate to Trend Velocity—to reverse-engineer the algorithm and generate personalized growth strategies. This is the complete breakdown of every data point we track."
+      },
+      tldr: {
+        content: "We track **12 engagement signals** (hook rate, watch-through, shares, and more), **10 trend signals** (sound velocity, hashtag momentum, saturation), and **8+ audience signals** (growth velocity, active hours, demographics). Each signal carries a weight based on its predictive power. Combined, they form your content profile — the foundation for every recommendation. See our [methodology](/methodology) for how these signals flow through our AI pipeline."
+      },
+      quickNav: {
+        engagement: "Engagement (12)",
+        trends: "Trends (10)",
+        audience: "Audience (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "Engagement Signals — 12 Factors",
+          task: "Understand how OwlSeer measures the way viewers interact with your content.",
+          desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
+          linkText: "AER card",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          signals: [
+            { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
+            { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
+            { name: "Share Rate", id: "share-rate", def: "Number of shares relative to total views.", why: "Shares indicate viral potential and are one of the strongest signals for For You Page qualification. A shared video reaches audiences beyond the algorithm's initial distribution.", how: "We identify share-worthy content characteristics in your niche — humor patterns, educational \"aha\" moments, relatable situations — and recommend formats that encourage sharing." },
+            { name: "Comment Sentiment", id: "comment-sentiment", def: "AI analysis of comment tone, quality, and engagement depth.", why: "Positive sentiment correlates with algorithm boost. But volume matters too — videos that spark discussion (even debate) signal community engagement, which TikTok rewards.", how: "We guide content toward topics that drive meaningful comments. If sentiment trends negative, OwlSeer flags the shift and suggests adjustments." },
+            { name: "Save Rate", id: "save-rate", def: "Number of saves relative to total views.", why: "Saves indicate high-value, reference-worthy content. TikTok treats saves as a strong quality signal because users save content they intend to revisit.", how: "We identify educational, tutorial, and inspirational content patterns that drive saves in your niche and recommend topics that match." },
+            { name: "Reply Rate", id: "reply-rate", def: "Creator replies relative to comments received.", why: "Reply rate signals active community building. Responding to comments can boost video distribution and deepen audience loyalty.", how: "We recommend an optimal comment engagement strategy based on your capacity, time, and growth goals." },
+            { name: "Stitch/Duet Rate", id: "stitch-duet-rate", def: "How often your content inspires stitch or duet responses from other creators.", why: "Stitches and duets extend your reach through other creators' audiences. Content that generates responses has inherently higher distribution potential.", how: "We identify collaborative content opportunities and formats that encourage stitches and duets — opinion prompts, challenges, and debate starters." },
+            { name: "Profile Visit Rate", id: "profile-visit-rate", def: "Profile views generated per video view.", why: "Profile visits indicate curiosity about the creator beyond a single video. A high profile visit rate suggests content that builds personal brand interest.", how: "We optimize content for follower conversion by analyzing what drives profile visits — CTAs, personality-forward content, series formats." },
+            { name: "Follow-Through Rate", id: "follow-through-rate", def: "New followers generated per video view.", why: "The most direct measure of content's growth impact. Follow-through rate reveals which content types convert casual viewers into followers.", how: "We correlate follow-through rate with content attributes (topic, hook style, CTA type) to identify and recommend your highest-converting formats." },
+            { name: "Rewatch Rate", id: "rewatch-rate", def: "Estimated rewatches based on watch-time patterns that exceed 100% completion.", why: "Rewatches signal highly engaging content. TikTok counts rewatch time toward overall engagement, amplifying distribution for \"sticky\" videos.", how: "We identify content characteristics that drive repeat viewing — layered details, plot twists, dense information — and recommend those formats." },
+            { name: "Sound Usage", id: "sound-usage", def: "How your sound choices compare to current platform and niche trends.", why: "Trending sounds boost discoverability through TikTok's sound search and browsing features. The right sound at the right time amplifies distribution.", how: "We recommend sound strategies based on sound velocity data — rising sounds before they peak, evergreen sounds for consistent performance." },
+            { name: "Caption Engagement", id: "caption-engagement", def: "Interactions driven by caption content, including click-throughs on text and engagement prompted by caption text.", why: "Captions extend engagement beyond the video itself and can drive comments, shares, and profile visits. Well-crafted captions act as a second hook.", how: "We optimize caption strategy including length, opening hooks, question prompts, and call-to-action placement." }
+          ]
+        },
+        trends: {
+          title: "Trend Signals — 10 Factors",
+          task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
+          desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
+          linkText: "Trend Radar",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          signals: [
+            { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
+            { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
+            { name: "Format Migration", id: "format-migration", def: "Trend patterns moving from other platforms (Instagram Reels, YouTube Shorts) to TikTok.", why: "Cross-platform trends often gain momentum on TikTok faster than native trends. Early detection of format migration creates first-mover advantage.", how: "We monitor format patterns on adjacent platforms and provide early warnings when a trend is likely to migrate to TikTok." },
+            { name: "Niche Trend Velocity", id: "niche-trend-velocity", def: "Trend speed within your specific content category, compared to the platform-wide average.", why: "Niche trends have different lifecycles than platform-wide trends. A sound that peaks in 48 hours for comedy might sustain for two weeks in education.", how: "We provide customized trend timing recommendations calibrated to your specific niche's trend lifecycle." },
+            { name: "Creator Adoption Rate", id: "creator-adoption-rate", def: "How quickly top creators in your niche adopt a given trend.", why: "Creator adoption signals trend legitimacy and potential longevity. When established creators in your space start using a trend, it validates the trend's relevance.", how: "We track adoption patterns among comparable creators and factor this into trend confidence scores." },
+            { name: "Geographic Spread", id: "geographic-spread", def: "How a trend expands across regions and markets.", why: "Regional trends can go global. A trend starting in Southeast Asia may reach North America within 1-2 weeks. Early detection provides a competitive window.", how: "We identify emerging international trends relevant to your audience's geography and cultural context." },
+            { name: "Platform Promotion", id: "platform-promotion", def: "Indicators that TikTok itself is actively promoting specific content types, formats, or features.", why: "Platform-promoted trends receive algorithm boost and increased distribution. Aligning with platform priorities can significantly amplify reach.", how: "We detect platform promotion patterns and factor them into recommendations when relevant to your niche." },
+            { name: "Trend Saturation", id: "trend-saturation", def: "Current participation density in a trend, measured as active creators per hour.", why: "Oversaturated trends yield diminishing returns. When thousands of creators post the same trend simultaneously, individual videos get less distribution.", how: "We warn against late trend participation and suggest optimal exit points — the moment when continued participation yields negative returns." },
+            { name: "Trend Longevity", id: "trend-longevity", def: "Estimated remaining lifespan of an active trend.", why: "Some trends sustain for weeks. Others fade in 48 hours. Resource allocation — scripting, filming, editing — should match expected lifespan.", how: "We prioritize trends with longer predicted lifespans for content that requires more production effort, and flag quick-fade trends for lighter formats." },
+            { name: "Brand Safety Score", id: "brand-safety-score", def: "Risk assessment for participating in a trend, measured on a 0-100 scale.", why: "Some trends carry reputational risk for brands, professional creators, and educators. A trend may be popular but inappropriate for certain audiences.", how: "We flag potentially problematic trends with risk explanations and alternative recommendations, particularly for brand and business accounts." }
+          ]
+        },
+        audience: {
+          title: "Audience Signals — 8+ Factors",
+          task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
+          desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
+          linkText: "Intelligence Hub",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          signals: [
+            { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
+            { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
+            { name: "Audience Overlap", id: "audience-overlap", def: "Viewer similarity between your account and comparable creators in your niche.", why: "Audience overlap reveals content opportunities that worked for similar audiences. High overlap with a faster-growing creator suggests format or topic gaps you could fill.", how: "We identify proven content strategies from comparable creators and recommend adaptations calibrated to your specific audience." },
+            { name: "Demographic Shifts", id: "demographic-shifts", def: "Changes in audience age, gender, geography, and interest composition over time.", why: "Audience changes require strategy adjustment. If your audience skews younger over time, your content tone and references may need to evolve.", how: "We alert you to significant demographic shifts and suggest content adjustments to maintain engagement with your evolving audience." },
+            { name: "Engagement Decay", id: "engagement-decay", def: "How quickly engagement drops after posting, measured as interaction rate at 1h, 6h, 24h, and 7d post-publish.", why: "Decay rate indicates content longevity. Fast decay suggests spike-dependent content. Slow decay suggests evergreen value that continues generating views over time.", how: "We optimize for your goals — viral spikes (if you want reach) vs. sustained engagement (if you want community depth) — and recommend content types accordingly." },
+            { name: "Cross-Video Journey", id: "cross-video-journey", def: "How viewers move through your content after watching one video, including profile visits, binge-watching patterns, and playlist engagement.", why: "Cross-video journey reveals which content creates \"rabbit holes\" — the videos that lead viewers to watch 5, 10, or 20 more of your videos.", how: "We optimize content sequencing, suggest complementary topics, and identify which videos serve as effective entry points to your profile." },
+            { name: "Follower Loyalty Score", id: "follower-loyalty-score", def: "Repeat engagement rate from existing followers, measured as the percentage of followers who interact with each new video.", why: "Loyal followers amplify reach (their engagement signals boost distribution) and provide consistent baseline performance for every post.", how: "We identify content that builds loyalty (community posts, series, personal stories) vs. content that attracts new viewers (trending formats, discovery hooks) and recommend the right balance." },
+            { name: "New vs. Returning", id: "new-vs-returning", def: "The ratio of first-time viewers to returning viewers for each video.", why: "A healthy mix indicates sustainable growth. All-new-viewer content is unstable (high reach, low retention). All-returning content limits growth (loyal but capped).", how: "We balance viral content recommendations (for new viewer acquisition) with community-building content (for returning viewer retention)." }
+          ]
+        },
+        howTogether: {
+          title: "How These Signals Work Together",
+          task: "See how OwlSeer combines signals to produce insights no single metric reveals alone.",
+          intro: "Signals do not operate in isolation. OwlSeer's AI finds correlations between signals across all three categories to generate recommendations that account for the full picture. Three examples:",
+          examples: [
+            { title: "Hook rate + sound velocity", desc: "When a trending sound matches your successful hook patterns, OwlSeer prioritizes that recommendation with higher confidence. The combination of proven hook performance and rising sound momentum creates a compounding opportunity." },
+            { title: "Active hours + trend window", desc: "OwlSeer aligns trend participation timing with your audience's peak activity. Posting a trending format during your audience's most engaged window maximizes the early engagement signals that TikTok uses to decide distribution." },
+            { title: "Share rate + comment sentiment", desc: "Content that drives both sharing and positive discussion gets flagged as a high-replication candidate. OwlSeer identifies the specific content attributes — topic, hook style, CTA — that produced the dual-signal outcome." }
+          ],
+          outro: "Learn exactly how our AI processes signal combinations in our [complete methodology documentation](/methodology)."
+        },
+        boundary: {
+          title: "Boundary Box",
+          data: "Data we use: Publicly available TikTok account metrics accessed through the official API. Signal definitions on this page reflect OwlSeer's current analytical framework.",
+          notDo: "What we do not do: OwlSeer does not access TikTok's internal algorithm weights. Our signal weights are derived from observed correlations in public data, not from proprietary TikTok documentation.",
+          variability: "Variability note: Signal predictive power varies by niche, account size, audience geography, and TikTok algorithm updates. Correlations described on this page are based on aggregate data and may not apply identically to every account."
+        },
+        cta: {
+          title: "See Your Signals in Action",
+          desc: "Connect your TikTok account and receive your personalized signal analysis in under three minutes. Or explore sample data to see how signals translate into strategy.",
+          primary: "Start Free Analysis",
+          secondary: "Explore Sample Data"
+        },
+        contextualConversion: {
+           title: "What do these 30+ signals look like for YOU?",
+           desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
+           button: "Generate My Signal Profile",
+           note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      }
+    },
+    scriptGeneration: {
+      hero: {
+        badge: "New Feature",
+        title: "Generate TikTok Scripts from Your Data in",
+        titleHighlight: "60 Seconds",
+        desc: "OwlSeer creates ready-to-shoot scripts personalized to your audience — with hooks, body content, CTAs, sounds, and hashtags, all derived from your engagement signals.",
+        cta: "Start Free Trial",
+        demo: "Try Demo"
+      },
+      problem: {
+        title: "Why Script Writing Is the Bottleneck",
+        desc: "TikTok rewards consistency. But producing 3-5 quality scripts per week takes 2-4 hours of manual work.",
+        manual: {
+          title: "Manual Process",
+          items: ["2-4 hours per week", "Generic, weak hooks", "Guessing trends", "Inconsistent posting"]
+        },
+        ai: {
+          title: "OwlSeer AI",
+          items: ["15-30 mins per week", "Data-driven hooks", "Auto-trend integration", "Consistent schedule"]
+        }
+      },
+      solution: {
+        title: "How OwlSeer Generates Scripts",
+        desc: "We don't just use GPT wrappers. OwlSeer scripts are built from three proprietary data sources:",
+        sources: [
+          { title: "Your Engagement Signals", desc: "AI analyzes your hook rate and watch time to learn what works for YOUR audience." },
+          { title: "Current Trend Data", desc: "Integrates rising sounds and hashtags directly from our Trend Radar." },
+          { title: "Content Profile", desc: "Maintains your unique brand voice and niche consistency." }
+        ],
+        processing: {
+          label: "Processing...",
+          steps: [
+             { label: "Analyzing hook retention...", status: "Complete" },
+             { label: "Scanning trend velocity...", status: "Complete" },
+             { label: "Generating scene structure...", status: "Processing" },
+             { label: "Optimizing CTA...", status: "Pending" }
+          ]
+        }
+      },
+      tool: {
+        title: "Tell us your niche, get a free hook",
+        desc: "See how OwlSeer customizes the opening 3 seconds for your specific audience.",
+        placeholder: "Select your niche",
+        inputPlaceholder: "Enter a topic (e.g. 'morning routine')",
+        generate: "Generate",
+        resultLabel: "AI Generated Hook",
+        fullScript: "Want the full script?",
+        connect: "Connect Account"
+      },
+      workflow: {
+        title: "The Script Workflow",
+        desc: "From 2-4 hours to 15-30 minutes per week.",
+        steps: [
+          { day: "Mon", title: "Review & Plan", desc: "Check weekly report, pick topics from Smart Recs." },
+          { day: "Tue", title: "Generate Scripts", desc: "Create 3-5 scripts in < 5 mins using Script Studio." },
+          { day: "Wed-Fri", title: "Film & Post", desc: "Shoot using the scene-by-scene breakdown." },
+          { day: "Sun", title: "Schedule", desc: "Auto-schedule for next week." }
+        ]
+      },
+      footer: {
+        noteTitle: "Transparency Note",
+        note: "Scripts are starting points, not final products. Creators should review and personalize each script to match their voice, filming setup, and brand. Script performance depends on execution quality and external factors. New accounts may receive more template-driven scripts initially until sufficient data is collected.",
+        title: "Write Your First Script in",
+        titleHighlight: "60 Seconds",
+        cta: "Start Free Trial",
+        howItWorks: "See How It Works"
+      }
+    },
+    contentCreators: {
+      hero: {
+        title: "Data-Driven TikTok Growth: The AI Engine Behind Viral Creators",
+        lead: "Stop guessing. Leverage 10M+ viral data points to generate scripts, predict trends, and automate engagement. The only tool that optimizes your hook rate and retention using deep learning.",
+        primaryCta: "Start Free Trial",
+        secondaryCta: "See the Demo"
+      },
+      tldr: "OwlSeer helps individual TikTok creators grow by replacing guesswork with data. Every week you receive trend alerts matched to your niche, content recommendations based on your engagement signals, ready-to-shoot scripts, and a personalized posting schedule. Your Content Supply Rhythm is tracked so you maintain the consistency that the algorithm rewards.",
+      painPoints: {
+        title: "Sound Familiar?",
+        subtitle: "Recognize the three pain points that slow down solo creators.",
+        cards: [
+          { 
+            title: "I never know what to post next.", 
+            desc: "You sit down to create and draw a blank. Topics feel stale. You end up scrolling for inspiration, which eats into production time.",
+            solutionTitle: "Weekly Recommendations",
+            solutionDesc: "Every Monday, get 5-10 topic suggestions based on your audience preferences and trending content."
+          },
+          { 
+            title: "I always miss the trends.", 
+            desc: "By the time you notice a trend, hundreds of creators have already posted. Your version gets buried.",
+            solutionTitle: "Trend Alerts",
+            solutionDesc: "Trend Radar scans your niche continuously and alerts you to rising trends before they peak."
+          },
+          { 
+            title: "I cannot stay consistent.", 
+            desc: "You post 4 times one week, then disappear for 10 days. The cycle of inconsistency reduces your reach and motivation.",
+            solutionTitle: "Optimal Schedule",
+            solutionDesc: "We track your rhythm and recommend a posting cadence that maintains consistency."
+          }
+        ]
+      },
+      solution: {
+        title: "How OwlSeer Solves This",
+        action: "See all capabilities on sample data",
+        items: [
+          { title: "Weekly Content Recommendations", desc: "Every Monday, generate 5-10 topic suggestions with confidence scores and reasoning." },
+          { title: "Trend Alerts Before They Peak", desc: "Trend Radar scans your niche continuously and alerts you to rising trends with velocity scores." },
+          { title: "Ready-to-Shoot Scripts", desc: "Generate a complete script in under 60 seconds. Hook, body, CTA, sounds, and hashtags." },
+          { title: "Optimal Posting Schedule", desc: "We recommend a posting cadence that maintains consistency and show when your audience is active." }
+        ]
+      },
+      results: {
+        title: "What Creators Are Seeing",
+        disclaimer: "These outcomes vary by creator. Results depend on niche, starting point, content execution quality, and how consistently creators implement recommendations.",
+        stats: [
+          { value: 5, suffix: "x", label: "Consistency Improvement", subLabel: "From sporadic to weekly cadence" },
+          { value: 40, suffix: "%", label: "Engagement Improvement", subLabel: "Better hooks & timing" },
+          { value: 5, suffix: "+", label: "Hours Saved Weekly", subLabel: "Less planning, more creating" }
+        ]
+      },
+      features: {
+        title: "Everything You Get",
+        items: [
+          "Weekly content recommendations with confidence scores",
+          "Trend alerts matched to your niche",
+          "AI script generation (under 60 seconds)",
+          "Personalized posting schedule",
+          "Weekly Intelligence Report",
+          "Content diagnosis with issue detection",
+          "AI Copilot for strategy questions",
+          "Content Library with performance analysis"
+        ]
+      },
+      boundary: {
+        note: "Data we use: Your public TikTok account metrics. What we do not do: OwlSeer does not post on your behalf, buy followers, or manipulate engagement. Growth comes from better strategy, not artificial inflation."
+      },
+      cta: {
+        title: "Ready to Stop Guessing?",
+        subtitle: "Join 10,000+ creators who use data-driven strategy. Free trial, no credit card required.",
+        primary: "Start Free Trial",
+        secondary: "See the Demo"
+      },
+      miniTool: {
+        title: "See what OwlSeer would recommend for YOUR next post.",
+        subtitle: "Enter your TikTok username to get a personalized lite preview.",
+        placeholder: "username",
+        button: {
+          default: "Show My Recommendation",
+          loading: "Analyzing..."
+        },
+        result: {
+          trend: "Trend Match",
+          relevance: "Relevance Score",
+          topic: "Topic Suggestion",
+          time: "Best Posting Time",
+          disclaimer: "This is 1 of 5-10 weekly recommendations in your full plan.",
+          cta: "Get My Full Weekly Plan"
+        },
+        mock: {
+          trend: "POV: You realize...",
+          topic: "Behind the scenes of my setup",
+          time: "Tomorrow at 6:30 PM"
+        }
+      }
+    },
+    localBusiness: {
+        hero: {
+          badge: "For Local Businesses",
+          title: "AI-Driven TikTok Marketing for Local Business: Turn Views into Foot Traffic",
+          lead: "OwlSeer automates local growth. We analyze 30+ signals to match your business with hyper-local trends, generate service-focused scripts, and target your community when they are most active. Stop posting for likes; start posting for leads.",
+          primary: "Start Free Trial",
+          secondary: "See the Demo"
+        },
+        tldr: "Local businesses do not need millions of views. They need the right 5,000 people — the ones who live within driving distance and want what you offer. OwlSeer tracks the signals that matter for local: profile visit rate, save rate, and geographic spread. AI Goals track the metrics that turn views into foot traffic.",
+        painPoints: {
+          title: "Sound Familiar?",
+          items: [
+            {
+              title: "I do not know what to post about my business.",
+              desc: "You own a salon, a restaurant, or a gym — not a media company. Coming up with content ideas every week feels like a second job."
+            },
+            {
+              title: "My content feels like an ad, not a TikTok.",
+              desc: "You know TikTok rewards authentic content. But when you try to promote your business, it comes out looking like a commercial."
+            },
+            {
+              title: "I get views but not customers.",
+              desc: "Your video got 50K views, but nobody walked through the door. Views from across the country do not help a local pizza shop."
+            }
+          ]
+        },
+        solution: {
+          title: "How Local Businesses Use OwlSeer",
+          items: [
+            {
+              title: "Local Trend Matching",
+              desc: "Trend Radar scans TikTok for trends that work in local business content — restaurant reviews, salon transformations, gym challenges. Match scores factor in your business type.",
+              icon: "Trend"
+            },
+            {
+              title: "Service-Focused Scripts",
+              desc: "Script Studio generates scripts designed for local formats — behind-the-scenes tours, customer reaction videos, and seasonal promotion hooks.",
+              icon: "Script"
+            },
+            {
+              title: "Local Audience Scheduling",
+              desc: "Your customers are not online at the same times as a national audience. Best-time badges ensure you post when your community is scrolling.",
+              icon: "Schedule"
+            },
+            {
+              title: "Foot Traffic Goals",
+              desc: "AI Goals let you set objectives that match a local business: \"Increase profile visits by 50%\" or \"Get 10 DM inquiries per week.\"",
+              icon: "Goal"
+            }
+          ]
+        },
+        results: {
+          title: "What Local Business Owners Are Seeing",
+          stats: [
+            { value: "3x", label: "More content output", desc: "AI scripts eliminate the \"what do I post?\" bottleneck" },
+            { value: "65%", label: "More profile visits", desc: "Better hooks drive more people to your profile" },
+            { value: "2x", label: "Increase in DMs", desc: "Service-focused CTAs convert viewers into leads" }
+          ]
+        },
+        formats: {
+          title: "Content Formats That Work for Local",
+          items: [
+            { title: "Behind-the-Scenes", desc: "Show what happens in the kitchen or studio." },
+            { title: "Customer Reactions", desc: "Real reactions from happy customers." },
+            { title: "Before/After", desc: "Visual transformations earn saves." },
+            { title: "Day in the Life", desc: "Humanizes the brand and triggers local pride." },
+            { title: "Seasonal / Event", desc: "Tie content to local events and holidays." },
+            { title: "Virtual Tours", desc: "Walk viewers through your space." }
+          ]
+        },
+        calculator: {
+          title: "How many extra customers can TikTok bring?",
+          followers: "Current TikTok Followers",
+          aov: "Average Order Value ($)",
+          result: {
+            customers: "Est. Monthly Walk-ins",
+            revenue: "Est. Monthly Revenue"
+          },
+          cta: "Start Bringing Customers In"
+        },
+        boundary: {
+          note: "Data we use: Your TikTok account metrics (profile visit rate, save rate, geographic spread). What we do not do: OwlSeer does not guarantee foot traffic or sales. We do not track in-store visits directly."
+        },
+        cta: {
+          title: "Ready to Bring Customers Through Your Door?",
+          subtitle: "Your next regular might be scrolling TikTok right now. Connect your account and start reaching your local audience.",
+          primary: "Start Free Trial",
+          secondary: "See the Demo"
+        }
+      },
+    compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ: Which TikTok Tool Fits Your Workflow?",
+          lead: "VidIQ started on YouTube and expanded to TikTok. OwlSeer was built for TikTok from day one. This comparison covers features, strengths, and the right use case for each tool."
+        },
+        tldr: "Choose OwlSeer if TikTok is your primary platform and you want TikTok-native signal analysis, trend prediction, and script generation. Choose VidIQ if you prioritize YouTube with TikTok as a secondary channel. Both tools serve creators — the difference is platform depth.",
+        table: {
+          title: "Feature-by-Feature Comparison",
+          rows: [
+            { feature: "Primary platform", owlseer: "TikTok (exclusive)", vidiq: "YouTube (primary), TikTok (secondary)" },
+            { feature: "TikTok signal depth", owlseer: "30+ weighted signals", vidiq: "Basic TikTok metrics" },
+            { feature: "Trend prediction", owlseer: "AI-powered with velocity", vidiq: "Trending topics list" },
+            { feature: "Script generation", owlseer: "Data-driven hook-body-CTA", vidiq: "No native script generation" },
+            { feature: "Posting schedule", owlseer: "Personalized best-time heatmap", vidiq: "Generic best-time suggestions" },
+            { feature: "Content diagnosis", owlseer: "Issue detection with fixes", vidiq: "Performance overview" },
+            { feature: "AI copilot", owlseer: "Conversational assistant", vidiq: "No conversational AI" },
+            { feature: "Weekly report", owlseer: "Automated with KPI tracking", vidiq: "No automated weekly report" },
+            { feature: "Brand safety", owlseer: "0-100 risk scale", vidiq: "No brand safety scoring" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "Choose OwlSeer If...",
+          items: [
+            "TikTok is your primary or only platform",
+            "You want 30+ signal depth beyond basic metrics",
+            "You need AI-generated scripts personalized to your audience",
+            "Trend timing and velocity matter to your strategy",
+            "You want automated weekly reports with KPI tracking",
+            "You prefer a conversational AI copilot"
+          ]
+        },
+        chooseVidIQ: {
+          title: "Choose VidIQ If...",
+          items: [
+            "YouTube is your primary platform",
+            "You need YouTube-specific features (SEO, keywords)",
+            "TikTok is a secondary channel and basic metrics suffice",
+            "You already use VidIQ for YouTube"
+          ]
+        },
+        platformFocus: {
+          title: "Why Platform Focus Matters",
+          p1: "YouTube and TikTok reward different behaviors. YouTube is search-driven — titles, descriptions, and thumbnails determine discovery. TikTok is algorithm-driven — hook rate, watch-through, and trend alignment determine distribution.",
+          p2: "A tool built for YouTube optimizes for search intent. A tool built for TikTok optimizes for signal patterns. Using a YouTube-first tool for TikTok strategy is like using a road map for ocean navigation — you can try, but the terrain is different.",
+          highlight: "OwlSeer tracks TikTok-specific metrics (AER, hook rate, save rate) that YouTube-first tools do not model."
+        },
+        boundary: {
+          transparency: "Feature comparisons are based on publicly available product information as of February 2026.",
+          note: "This comparison is not a paid review. We built it to help creators make informed decisions."
+        },
+        cta: {
+          title: "Ready to Try TikTok-Native Strategy?",
+          subtitle: "See how OwlSeer works on sample data. Or start your free trial.",
+          primary: "Start Free Trial",
+          secondary: "Explore Demo"
+        }
+      }
+    },
   zh: {
     product: '产品',
     pricing: '价格',
     resources: '资源',
+    methodology: '方法论',
     login: '登录',
     signup: '免费注册',
     whatIs: 'OwlSeer 是什么',
@@ -507,14 +1095,600 @@ export const translations = {
         }
       ]
     },
+    howItWorksPage: {
+      hero: {
+        title: "三步拥有你的 TikTok 策略",
+        titleHighlight: "",
+        lead: "OwlSeer 连接你的 TikTok 账号，通过 30+ 信号分析你的数据，并在三分钟内提供个性化的内容策略。以下是你可以期待的具体流程。",
+        cta: "免费试用演示",
+        video: "观看 1 分钟概览"
+      },
+      step1: {
+        title: "第一步：连接你的 TikTok 账号",
+        desc: "你通过 TikTok 的官方登录流程连接账号。OwlSeer 不会要求你的密码——你直接通过 TikTok 进行身份验证，我们获得一个只读访问令牌。整个连接过程不到 30 秒。",
+        readOnlyTitle: "\"只读\"意味着：",
+        readOnlyList: [
+          "OwlSeer 可以查看你的公开视频指标、发布历史和受众互动数据",
+          "OwlSeer 不能在你的账号上发布、编辑、删除或修改任何内容",
+          "OwlSeer 不能访问你的私信、草稿或支付信息",
+          "你可以随时在 TikTok 账号设置中撤销访问权限"
+        ],
+        securityNote: "连接使用 TikTok 为所有授权第三方工具提供的同一官方 API。有关数据处理的完整细节，请参阅数据安全实践。",
+        action: "了解更多安全措施——阅读数据安全页面。"
+      },
+      step2: {
+        title: "第二步：AI 分析你的数据",
+        desc: "连接后，OwlSeer 的 AI 通过我们的五步方法论处理你的账号数据。分析涵盖三个信号类别：",
+        signals: [
+          { title: "互动信号", desc: "12 个因素，包括钩子率、完播率、分享率和评论情感——衡量受众如何与你的内容互动" },
+          { title: "趋势信号", desc: "10 个因素，包括音频传播速度、标签动量和趋势饱和度——识别你利基中正在获得热度的内容" },
+          { title: "受众信号", desc: "8+ 个因素，包括粉丝增长速度、活跃时段映射和受众重叠度——描绘谁在观看以及何时观看" }
+        ],
+        process: "AI 将你的信号画像与数百万已分析 TikTok 视频的模式进行比对，识别你的内容优势、增长机会和最佳发布策略。完整分析在三分钟内完成。",
+        action: "深入了解技术流程——阅读完整方法论。"
+      },
+      step3: {
+        title: "第三步：获取你的个性化策略",
+        desc: "分析完成后，你进入个性化仪表盘，拥有规划、创作和优化 TikTok 内容所需的一切：",
+        outputs: [
+          { title: "趋势提醒", desc: "你利基中的新兴趋势，附带最佳参与时机和置信度分数。" },
+          { title: "内容建议", desc: "每周主题、格式和钩子建议，根据受众当前偏好量身定制" },
+          { title: "发布时间表", desc: "基于受众活跃时段的 AI 推荐发布时间" },
+          { title: "表现诊断", desc: "近期视频的分解——哪些有效、哪些没有、以及原因" },
+          { title: "可直接拍摄的脚本", desc: "完整视频脚本，包含钩子、正文、CTA 和推荐音频/标签。" },
+          { title: "AI 副驾驶", desc: "用自然语言提问你的策略问题。副驾驶利用你的账号数据提供个性化答案。" }
+        ],
+        note: "你的策略每七天更新一次。你还会收到一份每周智能报告，总结你的表现、关键洞察和推荐的下一步行动。",
+        action: "在示例数据上查看完整策略输出——探索互动演示。"
+      },
+      whatYouGet: {
+        title: "你将获得什么",
+        items: [
+          { title: "趋势预测", desc: "与你利基匹配的新兴趋势，附带时间窗口和置信度分数" },
+          { title: "内容诊断", desc: "逐条视频分析，展示内容为何成功或表现不佳" },
+          { title: "AI 脚本", desc: "可直接拍摄的脚本，含钩子、正文、CTA 和音频/标签建议" },
+          { title: "每周报告", desc: "表现摘要，含 KPI 追踪、洞察和下周行动计划" }
+        ]
+      },
+      roi: {
+        title: "算算你每周能省多少时间",
+        desc: "回答 3 个问题，看看 OwlSeer 能把你的内容规划时间压缩多少。",
+        q1: "你每周花多少时间研究发什么内容？",
+        q2: "你每周花多少时间追踪趋势？",
+        q3: "你每周花多少时间写脚本？",
+        result: {
+          current: "你的现状：每周 {{total}} 小时用于内容规划",
+          saved: "使用 OwlSeer 后：预计 {{saved}} 小时/周可释放",
+          monthly: "每月节省：约 {{monthly}} 小时",
+          value: "月度时间价值 ${{value}} (按 $50/小时)",
+          cta: "开始节省时间 — 免费试用"
+        }
+      },
+      deeper: {
+        title: "想深入了解吗？",
+        desc: "OwlSeer 的 AI 遵循透明的五步流程。如果你想了解技术细节——信号如何加权、模式如何识别、脚本如何生成——请探索我们的完整方法论。有关我们追踪的每个信号的定义，请访问信号页面。"
+      },
+      boundary: {
+        dataUse: "我们使用的数据: 通过官方 API 访问的公开 TikTok 账号指标。OwlSeer 接收只读访问令牌——我们可以查看你的指标但无法修改你的账号。",
+        limitations: "我们不做的事: OwlSeer 不会发布、编辑或删除内容。我们不访问私信、草稿或支付数据。我们不保证特定增长结果。",
+        note: "波动性说明: 分析准确性和建议质量取决于账号历史、发布频率和利基。发布视频少于 10 条的新账号可能收到精确度较低的初始建议。"
+      },
+      cta: {
+        title: "准备好了吗？",
+        desc: "连接你的 TikTok 账号，三分钟内获取个性化策略。免费试用，无需信用卡。或先探索示例数据。",
+        primary: "开始免费试用",
+        secondary: "探索互动演示"
+      }
+    },
+    contentDiagnosisPage: {
+      hero: {
+        title: "找出你的 TikTok 内容",
+        titleHighlight: "表现不佳的原因",
+        lead: "OwlSeer 通过 12 个互动信号分析每条视频，精确展示你在哪里获得或失去了受众——以及该怎么做。"
+      },
+      tldr: {
+        text: "低播放量是有原因的。OwlSeer 的智能模块通过分析包括钩子率、完播率、分享率和评论情感在内的 12 个互动信号来诊断内容问题。每个问题都会显示严重程度、解释和具体的推荐修复方案。内容诊断将模糊的挫败感转化为可操作的改进。",
+        link1: "智能模块",
+        link2: "12 个互动信号",
+        link3: "问题被浮现"
+      },
+      problem: {
+        title: "猜测循环",
+        task: "了解为什么创作者会重复同样的内容错误。",
+        desc1: "当视频表现不佳时，大多数创作者默认会猜测：“也许话题不对”或“也许我在错误的时间发布了”。没有数据，他们随机改变变量——有时修复了错误的变量，有时让事情变得更糟。",
+        desc2: "模式是这样的：发布视频，看到低播放量，改变某些东西，再次发布，看到不一致的结果，改变其他东西。这种猜测循环浪费了内容制作精力并侵蚀信心。",
+        desc3: "根本原因通常是具体且可修复的。它可能是一个弱钩子（观众在最初 2 秒内滑过），一个冗长的介绍（完播率在 8 秒标记处下降），或糟糕的时机（在受众睡觉时发布）。但如果没有信号级诊断，你无法区分这些原因。",
+        action: "了解涉及的信号——阅读关于互动信号。"
+      },
+      solution: {
+        title: "OwlSeer 如何诊断内容",
+        task: "查看从检测到修复的诊断工作流程。",
+        layer1: {
+          title: "第一层 — 问题检测",
+          desc: "“发现问题”面板扫描你最近的视频并用严重程度徽章（高或中）标记问题。示例：“弱钩子表现”（高）——“你的视频开头使用了缓慢的介绍。观众在看到你的内容之前就滑走了。”"
+        },
+        layer2: {
+          title: "第二层 — 信号分解",
+          desc: "对于每个问题，OwlSeer 会显示涉及哪些信号。弱钩子问题链接到你的钩子率数据，并附带具体数字——你当前的比率、你的利基平均值以及你最近 10 个视频的趋势。"
+        },
+        layer3: {
+          title: "第三层 — 推荐修复",
+          desc: "每个问题都包含一个具体的、可操作的修复方案。不是“改进你的钩子”，而是“尝试‘产品优先’钩子——在第一秒展示最终结果以吸引注意力。”修复方案来自在你利基中有效的模式。"
+        },
+        structure: "内容结构分析增加了另一个维度：它揭示了哪种视频格式（三段式、两段式、单段式）对你的账号表现最好，这样你就可以将未来的内容与你最强的结构保持一致。",
+        action: "在示例数据上查看诊断——打开智能演示。"
+      },
+      evidence: {
+        title: "诊断长什么样",
+        task: "查看来自真实账号的具体诊断输出。",
+        intro: "来自示例账号：",
+        issue1: {
+          title: "弱钩子表现",
+          severity: "高",
+          why: "为什么这很重要：“你的视频开头使用了像‘大家好，今天我要给你们展示……’这样缓慢的介绍。观众在看到你的内容之前就滑走了。”",
+          fix: "推荐修复：“尝试‘产品优先’钩子——在第一秒展示完成的菜肴以吸引注意力。”"
+        },
+        issue2: {
+          title: "次优发布时间",
+          severity: "中",
+          why: "为什么这很重要：“你一直在这个时间发布，而你的受众活跃高峰期在 5-7 PM。”",
+          fix: "推荐修复：“将发布时间转移到 5-6 PM 窗口。查看你的最佳时间热力图以获取特定日期的建议。”"
+        },
+        supporting: "支持数据：内容结构分析显示三段式视频的平均互动率为 5.8%，而单段式为 4.1%——这是一个输入到脚本建议中的结构性洞察。",
+        action: "查看完整的诊断视图——探索仪表盘。"
+      },
+      conversion: {
+        title: "即刻检查你的信号",
+        desc: "粘贴 TikTok 视频链接，免费获取 3 个信号的检查。",
+        placeholder: "粘贴 TikTok 视频链接...",
+        button: "诊断我的内容",
+        note: "免费 3 信号检查。完整 12 信号诊断需连接账号。",
+        resultTitle: "诊断预览",
+        signals: {
+          hook: "钩子率",
+          pacing: "节奏评分",
+          structure: "结构"
+        },
+        cta: "连接账号以获取完整诊断"
+      },
+      boundary: {
+        title: "边界框",
+        dataUse: "我们使用的数据：诊断利用你的视频表现指标、12 个互动信号、发布历史和受众行为数据——所有这些都通过 TikTok API 访问。",
+        limitations: "我们不做的事：诊断识别模式并建议修复方案，但不保证实施修复方案会产生具体结果。内容表现受信号数据以外的因素影响，包括视频制作质量、算法变化和受众情绪。",
+        note: "变异性说明：诊断准确性随着数据的增加而提高。发布少于 10 个视频的账号可能会收到不太具体的诊断。显示的所有示例均来自示例账号。"
+      },
+      cta: {
+        title: "诊断你的内容",
+        desc: "连接你的账号，找出确切需要修复的地方。",
+        primary: "开始免费试用",
+        secondary: "尝试智能演示"
+      }
+    },
     footer: {
       tagline: "创作者的 AI TikTok 策略引擎。\n停止猜测，开始增长。",
       product: "产品",
       resources: "资源",
       legal: "法律",
       rights: "© 2026 OwlSeer. 保留所有权利。"
-    }
-  },
+    },
+    signalsPage: {
+      ctaButton: "优化此指标",
+      hero: {
+        title: "解密 TikTok 算法：30+ 个 AI 核心信号助你打造爆款",
+        lead: "OwlSeer 超越了点赞和播放量等虚荣指标。我们深入分析 30+ 个加权信号——从完播率到趋势速度——为您逆向解析算法，生成个性化增长策略。这里详细解读了我们要追踪的每一个数据点及其背后的增长逻辑。"
+      },
+      tldr: {
+        content: "我们不仅关注**12 个互动信号**（如完播率、分享率），还追踪**10 个趋势信号**（如音频爆发点、蓝海标签）和**8+ 个受众信号**（如铁粉粘性、活跃时区）。这些信号构成了你的**账号 DNA**。想要了解我们如何将这些数据转化为爆款策略？请查看我们的 [核心方法论](/methodology)。"
+      },
+      quickNav: {
+        engagement: "互动质量 (12)",
+        trends: "趋势红利 (10)",
+        audience: "受众画像 (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "互动质量 —— 撬动算法的杠杆",
+          task: "理解算法如何通过用户行为来评判你的内容价值。",
+          desc: "互动不仅仅是点赞。算法更看重那些代表“深度兴趣”的信号。从黄金 3 秒的留存，到引发分享的冲动，每一个微小的用户行为都是算法是否给你推流的依据。OwlSeer 根据这些信号的权重，精准诊断你的内容短板。",
+          linkText: "AER 诊断卡",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "查看真实账号的互动诊断 —— [体验 AER 仪表盘演示](/sample-explorer/dashboard#aer-card)。",
+          signals: [
+            { name: "黄金 3 秒留存 (Hook Rate)", id: "hook-rate", def: "有多少观众坚持看过了前 3 秒。", why: "这是视频的生死线。TikTok 算法极度看重开头。如果开头没留住人，内容再好也无法进入更大的流量池。", how: "我们分析你历史上最成功的开场模式，并结合你所在领域的爆款案例，为你定制“抓人”的开头脚本。" },
+            { name: "完播率 (Completion Rate)", id: "watch-through-rate", def: "观众看完整条视频的比例。", why: "完播是内容质量的硬指标。高完播率告诉算法：这条视频值得被更多人看到。它也是判断视频时长是否合理的关键。", how: "我们通过分析数据，找到你账号的最佳视频时长区间，并建议在哪里设置“高潮点”以防止观众流失。" },
+            { name: "分享率 (Share Rate)", id: "share-rate", def: "平均每 100 次观看产生的分享次数。", why: "分享意味着“破圈”。这是最强的病毒传播信号，因为它能把你的内容带给非粉丝群体，触发裂变式传播。", how: "我们识别你所在领域容易被转发的内容特征（如实用干货、情感共鸣），并提供专门设计的“分享诱导”话术。" },
+            { name: "评论区情感值 (Sentiment)", id: "comment-sentiment", def: "AI 识别评论区的讨论氛围和深度。", why: "有争议或高互动的评论区能显著增加视频的停留时间。算法喜欢能引发讨论的内容，哪怕是激烈的辩论。", how: "我们教你在视频中埋下“讨论点”，引导良性互动，把评论区变成流量的助推器。" },
+            { name: "收藏率 (Save Rate)", id: "save-rate", def: "用户收藏视频的比例。", why: "收藏代表“高价值”。用户收藏是因为觉得内容有用、值得回看。这类内容通常生命周期更长，长尾流量更足。", how: "我们帮你策划“干货型”或“教科书级”内容，让用户忍不住点击收藏，以此提升账号的权重。" },
+            { name: "回复互动率 (Reply Rate)", id: "reply-rate", def: "你与评论区互动的频率。", why: "宠粉不仅能增加粘性，还能带来二次曝光。积极回复评论能激活老粉丝，让视频热度持续更久。", how: "我们提供高效的评论回复策略，帮你用最少的时间维持最高的社区活跃度。" },
+            { name: "二创潜力 (Stitch/Duet)", id: "stitch-duet-rate", def: "被合拍或抢镜的频率。", why: "被二创意味着你的内容具有“模版属性”或“话题性”。这是一种借力打力的高级玩法，能低成本获取巨大流量。", how: "我们设计易于模仿或互动的脚本结构，鼓励粉丝和同行对你的视频进行二次创作。" },
+            { name: "主页转化率 (Profile Visit)", id: "profile-visit-rate", def: "看了视频后点进主页的人数比例。", why: "这代表观众对“你这个人”感兴趣，而不仅仅是视频。这是从“爆款视频”到“大网红”的关键跨越。", how: "我们优化你的主页装修和视频结尾引导（CTA），最大化“路人”转“访客”的概率。" },
+            { name: "路转粉率 (Follow Conversion)", id: "follow-through-rate", def: "单条视频带来的新增粉丝数。", why: "涨粉才是硬道理。这个指标直接衡量了你的内容吸粉能力，是变现的基础。", how: "我们分析哪类视频最吸粉，并建议你在视频的什么位置、用什么话术来请求关注。" },
+            { name: "复看率 (Rewatch Rate)", id: "rewatch-rate", def: "视频被重复播放的次数。", why: "一遍不过瘾？这说明内容信息量大或极其有趣。高复看率会极大地拉高平均播放时长，这是算法的最爱。", how: "我们教你制作“细节满满”或“反转惊人”的视频，让观众忍不住再看亿遍。" },
+            { name: "BGM 契合度 (Sound Fit)", id: "sound-usage", def: "背景音乐对视频数据的贡献度。", why: "选对 BGM，流量翻倍。合适的音乐不仅能烘托氛围，还能蹭上音乐本身的热度。", how: "不仅仅是推荐热门音乐，我们更推荐“适合你视频节奏”的音乐，实现音画同步的极致体验。" },
+            { name: "文案引导力 (Caption Impact)", id: "caption-engagement", def: "标题和文案带来的点击与互动。", why: "好的文案是第二战场。它能补充信息、引发好奇，甚至在视频本身一般的情况下挽救完播率。", how: "我们提供经过验证的“神文案”模版，包括悬念式、提问式和情绪式标题。" }
+          ]
+        },
+        trends: {
+          title: "趋势红利 —— 借势起飞的艺术",
+          task: "不再盲目跟风，学会精准踩点。利用数据抓住红利期。",
+          desc: "趋势就是流量的放大器。但时机就是一切：太早没人看，太晚汤都没了。OwlSeer 监控全网数据，帮你找到那个“刚刚好”的入场时机，让你的努力事半功倍。",
+          linkText: "趋势雷达",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "查看实时趋势数据 —— [探索趋势雷达演示](/sample-explorer/trend-radar)。",
+          signals: [
+            { name: "音频飙升榜 (Sound Velocity)", id: "sound-velocity", def: "BGM 使用量的增长速度。", why: "在 BGM 彻底火烂之前入场，能吃到最大的算法红利。我们预判哪些音乐即将在未来 3 天内爆发。", how: "当某个 BGM 在你所在领域开始起量但尚未饱和时，我们会第一时间向你发出信号。" },
+            { name: "标签红利 (Hashtag Momentum)", id: "hashtag-momentum", def: "话题标签的热度上升曲线。", why: "用对标签，精准投喂。处于上升期的标签能带来大量精准的搜索流量和推荐流量。", how: "我们推荐那些竞争较小但热度正在飙升的“蓝海标签”，避开那些已经卷成红海的大词。" },
+            { name: "跨平台外溢 (Format Migration)", id: "format-migration", def: "Instagram/YouTube 上的爆款向 TikTok 蔓延的趋势。", why: "火过的内容还会再火。其他平台的爆款往往会滞后几天传导到 TikTok，这就是你的“时间差”优势。", how: "我们监控全网平台，提前告诉你哪些外站梗即将席卷 TikTok。" },
+            { name: "赛道风向标 (Niche Velocity)", id: "niche-trend-velocity", def: "你所在垂直领域的专属趋势。", why: "美妆圈的火和科技圈的火不一样。我们只关注对你有用的圈内趋势，避免无效跟风。", how: "为你定制垂直领域的趋势周报，让你做自己赛道的领跑者，而不是跟随者。" },
+            { name: "大号风向 (Creator Adoption)", id: "creator-adoption-rate", def: "头部博主开始跟进某个趋势的速度。", why: "春江水暖鸭先知。头部博主的动向往往预示着趋势的爆发。跟着大号走，大概率不会错。", how: "我们追踪你对标账号的选题变化，让你第一时间通过模仿+微创新来分一杯羹。" },
+            { name: "地域扩散 (Geo Spread)", id: "geographic-spread", def: "趋势在不同国家/地区的流行路线。", why: "如果你的目标是全球市场，了解趋势的“传播路线图”至关重要。", how: "识别那些在东南亚起势并即将蔓延到欧美的趋势，助你做全球化布局。" },
+            { name: "官方扶持 (Platform Push)", id: "platform-promotion", def: "TikTok 官方近期主推的功能或话题。", why: "顺势而为，官方喂饭。使用官方正在推广的滤镜、贴纸或话题，往往能获得额外的流量加权。", how: "第一时间同步官方活动日历和扶持计划，让你轻松获得“官方 buff”。" },
+            { name: "内卷指数 (Saturation)", id: "trend-saturation", def: "当前参与该趋势的拥挤程度。", why: "人多的地方不要去。当一个梗满大街都是时，再拍就是浪费时间。知道“什么时候离场”和“什么时候进场”一样重要。", how: "我们不仅告诉你什么火，还告诉你什么“已经过气了”，帮你节省宝贵的制作精力。" },
+            { name: "生命周期预判 (Longevity)", id: "trend-longevity", def: "这个趋势还能火多久。", why: "有些梗是昙花一现，有些则是长青树。根据生命周期来决定投入多少制作成本，是聪明人的做法。", how: "区分“快消型趋势”和“长效型趋势”，指导你是该快速蹭热点，还是精心打磨内容。" },
+            { name: "安全系数 (Brand Safety)", id: "brand-safety-score", def: "跟风是否有被限流或封号的风险。", why: "流量诚可贵，账号价更高。有些热点涉及敏感话题，盲目跟风可能导致限流甚至封号。", how: "每一个推荐的趋势都会附带风险评估，确保你在安全线内从容增长。" }
+          ]
+        },
+        audience: {
+          title: "受众画像 —— 读懂屏幕背后的人",
+          task: "不要猜你的观众喜欢什么，看数据怎么说。",
+          desc: "你的粉丝是谁？他们什么时候有空？他们还喜欢看什么？OwlSeer 把模糊的“粉丝”变成清晰的“画像”，让你的每一次发布都像是在对老朋友说话。",
+          linkText: "情报中心",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "查看受众深度分析 —— [探索情报中心演示](/sample-explorer/intelligence)。",
+          signals: [
+            { name: "涨粉加速度 (Growth Velocity)", id: "follower-growth-velocity", def: "近期粉丝增长的速率变化。", why: "涨粉速度比总量更重要。它反映了你当前的内容策略是否“对路”。", how: "将你的涨粉曲线与发布记录对应，找出那条让你“一夜爆红”的视频，并复制它的成功。" },
+            { name: "黄金发布时间 (Active Hours)", id: "active-hour-mapping", def: "你的粉丝最活跃的时间段。", why: "错的时间发对的内容=白发。在粉丝都在线的时候发布，能瞬间获得大量初始数据，助推视频进入更大的流量池。", how: "根据你粉丝的时区和习惯，精确到小时地告诉你：下周二下午 6 点发视频效果最好。" },
+            { name: "受众重合度 (Audience Overlap)", id: "audience-overlap", def: "你的粉丝还关注了谁。", why: "他山之石，可以攻玉。了解粉丝喜欢的其他博主，能帮你拓展选题思路，甚至找到合作机会。", how: "分析粉丝关注列表中的高频重合账号，拆解他们的爆款逻辑为你所用。" },
+            { name: "人群画像变迁 (Demo Shifts)", id: "demographic-shifts", def: "粉丝年龄、性别、地域的动态变化。", why: "账号在成长，受众也在变。如果不及时调整内容口吻，很容易造成老粉取关。", how: "敏锐捕捉受众构成的细微变化（比如男性比例增加），及时建议你调整内容风格。" },
+            { name: "热度衰减率 (Engagement Decay)", id: "engagement-decay", def: "视频发布后热度下降的速度。", why: "是“昙花一现”还是“细水长流”？了解内容的长尾效应，有助于平衡“蹭热点”和“做沉淀”的比例。", how: "帮你规划内容矩阵：用短平快的内容冲流量，用长效内容做沉淀。" },
+            { name: "观看路径 (User Journey)", id: "cross-video-journey", def: "看完这个视频后，他们去了哪？", why: "打造“沉浸式”体验。如果一个视频能让观众连着看你十个视频，你的账号权重会高得吓人。", how: "设计“连续剧”式的内容结构，让观众像追剧一样停不下来。" },
+            { name: "铁粉粘性 (Loyalty Score)", id: "follower-loyalty-score", def: "老粉对新视频的互动比例。", why: "铁粉是你的基本盘。如果老粉都不看你的新视频，说明账号遇到危机了。", how: "区分“吸粉内容”和“固粉内容”，确保在追求增长的同时不伤老粉的心。" },
+            { name: "新老占比 (New vs Returning)", id: "new-vs-returning", def: "陌生观众 vs 回头客的比例。", why: "太高说明留不住人，太低说明没流量。健康的账号需要维持一个动态平衡。", how: "监控流量结构，当你过于依赖老粉时，我们会建议你尝试破圈选题；当你流量虽大但留存低时，我们会建议你加强人设塑造。" }
+          ]
+        },
+        howTogether: {
+          title: "1+1 > 2：信号的化学反应",
+          task: "单一数据会骗人，组合拳才是王道。",
+          intro: "OwlSeer 的核心竞争力在于“交叉分析”。我们不会孤立地看某个指标，而是寻找它们之间的隐秘联系，从而给出更聪明的建议。例如：",
+          examples: [
+            { title: "Hook 率 + 音频趋势", desc: "当一个【正在飙升的 BGM】遇上你【最擅长的开场方式】，爆款概率将提升 300%。我们会自动为你匹配这种黄金组合。" },
+            { title: "活跃时间 + 趋势窗口", desc: "就算梗再火，半夜发也没人看。我们帮你计算出【趋势热度】与【粉丝活跃度】的完美交汇点，实现错峰打击。" },
+            { title: "分享率 + 评论情感", desc: "高分享+正向评论=神级内容。我们帮你找出历史视频中的这些“高光时刻”，提炼出可复制的模版，让你持续产出高质量内容。" }
+          ],
+          outro: "想深入了解这背后的 AI 算法？欢迎阅读我们的 [完整技术白皮书](/methodology)。"
+        },
+        boundary: {
+          title: "我们如何确数据的准确性",
+          data: "数据来源：我们只使用 TikTok 官方 API 提供的公开合规数据。本页展示的信号定义基于 OwlSeer 独家的分析模型。",
+          notDo: "我们的底线：OwlSeer 绝不使用任何违规爬虫，也不猜测 TikTok 的黑盒算法权重。我们的建议基于海量数据的统计学规律，而非玄学。",
+          variability: "免责声明：不同赛道、不同体量的账号，信号的表现力会有所不同。我们的 AI 会根据你的账号特性进行动态校准，但无法保证 100% 的预测准确率——毕竟，人心是不可预测的。"
+        },
+        cta: {
+          title: "眼见为实，让数据说话",
+          desc: "连接你的 TikTok 账号，3 分钟内获取一份长达 20 页的深度诊断报告。或者，先看看演示数据过过瘾。",
+          primary: "免费生成我的诊断报告",
+          secondary: "先看看演示数据"
+        },
+        contextualConversion: {
+           title: "想知道你的“黄金 3 秒”合格吗？",
+           desc: "连接 TikTok 账号，OwlSeer 立刻为你体检。3 分钟后，你将看到这 30+ 个信号在你账号上的具体数值，以及 3 个最紧迫的改进建议。",
+           button: "立即开始免费体检",
+           note: "安全无忧：官方接口只读权限，随时可解绑"
+        }
+      }
+    },
+    scriptGeneration: {
+      hero: {
+        badge: "新功能",
+        title: "60 秒内从你的数据生成",
+        titleHighlight: "TikTok 脚本",
+        desc: "OwlSeer 为你的受众定制可直接拍摄的脚本——钩子、正文、CTA、音频和标签，全部来自你的互动信号。",
+        cta: "开始免费试用",
+        demo: "尝试演示"
+      },
+      problem: {
+        title: "为什么脚本写作是瓶颈",
+        desc: "TikTok 奖励一致性。但每周制作 3-5 个高质量脚本需要 2-4 小时的手动工作。",
+        manual: {
+          title: "手动流程",
+          items: ["每周 2-4 小时", "通用、弱钩子", "猜测趋势", "发布不稳定"]
+        },
+        ai: {
+          title: "OwlSeer AI",
+          items: ["每周 15-30 分钟", "数据驱动钩子", "自动趋势整合", "稳定发布"]
+        }
+      },
+      solution: {
+        title: "OwlSeer 如何生成脚本",
+        desc: "我们不仅仅使用 GPT 套壳。OwlSeer 脚本基于三个专有数据源构建：",
+        sources: [
+          { title: "你的互动信号", desc: "AI 分析你的钩子率和观看时间，了解什么对你的受众有效。" },
+          { title: "当前趋势数据", desc: "直接从我们的趋势雷达整合上升的音频和标签。" },
+          { title: "内容画像", desc: "保持你独特的品牌声音和利基一致性。" }
+        ],
+        processing: {
+          label: "处理中...",
+          steps: [
+             { label: "分析钩子留存...", status: "完成" },
+             { label: "扫描趋势速度...", status: "完成" },
+             { label: "生成场景结构...", status: "处理中" },
+             { label: "优化 CTA...", status: "等待中" }
+          ]
+        }
+      },
+      tool: {
+        title: "告诉我们你的利基，免费获得一个钩子",
+        desc: "看看 OwlSeer 如何为你的特定受众定制开场 3 秒。",
+        placeholder: "选择你的利基",
+        inputPlaceholder: "输入一个话题（例如‘早晨例程’）",
+        generate: "生成",
+        resultLabel: "AI 生成的钩子",
+        fullScript: "想要完整脚本？",
+        connect: "连接账号"
+      },
+      workflow: {
+        title: "脚本工作流",
+        desc: "从每周 2-4 小时缩减到 15-30 分钟。",
+        steps: [
+          { day: "周一", title: "回顾与计划", desc: "查看周报，从智能推荐中挑选话题。" },
+          { day: "周二", title: "生成脚本", desc: "使用脚本工作室在 5 分钟内创建 3-5 个脚本。" },
+          { day: "周三-周五", title: "拍摄与发布", desc: "使用分场景细分进行拍摄。" },
+          { day: "周日", title: "安排", desc: "自动安排下周发布。" }
+        ]
+      },
+      footer: {
+        noteTitle: "透明度说明",
+        note: "脚本是起点，不是最终产品。创作者应审查并个性化每个脚本，以匹配其声音、拍摄设置和品牌。脚本表现取决于执行质量和外部因素。新账号最初可能会收到更多基于模板的脚本，直到收集到足够的数据。",
+        title: "在 60 秒内写出你的",
+        titleHighlight: "第一个脚本",
+        cta: "开始免费试用",
+        howItWorks: "查看工作原理"
+      }
+    },
+    contentCreators: {
+      hero: {
+        title: "数据驱动的 TikTok 增长引擎：打造病毒式爆款的 AI 秘密武器",
+        lead: "告别盲目猜测。利用千万级病毒视频数据点，精准生成脚本、预测爆款趋势并自动化互动策略。这是全球唯一利用深度学习优化完播率与粉丝留存的智能增长工具。",
+        primaryCta: "开始免费试用",
+        secondaryCta: "观看演示"
+      },
+      tldr: "OwlSeer 通过数据取代猜测帮助个人创作者成长。每周你会收到匹配你利基的趋势提醒、基于互动信号的内容推荐、可直接拍摄的脚本，以及个性化的发布时间表。我们会追踪你的内容供应节奏，以保持算法奖励的一致性。",
+      painPoints: {
+        title: "听起来很熟悉？",
+        subtitle: "这三个痛点正在拖慢个人创作者的脚步。",
+        cards: [
+          { 
+            title: "我从不知道下一步发什么", 
+            desc: "当你坐下来创作时大脑一片空白。主题感觉陈旧。你开始刷屏寻找灵感，这吞噬了制作时间。",
+            solutionTitle: "每周内容推荐",
+            solutionDesc: "每周一，根据你的受众偏好和趋势内容生成 5-10 个主题建议。"
+          },
+          { 
+            title: "我总是错过趋势", 
+            desc: "当你注意到一个趋势时，数百名创作者已经发布了。你的版本被淹没。你眼看着竞争对手乘风破浪。",
+            solutionTitle: "趋势提醒",
+            solutionDesc: "趋势雷达持续扫描你的利基，并在趋势达到顶峰前提醒你。"
+          },
+          { 
+            title: "我无法保持一致", 
+            desc: "你一周发 4 次，然后消失 10 天。不一致的循环减少了你的触达和动力。",
+            solutionTitle: "最优时间表",
+            solutionDesc: "我们追踪你的节奏并推荐一个保持一致性的发布频率。"
+          }
+        ]
+      },
+      solution: {
+        title: "OwlSeer 如何解决",
+        action: "查看样本数据上的所有功能",
+        items: [
+          { title: "每周内容推荐", desc: "每周一，生成 5-10 个带有信心评分和理由的主题建议。" },
+          { title: "高峰前趋势提醒", desc: "趋势雷达持续扫描你的利基，并通过速度评分提醒你上升的趋势。" },
+          { title: "可直接拍摄的脚本", desc: "在 60 秒内生成完整脚本。钩子、正文、CTA、音频和标签。" },
+          { title: "最优发布时间表", desc: "我们推荐保持一致性的发布节奏，并显示你的受众何时活跃。" }
+        ]
+      },
+      results: {
+        title: "创作者看到的效果",
+        disclaimer: "结果因创作者而异。效果取决于利基、起点、内容执行质量以及创作者实施建议的一致性。",
+        stats: [
+          { value: 5, suffix: "倍", label: "一致性提升", subLabel: "从零星发布到每周稳定" },
+          { value: 40, suffix: "%", label: "互动提升", subLabel: "更好的钩子和时机" },
+          { value: 5, suffix: "+", label: "每周节省小时", subLabel: "更少计划，更多创作" }
+        ]
+      },
+      features: {
+        title: "你获得的一切",
+        items: [
+          "带有信心评分的每周内容推荐",
+          "匹配你利基的趋势提醒",
+          "AI 脚本生成（60秒内）",
+          "个性化发布时间表",
+          "每周智能报告",
+          "带有问题检测的内容诊断",
+          "用于策略提问的 AI 副驾驶",
+          "带有表现分析的内容库"
+        ]
+      },
+      boundary: {
+        note: "我们使用的数据：你的公开 TikTok 账号指标。我们不做的：OwlSeer 不会代你发布、买粉或操控互动。增长来自更好的策略，而非人为膨胀。"
+      },
+      cta: {
+        title: "准备好停止猜测了吗？",
+        subtitle: "加入 10,000+ 使用数据驱动策略的创作者。免费试用，无需信用卡。",
+        primary: "开始免费试用",
+        secondary: "观看演示"
+      },
+      miniTool: {
+        title: "查看 OwlSeer 为你的下一条视频推荐什么。",
+        subtitle: "输入你的 TikTok 用户名以获取个性化的精简预览。",
+        placeholder: "用户名",
+        button: {
+          default: "显示我的推荐",
+          loading: "分析中..."
+        },
+        result: {
+          trend: "趋势匹配",
+          relevance: "相关性评分",
+          topic: "主题建议",
+          time: "最佳发布时间",
+          disclaimer: "这只是你完整计划中每周 5-10 条推荐中的 1 条。",
+          cta: "获取我的完整周计划"
+        },
+        mock: {
+          trend: "POV: 当你意识到...",
+          topic: "我的工作台幕后花絮",
+          time: "明天下午 6:30"
+        }
+      }
+    },
+    localBusiness: {
+        hero: {
+          badge: "专为本地商家设计",
+          title: "实体店 AI 拓客引擎：将 TikTok 流量转化为进店客流",
+          lead: "OwlSeer 专为本地商家打造。利用 AI 分析 30+ 维度信号，为您匹配周边热门趋势，自动生成高转化脚本，并锁定社区活跃黄金时段。告别无效曝光，让每一条视频都成为您的 24 小时金牌销售。",
+          primary: "开始免费试用",
+          secondary: "体验演示"
+        },
+        tldr: "本地商家不需要数百万的浏览量。你需要的是正确的 5,000 人——那些住在驾车距离内并需要你服务的人。OwlSeer 追踪对本地重要的信号：主页访问率、收藏率和地理传播。AI Goals 追踪将浏览转化为客流的指标。",
+        painPoints: {
+          title: "听起来很熟悉？",
+          items: [
+            {
+              title: "不知道发什么",
+              desc: "你是开餐厅、沙龙或健身房的，不是媒体公司。每周想内容创意感觉像第二份工作。"
+            },
+            {
+              title: "内容像广告不像 TikTok",
+              desc: "你知道 TikTok 奖励真实内容。但当你试图推广业务时，结果看起来像个商业广告。"
+            },
+            {
+              title: "有播放量但没客人来",
+              desc: "你的视频有 5 万播放，但没人进店。来自全国的浏览量对本地披萨店没有帮助。"
+            }
+          ]
+        },
+        solution: {
+          title: "本地商家如何使用 OwlSeer",
+          items: [
+            {
+              title: "本地趋势匹配",
+              desc: "Trend Radar 扫描适合本地商家的趋势——餐厅评论、沙龙改造、健身挑战。匹配分数考虑你的商业类型。",
+              icon: "Trend"
+            },
+            {
+              title: "服务型脚本",
+              desc: "Script Studio 生成专为本地格式设计的脚本——幕后花絮、顾客反应视频和季节性促销钩子。",
+              icon: "Script"
+            },
+            {
+              title: "本地受众排期",
+              desc: "你的客户与全国受众的在线时间不同。最佳时间徽章确保你在社区滚动浏览时发布。",
+              icon: "Schedule"
+            },
+            {
+              title: "到店目标追踪",
+              desc: "AI Goals 让你设定符合本地商家的目标：“本月主页访问增加 50%”或“每周获得 10 个私信询盘”。",
+              icon: "Goal"
+            }
+          ]
+        },
+        results: {
+          title: "本地商家看到的效果",
+          stats: [
+            { value: "3x", label: "更多内容产出", desc: "AI 脚本消除了“发什么”的瓶颈" },
+            { value: "65%", label: "更多主页访问", desc: "更好的钩子吸引更多人访问你的主页" },
+            { value: "2x", label: "私信询盘增加", desc: "服务型 CTA 将观众转化为线索" }
+          ]
+        },
+        formats: {
+          title: "适合本地的内容格式",
+          items: [
+            { title: "幕后花絮", desc: "展示厨房或工作室里发生的事情。" },
+            { title: "顾客反应", desc: "来自快乐顾客的真实反应。" },
+            { title: "前后对比", desc: "视觉变化赢得收藏。" },
+            { title: "一天的生活", desc: "人性化品牌并激发本地自豪感。" },
+            { title: "季节/活动", desc: "将内容与本地活动和节日联系起来。" },
+            { title: "虚拟导览", desc: "带观众参观你的空间。" }
+          ]
+        },
+        calculator: {
+          title: "TikTok 能带来多少额外客人？",
+          followers: "当前 TikTok 粉丝数",
+          aov: "平均客单价 ($)",
+          result: {
+            customers: "预估月度到店客人",
+            revenue: "预估月度额外收入"
+          },
+          cta: "开始带客人进门"
+        },
+        boundary: {
+          note: "我们使用的数据：你的 TikTok 账号指标（主页访问率、收藏率、地理传播）。我们不做的：OwlSeer 不保证客流或销售。我们不直接追踪进店访问。"
+        },
+        cta: {
+          title: "准备好带客人进门了吗？",
+          subtitle: "你的下一个常客可能正在刷 TikTok。连接你的账号，开始用数据驱动的内容触达本地受众。",
+          primary: "开始免费试用",
+          secondary: "体验演示"
+        }
+      },
+    compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ：哪个 TikTok 工具适合你的工作流？",
+          lead: "VidIQ 从 YouTube 起步后扩展到 TikTok。OwlSeer 从第一天起就专为 TikTok 构建。差异在于平台深度。"
+        },
+        tldr: "如果 TikTok 是你的主平台，你需要 30+ 信号深度、AI 脚本、趋势预测，请选择 OwlSeer。如果 YouTube 是你的主平台，TikTok 是次要渠道，请选择 VidIQ。",
+        table: {
+          title: "功能详细对比",
+          rows: [
+            { feature: "主要平台", owlseer: "TikTok (专注)", vidiq: "YouTube (主要), TikTok (次要)" },
+            { feature: "TikTok 信号深度", owlseer: "30+ 加权信号", vidiq: "基础 TikTok 指标" },
+            { feature: "趋势预测", owlseer: "AI 驱动 + 速度评分", vidiq: "热门话题列表" },
+            { feature: "脚本生成", owlseer: "数据驱动 Hook-Body-CTA", vidiq: "无原生脚本生成" },
+            { feature: "发布时间表", owlseer: "个性化最佳时间热力图", vidiq: "通用最佳时间建议" },
+            { feature: "内容诊断", owlseer: "问题检测与修复建议", vidiq: "表现概览" },
+            { feature: "AI 副驾驶", owlseer: "对话式助手", vidiq: "无对话式 AI" },
+            { feature: "周报", owlseer: "自动化 KPI 追踪", vidiq: "无自动化周报" },
+            { feature: "品牌安全", owlseer: "0-100 风险评分", vidiq: "无品牌安全评分" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "选择 OwlSeer 如果...",
+          items: [
+            "TikTok 是你的主要或唯一平台",
+            "你需要超越基础指标的 30+ 信号深度",
+            "你需要针对受众个性化的 AI 脚本",
+            "趋势时机和速度对你的策略很重要",
+            "你需要带有 KPI 追踪的自动化周报",
+            "你更喜欢对话式 AI 副驾驶"
+          ]
+        },
+        chooseVidIQ: {
+          title: "选择 VidIQ 如果...",
+          items: [
+            "YouTube 是你的主要平台",
+            "你需要 YouTube 特有功能 (SEO, 关键词)",
+            "TikTok 是次要渠道，基础指标就够了",
+            "你已经在使用 VidIQ 做 YouTube"
+          ]
+        },
+        platformFocus: {
+          title: "为什么平台专注度很重要",
+          p1: "YouTube 和 TikTok 奖励不同的行为。YouTube 是搜索驱动的——标题、描述和缩略图决定发现。TikTok 是算法驱动的——完播率、Hook 率和趋势匹配决定分发。",
+          p2: "为 YouTube 构建的工具优化搜索意图。为 TikTok 构建的工具优化信号模式。使用 YouTube 优先的工具做 TikTok 策略就像用公路地图在海洋导航——你可以尝试，但地形完全不同。",
+          highlight: "OwlSeer 追踪 YouTube 优先工具不建模的 TikTok 特有指标（AER、Hook 率、保存率）。"
+        },
+        boundary: {
+          transparency: "功能对比基于 2026 年 2 月的公开产品信息。",
+          note: "此对比不是付费评论。我们建立它是为了帮助创作者做出明智决定。"
+        },
+        cta: {
+          title: "准备好尝试 TikTok 原生策略了吗？",
+          subtitle: "在样本数据上查看 OwlSeer 如何工作。或者开始免费试用。",
+          primary: "开始免费试用",
+          secondary: "探索演示"
+        }
+      }
+    },
   ja: {
     product: '製品',
     pricing: '料金',
@@ -585,6 +1759,112 @@ export const translations = {
       resources: "リソース",
       legal: "法的情報",
       rights: "© 2026 OwlSeer. All rights reserved."
+    },
+    signalsPage: {
+      ctaButton: "Analyze this signal",
+      hero: {
+        title: "The 30+ TikTok Signals OwlSeer Tracks for Your Growth",
+        lead: "OwlSeer goes beyond likes and views. We analyze 30+ weighted signals across engagement, trends, and audience behavior to generate strategies personalized to your account. This page defines every signal — what it measures, why it matters, and how OwlSeer uses it."
+      },
+      tldr: {
+        content: "We track **12 engagement signals** (hook rate, watch-through, shares, and more), **10 trend signals** (sound velocity, hashtag momentum, saturation), and **8+ audience signals** (growth velocity, active hours, demographics). Each signal carries a weight based on its predictive power. Combined, they form your content profile — the foundation for every recommendation. See our [methodology](/methodology) for how these signals flow through our AI pipeline."
+      },
+      quickNav: {
+        engagement: "Engagement (12)",
+        trends: "Trends (10)",
+        audience: "Audience (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "Engagement Signals — 12 Factors",
+          task: "Understand how OwlSeer measures the way viewers interact with your content.",
+          desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
+          linkText: "AER card",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          signals: [
+            { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
+            { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
+            { name: "Share Rate", id: "share-rate", def: "Number of shares relative to total views.", why: "Shares indicate viral potential and are one of the strongest signals for For You Page qualification. A shared video reaches audiences beyond the algorithm's initial distribution.", how: "We identify share-worthy content characteristics in your niche — humor patterns, educational \"aha\" moments, relatable situations — and recommend formats that encourage sharing." },
+            { name: "Comment Sentiment", id: "comment-sentiment", def: "AI analysis of comment tone, quality, and engagement depth.", why: "Positive sentiment correlates with algorithm boost. But volume matters too — videos that spark discussion (even debate) signal community engagement, which TikTok rewards.", how: "We guide content toward topics that drive meaningful comments. If sentiment trends negative, OwlSeer flags the shift and suggests adjustments." },
+            { name: "Save Rate", id: "save-rate", def: "Number of saves relative to total views.", why: "Saves indicate high-value, reference-worthy content. TikTok treats saves as a strong quality signal because users save content they intend to revisit.", how: "We identify educational, tutorial, and inspirational content patterns that drive saves in your niche and recommend topics that match." },
+            { name: "Reply Rate", id: "reply-rate", def: "Creator replies relative to comments received.", why: "Reply rate signals active community building. Responding to comments can boost video distribution and deepen audience loyalty.", how: "We recommend an optimal comment engagement strategy based on your capacity, time, and growth goals." },
+            { name: "Stitch/Duet Rate", id: "stitch-duet-rate", def: "How often your content inspires stitch or duet responses from other creators.", why: "Stitches and duets extend your reach through other creators' audiences. Content that generates responses has inherently higher distribution potential.", how: "We identify collaborative content opportunities and formats that encourage stitches and duets — opinion prompts, challenges, and debate starters." },
+            { name: "Profile Visit Rate", id: "profile-visit-rate", def: "Profile views generated per video view.", why: "Profile visits indicate curiosity about the creator beyond a single video. A high profile visit rate suggests content that builds personal brand interest.", how: "We optimize content for follower conversion by analyzing what drives profile visits — CTAs, personality-forward content, series formats." },
+            { name: "Follow-Through Rate", id: "follow-through-rate", def: "New followers generated per video view.", why: "The most direct measure of content's growth impact. Follow-through rate reveals which content types convert casual viewers into followers.", how: "We correlate follow-through rate with content attributes (topic, hook style, CTA type) to identify and recommend your highest-converting formats." },
+            { name: "Rewatch Rate", id: "rewatch-rate", def: "Estimated rewatches based on watch-time patterns that exceed 100% completion.", why: "Rewatches signal highly engaging content. TikTok counts rewatch time toward overall engagement, amplifying distribution for \"sticky\" videos.", how: "We identify content characteristics that drive repeat viewing — layered details, plot twists, dense information — and recommend those formats." },
+            { name: "Sound Usage", id: "sound-usage", def: "How your sound choices compare to current platform and niche trends.", why: "Trending sounds boost discoverability through TikTok's sound search and browsing features. The right sound at the right time amplifies distribution.", how: "We recommend sound strategies based on sound velocity data — rising sounds before they peak, evergreen sounds for consistent performance." },
+            { name: "Caption Engagement", id: "caption-engagement", def: "Interactions driven by caption content, including click-throughs on text and engagement prompted by caption text.", why: "Captions extend engagement beyond the video itself and can drive comments, shares, and profile visits. Well-crafted captions act as a second hook.", how: "We optimize caption strategy including length, opening hooks, question prompts, and call-to-action placement." }
+          ]
+        },
+        trends: {
+          title: "Trend Signals — 10 Factors",
+          task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
+          desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
+          linkText: "Trend Radar",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          signals: [
+            { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
+            { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
+            { name: "Format Migration", id: "format-migration", def: "Trend patterns moving from other platforms (Instagram Reels, YouTube Shorts) to TikTok.", why: "Cross-platform trends often gain momentum on TikTok faster than native trends. Early detection of format migration creates first-mover advantage.", how: "We monitor format patterns on adjacent platforms and provide early warnings when a trend is likely to migrate to TikTok." },
+            { name: "Niche Trend Velocity", id: "niche-trend-velocity", def: "Trend speed within your specific content category, compared to the platform-wide average.", why: "Niche trends have different lifecycles than platform-wide trends. A sound that peaks in 48 hours for comedy might sustain for two weeks in education.", how: "We provide customized trend timing recommendations calibrated to your specific niche's trend lifecycle." },
+            { name: "Creator Adoption Rate", id: "creator-adoption-rate", def: "How quickly top creators in your niche adopt a given trend.", why: "Creator adoption signals trend legitimacy and potential longevity. When established creators in your space start using a trend, it validates the trend's relevance.", how: "We track adoption patterns among comparable creators and factor this into trend confidence scores." },
+            { name: "Geographic Spread", id: "geographic-spread", def: "How a trend expands across regions and markets.", why: "Regional trends can go global. A trend starting in Southeast Asia may reach North America within 1-2 weeks. Early detection provides a competitive window.", how: "We identify emerging international trends relevant to your audience's geography and cultural context." },
+            { name: "Platform Promotion", id: "platform-promotion", def: "Indicators that TikTok itself is actively promoting specific content types, formats, or features.", why: "Platform-promoted trends receive algorithm boost and increased distribution. Aligning with platform priorities can significantly amplify reach.", how: "We detect platform promotion patterns and factor them into recommendations when relevant to your niche." },
+            { name: "Trend Saturation", id: "trend-saturation", def: "Current participation density in a trend, measured as active creators per hour.", why: "Oversaturated trends yield diminishing returns. When thousands of creators post the same trend simultaneously, individual videos get less distribution.", how: "We warn against late trend participation and suggest optimal exit points — the moment when continued participation yields negative returns." },
+            { name: "Trend Longevity", id: "trend-longevity", def: "Estimated remaining lifespan of an active trend.", why: "Some trends sustain for weeks. Others fade in 48 hours. Resource allocation — scripting, filming, editing — should match expected lifespan.", how: "We prioritize trends with longer predicted lifespans for content that requires more production effort, and flag quick-fade trends for lighter formats." },
+            { name: "Brand Safety Score", id: "brand-safety-score", def: "Risk assessment for participating in a trend, measured on a 0-100 scale.", why: "Some trends carry reputational risk for brands, professional creators, and educators. A trend may be popular but inappropriate for certain audiences.", how: "We flag potentially problematic trends with risk explanations and alternative recommendations, particularly for brand and business accounts." }
+          ]
+        },
+        audience: {
+          title: "Audience Signals — 8+ Factors",
+          task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
+          desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
+          linkText: "Intelligence Hub",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          signals: [
+            { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
+            { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
+            { name: "Audience Overlap", id: "audience-overlap", def: "Viewer similarity between your account and comparable creators in your niche.", why: "Audience overlap reveals content opportunities that worked for similar audiences. High overlap with a faster-growing creator suggests format or topic gaps you could fill.", how: "We identify proven content strategies from comparable creators and recommend adaptations calibrated to your specific audience." },
+            { name: "Demographic Shifts", id: "demographic-shifts", def: "Changes in audience age, gender, geography, and interest composition over time.", why: "Audience changes require strategy adjustment. If your audience skews younger over time, your content tone and references may need to evolve.", how: "We alert you to significant demographic shifts and suggest content adjustments to maintain engagement with your evolving audience." },
+            { name: "Engagement Decay", id: "engagement-decay", def: "How quickly engagement drops after posting, measured as interaction rate at 1h, 6h, 24h, and 7d post-publish.", why: "Decay rate indicates content longevity. Fast decay suggests spike-dependent content. Slow decay suggests evergreen value that continues generating views over time.", how: "We optimize for your goals — viral spikes (if you want reach) vs. sustained engagement (if you want community depth) — and recommend content types accordingly." },
+            { name: "Cross-Video Journey", id: "cross-video-journey", def: "How viewers move through your content after watching one video, including profile visits, binge-watching patterns, and playlist engagement.", why: "Cross-video journey reveals which content creates \"rabbit holes\" — the videos that lead viewers to watch 5, 10, or 20 more of your videos.", how: "We optimize content sequencing, suggest complementary topics, and identify which videos serve as effective entry points to your profile." },
+            { name: "Follower Loyalty Score", id: "follower-loyalty-score", def: "Repeat engagement rate from existing followers, measured as the percentage of followers who interact with each new video.", why: "Loyal followers amplify reach (their engagement signals boost distribution) and provide consistent baseline performance for every post.", how: "We identify content that builds loyalty (community posts, series, personal stories) vs. content that attracts new viewers (trending formats, discovery hooks) and recommend the right balance." },
+            { name: "New vs. Returning", id: "new-vs-returning", def: "The ratio of first-time viewers to returning viewers for each video.", why: "A healthy mix indicates sustainable growth. All-new-viewer content is unstable (high reach, low retention). All-returning content limits growth (loyal but capped).", how: "We balance viral content recommendations (for new viewer acquisition) with community-building content (for returning viewer retention)." }
+          ]
+        },
+        howTogether: {
+          title: "How These Signals Work Together",
+          task: "See how OwlSeer combines signals to produce insights no single metric reveals alone.",
+          intro: "Signals do not operate in isolation. OwlSeer's AI finds correlations between signals across all three categories to generate recommendations that account for the full picture. Three examples:",
+          examples: [
+            { title: "Hook rate + sound velocity", desc: "When a trending sound matches your successful hook patterns, OwlSeer prioritizes that recommendation with higher confidence. The combination of proven hook performance and rising sound momentum creates a compounding opportunity." },
+            { title: "Active hours + trend window", desc: "OwlSeer aligns trend participation timing with your audience's peak activity. Posting a trending format during your audience's most engaged window maximizes the early engagement signals that TikTok uses to decide distribution." },
+            { title: "Share rate + comment sentiment", desc: "Content that drives both sharing and positive discussion gets flagged as a high-replication candidate. OwlSeer identifies the specific content attributes — topic, hook style, CTA — that produced the dual-signal outcome." }
+          ],
+          outro: "Learn exactly how our AI processes signal combinations in our [complete methodology documentation](/methodology)."
+        },
+        boundary: {
+          title: "Boundary Box",
+          data: "Data we use: Publicly available TikTok account metrics accessed through the official API. Signal definitions on this page reflect OwlSeer's current analytical framework.",
+          notDo: "What we do not do: OwlSeer does not access TikTok's internal algorithm weights. Our signal weights are derived from observed correlations in public data, not from proprietary TikTok documentation.",
+          variability: "Variability note: Signal predictive power varies by niche, account size, audience geography, and TikTok algorithm updates. Correlations described on this page are based on aggregate data and may not apply identically to every account."
+        },
+        cta: {
+          title: "See Your Signals in Action",
+          desc: "Connect your TikTok account and receive your personalized signal analysis in under three minutes. Or explore sample data to see how signals translate into strategy.",
+          primary: "Start Free Analysis",
+          secondary: "Explore Sample Data"
+        },
+        contextualConversion: {
+           title: "What do these 30+ signals look like for YOU?",
+           desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
+           button: "Generate My Signal Profile",
+           note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      }
     }
   },
   ko: {
@@ -651,6 +1931,112 @@ export const translations = {
       resources: "리소스",
       legal: "법적 고지",
       rights: "© 2026 OwlSeer. All rights reserved."
+    },
+    signalsPage: {
+      ctaButton: "优化此指标",
+      hero: {
+        title: "The 30+ TikTok Signals OwlSeer Tracks for Your Growth",
+        lead: "OwlSeer goes beyond likes and views. We analyze 30+ weighted signals across engagement, trends, and audience behavior to generate strategies personalized to your account. This page defines every signal — what it measures, why it matters, and how OwlSeer uses it."
+      },
+      tldr: {
+        content: "We track **12 engagement signals** (hook rate, watch-through, shares, and more), **10 trend signals** (sound velocity, hashtag momentum, saturation), and **8+ audience signals** (growth velocity, active hours, demographics). Each signal carries a weight based on its predictive power. Combined, they form your content profile — the foundation for every recommendation. See our [methodology](/methodology) for how these signals flow through our AI pipeline."
+      },
+      quickNav: {
+        engagement: "Engagement (12)",
+        trends: "Trends (10)",
+        audience: "Audience (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "Engagement Signals — 12 Factors",
+          task: "Understand how OwlSeer measures the way viewers interact with your content.",
+          desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
+          linkText: "AER card",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          signals: [
+            { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
+            { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
+            { name: "Share Rate", id: "share-rate", def: "Number of shares relative to total views.", why: "Shares indicate viral potential and are one of the strongest signals for For You Page qualification. A shared video reaches audiences beyond the algorithm's initial distribution.", how: "We identify share-worthy content characteristics in your niche — humor patterns, educational \"aha\" moments, relatable situations — and recommend formats that encourage sharing." },
+            { name: "Comment Sentiment", id: "comment-sentiment", def: "AI analysis of comment tone, quality, and engagement depth.", why: "Positive sentiment correlates with algorithm boost. But volume matters too — videos that spark discussion (even debate) signal community engagement, which TikTok rewards.", how: "We guide content toward topics that drive meaningful comments. If sentiment trends negative, OwlSeer flags the shift and suggests adjustments." },
+            { name: "Save Rate", id: "save-rate", def: "Number of saves relative to total views.", why: "Saves indicate high-value, reference-worthy content. TikTok treats saves as a strong quality signal because users save content they intend to revisit.", how: "We identify educational, tutorial, and inspirational content patterns that drive saves in your niche and recommend topics that match." },
+            { name: "Reply Rate", id: "reply-rate", def: "Creator replies relative to comments received.", why: "Reply rate signals active community building. Responding to comments can boost video distribution and deepen audience loyalty.", how: "We recommend an optimal comment engagement strategy based on your capacity, time, and growth goals." },
+            { name: "Stitch/Duet Rate", id: "stitch-duet-rate", def: "How often your content inspires stitch or duet responses from other creators.", why: "Stitches and duets extend your reach through other creators' audiences. Content that generates responses has inherently higher distribution potential.", how: "We identify collaborative content opportunities and formats that encourage stitches and duets — opinion prompts, challenges, and debate starters." },
+            { name: "Profile Visit Rate", id: "profile-visit-rate", def: "Profile views generated per video view.", why: "Profile visits indicate curiosity about the creator beyond a single video. A high profile visit rate suggests content that builds personal brand interest.", how: "We optimize content for follower conversion by analyzing what drives profile visits — CTAs, personality-forward content, series formats." },
+            { name: "Follow-Through Rate", id: "follow-through-rate", def: "New followers generated per video view.", why: "The most direct measure of content's growth impact. Follow-through rate reveals which content types convert casual viewers into followers.", how: "We correlate follow-through rate with content attributes (topic, hook style, CTA type) to identify and recommend your highest-converting formats." },
+            { name: "Rewatch Rate", id: "rewatch-rate", def: "Estimated rewatches based on watch-time patterns that exceed 100% completion.", why: "Rewatches signal highly engaging content. TikTok counts rewatch time toward overall engagement, amplifying distribution for \"sticky\" videos.", how: "We identify content characteristics that drive repeat viewing — layered details, plot twists, dense information — and recommend those formats." },
+            { name: "Sound Usage", id: "sound-usage", def: "How your sound choices compare to current platform and niche trends.", why: "Trending sounds boost discoverability through TikTok's sound search and browsing features. The right sound at the right time amplifies distribution.", how: "We recommend sound strategies based on sound velocity data — rising sounds before they peak, evergreen sounds for consistent performance." },
+            { name: "Caption Engagement", id: "caption-engagement", def: "Interactions driven by caption content, including click-throughs on text and engagement prompted by caption text.", why: "Captions extend engagement beyond the video itself and can drive comments, shares, and profile visits. Well-crafted captions act as a second hook.", how: "We optimize caption strategy including length, opening hooks, question prompts, and call-to-action placement." }
+          ]
+        },
+        trends: {
+          title: "Trend Signals — 10 Factors",
+          task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
+          desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
+          linkText: "Trend Radar",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          signals: [
+            { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
+            { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
+            { name: "Format Migration", id: "format-migration", def: "Trend patterns moving from other platforms (Instagram Reels, YouTube Shorts) to TikTok.", why: "Cross-platform trends often gain momentum on TikTok faster than native trends. Early detection of format migration creates first-mover advantage.", how: "We monitor format patterns on adjacent platforms and provide early warnings when a trend is likely to migrate to TikTok." },
+            { name: "Niche Trend Velocity", id: "niche-trend-velocity", def: "Trend speed within your specific content category, compared to the platform-wide average.", why: "Niche trends have different lifecycles than platform-wide trends. A sound that peaks in 48 hours for comedy might sustain for two weeks in education.", how: "We provide customized trend timing recommendations calibrated to your specific niche's trend lifecycle." },
+            { name: "Creator Adoption Rate", id: "creator-adoption-rate", def: "How quickly top creators in your niche adopt a given trend.", why: "Creator adoption signals trend legitimacy and potential longevity. When established creators in your space start using a trend, it validates the trend's relevance.", how: "We track adoption patterns among comparable creators and factor this into trend confidence scores." },
+            { name: "Geographic Spread", id: "geographic-spread", def: "How a trend expands across regions and markets.", why: "Regional trends can go global. A trend starting in Southeast Asia may reach North America within 1-2 weeks. Early detection provides a competitive window.", how: "We identify emerging international trends relevant to your audience's geography and cultural context." },
+            { name: "Platform Promotion", id: "platform-promotion", def: "Indicators that TikTok itself is actively promoting specific content types, formats, or features.", why: "Platform-promoted trends receive algorithm boost and increased distribution. Aligning with platform priorities can significantly amplify reach.", how: "We detect platform promotion patterns and factor them into recommendations when relevant to your niche." },
+            { name: "Trend Saturation", id: "trend-saturation", def: "Current participation density in a trend, measured as active creators per hour.", why: "Oversaturated trends yield diminishing returns. When thousands of creators post the same trend simultaneously, individual videos get less distribution.", how: "We warn against late trend participation and suggest optimal exit points — the moment when continued participation yields negative returns." },
+            { name: "Trend Longevity", id: "trend-longevity", def: "Estimated remaining lifespan of an active trend.", why: "Some trends sustain for weeks. Others fade in 48 hours. Resource allocation — scripting, filming, editing — should match expected lifespan.", how: "We prioritize trends with longer predicted lifespans for content that requires more production effort, and flag quick-fade trends for lighter formats." },
+            { name: "Brand Safety Score", id: "brand-safety-score", def: "Risk assessment for participating in a trend, measured on a 0-100 scale.", why: "Some trends carry reputational risk for brands, professional creators, and educators. A trend may be popular but inappropriate for certain audiences.", how: "We flag potentially problematic trends with risk explanations and alternative recommendations, particularly for brand and business accounts." }
+          ]
+        },
+        audience: {
+          title: "Audience Signals — 8+ Factors",
+          task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
+          desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
+          linkText: "Intelligence Hub",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          signals: [
+            { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
+            { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
+            { name: "Audience Overlap", id: "audience-overlap", def: "Viewer similarity between your account and comparable creators in your niche.", why: "Audience overlap reveals content opportunities that worked for similar audiences. High overlap with a faster-growing creator suggests format or topic gaps you could fill.", how: "We identify proven content strategies from comparable creators and recommend adaptations calibrated to your specific audience." },
+            { name: "Demographic Shifts", id: "demographic-shifts", def: "Changes in audience age, gender, geography, and interest composition over time.", why: "Audience changes require strategy adjustment. If your audience skews younger over time, your content tone and references may need to evolve.", how: "We alert you to significant demographic shifts and suggest content adjustments to maintain engagement with your evolving audience." },
+            { name: "Engagement Decay", id: "engagement-decay", def: "How quickly engagement drops after posting, measured as interaction rate at 1h, 6h, 24h, and 7d post-publish.", why: "Decay rate indicates content longevity. Fast decay suggests spike-dependent content. Slow decay suggests evergreen value that continues generating views over time.", how: "We optimize for your goals — viral spikes (if you want reach) vs. sustained engagement (if you want community depth) — and recommend content types accordingly." },
+            { name: "Cross-Video Journey", id: "cross-video-journey", def: "How viewers move through your content after watching one video, including profile visits, binge-watching patterns, and playlist engagement.", why: "Cross-video journey reveals which content creates \"rabbit holes\" — the videos that lead viewers to watch 5, 10, or 20 more of your videos.", how: "We optimize content sequencing, suggest complementary topics, and identify which videos serve as effective entry points to your profile." },
+            { name: "Follower Loyalty Score", id: "follower-loyalty-score", def: "Repeat engagement rate from existing followers, measured as the percentage of followers who interact with each new video.", why: "Loyal followers amplify reach (their engagement signals boost distribution) and provide consistent baseline performance for every post.", how: "We identify content that builds loyalty (community posts, series, personal stories) vs. content that attracts new viewers (trending formats, discovery hooks) and recommend the right balance." },
+            { name: "New vs. Returning", id: "new-vs-returning", def: "The ratio of first-time viewers to returning viewers for each video.", why: "A healthy mix indicates sustainable growth. All-new-viewer content is unstable (high reach, low retention). All-returning content limits growth (loyal but capped).", how: "We balance viral content recommendations (for new viewer acquisition) with community-building content (for returning viewer retention)." }
+          ]
+        },
+        howTogether: {
+          title: "How These Signals Work Together",
+          task: "See how OwlSeer combines signals to produce insights no single metric reveals alone.",
+          intro: "Signals do not operate in isolation. OwlSeer's AI finds correlations between signals across all three categories to generate recommendations that account for the full picture. Three examples:",
+          examples: [
+            { title: "Hook rate + sound velocity", desc: "When a trending sound matches your successful hook patterns, OwlSeer prioritizes that recommendation with higher confidence. The combination of proven hook performance and rising sound momentum creates a compounding opportunity." },
+            { title: "Active hours + trend window", desc: "OwlSeer aligns trend participation timing with your audience's peak activity. Posting a trending format during your audience's most engaged window maximizes the early engagement signals that TikTok uses to decide distribution." },
+            { title: "Share rate + comment sentiment", desc: "Content that drives both sharing and positive discussion gets flagged as a high-replication candidate. OwlSeer identifies the specific content attributes — topic, hook style, CTA — that produced the dual-signal outcome." }
+          ],
+          outro: "Learn exactly how our AI processes signal combinations in our [complete methodology documentation](/methodology)."
+        },
+        boundary: {
+          title: "Boundary Box",
+          data: "Data we use: Publicly available TikTok account metrics accessed through the official API. Signal definitions on this page reflect OwlSeer's current analytical framework.",
+          notDo: "What we do not do: OwlSeer does not access TikTok's internal algorithm weights. Our signal weights are derived from observed correlations in public data, not from proprietary TikTok documentation.",
+          variability: "Variability note: Signal predictive power varies by niche, account size, audience geography, and TikTok algorithm updates. Correlations described on this page are based on aggregate data and may not apply identically to every account."
+        },
+        cta: {
+          title: "See Your Signals in Action",
+          desc: "Connect your TikTok account and receive your personalized signal analysis in under three minutes. Or explore sample data to see how signals translate into strategy.",
+          primary: "Start Free Analysis",
+          secondary: "Explore Sample Data"
+        },
+        contextualConversion: {
+           title: "What do these 30+ signals look like for YOU?",
+           desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
+           button: "Generate My Signal Profile",
+           note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      }
     }
   },
   es: {
@@ -717,6 +2103,111 @@ export const translations = {
       resources: "Recursos",
       legal: "Legal",
       rights: "© 2026 OwlSeer. Todos los derechos reservados."
+    },
+    signalsPage: {
+      hero: {
+        title: "The 30+ TikTok Signals OwlSeer Tracks for Your Growth",
+        lead: "OwlSeer goes beyond likes and views. We analyze 30+ weighted signals across engagement, trends, and audience behavior to generate strategies personalized to your account. This page defines every signal — what it measures, why it matters, and how OwlSeer uses it."
+      },
+      tldr: {
+        content: "We track **12 engagement signals** (hook rate, watch-through, shares, and more), **10 trend signals** (sound velocity, hashtag momentum, saturation), and **8+ audience signals** (growth velocity, active hours, demographics). Each signal carries a weight based on its predictive power. Combined, they form your content profile — the foundation for every recommendation. See our [methodology](/methodology) for how these signals flow through our AI pipeline."
+      },
+      quickNav: {
+        engagement: "Engagement (12)",
+        trends: "Trends (10)",
+        audience: "Audience (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "Engagement Signals — 12 Factors",
+          task: "Understand how OwlSeer measures the way viewers interact with your content.",
+          desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
+          linkText: "AER card",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          signals: [
+            { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
+            { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
+            { name: "Share Rate", id: "share-rate", def: "Number of shares relative to total views.", why: "Shares indicate viral potential and are one of the strongest signals for For You Page qualification. A shared video reaches audiences beyond the algorithm's initial distribution.", how: "We identify share-worthy content characteristics in your niche — humor patterns, educational \"aha\" moments, relatable situations — and recommend formats that encourage sharing." },
+            { name: "Comment Sentiment", id: "comment-sentiment", def: "AI analysis of comment tone, quality, and engagement depth.", why: "Positive sentiment correlates with algorithm boost. But volume matters too — videos that spark discussion (even debate) signal community engagement, which TikTok rewards.", how: "We guide content toward topics that drive meaningful comments. If sentiment trends negative, OwlSeer flags the shift and suggests adjustments." },
+            { name: "Save Rate", id: "save-rate", def: "Number of saves relative to total views.", why: "Saves indicate high-value, reference-worthy content. TikTok treats saves as a strong quality signal because users save content they intend to revisit.", how: "We identify educational, tutorial, and inspirational content patterns that drive saves in your niche and recommend topics that match." },
+            { name: "Reply Rate", id: "reply-rate", def: "Creator replies relative to comments received.", why: "Reply rate signals active community building. Responding to comments can boost video distribution and deepen audience loyalty.", how: "We recommend an optimal comment engagement strategy based on your capacity, time, and growth goals." },
+            { name: "Stitch/Duet Rate", id: "stitch-duet-rate", def: "How often your content inspires stitch or duet responses from other creators.", why: "Stitches and duets extend your reach through other creators' audiences. Content that generates responses has inherently higher distribution potential.", how: "We identify collaborative content opportunities and formats that encourage stitches and duets — opinion prompts, challenges, and debate starters." },
+            { name: "Profile Visit Rate", id: "profile-visit-rate", def: "Profile views generated per video view.", why: "Profile visits indicate curiosity about the creator beyond a single video. A high profile visit rate suggests content that builds personal brand interest.", how: "We optimize content for follower conversion by analyzing what drives profile visits — CTAs, personality-forward content, series formats." },
+            { name: "Follow-Through Rate", id: "follow-through-rate", def: "New followers generated per video view.", why: "The most direct measure of content's growth impact. Follow-through rate reveals which content types convert casual viewers into followers.", how: "We correlate follow-through rate with content attributes (topic, hook style, CTA type) to identify and recommend your highest-converting formats." },
+            { name: "Rewatch Rate", id: "rewatch-rate", def: "Estimated rewatches based on watch-time patterns that exceed 100% completion.", why: "Rewatches signal highly engaging content. TikTok counts rewatch time toward overall engagement, amplifying distribution for \"sticky\" videos.", how: "We identify content characteristics that drive repeat viewing — layered details, plot twists, dense information — and recommend those formats." },
+            { name: "Sound Usage", id: "sound-usage", def: "How your sound choices compare to current platform and niche trends.", why: "Trending sounds boost discoverability through TikTok's sound search and browsing features. The right sound at the right time amplifies distribution.", how: "We recommend sound strategies based on sound velocity data — rising sounds before they peak, evergreen sounds for consistent performance." },
+            { name: "Caption Engagement", id: "caption-engagement", def: "Interactions driven by caption content, including click-throughs on text and engagement prompted by caption text.", why: "Captions extend engagement beyond the video itself and can drive comments, shares, and profile visits. Well-crafted captions act as a second hook.", how: "We optimize caption strategy including length, opening hooks, question prompts, and call-to-action placement." }
+          ]
+        },
+        trends: {
+          title: "Trend Signals — 10 Factors",
+          task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
+          desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
+          linkText: "Trend Radar",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          signals: [
+            { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
+            { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
+            { name: "Format Migration", id: "format-migration", def: "Trend patterns moving from other platforms (Instagram Reels, YouTube Shorts) to TikTok.", why: "Cross-platform trends often gain momentum on TikTok faster than native trends. Early detection of format migration creates first-mover advantage.", how: "We monitor format patterns on adjacent platforms and provide early warnings when a trend is likely to migrate to TikTok." },
+            { name: "Niche Trend Velocity", id: "niche-trend-velocity", def: "Trend speed within your specific content category, compared to the platform-wide average.", why: "Niche trends have different lifecycles than platform-wide trends. A sound that peaks in 48 hours for comedy might sustain for two weeks in education.", how: "We provide customized trend timing recommendations calibrated to your specific niche's trend lifecycle." },
+            { name: "Creator Adoption Rate", id: "creator-adoption-rate", def: "How quickly top creators in your niche adopt a given trend.", why: "Creator adoption signals trend legitimacy and potential longevity. When established creators in your space start using a trend, it validates the trend's relevance.", how: "We track adoption patterns among comparable creators and factor this into trend confidence scores." },
+            { name: "Geographic Spread", id: "geographic-spread", def: "How a trend expands across regions and markets.", why: "Regional trends can go global. A trend starting in Southeast Asia may reach North America within 1-2 weeks. Early detection provides a competitive window.", how: "We identify emerging international trends relevant to your audience's geography and cultural context." },
+            { name: "Platform Promotion", id: "platform-promotion", def: "Indicators that TikTok itself is actively promoting specific content types, formats, or features.", why: "Platform-promoted trends receive algorithm boost and increased distribution. Aligning with platform priorities can significantly amplify reach.", how: "We detect platform promotion patterns and factor them into recommendations when relevant to your niche." },
+            { name: "Trend Saturation", id: "trend-saturation", def: "Current participation density in a trend, measured as active creators per hour.", why: "Oversaturated trends yield diminishing returns. When thousands of creators post the same trend simultaneously, individual videos get less distribution.", how: "We warn against late trend participation and suggest optimal exit points — the moment when continued participation yields negative returns." },
+            { name: "Trend Longevity", id: "trend-longevity", def: "Estimated remaining lifespan of an active trend.", why: "Some trends sustain for weeks. Others fade in 48 hours. Resource allocation — scripting, filming, editing — should match expected lifespan.", how: "We prioritize trends with longer predicted lifespans for content that requires more production effort, and flag quick-fade trends for lighter formats." },
+            { name: "Brand Safety Score", id: "brand-safety-score", def: "Risk assessment for participating in a trend, measured on a 0-100 scale.", why: "Some trends carry reputational risk for brands, professional creators, and educators. A trend may be popular but inappropriate for certain audiences.", how: "We flag potentially problematic trends with risk explanations and alternative recommendations, particularly for brand and business accounts." }
+          ]
+        },
+        audience: {
+          title: "Audience Signals — 8+ Factors",
+          task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
+          desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
+          linkText: "Intelligence Hub",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          signals: [
+            { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
+            { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
+            { name: "Audience Overlap", id: "audience-overlap", def: "Viewer similarity between your account and comparable creators in your niche.", why: "Audience overlap reveals content opportunities that worked for similar audiences. High overlap with a faster-growing creator suggests format or topic gaps you could fill.", how: "We identify proven content strategies from comparable creators and recommend adaptations calibrated to your specific audience." },
+            { name: "Demographic Shifts", id: "demographic-shifts", def: "Changes in audience age, gender, geography, and interest composition over time.", why: "Audience changes require strategy adjustment. If your audience skews younger over time, your content tone and references may need to evolve.", how: "We alert you to significant demographic shifts and suggest content adjustments to maintain engagement with your evolving audience." },
+            { name: "Engagement Decay", id: "engagement-decay", def: "How quickly engagement drops after posting, measured as interaction rate at 1h, 6h, 24h, and 7d post-publish.", why: "Decay rate indicates content longevity. Fast decay suggests spike-dependent content. Slow decay suggests evergreen value that continues generating views over time.", how: "We optimize for your goals — viral spikes (if you want reach) vs. sustained engagement (if you want community depth) — and recommend content types accordingly." },
+            { name: "Cross-Video Journey", id: "cross-video-journey", def: "How viewers move through your content after watching one video, including profile visits, binge-watching patterns, and playlist engagement.", why: "Cross-video journey reveals which content creates \"rabbit holes\" — the videos that lead viewers to watch 5, 10, or 20 more of your videos.", how: "We optimize content sequencing, suggest complementary topics, and identify which videos serve as effective entry points to your profile." },
+            { name: "Follower Loyalty Score", id: "follower-loyalty-score", def: "Repeat engagement rate from existing followers, measured as the percentage of followers who interact with each new video.", why: "Loyal followers amplify reach (their engagement signals boost distribution) and provide consistent baseline performance for every post.", how: "We identify content that builds loyalty (community posts, series, personal stories) vs. content that attracts new viewers (trending formats, discovery hooks) and recommend the right balance." },
+            { name: "New vs. Returning", id: "new-vs-returning", def: "The ratio of first-time viewers to returning viewers for each video.", why: "A healthy mix indicates sustainable growth. All-new-viewer content is unstable (high reach, low retention). All-returning content limits growth (loyal but capped).", how: "We balance viral content recommendations (for new viewer acquisition) with community-building content (for returning viewer retention)." }
+          ]
+        },
+        howTogether: {
+          title: "How These Signals Work Together",
+          task: "See how OwlSeer combines signals to produce insights no single metric reveals alone.",
+          intro: "Signals do not operate in isolation. OwlSeer's AI finds correlations between signals across all three categories to generate recommendations that account for the full picture. Three examples:",
+          examples: [
+            { title: "Hook rate + sound velocity", desc: "When a trending sound matches your successful hook patterns, OwlSeer prioritizes that recommendation with higher confidence. The combination of proven hook performance and rising sound momentum creates a compounding opportunity." },
+            { title: "Active hours + trend window", desc: "OwlSeer aligns trend participation timing with your audience's peak activity. Posting a trending format during your audience's most engaged window maximizes the early engagement signals that TikTok uses to decide distribution." },
+            { title: "Share rate + comment sentiment", desc: "Content that drives both sharing and positive discussion gets flagged as a high-replication candidate. OwlSeer identifies the specific content attributes — topic, hook style, CTA — that produced the dual-signal outcome." }
+          ],
+          outro: "Learn exactly how our AI processes signal combinations in our [complete methodology documentation](/methodology)."
+        },
+        boundary: {
+          title: "Boundary Box",
+          data: "Data we use: Publicly available TikTok account metrics accessed through the official API. Signal definitions on this page reflect OwlSeer's current analytical framework.",
+          notDo: "What we do not do: OwlSeer does not access TikTok's internal algorithm weights. Our signal weights are derived from observed correlations in public data, not from proprietary TikTok documentation.",
+          variability: "Variability note: Signal predictive power varies by niche, account size, audience geography, and TikTok algorithm updates. Correlations described on this page are based on aggregate data and may not apply identically to every account."
+        },
+        cta: {
+          title: "See Your Signals in Action",
+          desc: "Connect your TikTok account and receive your personalized signal analysis in under three minutes. Or explore sample data to see how signals translate into strategy.",
+          primary: "Start Free Analysis",
+          secondary: "Explore Sample Data"
+        },
+        contextualConversion: {
+           title: "What do these 30+ signals look like for YOU?",
+           desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
+           button: "Generate My Signal Profile",
+           note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      }
     }
   },
   fr: {
@@ -783,6 +2274,111 @@ export const translations = {
       resources: "Ressources",
       legal: "Légal",
       rights: "© 2026 OwlSeer. Tous droits réservés."
+    },
+    signalsPage: {
+      hero: {
+        title: "The 30+ TikTok Signals OwlSeer Tracks for Your Growth",
+        lead: "OwlSeer goes beyond likes and views. We analyze 30+ weighted signals across engagement, trends, and audience behavior to generate strategies personalized to your account. This page defines every signal — what it measures, why it matters, and how OwlSeer uses it."
+      },
+      tldr: {
+        content: "We track **12 engagement signals** (hook rate, watch-through, shares, and more), **10 trend signals** (sound velocity, hashtag momentum, saturation), and **8+ audience signals** (growth velocity, active hours, demographics). Each signal carries a weight based on its predictive power. Combined, they form your content profile — the foundation for every recommendation. See our [methodology](/methodology) for how these signals flow through our AI pipeline."
+      },
+      quickNav: {
+        engagement: "Engagement (12)",
+        trends: "Trends (10)",
+        audience: "Audience (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "Engagement Signals — 12 Factors",
+          task: "Understand how OwlSeer measures the way viewers interact with your content.",
+          desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
+          linkText: "AER card",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          signals: [
+            { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
+            { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
+            { name: "Share Rate", id: "share-rate", def: "Number of shares relative to total views.", why: "Shares indicate viral potential and are one of the strongest signals for For You Page qualification. A shared video reaches audiences beyond the algorithm's initial distribution.", how: "We identify share-worthy content characteristics in your niche — humor patterns, educational \"aha\" moments, relatable situations — and recommend formats that encourage sharing." },
+            { name: "Comment Sentiment", id: "comment-sentiment", def: "AI analysis of comment tone, quality, and engagement depth.", why: "Positive sentiment correlates with algorithm boost. But volume matters too — videos that spark discussion (even debate) signal community engagement, which TikTok rewards.", how: "We guide content toward topics that drive meaningful comments. If sentiment trends negative, OwlSeer flags the shift and suggests adjustments." },
+            { name: "Save Rate", id: "save-rate", def: "Number of saves relative to total views.", why: "Saves indicate high-value, reference-worthy content. TikTok treats saves as a strong quality signal because users save content they intend to revisit.", how: "We identify educational, tutorial, and inspirational content patterns that drive saves in your niche and recommend topics that match." },
+            { name: "Reply Rate", id: "reply-rate", def: "Creator replies relative to comments received.", why: "Reply rate signals active community building. Responding to comments can boost video distribution and deepen audience loyalty.", how: "We recommend an optimal comment engagement strategy based on your capacity, time, and growth goals." },
+            { name: "Stitch/Duet Rate", id: "stitch-duet-rate", def: "How often your content inspires stitch or duet responses from other creators.", why: "Stitches and duets extend your reach through other creators' audiences. Content that generates responses has inherently higher distribution potential.", how: "We identify collaborative content opportunities and formats that encourage stitches and duets — opinion prompts, challenges, and debate starters." },
+            { name: "Profile Visit Rate", id: "profile-visit-rate", def: "Profile views generated per video view.", why: "Profile visits indicate curiosity about the creator beyond a single video. A high profile visit rate suggests content that builds personal brand interest.", how: "We optimize content for follower conversion by analyzing what drives profile visits — CTAs, personality-forward content, series formats." },
+            { name: "Follow-Through Rate", id: "follow-through-rate", def: "New followers generated per video view.", why: "The most direct measure of content's growth impact. Follow-through rate reveals which content types convert casual viewers into followers.", how: "We correlate follow-through rate with content attributes (topic, hook style, CTA type) to identify and recommend your highest-converting formats." },
+            { name: "Rewatch Rate", id: "rewatch-rate", def: "Estimated rewatches based on watch-time patterns that exceed 100% completion.", why: "Rewatches signal highly engaging content. TikTok counts rewatch time toward overall engagement, amplifying distribution for \"sticky\" videos.", how: "We identify content characteristics that drive repeat viewing — layered details, plot twists, dense information — and recommend those formats." },
+            { name: "Sound Usage", id: "sound-usage", def: "How your sound choices compare to current platform and niche trends.", why: "Trending sounds boost discoverability through TikTok's sound search and browsing features. The right sound at the right time amplifies distribution.", how: "We recommend sound strategies based on sound velocity data — rising sounds before they peak, evergreen sounds for consistent performance." },
+            { name: "Caption Engagement", id: "caption-engagement", def: "Interactions driven by caption content, including click-throughs on text and engagement prompted by caption text.", why: "Captions extend engagement beyond the video itself and can drive comments, shares, and profile visits. Well-crafted captions act as a second hook.", how: "We optimize caption strategy including length, opening hooks, question prompts, and call-to-action placement." }
+          ]
+        },
+        trends: {
+          title: "Trend Signals — 10 Factors",
+          task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
+          desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
+          linkText: "Trend Radar",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          signals: [
+            { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
+            { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
+            { name: "Format Migration", id: "format-migration", def: "Trend patterns moving from other platforms (Instagram Reels, YouTube Shorts) to TikTok.", why: "Cross-platform trends often gain momentum on TikTok faster than native trends. Early detection of format migration creates first-mover advantage.", how: "We monitor format patterns on adjacent platforms and provide early warnings when a trend is likely to migrate to TikTok." },
+            { name: "Niche Trend Velocity", id: "niche-trend-velocity", def: "Trend speed within your specific content category, compared to the platform-wide average.", why: "Niche trends have different lifecycles than platform-wide trends. A sound that peaks in 48 hours for comedy might sustain for two weeks in education.", how: "We provide customized trend timing recommendations calibrated to your specific niche's trend lifecycle." },
+            { name: "Creator Adoption Rate", id: "creator-adoption-rate", def: "How quickly top creators in your niche adopt a given trend.", why: "Creator adoption signals trend legitimacy and potential longevity. When established creators in your space start using a trend, it validates the trend's relevance.", how: "We track adoption patterns among comparable creators and factor this into trend confidence scores." },
+            { name: "Geographic Spread", id: "geographic-spread", def: "How a trend expands across regions and markets.", why: "Regional trends can go global. A trend starting in Southeast Asia may reach North America within 1-2 weeks. Early detection provides a competitive window.", how: "We identify emerging international trends relevant to your audience's geography and cultural context." },
+            { name: "Platform Promotion", id: "platform-promotion", def: "Indicators that TikTok itself is actively promoting specific content types, formats, or features.", why: "Platform-promoted trends receive algorithm boost and increased distribution. Aligning with platform priorities can significantly amplify reach.", how: "We detect platform promotion patterns and factor them into recommendations when relevant to your niche." },
+            { name: "Trend Saturation", id: "trend-saturation", def: "Current participation density in a trend, measured as active creators per hour.", why: "Oversaturated trends yield diminishing returns. When thousands of creators post the same trend simultaneously, individual videos get less distribution.", how: "We warn against late trend participation and suggest optimal exit points — the moment when continued participation yields negative returns." },
+            { name: "Trend Longevity", id: "trend-longevity", def: "Estimated remaining lifespan of an active trend.", why: "Some trends sustain for weeks. Others fade in 48 hours. Resource allocation — scripting, filming, editing — should match expected lifespan.", how: "We prioritize trends with longer predicted lifespans for content that requires more production effort, and flag quick-fade trends for lighter formats." },
+            { name: "Brand Safety Score", id: "brand-safety-score", def: "Risk assessment for participating in a trend, measured on a 0-100 scale.", why: "Some trends carry reputational risk for brands, professional creators, and educators. A trend may be popular but inappropriate for certain audiences.", how: "We flag potentially problematic trends with risk explanations and alternative recommendations, particularly for brand and business accounts." }
+          ]
+        },
+        audience: {
+          title: "Audience Signals — 8+ Factors",
+          task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
+          desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
+          linkText: "Intelligence Hub",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          signals: [
+            { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
+            { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
+            { name: "Audience Overlap", id: "audience-overlap", def: "Viewer similarity between your account and comparable creators in your niche.", why: "Audience overlap reveals content opportunities that worked for similar audiences. High overlap with a faster-growing creator suggests format or topic gaps you could fill.", how: "We identify proven content strategies from comparable creators and recommend adaptations calibrated to your specific audience." },
+            { name: "Demographic Shifts", id: "demographic-shifts", def: "Changes in audience age, gender, geography, and interest composition over time.", why: "Audience changes require strategy adjustment. If your audience skews younger over time, your content tone and references may need to evolve.", how: "We alert you to significant demographic shifts and suggest content adjustments to maintain engagement with your evolving audience." },
+            { name: "Engagement Decay", id: "engagement-decay", def: "How quickly engagement drops after posting, measured as interaction rate at 1h, 6h, 24h, and 7d post-publish.", why: "Decay rate indicates content longevity. Fast decay suggests spike-dependent content. Slow decay suggests evergreen value that continues generating views over time.", how: "We optimize for your goals — viral spikes (if you want reach) vs. sustained engagement (if you want community depth) — and recommend content types accordingly." },
+            { name: "Cross-Video Journey", id: "cross-video-journey", def: "How viewers move through your content after watching one video, including profile visits, binge-watching patterns, and playlist engagement.", why: "Cross-video journey reveals which content creates \"rabbit holes\" — the videos that lead viewers to watch 5, 10, or 20 more of your videos.", how: "We optimize content sequencing, suggest complementary topics, and identify which videos serve as effective entry points to your profile." },
+            { name: "Follower Loyalty Score", id: "follower-loyalty-score", def: "Repeat engagement rate from existing followers, measured as the percentage of followers who interact with each new video.", why: "Loyal followers amplify reach (their engagement signals boost distribution) and provide consistent baseline performance for every post.", how: "We identify content that builds loyalty (community posts, series, personal stories) vs. content that attracts new viewers (trending formats, discovery hooks) and recommend the right balance." },
+            { name: "New vs. Returning", id: "new-vs-returning", def: "The ratio of first-time viewers to returning viewers for each video.", why: "A healthy mix indicates sustainable growth. All-new-viewer content is unstable (high reach, low retention). All-returning content limits growth (loyal but capped).", how: "We balance viral content recommendations (for new viewer acquisition) with community-building content (for returning viewer retention)." }
+          ]
+        },
+        howTogether: {
+          title: "How These Signals Work Together",
+          task: "See how OwlSeer combines signals to produce insights no single metric reveals alone.",
+          intro: "Signals do not operate in isolation. OwlSeer's AI finds correlations between signals across all three categories to generate recommendations that account for the full picture. Three examples:",
+          examples: [
+            { title: "Hook rate + sound velocity", desc: "When a trending sound matches your successful hook patterns, OwlSeer prioritizes that recommendation with higher confidence. The combination of proven hook performance and rising sound momentum creates a compounding opportunity." },
+            { title: "Active hours + trend window", desc: "OwlSeer aligns trend participation timing with your audience's peak activity. Posting a trending format during your audience's most engaged window maximizes the early engagement signals that TikTok uses to decide distribution." },
+            { title: "Share rate + comment sentiment", desc: "Content that drives both sharing and positive discussion gets flagged as a high-replication candidate. OwlSeer identifies the specific content attributes — topic, hook style, CTA — that produced the dual-signal outcome." }
+          ],
+          outro: "Learn exactly how our AI processes signal combinations in our [complete methodology documentation](/methodology)."
+        },
+        boundary: {
+          title: "Boundary Box",
+          data: "Data we use: Publicly available TikTok account metrics accessed through the official API. Signal definitions on this page reflect OwlSeer's current analytical framework.",
+          notDo: "What we do not do: OwlSeer does not access TikTok's internal algorithm weights. Our signal weights are derived from observed correlations in public data, not from proprietary TikTok documentation.",
+          variability: "Variability note: Signal predictive power varies by niche, account size, audience geography, and TikTok algorithm updates. Correlations described on this page are based on aggregate data and may not apply identically to every account."
+        },
+        cta: {
+          title: "See Your Signals in Action",
+          desc: "Connect your TikTok account and receive your personalized signal analysis in under three minutes. Or explore sample data to see how signals translate into strategy.",
+          primary: "Start Free Analysis",
+          secondary: "Explore Sample Data"
+        },
+        contextualConversion: {
+           title: "What do these 30+ signals look like for YOU?",
+           desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
+           button: "Generate My Signal Profile",
+           note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      }
     }
   },
   de: {
@@ -849,6 +2445,111 @@ export const translations = {
       resources: "Ressourcen",
       legal: "Rechtliches",
       rights: "© 2026 OwlSeer. Alle Rechte vorbehalten."
+    },
+    signalsPage: {
+      hero: {
+        title: "The 30+ TikTok Signals OwlSeer Tracks for Your Growth",
+        lead: "OwlSeer goes beyond likes and views. We analyze 30+ weighted signals across engagement, trends, and audience behavior to generate strategies personalized to your account. This page defines every signal — what it measures, why it matters, and how OwlSeer uses it."
+      },
+      tldr: {
+        content: "We track **12 engagement signals** (hook rate, watch-through, shares, and more), **10 trend signals** (sound velocity, hashtag momentum, saturation), and **8+ audience signals** (growth velocity, active hours, demographics). Each signal carries a weight based on its predictive power. Combined, they form your content profile — the foundation for every recommendation. See our [methodology](/methodology) for how these signals flow through our AI pipeline."
+      },
+      quickNav: {
+        engagement: "Engagement (12)",
+        trends: "Trends (10)",
+        audience: "Audience (8+)"
+      },
+      sections: {
+        engagement: {
+          title: "Engagement Signals — 12 Factors",
+          task: "Understand how OwlSeer measures the way viewers interact with your content.",
+          desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
+          linkText: "AER card",
+          linkUrl: "/sample-explorer/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          signals: [
+            { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
+            { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
+            { name: "Share Rate", id: "share-rate", def: "Number of shares relative to total views.", why: "Shares indicate viral potential and are one of the strongest signals for For You Page qualification. A shared video reaches audiences beyond the algorithm's initial distribution.", how: "We identify share-worthy content characteristics in your niche — humor patterns, educational \"aha\" moments, relatable situations — and recommend formats that encourage sharing." },
+            { name: "Comment Sentiment", id: "comment-sentiment", def: "AI analysis of comment tone, quality, and engagement depth.", why: "Positive sentiment correlates with algorithm boost. But volume matters too — videos that spark discussion (even debate) signal community engagement, which TikTok rewards.", how: "We guide content toward topics that drive meaningful comments. If sentiment trends negative, OwlSeer flags the shift and suggests adjustments." },
+            { name: "Save Rate", id: "save-rate", def: "Number of saves relative to total views.", why: "Saves indicate high-value, reference-worthy content. TikTok treats saves as a strong quality signal because users save content they intend to revisit.", how: "We identify educational, tutorial, and inspirational content patterns that drive saves in your niche and recommend topics that match." },
+            { name: "Reply Rate", id: "reply-rate", def: "Creator replies relative to comments received.", why: "Reply rate signals active community building. Responding to comments can boost video distribution and deepen audience loyalty.", how: "We recommend an optimal comment engagement strategy based on your capacity, time, and growth goals." },
+            { name: "Stitch/Duet Rate", id: "stitch-duet-rate", def: "How often your content inspires stitch or duet responses from other creators.", why: "Stitches and duets extend your reach through other creators' audiences. Content that generates responses has inherently higher distribution potential.", how: "We identify collaborative content opportunities and formats that encourage stitches and duets — opinion prompts, challenges, and debate starters." },
+            { name: "Profile Visit Rate", id: "profile-visit-rate", def: "Profile views generated per video view.", why: "Profile visits indicate curiosity about the creator beyond a single video. A high profile visit rate suggests content that builds personal brand interest.", how: "We optimize content for follower conversion by analyzing what drives profile visits — CTAs, personality-forward content, series formats." },
+            { name: "Follow-Through Rate", id: "follow-through-rate", def: "New followers generated per video view.", why: "The most direct measure of content's growth impact. Follow-through rate reveals which content types convert casual viewers into followers.", how: "We correlate follow-through rate with content attributes (topic, hook style, CTA type) to identify and recommend your highest-converting formats." },
+            { name: "Rewatch Rate", id: "rewatch-rate", def: "Estimated rewatches based on watch-time patterns that exceed 100% completion.", why: "Rewatches signal highly engaging content. TikTok counts rewatch time toward overall engagement, amplifying distribution for \"sticky\" videos.", how: "We identify content characteristics that drive repeat viewing — layered details, plot twists, dense information — and recommend those formats." },
+            { name: "Sound Usage", id: "sound-usage", def: "How your sound choices compare to current platform and niche trends.", why: "Trending sounds boost discoverability through TikTok's sound search and browsing features. The right sound at the right time amplifies distribution.", how: "We recommend sound strategies based on sound velocity data — rising sounds before they peak, evergreen sounds for consistent performance." },
+            { name: "Caption Engagement", id: "caption-engagement", def: "Interactions driven by caption content, including click-throughs on text and engagement prompted by caption text.", why: "Captions extend engagement beyond the video itself and can drive comments, shares, and profile visits. Well-crafted captions act as a second hook.", how: "We optimize caption strategy including length, opening hooks, question prompts, and call-to-action placement." }
+          ]
+        },
+        trends: {
+          title: "Trend Signals — 10 Factors",
+          task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
+          desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
+          linkText: "Trend Radar",
+          linkUrl: "/sample-explorer/trend-radar",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          signals: [
+            { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
+            { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
+            { name: "Format Migration", id: "format-migration", def: "Trend patterns moving from other platforms (Instagram Reels, YouTube Shorts) to TikTok.", why: "Cross-platform trends often gain momentum on TikTok faster than native trends. Early detection of format migration creates first-mover advantage.", how: "We monitor format patterns on adjacent platforms and provide early warnings when a trend is likely to migrate to TikTok." },
+            { name: "Niche Trend Velocity", id: "niche-trend-velocity", def: "Trend speed within your specific content category, compared to the platform-wide average.", why: "Niche trends have different lifecycles than platform-wide trends. A sound that peaks in 48 hours for comedy might sustain for two weeks in education.", how: "We provide customized trend timing recommendations calibrated to your specific niche's trend lifecycle." },
+            { name: "Creator Adoption Rate", id: "creator-adoption-rate", def: "How quickly top creators in your niche adopt a given trend.", why: "Creator adoption signals trend legitimacy and potential longevity. When established creators in your space start using a trend, it validates the trend's relevance.", how: "We track adoption patterns among comparable creators and factor this into trend confidence scores." },
+            { name: "Geographic Spread", id: "geographic-spread", def: "How a trend expands across regions and markets.", why: "Regional trends can go global. A trend starting in Southeast Asia may reach North America within 1-2 weeks. Early detection provides a competitive window.", how: "We identify emerging international trends relevant to your audience's geography and cultural context." },
+            { name: "Platform Promotion", id: "platform-promotion", def: "Indicators that TikTok itself is actively promoting specific content types, formats, or features.", why: "Platform-promoted trends receive algorithm boost and increased distribution. Aligning with platform priorities can significantly amplify reach.", how: "We detect platform promotion patterns and factor them into recommendations when relevant to your niche." },
+            { name: "Trend Saturation", id: "trend-saturation", def: "Current participation density in a trend, measured as active creators per hour.", why: "Oversaturated trends yield diminishing returns. When thousands of creators post the same trend simultaneously, individual videos get less distribution.", how: "We warn against late trend participation and suggest optimal exit points — the moment when continued participation yields negative returns." },
+            { name: "Trend Longevity", id: "trend-longevity", def: "Estimated remaining lifespan of an active trend.", why: "Some trends sustain for weeks. Others fade in 48 hours. Resource allocation — scripting, filming, editing — should match expected lifespan.", how: "We prioritize trends with longer predicted lifespans for content that requires more production effort, and flag quick-fade trends for lighter formats." },
+            { name: "Brand Safety Score", id: "brand-safety-score", def: "Risk assessment for participating in a trend, measured on a 0-100 scale.", why: "Some trends carry reputational risk for brands, professional creators, and educators. A trend may be popular but inappropriate for certain audiences.", how: "We flag potentially problematic trends with risk explanations and alternative recommendations, particularly for brand and business accounts." }
+          ]
+        },
+        audience: {
+          title: "Audience Signals — 8+ Factors",
+          task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
+          desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
+          linkText: "Intelligence Hub",
+          linkUrl: "/sample-explorer/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          signals: [
+            { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
+            { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
+            { name: "Audience Overlap", id: "audience-overlap", def: "Viewer similarity between your account and comparable creators in your niche.", why: "Audience overlap reveals content opportunities that worked for similar audiences. High overlap with a faster-growing creator suggests format or topic gaps you could fill.", how: "We identify proven content strategies from comparable creators and recommend adaptations calibrated to your specific audience." },
+            { name: "Demographic Shifts", id: "demographic-shifts", def: "Changes in audience age, gender, geography, and interest composition over time.", why: "Audience changes require strategy adjustment. If your audience skews younger over time, your content tone and references may need to evolve.", how: "We alert you to significant demographic shifts and suggest content adjustments to maintain engagement with your evolving audience." },
+            { name: "Engagement Decay", id: "engagement-decay", def: "How quickly engagement drops after posting, measured as interaction rate at 1h, 6h, 24h, and 7d post-publish.", why: "Decay rate indicates content longevity. Fast decay suggests spike-dependent content. Slow decay suggests evergreen value that continues generating views over time.", how: "We optimize for your goals — viral spikes (if you want reach) vs. sustained engagement (if you want community depth) — and recommend content types accordingly." },
+            { name: "Cross-Video Journey", id: "cross-video-journey", def: "How viewers move through your content after watching one video, including profile visits, binge-watching patterns, and playlist engagement.", why: "Cross-video journey reveals which content creates \"rabbit holes\" — the videos that lead viewers to watch 5, 10, or 20 more of your videos.", how: "We optimize content sequencing, suggest complementary topics, and identify which videos serve as effective entry points to your profile." },
+            { name: "Follower Loyalty Score", id: "follower-loyalty-score", def: "Repeat engagement rate from existing followers, measured as the percentage of followers who interact with each new video.", why: "Loyal followers amplify reach (their engagement signals boost distribution) and provide consistent baseline performance for every post.", how: "We identify content that builds loyalty (community posts, series, personal stories) vs. content that attracts new viewers (trending formats, discovery hooks) and recommend the right balance." },
+            { name: "New vs. Returning", id: "new-vs-returning", def: "The ratio of first-time viewers to returning viewers for each video.", why: "A healthy mix indicates sustainable growth. All-new-viewer content is unstable (high reach, low retention). All-returning content limits growth (loyal but capped).", how: "We balance viral content recommendations (for new viewer acquisition) with community-building content (for returning viewer retention)." }
+          ]
+        },
+        howTogether: {
+          title: "How These Signals Work Together",
+          task: "See how OwlSeer combines signals to produce insights no single metric reveals alone.",
+          intro: "Signals do not operate in isolation. OwlSeer's AI finds correlations between signals across all three categories to generate recommendations that account for the full picture. Three examples:",
+          examples: [
+            { title: "Hook rate + sound velocity", desc: "When a trending sound matches your successful hook patterns, OwlSeer prioritizes that recommendation with higher confidence. The combination of proven hook performance and rising sound momentum creates a compounding opportunity." },
+            { title: "Active hours + trend window", desc: "OwlSeer aligns trend participation timing with your audience's peak activity. Posting a trending format during your audience's most engaged window maximizes the early engagement signals that TikTok uses to decide distribution." },
+            { title: "Share rate + comment sentiment", desc: "Content that drives both sharing and positive discussion gets flagged as a high-replication candidate. OwlSeer identifies the specific content attributes — topic, hook style, CTA — that produced the dual-signal outcome." }
+          ],
+          outro: "Learn exactly how our AI processes signal combinations in our [complete methodology documentation](/methodology)."
+        },
+        boundary: {
+          title: "Boundary Box",
+          data: "Data we use: Publicly available TikTok account metrics accessed through the official API. Signal definitions on this page reflect OwlSeer's current analytical framework.",
+          notDo: "What we do not do: OwlSeer does not access TikTok's internal algorithm weights. Our signal weights are derived from observed correlations in public data, not from proprietary TikTok documentation.",
+          variability: "Variability note: Signal predictive power varies by niche, account size, audience geography, and TikTok algorithm updates. Correlations described on this page are based on aggregate data and may not apply identically to every account."
+        },
+        cta: {
+          title: "See Your Signals in Action",
+          desc: "Connect your TikTok account and receive your personalized signal analysis in under three minutes. Or explore sample data to see how signals translate into strategy.",
+          primary: "Start Free Analysis",
+          secondary: "Explore Sample Data"
+        },
+        contextualConversion: {
+            title: "What do these 30+ signals look like for YOU?",
+            desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
+            button: "Generate My Signal Profile",
+            note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      }
     }
   }
 };

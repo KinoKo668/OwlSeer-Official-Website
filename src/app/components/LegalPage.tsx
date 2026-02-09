@@ -12,7 +12,8 @@
 
 import React, { useEffect, useMemo } from 'react';
 import { useLanguage } from '../contexts';
-import { Navbar, Footer } from './LandingPage';
+import { Navbar } from './layout/Navbar';
+import { Footer } from './layout/Footer';
 import { translations } from '../data/translations';
 import { PrivacyPolicy } from './legal/PrivacyPolicy';
 import { TermsOfService } from './legal/TermsOfService';

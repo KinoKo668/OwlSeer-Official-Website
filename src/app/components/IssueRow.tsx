@@ -81,17 +81,19 @@ export function IssueRow({
 
         {/* Actions */}
         <div className="flex items-center gap-4 pt-2 border-t border-[#e0e0e0]">
-          <button
-            onClick={onFixWithRecommendation}
-            className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-            style={{ fontSize: '12px', fontWeight: '600' }}
-          >
-            <span>Fix with recommendation</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          {onFixWithRecommendation && (
+            <button
+              onClick={onFixWithRecommendation}
+              className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
+              style={{ fontSize: '12px', fontWeight: '600' }}
+            >
+              <span>Fix with recommendation</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
           {onViewEvidence && (
             <>
-              <span className="text-[#e0e0e0]">•</span>
+              {onFixWithRecommendation && <span className="text-[#e0e0e0]">•</span>}
               <button
                 onClick={onViewEvidence}
                 className="text-[#666666] hover:text-[#1a1a1a] transition-colors flex items-center gap-1"

@@ -21,12 +21,9 @@ import { GoalRow } from './GoalRow';
 import { ActionRow } from './ActionRow';
 import { InsightAccordion } from './InsightAccordion';
 import { IssueRow } from './IssueRow';
-import { HighlightCard } from './HighlightCard';
-import { RecommendationCard } from './RecommendationCard';
 import { Toast } from './Toast';
 import { AdjustedGoalRow } from './AdjustedGoalRow';
 import { DayScheduleRow } from './DayScheduleRow';
-import { RiskRow } from './RiskRow';
 import {
   GoalRowSkeleton,
   ActionRowSkeleton,
@@ -95,8 +92,6 @@ export function WeeklyReportDetail({
     { id: 'execution', label: 'Execution analysis' },
     { id: 'insights', label: 'Key insights' },
     { id: 'issues', label: 'Challenges & issues' },
-    { id: 'highlights', label: 'Achievements & highlights' },
-    { id: 'recommendations', label: 'Smart recommendations' },
     { id: 'nextplan', label: 'Next week smart plan' },
   ];
 
@@ -106,10 +101,6 @@ export function WeeklyReportDetail({
       <SidebarPro
         activeItem="intelligence"
         onNavigate={onNavigate}
-        conversations={conversations}
-        currentConversationId={currentConversationId}
-        onSelectConversation={onSelectConversation}
-        onDeleteConversation={onDeleteConversation}
       />
 
       {/* Main Content */}
@@ -134,12 +125,6 @@ export function WeeklyReportDetail({
                   <h1 className="text-[#1a1a1a]" style={{ fontSize: '26px', fontWeight: '700' }}>
                     Weekly report
                   </h1>
-                  <span
-                    className="px-2.5 py-1 rounded-full border bg-[#d1fae5] text-[#065f46] border-[#a7f3d0]"
-                    style={{ fontSize: '11px', fontWeight: '600' }}
-                  >
-                    On track
-                  </span>
                 </div>
                 <p className="text-[#666666] mt-1" style={{ fontSize: '13px' }}>
                   Week of Jan 12–Jan 18
@@ -195,7 +180,7 @@ export function WeeklyReportDetail({
               <div className="flex items-center gap-8 flex-wrap flex-1">
                 <KPIItem label="Views" value="54K" delta="▲12% vs last week" isPositive={true} />
                 <KPIItem label="Followers" value="+180" delta="▲5% vs last week" isPositive={true} />
-                <KPIItem label="Posts" value="4/5" delta="80% complete" isPositive={null} />
+                <KPIItem label="Posts" value="4/5" delta="80% complete" isPositive={undefined} />
                 <KPIItem label="Deals" value="2" delta="▼1 vs last week" isPositive={false} />
               </div>
 
@@ -410,49 +395,6 @@ export function WeeklyReportDetail({
                       </button>
                     </div>
 
-                    {/* Supporting metrics row */}
-                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#e0e0e0] bg-[#fafafa] -mx-6 px-6 py-3">
-                      <div className="flex items-center gap-6">
-                        <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                          Supporting metrics
-                        </span>
-                        <div className="flex items-center gap-6">
-                          {/* Views metric */}
-                          <div className="flex items-center gap-2">
-                            <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                              Views
-                            </span>
-                            <span className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '700' }}>
-                              54K
-                            </span>
-                            <span className="text-[#10b981] flex items-center" style={{ fontSize: '11px', fontWeight: '600' }}>
-                              ▲12%
-                            </span>
-                          </div>
-                          {/* Median views metric */}
-                          <div className="flex items-center gap-2">
-                            <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                              Median views
-                            </span>
-                            <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                              48K →
-                            </span>
-                            <span className="text-[#1a1a1a]" style={{ fontSize: '13px', fontWeight: '700' }}>
-                              54K
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => scrollToSection('overall')}
-                        className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-                        style={{ fontSize: '12px', fontWeight: '600' }}
-                      >
-                        <span>View performance</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-
                     {/* Goal rows */}
                     <div>
                       <GoalRow
@@ -649,17 +591,6 @@ export function WeeklyReportDetail({
                         onAddToPlan={() => {}}
                       />
                     </div>
-
-                    {/* Bottom link */}
-                    <div className="mt-6 pt-4 border-t border-[#e0e0e0]">
-                      <button
-                        className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-                        style={{ fontSize: '13px', fontWeight: '600' }}
-                      >
-                        <span>Open plan to adjust next week</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
                   </div>
                 </SectionCard>
 
@@ -709,14 +640,13 @@ export function WeeklyReportDetail({
                       headline="Posting cadence was stable but topic spread diluted impact"
                       signal="Posts"
                       signalDelta="4/5 completed (80%)"
-                      isPositive={null}
+                      isPositive={undefined}
                       evidence={[
                         '3 topics with small sample sizes',
                         'Top topic outperformed others by +18%',
                       ]}
                       confidence="medium"
                       defaultExpanded={false}
-                      onUsePlan={() => {}}
                       onViewEvidence={() => scrollToSection('execution')}
                     />
                   </div>
@@ -740,183 +670,26 @@ export function WeeklyReportDetail({
                       title="CTA was inconsistent across posts"
                       severity="high"
                       cause="Only 2/5 posts included a clear CTA."
-                      onFixWithRecommendation={() => scrollToSection('recommendations')}
                       onViewEvidence={() => scrollToSection('execution')}
                     />
                     <IssueRow
                       title="Deal outreach execution was missed"
                       severity="medium"
                       cause="DM outreach task was skipped this week."
-                      onFixWithRecommendation={() => scrollToSection('recommendations')}
                       onViewEvidence={() => scrollToSection('execution')}
                     />
                     <IssueRow
                       title="Topic spread diluted performance"
                       severity="medium"
                       cause="Content covered 3 topics with low sample size each."
-                      onFixWithRecommendation={() => scrollToSection('recommendations')}
                       onViewEvidence={() => scrollToSection('insights')}
                     />
                     <IssueRow
                       title="One post underperformed due to weak hook"
                       severity="low"
                       cause="Drop-off in the first 2 seconds."
-                      onFixWithRecommendation={() => scrollToSection('recommendations')}
                       onViewEvidence={() => scrollToSection('insights')}
                     />
-                  </div>
-                </section>
-
-                {/* Section F: Achievements & highlights */}
-                <section id="highlights" className="scroll-mt-48">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-[#1a1a1a]" style={{ fontSize: '18px', fontWeight: '700' }}>
-                        Achievements & highlights
-                      </h2>
-                      <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                        What worked best (ready to reuse)
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <HighlightCard
-                      title="Best format: 3 quick tips"
-                      highlight="Higher retention than long tutorials."
-                      evidence="Evidence: n=4"
-                      confidence="high"
-                      onUsePlan={() => {}}
-                      onViewEvidence={() => scrollToSection('insights')}
-                    />
-                    <HighlightCard
-                      title="Sweet spot: 18–25s length"
-                      highlight="Above-median completion on short posts."
-                      evidence="▲12% completion"
-                      confidence="medium"
-                      onUsePlan={() => {}}
-                      onViewEvidence={() => scrollToSection('insights')}
-                    />
-                    <HighlightCard
-                      title="Topic winner: workflow automation"
-                      highlight="Outperformed other topics this week."
-                      evidence="▲18% vs topic median"
-                      confidence="high"
-                      onUsePlan={() => {}}
-                      onViewEvidence={() => scrollToSection('insights')}
-                    />
-                    <HighlightCard
-                      title="Best CTA: comment keyword"
-                      highlight="Clearer intent capture than generic CTA."
-                      evidence="Evidence: n=2"
-                      confidence="medium"
-                      onUsePlan={() => {}}
-                      onViewEvidence={() => scrollToSection('insights')}
-                    />
-                  </div>
-                </section>
-
-                {/* Section G: Smart recommendations */}
-                <section id="recommendations" className="scroll-mt-48">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h2 className="text-[#1a1a1a]" style={{ fontSize: '18px', fontWeight: '700' }}>
-                          Smart recommendations
-                        </h2>
-                        <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                          Top actions ranked by impact and effort
-                        </span>
-                      </div>
-                    </div>
-                    {/* Controls */}
-                    <div className="flex items-center gap-3">
-                      <select className="px-3 py-2 border border-[#e0e0e0] rounded-lg text-[#666666] bg-white hover:border-[#1a1a1a] transition-colors" style={{ fontSize: '12px', fontWeight: '500' }}>
-                        <option>Sort: Highest impact</option>
-                        <option>Sort: Lowest effort</option>
-                        <option>Sort: Priority</option>
-                      </select>
-                      <label className="flex items-center gap-2 px-3 py-2 border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] transition-colors cursor-pointer">
-                        <input type="checkbox" className="w-3.5 h-3.5" />
-                        <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
-                          Quick wins only
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* High impact group */}
-                  <div className="mb-6">
-                    <div className="text-[#999999] mb-3" style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      High impact
-                    </div>
-                    <div className="space-y-4">
-                      <RecommendationCard
-                        title="Add a clear CTA in the last 3 seconds"
-                        priority="p1"
-                        confidence="high"
-                        impacts={['deals']}
-                        effort="30–45 min"
-                        expectedImpact="+1 deal"
-                        tag="repeatable"
-                        reason="Deals fell and CTA was inconsistent."
-                        onAddToPlan={() => showToast('Added to next week plan')}
-                        onCopy={() => showToast('Copied')}
-                        onWhyThis={() => scrollToSection('insights')}
-                        onViewEvidence={() => scrollToSection('execution')}
-                      />
-                      <RecommendationCard
-                        title="Repurpose the '3 quick tips' format for 2 topics"
-                        priority="p1"
-                        confidence="medium"
-                        impacts={['views', 'followers']}
-                        effort="1–2 hrs"
-                        expectedImpact="▲10% views"
-                        tag="repeatable"
-                        reason="This format outperformed median in 4 posts."
-                        onAddToPlan={() => showToast('Added to next week plan')}
-                        onCopy={() => showToast('Copied')}
-                        onWhyThis={() => scrollToSection('insights')}
-                        onViewEvidence={() => scrollToSection('insights')}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Quick wins group */}
-                  <div>
-                    <div className="text-[#999999] mb-3" style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      Quick wins
-                    </div>
-                    <div className="space-y-4">
-                      <RecommendationCard
-                        title="Batch-write 6 short scripts and schedule by Wed"
-                        priority="p2"
-                        confidence="medium"
-                        impacts={['posts']}
-                        effort="2–3 hrs"
-                        expectedImpact="+2 posts"
-                        tag="repeatable"
-                        reason="Batching reduces context-switching and improves output quality."
-                        onAddToPlan={() => showToast('Added to next week plan')}
-                        onCopy={() => showToast('Copied')}
-                        onWhyThis={() => scrollToSection('execution')}
-                        onViewEvidence={() => scrollToSection('execution')}
-                      />
-                      <RecommendationCard
-                        title="Run a hook A/B test on one post"
-                        priority="p3"
-                        confidence="medium"
-                        impacts={['views']}
-                        effort="30–45 min"
-                        expectedImpact="▲5% retention"
-                        tag="one-time"
-                        reason="Hook performance varied; test can identify winning patterns."
-                        onAddToPlan={() => showToast('Added to next week plan')}
-                        onCopy={() => showToast('Copied')}
-                        onWhyThis={() => scrollToSection('insights')}
-                        onViewEvidence={() => scrollToSection('insights')}
-                      />
-                    </div>
                   </div>
                 </section>
 
@@ -990,9 +763,6 @@ export function WeeklyReportDetail({
                         <div className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                           Weekly schedule
                         </div>
-                        <span className="text-[#999999]" style={{ fontSize: '11px', fontWeight: '500' }}>
-                          ~30–60 min/day
-                        </span>
                       </div>
                       <div className="space-y-0">
                         <DayScheduleRow day="Mon" actions={['Write 3 scripts']} />
@@ -1002,39 +772,6 @@ export function WeeklyReportDetail({
                         <DayScheduleRow day="Fri" actions={['DM 10 partners']} />
                         <DayScheduleRow day="Sat" actions={['Repurpose best format']} />
                         <DayScheduleRow day="Sun" actions={['Review results + adjust']} />
-                      </div>
-                      <div className="mt-4 pt-4 border-t border-[#e0e0e0]">
-                        <button
-                          className="text-[#10b981] hover:text-[#059669] transition-colors flex items-center gap-1"
-                          style={{ fontSize: '13px', fontWeight: '600' }}
-                        >
-                          <span>Customize in plan</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Risks & watchouts */}
-                    <div>
-                      <div className="text-[#999999] mb-4" style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        Risks & watchouts
-                      </div>
-                      <div className="space-y-3">
-                        <RiskRow
-                          title="Deals may remain behind"
-                          trigger="If deals < 2 by Thu"
-                          onAddMitigation={() => scrollToSection('recommendations')}
-                        />
-                        <RiskRow
-                          title="Posting cadence may slip"
-                          trigger="If scripts not done by Wed"
-                          onAddMitigation={() => scrollToSection('recommendations')}
-                        />
-                        <RiskRow
-                          title="Topic spread dilutes performance"
-                          trigger="If >2 topics planned"
-                          onAddMitigation={() => scrollToSection('recommendations')}
-                        />
                       </div>
                     </div>
                   </div>
@@ -1072,13 +809,6 @@ export function WeeklyReportDetail({
                         style={{ fontSize: '14px', fontWeight: '600' }}
                       >
                         Open plan
-                      </button>
-                      <button
-                        onClick={handleBackToReports}
-                        className="w-full text-[#10b981] hover:text-[#059669] transition-colors text-center"
-                        style={{ fontSize: '14px', fontWeight: '600' }}
-                      >
-                        Back to archive
                       </button>
                       <button
                         className="w-full px-4 py-2.5 border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] transition-colors flex items-center justify-center gap-2"

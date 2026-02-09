@@ -29,7 +29,8 @@ import {
   Target,
   Map
 } from 'lucide-react';
-import { Navbar, Footer } from './LandingPage';
+import { Navbar } from './layout/Navbar';
+import { Footer } from './layout/Footer';
 import { translations } from '../data/translations';
 import { SEO } from './SEO';
 import { seoConfig, generateAlternates } from '../data/seoConfig';
