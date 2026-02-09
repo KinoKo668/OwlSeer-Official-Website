@@ -59,7 +59,7 @@ const PricingCard = ({
 );
 
 export function PricingSection({ onSignUp, t }: { onSignUp: () => void, t: any }) {
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
 
   return (
     <section className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-300" id="pricing">
@@ -78,36 +78,17 @@ export function PricingSection({ onSignUp, t }: { onSignUp: () => void, t: any }
             {t?.subtitle || 'Start your 14-day free trial. Cancel anytime.'}
           </p>
           
-          {/* Toggle */}
-          <div className="inline-flex items-center p-1 bg-gray-100 dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                billingCycle === 'monthly' 
-                  ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' 
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              {t?.monthly || 'Monthly'}
-            </button>
-            <button
-              onClick={() => setBillingCycle('annual')}
-              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                billingCycle === 'annual' 
-                  ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' 
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              {t?.yearly || 'Yearly'} <span className="text-[10px] font-bold text-[#1AAE82] bg-[#1AAE82]/10 px-2 py-0.5 rounded-full">{t?.save || '20% OFF'}</span>
-            </button>
-          </div>
+          {/* Toggle - Removed */}
+          {/* <div className="inline-flex items-center p-1 bg-gray-100 dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700">
+             ...
+          </div> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Creator Tier */}
           <PricingCard 
             plan={t?.plans?.creator?.name || "Creator"}
-            price={billingCycle === 'annual' ? "$31.99" : "$39.99"}
+            price={billingCycle === 'annual' ? "$31" : "$39"}
             period={t?.period || "mo"}
             features={t?.plans?.creator?.features || [
               "Up to 3 TikTok accounts",
@@ -123,7 +104,7 @@ export function PricingSection({ onSignUp, t }: { onSignUp: () => void, t: any }
           {/* Growth Tier */}
           <PricingCard 
             plan={t?.plans?.growth?.name || "Growth"}
-            price={billingCycle === 'annual' ? "$55.99" : "$69.99"}
+            price={billingCycle === 'annual' ? "$60" : "$75"}
             period={t?.period || "mo"}
             isPopular={true}
             features={t?.plans?.growth?.features || [
@@ -141,7 +122,7 @@ export function PricingSection({ onSignUp, t }: { onSignUp: () => void, t: any }
           {/* Scale Tier */}
           <PricingCard 
             plan={t?.plans?.scale?.name || "Scale"}
-            price={billingCycle === 'annual' ? "$119.99" : "$149.99"}
+            price={billingCycle === 'annual' ? "$196" : "$245"}
             period={t?.period || "mo"}
             features={t?.plans?.scale?.features || [
               "Unlimited accounts",

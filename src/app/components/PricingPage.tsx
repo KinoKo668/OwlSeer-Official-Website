@@ -243,7 +243,7 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-6xl mx-auto">
             <PricingCard 
               tier={pricingT.plans?.creator?.name || "Creator"}
-              price={isAnnual ? "$31.99" : "$39.99"}
+              price={isAnnual ? "$31" : "$39"}
               period={pricingT.period || "mo"}
               cta={pricingT.cta?.trial || "Start Free Trial"}
               features={pricingT.plans?.creator?.features || []}
@@ -252,7 +252,7 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
             
             <PricingCard 
               tier={pricingT.plans?.growth?.name || "Growth"}
-              price={isAnnual ? "$55.99" : "$69.99"}
+              price={isAnnual ? "$60" : "$75"}
               period={pricingT.period || "mo"}
               popular={true}
               cta={pricingT.cta?.buy || "Buy Now"}
@@ -262,7 +262,7 @@ export function PricingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
             
             <PricingCard 
               tier={pricingT.plans?.scale?.name || "Scale"}
-              price={isAnnual ? "$119.99" : "$149.99"}
+              price={isAnnual ? "$196" : "$245"}
               period={pricingT.period || "mo"}
               cta={pricingT.cta?.buy || "Buy Now"}
               features={pricingT.plans?.scale?.features || []}

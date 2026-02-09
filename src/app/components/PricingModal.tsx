@@ -31,7 +31,7 @@ export function PricingModal({ isOpen, onClose, currentPlan }: PricingModalProps
     {
       id: 'creator',
       name: 'Creator',
-      monthlyPrice: 39.99,
+      monthlyPrice: 39,
       icon: <Sparkles size={20} strokeWidth={2} />,
       description: 'Perfect for individual creators',
       features: [
@@ -45,7 +45,7 @@ export function PricingModal({ isOpen, onClose, currentPlan }: PricingModalProps
     {
       id: 'growth',
       name: 'Growth',
-      monthlyPrice: 69.99,
+      monthlyPrice: 75,
       icon: <TrendingUp size={20} strokeWidth={2} />,
       description: 'Ideal for growing creators',
       popular: true,
@@ -61,7 +61,7 @@ export function PricingModal({ isOpen, onClose, currentPlan }: PricingModalProps
     {
       id: 'scale',
       name: 'Scale',
-      monthlyPrice: 149.99,
+      monthlyPrice: 245,
       icon: <Rocket size={20} strokeWidth={2} />,
       description: 'Enterprise solution',
       features: [
@@ -110,34 +110,11 @@ export function PricingModal({ isOpen, onClose, currentPlan }: PricingModalProps
             </button>
           </div>
 
-          {/* Billing Cycle Toggle */}
-          <div className="flex items-center justify-center gap-2">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-6 py-2.5 rounded-lg transition-all ${
-                billingCycle === 'monthly'
-                  ? 'bg-[#0F766E] text-white'
-                  : 'bg-white border border-[#E5E7EB] text-[#374151] hover:bg-[#F8F9FA]'
-              }`}
-              style={{ fontSize: '14px', fontWeight: '600' }}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle('yearly')}
-              className={`px-6 py-2.5 rounded-lg transition-all relative ${
-                billingCycle === 'yearly'
-                  ? 'bg-[#0F766E] text-white'
-                  : 'bg-white border border-[#E5E7EB] text-[#374151] hover:bg-[#F8F9FA]'
-              }`}
-              style={{ fontSize: '14px', fontWeight: '600' }}
-            >
-              Yearly
-              <span className="ml-2 px-2 py-0.5 rounded-full bg-[#059669] text-white" style={{ fontSize: '10px', fontWeight: '700' }}>
-                20% OFF
-              </span>
-            </button>
-          </div>
+          {/* Billing Cycle Toggle - Removed */}
+          {/* <div className="flex items-center justify-center gap-2">
+            <button ... />
+            <button ... />
+          </div> */}
         </div>
 
         {/* Pricing Cards */}

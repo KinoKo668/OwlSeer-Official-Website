@@ -274,12 +274,6 @@ export function ReportsArchiveList({
                           Export
                         </button>
                         <button
-                          className="text-[#999999] hover:text-[#666666] transition-colors hidden md:inline-flex"
-                          style={{ fontSize: '13px', fontWeight: '500' }}
-                        >
-                          Compare
-                        </button>
-                        <button
                           onClick={() => onOpenReport?.(report.id)}
                           className="px-4 py-2 text-white bg-[#10b981] rounded-lg hover:bg-[#059669] transition-colors ml-2"
                           style={{ fontSize: '13px', fontWeight: '600' }}

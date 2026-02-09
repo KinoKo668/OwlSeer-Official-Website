@@ -118,18 +118,6 @@ export function LatestWeeklyReportCard({
             {currentStatus.label}
           </span>
         </div>
-        <div className="relative group flex-shrink-0">
-          <button
-            onClick={onRegenerate}
-            className="px-4 py-2 text-[#666666] bg-white border border-[#e0e0e0] rounded-lg hover:border-[#10b981] hover:text-[#10b981] transition-colors"
-            style={{ fontSize: '13px', fontWeight: '600' }}
-          >
-            Regenerate
-          </button>
-          <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-[#1a1a1a] text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10" style={{ fontSize: '12px' }}>
-            Suggest changes for next generation
-          </div>
-        </div>
       </div>
 
       {/* Week Range */}
@@ -280,13 +268,6 @@ export function LatestWeeklyReportCard({
 
         {/* CTA Buttons - Optimized Hierarchy */}
         <div className="flex items-center gap-3 w-full md:w-auto flex-wrap md:flex-nowrap">
-          <button
-            onClick={onViewPlan}
-            className="px-4 py-2 text-[#666666] bg-white border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] hover:text-[#1a1a1a] transition-colors"
-            style={{ fontSize: '13px', fontWeight: '600' }}
-          >
-            View plan
-          </button>
           <button
             onClick={onOpenReport}
             className="px-4 py-2 text-white bg-[#10b981] rounded-lg hover:bg-[#059669] transition-colors"
