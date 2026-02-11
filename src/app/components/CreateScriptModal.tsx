@@ -363,19 +363,6 @@ export function CreateScriptModal({ isOpen, onClose, onCreateScript, initialData
                   );
                 })}
               </div>
-
-              {/* Dynamic Summary Panel */}
-              <div className="mt-4 p-4 bg-[#f5f5f5] rounded-lg border border-[#e0e0e0]">
-                <h4 className="text-[#1a1a1a] mb-2" style={{ fontSize: '13px', fontWeight: '700' }}>
-                  What you'll get
-                </h4>
-                <p className="text-[#1a1a1a] mb-1" style={{ fontSize: '13px' }}>
-                  Editor starts with: <span className="font-semibold">{shootingStyleData[shootingStyle].editorStarts}</span>
-                </p>
-                <p className="text-[#666666]" style={{ fontSize: '12px' }}>
-                  You can switch styles later, but some fields may reformat.
-                </p>
-              </div>
             </div>
 
             {/* SECTION C — More Options */}

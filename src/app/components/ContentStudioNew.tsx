@@ -1859,7 +1859,7 @@ export function ContentStudio({
             onCreateNew={handleCreateNew}
             onOpenScript={handleOpenScript}
             onEditScript={handleEditScript}
-            onSimulationAction={handleSimulationAction}
+            onSimulationAction={isSimulation ? handleSimulationAction : undefined}
           />
         ) : currentScript ? (
           <ScriptEditorNew

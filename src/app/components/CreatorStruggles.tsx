@@ -238,7 +238,6 @@ export function CreatorStruggles({ onContinue, onBack }: CreatorStrugglesProps) 
             What are you struggling with right now?
           </h1>
           <div className="flex items-center justify-center gap-2">
-            <Target className="w-4 h-4 text-[#0F766E]" />
             <p
               className="text-[#374151]"
               style={{ fontSize: 'var(--text-body)', lineHeight: '1.5' }}

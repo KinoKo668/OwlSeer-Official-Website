@@ -101,9 +101,9 @@ export const Navbar = memo(({
   const navBgClass = useMemo(() => {
     const base = "border-b transition-all duration-300";
       
-    // Always apply semi-transparent background with higher transparency (lower opacity value)
+    // Liquid glass effect
     return enableBlur
-      ? `${base} bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-gray-200/50 dark:border-slate-800/50`
+      ? `${base} bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border-white/20 dark:border-white/10 supports-[backdrop-filter]:bg-white/10`
       : `${base} bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800`;
   }, [enableBlur]);
 
@@ -136,7 +136,7 @@ export const Navbar = memo(({
                 className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
                   activeDropdown === 'product' 
                     ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
+                    : 'text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
                 }`}
                 onClick={() => toggleDropdown('product')}
               >
@@ -215,7 +215,7 @@ export const Navbar = memo(({
                 className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
                   activeDropdown === 'solutions' 
                     ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
+                    : 'text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
                 }`}
                 onClick={() => toggleDropdown('solutions')}
               >
@@ -261,7 +261,7 @@ export const Navbar = memo(({
             </div>
 
             <button 
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-all px-4 py-2 rounded-full"
+              className="text-sm font-medium text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-all px-4 py-2 rounded-full"
               onClick={() => handleNav('pricing')}
             >
               {t.pricing}
@@ -275,7 +275,7 @@ export const Navbar = memo(({
                 className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
                   activeDropdown === 'resources' 
                     ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-gray-300 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
+                    : 'text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
                 }`}
                 onClick={() => toggleDropdown('resources')}
               >
@@ -345,7 +345,7 @@ export const Navbar = memo(({
             className="relative group" 
           >
             <button 
-              className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+              className="p-2.5 text-gray-500 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
               onClick={() => toggleDropdown('language')}
             >
               <Globe className="w-5 h-5" />
@@ -393,7 +393,7 @@ export const Navbar = memo(({
           {/* Dark Mode Toggle */}
           <button 
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+            className="p-2.5 text-gray-500 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
             title="Toggle Dark Mode"
           >
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -402,7 +402,7 @@ export const Navbar = memo(({
           <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-2" />
 
           <button 
-            className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-[#1AAE82] transition-colors px-4 py-2 whitespace-nowrap"
+            className="text-sm font-semibold text-gray-700 dark:text-white hover:text-[#1AAE82] transition-colors px-4 py-2 whitespace-nowrap"
             onClick={onTrySample}
           >
             Try Sample

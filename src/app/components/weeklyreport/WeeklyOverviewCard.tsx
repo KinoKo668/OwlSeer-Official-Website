@@ -61,6 +61,49 @@ export function WeeklyOverviewCard({
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [animatedRate, setAnimatedRate] = useState(0);
   const [quickWinCompleted, setQuickWinCompleted] = useState(false);
+  const [quickWinMenuOpen, setQuickWinMenuOpen] = useState(false);
+  const [editingQuickWin, setEditingQuickWin] = useState(false);
+  const [quickWinTitle, setQuickWinTitle] = useState('');
+  const [quickWinDesc, setQuickWinDesc] = useState('');
+  const [localQuickWin, setLocalQuickWin] = useState<QuickWin | undefined>(quickWin);
+  const [deletingQuickWin, setDeletingQuickWin] = useState(false);
+
+  useEffect(() => {
+    setLocalQuickWin(quickWin);
+    if (quickWin) {
+      setQuickWinTitle(quickWin.title);
+      setQuickWinDesc(quickWin.description);
+    }
+  }, [quickWin]);
+
+  const handleStartEditQuickWin = () => {
+    setEditingQuickWin(true);
+    setQuickWinMenuOpen(false);
+  };
+
+  const handleSaveQuickWin = () => {
+    if (localQuickWin && quickWinTitle.trim()) {
+      setLocalQuickWin({
+        ...localQuickWin,
+        title: quickWinTitle.trim(),
+        description: quickWinDesc.trim(),
+      });
+      setEditingQuickWin(false);
+    }
+  };
+
+  const handleCancelEditQuickWin = () => {
+    setEditingQuickWin(false);
+    if (localQuickWin) {
+      setQuickWinTitle(localQuickWin.title);
+      setQuickWinDesc(localQuickWin.description);
+    }
+  };
+
+  const handleDeleteQuickWin = () => {
+    setLocalQuickWin(undefined);
+    setDeletingQuickWin(false);
+  };
 
   // Track if animation has already run for this completion rate
   const lastCompletionRate = useRef<number>(0);
@@ -196,19 +239,6 @@ export function WeeklyOverviewCard({
               <h4 className="text-card-foreground" style={{ fontSize: '14px', fontWeight: '700' }}>
                 Goal Progress
               </h4>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#CCFBF1] dark:bg-[#0F766E]/20 rounded-full">
-                {weekOverWeekChange >= 0 ? (
-                  <TrendingUp className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#2DD4BF]" />
-                ) : (
-                  <TrendingDown className="w-3.5 h-3.5 text-[#DC2626]" />
-                )}
-                <span
-                  className={weekOverWeekChange >= 0 ? 'text-[#0F766E] dark:text-[#2DD4BF]' : 'text-[#DC2626]'}
-                  style={{ fontSize: '12px', fontWeight: '700' }}
-                >
-                  {weekOverWeekChange >= 0 ? '+' : ''}{weekOverWeekChange}% vs last week
-                </span>
-              </div>
             </div>
 
             {/* Main Progress Bar */}
@@ -277,7 +307,7 @@ export function WeeklyOverviewCard({
 
             <div className="space-y-2">
               {/* Quick Win - Special Action Item */}
-              {quickWin && !quickWinCompleted && (
+              {localQuickWin && !quickWinCompleted && (
                 <div className="relative rounded-[10px] bg-gradient-to-br from-[#0F766E] to-[#14B8A6] overflow-hidden group shadow-sm">
                   {/* Subtle glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-40 pointer-events-none"></div>
@@ -290,36 +320,119 @@ export function WeeklyOverviewCard({
                       checked={false}
                       onChange={() => {
                         setQuickWinCompleted(true);
-                        quickWin.onComplete?.();
+                        localQuickWin.onComplete?.();
                       }}
+                      disabled={editingQuickWin}
                       className="w-4 h-4 rounded border-white/50 bg-white/20 text-white focus:ring-2 focus:ring-white/50 focus:ring-offset-0 cursor-pointer transition-all flex-shrink-0"
                     />
                     
-                    {/* Icon + Text Content */}
-                    <div className="flex items-start gap-2.5 flex-1 min-w-0">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-white/90" style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.02em' }}>
-                            QUICK WIN
-                          </span>
+                    {editingQuickWin ? (
+                      <div className="flex-1 min-w-0 flex flex-col gap-2">
+                        <input
+                          type="text"
+                          value={quickWinTitle}
+                          onChange={(e) => setQuickWinTitle(e.target.value)}
+                          placeholder="Quick Win Title"
+                          className="w-full px-2 py-1 bg-white/20 text-white placeholder-white/50 border border-white/30 rounded focus:outline-none focus:ring-2 focus:ring-white/50"
+                          style={{ fontSize: '14px', fontWeight: '700' }}
+                          autoFocus
+                        />
+                        <input
+                          type="text"
+                          value={quickWinDesc}
+                          onChange={(e) => setQuickWinDesc(e.target.value)}
+                          placeholder="Description"
+                          className="w-full px-2 py-1 bg-white/20 text-white placeholder-white/50 border border-white/30 rounded focus:outline-none focus:ring-2 focus:ring-white/50"
+                          style={{ fontSize: '12px' }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleSaveQuickWin();
+                            if (e.key === 'Escape') handleCancelEditQuickWin();
+                          }}
+                        />
+                        <div className="flex gap-2 mt-1">
+                          <button
+                            onClick={handleSaveQuickWin}
+                            className="px-3 py-1 bg-white text-[#0F766E] rounded text-xs font-bold hover:bg-white/90"
+                          >
+                            Save
+                          </button>
+                          <button
+                            onClick={handleCancelEditQuickWin}
+                            className="px-3 py-1 bg-white/20 text-white rounded text-xs font-bold hover:bg-white/30"
+                          >
+                            Cancel
+                          </button>
                         </div>
-                        <h5 className="text-white mb-0.5" style={{ fontSize: '14px', fontWeight: '700', lineHeight: '1.3' }}>
-                          {quickWin.title}
-                        </h5>
-                        <p className="text-white/75" style={{ fontSize: '12px', lineHeight: '1.35' }}>
-                          {quickWin.description}
-                        </p>
                       </div>
-                    </div>
-                    
-                    {/* Send to Copilot Button */}
-                    <button
-                      onClick={quickWin.onGenerate}
-                      className="opacity-100 transition-all p-1.5 rounded-lg hover:bg-white/20 text-white flex-shrink-0"
-                      title="Send to Copilot"
-                    >
-                      <Sparkles className="w-4 h-4" />
-                    </button>
+                    ) : (
+                      <>
+                        {/* Icon + Text Content */}
+                        <div className="flex items-start gap-2.5 flex-1 min-w-0">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <span className="text-white/90" style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.02em' }}>
+                                QUICK WIN
+                              </span>
+                            </div>
+                            <h5 className="text-white mb-0.5" style={{ fontSize: '14px', fontWeight: '700', lineHeight: '1.3' }}>
+                              {localQuickWin.title}
+                            </h5>
+                            <p className="text-white/75" style={{ fontSize: '12px', lineHeight: '1.35' }}>
+                              {localQuickWin.description}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* Send to Copilot Button */}
+                        <button
+                          onClick={localQuickWin.onGenerate}
+                          className="opacity-100 transition-all p-1.5 rounded-lg hover:bg-white/20 text-white flex-shrink-0"
+                          title="Send to Copilot"
+                        >
+                          <Sparkles className="w-4 h-4" />
+                        </button>
+
+                        {/* More Menu */}
+                        <div className="relative">
+                          <button
+                            onClick={() => setQuickWinMenuOpen(!quickWinMenuOpen)}
+                            className="opacity-0 group-hover:opacity-100 transition-all p-1.5 rounded-lg hover:bg-white/20 text-white flex-shrink-0"
+                            title="More"
+                          >
+                            <MoreVertical className="w-4 h-4" />
+                          </button>
+                          {quickWinMenuOpen && (
+                            <>
+                              <div 
+                                className="fixed inset-0 z-40" 
+                                onClick={() => setQuickWinMenuOpen(false)}
+                              />
+                              <div className="absolute right-0 top-full mt-1 bg-popover border border-border shadow-lg rounded-[10px] z-50 overflow-hidden min-w-[140px]">
+                                <button
+                                  onClick={handleStartEditQuickWin}
+                                  className="w-full text-left px-4 py-2.5 text-popover-foreground hover:bg-muted transition-colors flex items-center gap-2"
+                                  style={{ fontSize: '13px', fontWeight: '600' }}
+                                >
+                                  <Pencil className="w-4 h-4" />
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setDeletingQuickWin(true);
+                                    setQuickWinMenuOpen(false);
+                                  }}
+                                  className="w-full text-left px-4 py-2.5 text-[#EF4444] hover:bg-[#FEE2E2] dark:hover:bg-[#7F1D1D]/30 transition-colors flex items-center gap-2"
+                                  style={{ fontSize: '13px', fontWeight: '600' }}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                  Delete
+                                </button>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
@@ -473,8 +586,10 @@ export function WeeklyOverviewCard({
       </div>
 
       {/* Delete Confirmation Dialog */}
-      {deletingId && (() => {
-        const taskToDelete = localActions.find(a => a.id === deletingId);
+      {(deletingId || deletingQuickWin) && (() => {
+        const isQuickWin = !!deletingQuickWin;
+        const label = isQuickWin ? localQuickWin?.title : localActions.find(a => a.id === deletingId)?.label;
+        
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
             <div className="bg-card rounded-[12px] border border-border shadow-2xl p-6 max-w-md w-full mx-4">
@@ -484,26 +599,35 @@ export function WeeklyOverviewCard({
                 </div>
                 <div className="flex-1">
                   <h3 className="text-card-foreground mb-2" style={{ fontSize: '18px', fontWeight: '700' }}>
-                    Delete Task
+                    {isQuickWin ? 'Delete Quick Win' : 'Delete Task'}
                   </h3>
                   <p className="text-muted-foreground mb-1" style={{ fontSize: '14px', lineHeight: '1.5' }}>
-                    Are you sure you want to delete this task?
+                    Are you sure you want to delete this {isQuickWin ? 'quick win' : 'task'}?
                   </p>
                   <p className="text-card-foreground font-medium" style={{ fontSize: '14px' }}>
-                    "{taskToDelete?.label}"
+                    "{label}"
                   </p>
                 </div>
               </div>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setDeletingId(null)}
+                  onClick={() => {
+                    setDeletingId(null);
+                    setDeletingQuickWin(false);
+                  }}
                   className="flex-1 py-2.5 rounded-lg border-2 border-border bg-card text-card-foreground hover:bg-muted hover:border-[#0F766E] transition-all"
                   style={{ fontSize: '14px', fontWeight: '600' }}
                 >
                   Cancel
                 </button>
                 <button
-                  onClick={() => handleDeleteAction(deletingId)}
+                  onClick={() => {
+                    if (isQuickWin) {
+                      handleDeleteQuickWin();
+                    } else if (deletingId) {
+                      handleDeleteAction(deletingId);
+                    }
+                  }}
                   className="flex-1 py-2.5 rounded-lg bg-[#EF4444] text-white hover:bg-[#DC2626] transition-all shadow-lg"
                   style={{ fontSize: '14px', fontWeight: '700' }}
                 >

@@ -240,15 +240,12 @@ export function ProductShowcase({ t }: { t: any }) {
   const textTranslateY = useTransform(springScroll, [0, 1], [50, -750]);
 
   return (
-    <section ref={containerRef} className="relative md:h-[300vh] py-12 md:py-0 transition-colors duration-300 z-10">
-      {/* Desktop Layout: Sticky */}
+    <section ref={containerRef} className="relative py-12 transition-colors duration-300 z-10">
+      {/* Desktop Layout: Sticky - TEMPORARILY DISABLED
       <div className="hidden md:flex sticky top-0 h-screen flex-col justify-center overflow-hidden pt-20">
         
-        {/* Background Ambient Effects - Matched to Hero - REMOVED for Shared Background */}
-
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 h-full flex flex-row items-center gap-24">
           
-          {/* Left Side: Text Narrative */}
           <div className="w-1/3 h-[600px] relative z-10 overflow-hidden">
              <div className="absolute inset-0 flex flex-col items-center">
                 <motion.div 
@@ -299,7 +296,6 @@ export function ProductShowcase({ t }: { t: any }) {
              </div>
           </div>
 
-          {/* Right Side: The "Screen" Visual */}
           <div className="w-2/3 flex items-center justify-center relative perspective-1000 h-full">
             <motion.div
               style={{ 
@@ -309,7 +305,6 @@ export function ProductShowcase({ t }: { t: any }) {
               }}
               className="relative w-full aspect-[16/10] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200/50 dark:border-slate-800/50 overflow-hidden backdrop-blur-xl"
             >
-              {/* Browser Chrome */}
               <div className="absolute top-0 left-0 right-0 h-8 bg-gray-50 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 flex items-center px-4 gap-2 z-20">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
@@ -321,7 +316,6 @@ export function ProductShowcase({ t }: { t: any }) {
                 </div>
               </div>
 
-              {/* Dynamic Content Area */}
               <div className="absolute inset-0 pt-8 bg-gray-50/50 dark:bg-slate-900/50">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -356,29 +350,37 @@ export function ProductShowcase({ t }: { t: any }) {
           </div>
         </div>
       </div>
+      */}
 
-      {/* Mobile Layout: Vertical Stack */}
-      <div className="md:hidden max-w-7xl mx-auto px-4 sm:px-6 space-y-16">
+      {/* Unified Layout (formerly Mobile) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-12">
         {features.map((feature, index) => (
-          <div key={feature.id} className="flex flex-col gap-6">
-            <div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
+          <div key={feature.id} className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+            <div className="md:w-1/3">
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-display leading-tight">
                 {feature.title}
               </h3>
-              <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
                 {feature.description}
               </p>
+              <button 
+                className="flex items-center gap-2 text-sm font-bold transition-colors hover:underline" 
+                style={{ color: feature.color }}
+                aria-label={`Learn more about ${feature.title}`}
+              >
+                Learn more <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
             
-            {/* Mobile Card Visual */}
-            <div className="w-full aspect-[4/3] bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-200 dark:border-slate-800 overflow-hidden relative">
-              <div className="absolute top-0 left-0 right-0 h-6 bg-gray-50 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 flex items-center px-3 gap-1.5 z-20">
-                <div className="w-2 h-2 rounded-full bg-red-400/80" />
-                <div className="w-2 h-2 rounded-full bg-yellow-400/80" />
-                <div className="w-2 h-2 rounded-full bg-green-400/80" />
+            {/* Visual Card */}
+            <div className="w-full md:w-2/3 aspect-[4/3] md:aspect-[16/10] bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-200 dark:border-slate-800 overflow-hidden relative">
+              <div className="absolute top-0 left-0 right-0 h-6 md:h-8 bg-gray-50 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 flex items-center px-3 md:px-4 gap-1.5 md:gap-2 z-20">
+                <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-400/80" />
+                <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-yellow-400/80" />
+                <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-400/80" />
               </div>
-              <div className="absolute inset-0 pt-6 bg-gray-50/50 dark:bg-slate-900/50 p-4 overflow-hidden">
-                <div className="transform scale-[0.6] origin-top-left w-[166%] h-[166%]">
+              <div className="absolute inset-0 pt-6 md:pt-8 bg-gray-50/50 dark:bg-slate-900/50 p-4 overflow-hidden flex items-center justify-center">
+                <div className="transform scale-[0.6] md:scale-[0.85] origin-center w-[166%] md:w-full h-[166%] md:h-full flex items-center justify-center">
                    {feature.component}
                 </div>
               </div>

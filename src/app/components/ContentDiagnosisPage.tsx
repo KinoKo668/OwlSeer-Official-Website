@@ -4,7 +4,7 @@ import { translations } from '../data/translations';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Activity, 
   AlertCircle, 
@@ -189,8 +189,10 @@ const DiagnosisCard = ({ title, severity, why, fix, delay }: any) => {
 };
 
 export const ContentDiagnosisPage = ({ isDarkMode, setIsDarkMode }: any) => {
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
+  const navigate = useNavigate();
   const t = translations[language]?.contentDiagnosisPage || translations.en.contentDiagnosisPage;
+  const navT = translations[language] || translations.en;
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -200,7 +202,15 @@ export const ContentDiagnosisPage = ({ isDarkMode, setIsDarkMode }: any) => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 selection:bg-[#1AAE82] selection:text-white overflow-x-hidden">
-      <Navbar />
+      <Navbar 
+        onTrySample={() => navigate('/sample-explorer')}
+        onSignUp={() => navigate('/auth')}
+        language={language}
+        setLanguage={setLanguage}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        t={navT}
+      />
       
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1 bg-[#1AAE82] origin-left z-50"
@@ -478,7 +488,7 @@ export const ContentDiagnosisPage = ({ isDarkMode, setIsDarkMode }: any) => {
         </div>
       </section>
 
-      <Footer />
+      <Footer t={navT} onNavigate={(page) => navigate(page)} />
     </div>
   );
 };

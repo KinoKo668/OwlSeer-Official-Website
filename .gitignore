@@ -118,6 +118,17 @@ dist
 
 # Mac
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Vite
 dist
@@ -135,3 +146,8 @@ color_replace.py
 package-lock 2.json
 .gitignore.bak
 资源 4.svg
+
+# Project Specific Root Files (Duplicates/Legacy)
+Aurora.css
+Aurora.jsx
+Logo.svg

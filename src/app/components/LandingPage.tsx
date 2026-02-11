@@ -50,6 +50,7 @@ import { OwlSeerLogo } from './OwlSeerLogo';
 import { translations, languages } from '../data/translations';
 import { SEO } from './SEO';
 import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
+import { AuroraBackground } from './ui/aurora-background';
 
 // --- Types & Interfaces ---
 
@@ -122,29 +123,8 @@ const RandomStars = () => {
   );
 };
 
-// Shared Background Component
-const SharedBackground = memo(() => {
-  const { enableBlur } = usePerformance();
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]" />
-      
-      {/* Aurora Gradients */}
-      <div 
-        className={`absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-gradient-to-br from-[#1AAE82]/10 via-purple-500/5 to-transparent rounded-full ${
-          enableBlur ? 'blur-[80px]' : 'blur-[40px]'
-        } opacity-50`}
-      />
-      
-      <div 
-        className={`absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-gradient-to-tl from-[#06B6D4]/10 via-blue-500/5 to-transparent rounded-full ${
-          enableBlur ? 'blur-[60px]' : 'blur-[30px]'
-        } opacity-40`}
-      />
-    </div>
-  );
-});
+// Shared Background Component - REMOVED in favor of AuroraBackground
+
 
 // Optimized Hero component with performance mode support
 const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
@@ -231,66 +211,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
       aria-label="Hero section - AI TikTok Content Strategy Platform"
     >
       
-      {/* --- Floating Elements (Only show when animations enabled) --- */}
-      {enableAnimations && (
-        <div className="absolute inset-0 pointer-events-none z-0">
-          {/* Floating Glass Card 1: Views Growth */}
-          <div className="absolute top-[15%] left-[5%] md:left-[10%] hidden lg:block">
-            <motion.div 
-              initial={reduceMotion ? false : { opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-              className={`${enableBlur ? 'bg-white/20 dark:bg-slate-900/60 backdrop-blur-md' : 'bg-white/95 dark:bg-slate-900/95'} border border-white/20 dark:border-slate-700/50 p-4 rounded-2xl shadow-lg w-48 transform rotate-[-6deg]`}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500">
-                  <PlayCircle size={16} />
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Video Views</div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-1">
-                    2.4M <span className="text-xs text-green-500 bg-green-500/10 px-1 rounded flex items-center">
-                      <TrendingUp size={10} className="mr-0.5" /> 32%
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="h-10 w-full flex items-end gap-1 mt-2">
-                {[40, 65, 50, 85, 60, 95, 100].map((h, i) => (
-                  <div key={i} className="flex-1 bg-blue-500/30 rounded-sm" style={{ height: `${h}%` }} />
-                ))}
-              </div>
-            </motion.div>
-          </div>
 
-          {/* Floating Glass Card 2: Followers Growth */}
-          <div className="absolute bottom-[20%] right-[5%] md:right-[10%] hidden lg:block">
-            <motion.div 
-              initial={reduceMotion ? false : { opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-              className={`${enableBlur ? 'bg-white/20 dark:bg-slate-900/60 backdrop-blur-md' : 'bg-white/95 dark:bg-slate-900/95'} border border-white/20 dark:border-slate-700/50 p-4 rounded-2xl shadow-lg w-56 transform rotate-[6deg]`}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-500">
-                    <Users size={16} />
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Total Followers</div>
-                    <div className="text-lg font-bold text-gray-900 dark:text-white">128.5k</div>
-                  </div>
-                </div>
-                <span className="text-xs font-bold text-[#1AAE82] bg-[#1AAE82]/10 px-2 py-1 rounded-full">+4.2k</span>
-              </div>
-              <div className="flex items-center justify-between text-xs text-gray-500 mt-2 pt-2 border-t border-white/10 dark:border-white/5">
-                <span>Last 30 days</span>
-                <span className="text-[#1AAE82] font-medium">+12.5%</span>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      )}
 
       {/* --- Main Content --- */}
       <motion.div 
@@ -304,7 +225,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
         <motion.h1
           {...animationConfig}
           transition={{ ...animationConfig.transition, delay: reduceMotion ? 0 : 0.1 } as any}
-          className="text-7xl md:text-9xl lg:text-[120px] font-bold tracking-tighter text-gray-900 dark:text-white leading-[0.9] mb-8 font-display relative"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-6 font-display relative max-w-5xl mx-auto"
           style={{ textShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
         >
           {t.title} <br className="md:hidden" />
@@ -322,10 +243,10 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
         <motion.p
           {...animationConfig}
           transition={{ ...animationConfig.transition, delay: reduceMotion ? 0 : 0.2 } as any}
-          className="text-xl md:text-3xl text-gray-500 dark:text-gray-300 max-w-3xl mb-14 leading-relaxed tracking-tight font-light"
+          className="text-lg md:text-xl text-gray-500 dark:text-gray-300 max-w-2xl mb-10 leading-relaxed tracking-normal font-normal mx-auto"
         >
           {renderSubtitle(t.subtitle)} <br className="hidden md:block" />
-          <span className="text-gray-900 dark:text-white font-semibold relative">
+          <span className="text-gray-900 dark:text-white font-semibold relative inline-block mt-1">
             {t.subtitle2}
             <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#1AAE82] opacity-50"></span>
           </span>
@@ -595,8 +516,14 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
       />
       
       <main className="relative bg-white dark:bg-[#020617]">
-        <SharedBackground />
-        <Hero onTrySample={handleTrySample} t={t.hero} />
+        <AuroraBackground 
+          colorStops={isDarkMode ? ['#7BFF67', '#50FFB2', '#FFFFFF'] : ['#7BFF67', '#50FFB2', '#FFFFFF']} 
+          speed={0.5} 
+          blend={0.9}
+          baseColor={isDarkMode ? 0.0 : 1.0}
+        >
+          <Hero onTrySample={handleTrySample} t={t.hero} />
+        </AuroraBackground>
         <div className="relative z-10 mt-[-1px]">
           <ProductShowcase t={t.productShowcase} />
         <CoreFeatures t={t.coreFeatures} />

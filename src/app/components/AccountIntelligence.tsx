@@ -14,7 +14,6 @@ import { BottomTabBar } from './BottomTabBar';
 import { LatestWeeklyReportCard } from './LatestWeeklyReportCard';
 import { RegenerateReportModal } from './RegenerateReportModal';
 import { ReportsArchiveList } from './ReportsArchiveList';
-import { ThisWeeksBrief } from './ThisWeeksBrief';
 import { DiagnosisIssuesList } from './DiagnosisIssuesList';
 import { AIGoalsCard } from './AIGoalsCard';
 import { useIsMobile } from './ui/use-mobile';
@@ -244,12 +243,6 @@ export function AccountIntelligence({
                   onViewPlan={handleViewPlan}
                   onViewArchive={handleViewArchive}
                   onRegenerate={() => setIsRegenerateModalOpen(true)}
-                />
-
-                {/* THIS WEEK'S BRIEF */}
-                <ThisWeeksBrief 
-                  onNavigateToCopilot={onNavigate}
-                  onNavigateToWeeklyReport={(page) => onNavigate?.(page)}
                 />
 
                 {/* 1.5. KEY CHANGES - Full Width Grid */}
