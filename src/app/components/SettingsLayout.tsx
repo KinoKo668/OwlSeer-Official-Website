@@ -11,10 +11,6 @@ import {
   Users,
 } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
-import { MeMobile } from './MeMobile';
-import { MobileSettingsPage } from './MobileSettingsPage';
-import { useIsMobile } from './ui/use-mobile';
 
 interface SettingsLayoutProps {
   onNavigate?: (page: string) => void;
@@ -55,30 +51,6 @@ export function SettingsLayout({
     { id: 'team', label: 'Team', icon: <Users className="w-4 h-4" /> },
   ];
 
-  const isMobile = useIsMobile();
-
-  // Mobile: Show overview list or sub-page with back button
-  if (isMobile) {
-    if (activeSection === 'overview') {
-      // Show mobile overview list
-      return <MeMobile onNavigate={onNavigate} onSectionChange={onSectionChange} />;
-    } else {
-      // Show mobile sub-page with back button
-      const currentSection = sections.find(s => s.id === activeSection);
-      const sectionTitle = currentSection?.label || 'Settings';
-      
-      return (
-        <MobileSettingsPage
-          title={sectionTitle}
-          onBack={() => onSectionChange?.('overview')}
-          onNavigate={onNavigate}
-        >
-          {children}
-        </MobileSettingsPage>
-      );
-    }
-  }
-
   // Desktop: Show full layout with sidebar and tabs
   return (
     <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
@@ -89,11 +61,10 @@ export function SettingsLayout({
         currentConversationId={currentConversationId}
         onSelectConversation={onSelectConversation}
         onDeleteConversation={onDeleteConversation}
-        className="hidden md:flex"
       />
 
       {/* Main Content Area with Top Tabs */}
-      <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header with Tabs */}
         <div className="bg-white border-b border-[#e0e0e0] flex-shrink-0">
           <div className="px-4 md:px-8 pt-4 md:pt-6 pb-0">
@@ -137,12 +108,6 @@ export function SettingsLayout({
           {children}
         </div>
       </div>
-
-      {/* Bottom Tab Bar - Mobile Only */}
-      <BottomTabBar 
-        activeItem="me" 
-        onNavigate={onNavigate}
-      />
     </div>
   );
 }

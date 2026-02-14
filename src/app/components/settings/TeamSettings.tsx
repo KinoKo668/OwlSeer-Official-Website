@@ -23,8 +23,6 @@ import {
   Settings,
 } from 'lucide-react';
 import { Card, CardContent } from '../Card';
-import { useIsMobile } from '../ui/use-mobile';
-import { TeamSettingsMobile } from './TeamSettingsMobile';
 
 type TeamMember = {
   id: string;
@@ -57,8 +55,6 @@ type AuditLogEntry = {
 };
 
 export function TeamSettings() {
-  const isMobile = useIsMobile();
-  
   // All hooks must be called before any conditional returns
   // Desktop version state
   const [activeSubSection, setActiveSubSection] = React.useState<'overview' | 'members' | 'invites' | 'roles' | 'security' | 'audit'>('overview');
@@ -399,11 +395,6 @@ export function TeamSettings() {
     { id: 'security', label: 'Security', icon: <Lock className="w-4 h-4" /> },
     { id: 'audit', label: 'Audit Log', icon: <FileText className="w-4 h-4" /> },
   ];
-
-  // If mobile, render mobile version (after all hooks are called)
-  if (isMobile) {
-    return <TeamSettingsMobile />;
-  }
 
   // Desktop version
   return (

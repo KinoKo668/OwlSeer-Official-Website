@@ -1,13 +1,10 @@
 import React from 'react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
 import { TikTokPreviewModal } from './TikTokPreviewModal';
 import { TikTokPreviewInline } from './TikTokPreviewInline';
 import { PublishPlanModal } from './PublishPlanModal';
 import { ScriptEditorNew } from './ScriptEditorNew';
 import { CreateScriptModal, ScriptFormData } from './CreateScriptModal';
-import { StudioMobile } from './StudioMobile';
-import { useIsMobile } from './ui/use-mobile';
 import {
   Plus,
   Search,
@@ -1698,7 +1695,6 @@ export function ContentStudio({
   onDeleteConversation,
   isSimulation = false,
 }: ContentStudioProps) {
-  const isMobile = useIsMobile();
   const [scripts, setScripts] = React.useState<Script[]>(mockScripts);
   const [currentView, setCurrentView] = React.useState<'manager' | 'editor'>('manager');
   const [currentScriptId, setCurrentScriptId] = React.useState<string | null>(null);
@@ -1732,11 +1728,6 @@ export function ContentStudio({
     // 3. AI input trigger (called by ScriptEditorNew)
     trigger();
   };
-
-  // Show mobile version on mobile devices
-  if (isMobile) {
-    return <StudioMobile onNavigate={onNavigate} />;
-  }
 
   const handleOpenCreateModal = () => {
     setEditingScriptId(null);
@@ -1849,10 +1840,9 @@ export function ContentStudio({
       <SidebarPro 
         activeItem="studio" 
         onNavigate={onNavigate}
-        className="hidden md:flex"
       />
 
-      <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {currentView === 'manager' ? (
           <ScriptManager
             scripts={scripts}
@@ -1870,12 +1860,6 @@ export function ContentStudio({
           />
         ) : null}
       </div>
-
-      {/* Bottom Tab Bar - Mobile Only */}
-      <BottomTabBar 
-        activeItem="studio" 
-        onNavigate={onNavigate}
-      />
 
       {/* Create Script Modal */}
       <CreateScriptModal

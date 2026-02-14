@@ -10,13 +10,11 @@ import {
 import { SidebarPro } from './SidebarPro';
 import { CopilotCTAButton } from './CopilotCTAButton';
 import { ContentCategoryInsight } from './ContentCategoryInsight';
-import { BottomTabBar } from './BottomTabBar';
 import { LatestWeeklyReportCard } from './LatestWeeklyReportCard';
 import { RegenerateReportModal } from './RegenerateReportModal';
 import { ReportsArchiveList } from './ReportsArchiveList';
 import { DiagnosisIssuesList } from './DiagnosisIssuesList';
 import { AIGoalsCard } from './AIGoalsCard';
-import { useIsMobile } from './ui/use-mobile';
 import { useSimulationTrigger } from './SimulationPageWrapper';
 
 // Translations for Content Category Insight
@@ -167,7 +165,7 @@ export function AccountIntelligence({
     },
   ];
 
-  const isMobile = useIsMobile();
+  const isMobile = false;
 
   return (
     <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
@@ -178,7 +176,7 @@ export function AccountIntelligence({
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
           <div className="px-4 md:px-8 py-4 md:py-5 border-b border-slate-200 dark:border-slate-800">
@@ -478,12 +476,6 @@ export function AccountIntelligence({
           </div>
         </div>
       </div>
-
-      {/* Bottom Tab Bar - Mobile Only */}
-      <BottomTabBar 
-        activeItem="intelligence" 
-        onNavigate={onNavigate}
-      />
 
       {/* Regenerate Report Modal */}
       <RegenerateReportModal

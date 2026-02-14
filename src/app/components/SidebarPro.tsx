@@ -15,11 +15,14 @@ import {
   User,
   LogOut,
   ChevronsUpDown,
+  Menu,
+  X,
 } from 'lucide-react';
 import { motion, useMotionValue, useMotionTemplate, animate } from 'motion/react';
 import { PricingModal } from './PricingModal';
 import { CreditsPurchaseModal } from './CreditsPurchaseModal';
 import { ThemeToggle } from './ThemeToggle';
+import logoImage from '../../../Logo.png';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -242,6 +245,7 @@ export function SidebarPro({
 }: SidebarProProps) {
   const [isPricingModalOpen, setIsPricingModalOpen] = React.useState(false);
   const [isCreditsPurchaseModalOpen, setIsCreditsPurchaseModalOpen] = React.useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
   
   // Initialize from localStorage or default to true
   const [isCollapsed, setIsCollapsed] = React.useState(() => {
@@ -269,7 +273,27 @@ export function SidebarPro({
     if (onNavigate) {
       onNavigate(page);
     }
+    setMobileNavOpen(false);
   };
+
+  const mobileSwitcherItems = [
+    { key: 'home', label: 'Overview', page: 'home', icon: <LayoutDashboard size={16} strokeWidth={2} /> },
+    { key: 'dashboard', label: 'Dashboard', page: 'dashboard', icon: <Activity size={16} strokeWidth={2} /> },
+    { key: 'copilot', label: 'AI Chat', page: 'copilot', icon: <Sparkles size={16} strokeWidth={2} /> },
+    { key: 'intelligence', label: 'Account Insight', page: 'intelligence', icon: <PieChart size={16} strokeWidth={2} /> },
+    { key: 'library', label: 'Content Library', page: 'library', icon: <Library size={16} strokeWidth={2} /> },
+    { key: 'hashtag', label: 'Trends', page: 'hashtag', icon: <Hash size={16} strokeWidth={2} /> },
+    { key: 'scheduling', label: 'Scheduling & Slots', page: 'scheduling', icon: <CalendarRange size={16} strokeWidth={2} /> },
+    { key: 'studio', label: 'Content Studio', page: 'studio', icon: <Clapperboard size={16} strokeWidth={2} /> },
+    { key: 'settings', label: 'Settings', page: 'settings', icon: <Settings size={16} strokeWidth={2} /> },
+    { key: 'reports-archive', label: 'Reports Archive', page: 'reports-archive', icon: <Activity size={16} strokeWidth={2} /> },
+  ];
+
+  const normalizedActiveKey = activeItem === 'trends' ? 'hashtag' : activeItem;
+
+  const activeSwitcherItem =
+    mobileSwitcherItems.find((item) => item.key === normalizedActiveKey) ||
+    mobileSwitcherItems.find((item) => item.key === 'home')!;
 
   // Manual toggle function
   const handleToggleCollapse = () => {
@@ -322,6 +346,58 @@ export function SidebarPro({
   
   return (
     <>
+      {/* Mobile Hamburger - Floating, no layout compression */}
+      <div className="md:hidden fixed left-3 top-3 z-50">
+        <button
+          type="button"
+          onClick={() => setMobileNavOpen((prev) => !prev)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-sm"
+          aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        >
+          {mobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {mobileNavOpen && (
+        <div className="md:hidden fixed inset-0 z-40">
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            className="absolute inset-0 bg-black/35"
+            onClick={() => setMobileNavOpen(false)}
+          />
+          <div className="absolute left-0 top-0 h-full w-[280px] border-r border-sidebar-border bg-sidebar shadow-xl">
+            <div className="border-b border-sidebar-border px-4 py-4">
+              <div className="text-muted-foreground" style={{ fontSize: '11px', fontWeight: 600 }}>
+                CURRENT PAGE
+              </div>
+              <div className="mt-1 inline-flex items-center gap-2 text-sidebar-foreground" style={{ fontSize: '14px', fontWeight: 700 }}>
+                {activeSwitcherItem.icon}
+                <span>{activeSwitcherItem.label}</span>
+              </div>
+            </div>
+            <div className="max-h-[calc(100vh-78px)] overflow-y-auto p-2">
+              {mobileSwitcherItems.map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => handleNavigation(item.page)}
+                  className={`flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left transition-colors ${
+                    normalizedActiveKey === item.key
+                      ? 'bg-[#0F766E] text-white'
+                      : 'text-sidebar-foreground hover:bg-sidebar-accent'
+                  }`}
+                  style={{ fontSize: '13px', fontWeight: 600 }}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* SidebarOuter - Controls viewport width */}
       <motion.div
         className={`hidden md:flex h-screen bg-sidebar border-r border-sidebar-border flex-col ${className}`}
@@ -379,7 +455,7 @@ export function SidebarPro({
                 <div className="flex items-center relative">
                   {/* Logo - Hidden when collapsed + hovered */}
                   <motion.div 
-                    className="w-10 h-10 rounded-[10px] bg-gradient-to-br from-[#0F766E] to-[#14B8A6] flex items-center justify-center flex-shrink-0 shadow-sm"
+                    className="w-10 h-10 rounded-[10px] bg-transparent flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden"
                     initial={false}
                     animate={{
                       opacity: (!isExpanded && isCollapsedStable && isLogoHovered) ? 0 : 1,
@@ -389,23 +465,7 @@ export function SidebarPro({
                       ease: [0.4, 0, 0.2, 1]
                     }}
                   >
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path
-                        d="M10 2L4 6V14L10 18L16 14V6L10 2Z"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        fill="none"
-                      />
-                      <circle cx="10" cy="10" r="2" fill="white" />
-                      <path
-                        d="M10 8V4M10 16V12"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+                    <img src={logoImage} alt="OwlSeer logo" className="block w-full h-full object-cover" />
                   </motion.div>
 
                   {/* Expand Button - Replaces Logo when collapsed AND hovered */}

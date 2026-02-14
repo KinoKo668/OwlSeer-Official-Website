@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { IPhoneWrapper } from './components/iphone-simulator';
 import { addLanguagePrefix, isPublicPage, stripLanguagePrefix, useLanguage } from './contexts';
 import { getLanguageFromPathname } from './i18n/routing';
 
@@ -1083,84 +1082,50 @@ export default function App() {
           <Route path="/sidebar-demo" element={<Navigate to="/social/simulation/dashboard" replace />} />
           <Route path="/copilot" element={<Navigate to="/social/simulation/copilot" replace />} />
           <Route path="/simulation" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="dashboard">
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="dashboard">
                   <Dashboard onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/dashboard" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="dashboard">
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="dashboard">
                   <DashboardMonitor onNavigate={handleNavigateWithQuestion} isSimulation={true} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/trends" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="trend-radar">
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="trend-radar">
                   <HashtagRadar onNavigate={handleNavigateWithQuestion} isSimulation={true} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/studio" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="content-studio">
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion} scenario="content-studio">
                   <ContentStudio onNavigate={handleNavigateWithQuestion} isSimulation={true} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/copilot" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <Copilot onNavigate={handleNavigateWithQuestion} prefilledQuestion={copilotPrefilledQuestion} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/intelligence" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <AccountIntelligence 
                     onNavigate={handleNavigateWithQuestion} 
                     initialTab={intelligenceTab}
                   />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/library" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <ContentLibrary onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/scheduling" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <SchedulingSlotsNew onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/settings" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <SettingsLayout 
                     onNavigate={handleNavigateWithQuestion}
                     activeSection={settingsSection}
@@ -1177,13 +1142,9 @@ export default function App() {
                     {settingsSection === 'team' && <TeamSettings />}
                   </SettingsLayout>
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/weekly-report-detail" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <WeeklyReportDetail 
                     onNavigate={handleNavigateWithQuestion}
                     onBackToReports={() => {
@@ -1192,17 +1153,11 @@ export default function App() {
                     }} 
                   />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/simulation/reports-archive" element={
-            <>
-              <IPhoneWrapper>
-                <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
+              <SimulationPageWrapper onNavigate={handleNavigateWithQuestion}>
                   <ReportsArchive onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
-              </IPhoneWrapper>
-            </>
           } />
           <Route path="/dashboard" element={<Navigate to="/social/simulation/dashboard" replace />} />
           <Route path="/monitor" element={<Navigate to="/social/simulation/dashboard" replace />} />

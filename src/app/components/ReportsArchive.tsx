@@ -1,7 +1,6 @@
 import React from 'react';
 import { FileText, ChevronRight, Download, Calendar } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
 
 interface ReportsArchiveProps {
   onNavigate?: (page: string) => void;
@@ -48,7 +47,7 @@ export function ReportsArchive({
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <div className="bg-white border-b border-[#e0e0e0] px-4 md:px-8 py-4 md:py-5">
           <div className="flex items-center justify-between">
@@ -56,7 +55,7 @@ export function ReportsArchive({
               <h1 className="text-[#1a1a1a] mb-1" style={{ fontSize: '20px', fontWeight: '700' }}>
                 Reports Archive
               </h1>
-              <p className="text-[#666666] hidden md:block" style={{ fontSize: '13px' }}>
+              <p className="text-[#666666]" style={{ fontSize: '13px' }}>
                 Browse and revisit past weekly reports here.
               </p>
             </div>
@@ -126,8 +125,6 @@ export function ReportsArchive({
         </div>
       </div>
 
-      {/* Bottom Tab Bar - Mobile Only */}
-      <BottomTabBar activeItem="intelligence" onNavigate={onNavigate} />
     </div>
   );
 }

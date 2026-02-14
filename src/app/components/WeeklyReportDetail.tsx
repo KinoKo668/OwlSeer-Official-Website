@@ -12,7 +12,6 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
 import { KPIItem } from './skeletons/KPIItem';
 import { SectionCard } from './skeletons/SectionCard';
 import { SidebarNavItem } from './skeletons/SidebarNavItem';
@@ -104,7 +103,7 @@ export function WeeklyReportDetail({
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Sticky Header */}
         <div className="bg-white border-b border-[#e0e0e0] sticky top-0 z-30">
           {/* Row 1: Back link + Title + Status + Week switcher + Actions */}
@@ -152,7 +151,7 @@ export function WeeklyReportDetail({
                   </button>
                 </div>
 
-                <div className="hidden md:flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <button className="px-3 py-2 border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] transition-colors flex items-center gap-2" style={{ fontSize: '13px', fontWeight: '500' }}>
                     <Download className="w-4 h-4 text-[#666666]" />
                     <span className="text-[#666666]">Export</span>
@@ -825,9 +824,6 @@ export function WeeklyReportDetail({
           </div>
         </div>
       </div>
-
-      {/* Bottom Tab Bar - Mobile Only */}
-      <BottomTabBar activeItem="intelligence" onNavigate={onNavigate} />
 
       {/* Toast notification */}
       {toast && (

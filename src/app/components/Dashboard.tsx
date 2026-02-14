@@ -43,13 +43,10 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 import { AccountProfileSnapshot } from './AccountProfileSnapshot';
-import { HomeMobile } from './HomeMobile';
 import { WeeklyReportModule, WeeklyOverviewCard, CompactArchiveCard, QuickActionsCard } from './weeklyreport';
 import { FeedbackDrawer } from './FeedbackDrawer';
-import { useIsMobile } from './ui/use-mobile';
 import { QuickWinCard } from './QuickWinCard';
 import { RenderLogger } from './RenderLogger';
 import { usePerformance } from '../contexts';
@@ -560,27 +557,14 @@ export const Dashboard = memo(function Dashboard({ onNavigate }: { onNavigate?: 
     }, 20000);
     return () => clearTimeout(timer);
   }, [trigger]);
-  
-  // Use standard mobile detection hook
-  const isMobile = useIsMobile();
-
-  // Show mobile version on small screens
-  if (isMobile) {
-    return (
-      <div className="simulation-overview-theme h-screen bg-sidebar" onClick={() => trigger()}>
-        <HomeMobile onNavigate={onNavigate} />
-      </div>
-    );
-  }
 
   // Show desktop version on larger screens
   return (
     <div className="simulation-overview-theme flex h-screen bg-sidebar" onClick={() => trigger()}>
-      {/* Sidebar - Hidden on mobile, shown on desktop */}
+      {/* Sidebar */}
       <SidebarPro 
         activeItem="home" 
         onNavigate={onNavigate}
-        className="hidden md:flex"
       />
       
       {/* Main Content */}
@@ -593,11 +577,6 @@ export const Dashboard = memo(function Dashboard({ onNavigate }: { onNavigate?: 
         onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
       />
 
-      {/* Bottom Tab Bar - Mobile Only */}
-      <BottomTabBar 
-        activeItem="home" 
-        onNavigate={onNavigate}
-      />
     </div>
   );
 });

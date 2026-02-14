@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { X, Info, ChevronDown, ChevronUp, Check } from 'lucide-react';
-import { useIsMobile } from './ui/use-mobile';
 
 type SlotType = 'Core Content' | 'Monetized Content' | 'Experiment' | 'Timely';
 type AspectRatio = '9:16' | '16:9' | '1:1';
@@ -72,7 +71,7 @@ const shootingStyleData = {
 };
 
 export function CreateScriptModal({ isOpen, onClose, onCreateScript, initialData, isEditMode = false }: CreateScriptModalProps) {
-  const isMobile = useIsMobile();
+  const isMobile = false;
   const [title, setTitle] = useState('Untitled Script');
   const [slotType, setSlotType] = useState<SlotType>('Core Content');
   const [aspectRatio, setAspectRatio] = useState<AspectRatio>('9:16');

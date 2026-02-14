@@ -31,7 +31,6 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
 import { ScriptSelectorModal } from './ScriptSelectorModal';
 import { useSimulationTrigger } from './SimulationPageWrapper';
 
@@ -2881,7 +2880,7 @@ export function SchedulingSlotsNew({
           onNavigate={onNavigate}
         />
 
-        <div className="flex flex-1 overflow-hidden pb-[64px] md:pb-0">
+        <div className="flex flex-1 overflow-hidden">
           {/* Left Filter Panel - Hidden on Mobile */}
           <div className="hidden md:block">
             <LeftFilterPanel
@@ -2964,11 +2963,6 @@ export function SchedulingSlotsNew({
           />
         )}
 
-        {/* Bottom Tab Bar - Mobile Only */}
-        <BottomTabBar 
-          activeItem="scheduling" 
-          onNavigate={onNavigate}
-        />
       </div>
     </DndProvider>
   );

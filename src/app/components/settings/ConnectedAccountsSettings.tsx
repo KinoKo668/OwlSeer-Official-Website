@@ -2,7 +2,6 @@ import React from 'react';
 import { Mail, Globe, Shield, RefreshCw, Plus, Star, Users, TrendingUp, Check, AlertCircle, ExternalLink, CheckCircle2, XCircle } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '../Card';
 import { Modal, ModalHeader, ModalContent, ModalFooter } from '../Modal';
-import { useIsMobile } from '../ui/use-mobile';
 
 interface TikTokAccount {
   id: string;
@@ -109,7 +108,7 @@ export function ConnectedAccountsSettings({ autoOpenAddModal = false }: Connecte
     return count.toString();
   };
 
-  const isMobile = useIsMobile();
+  const isMobile = false;
 
   return (
     <div className="max-w-4xl mx-auto px-4 md:px-8 py-6 md:py-10">

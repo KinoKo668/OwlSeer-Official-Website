@@ -49,6 +49,7 @@ export const Navbar = memo(({
   const navDesc = nav.desc || {};
   const navActions = nav.actions || {};
   const navDarkMode = nav.darkMode || {};
+  const DESKTOP_DROPDOWN_CLOSE_DELAY_MS = 500;
 
   const handleNav = (page: string) => {
     if (onNavigate) {
@@ -68,6 +69,10 @@ export const Navbar = memo(({
        if (page === 'terms') (window as any).navigateToTerms?.();
        if (page === 'cookies') (window as any).navigateToCookies?.();
        if (page === 'landing') window.location.href = addLanguagePrefix('/', language); 
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
     setActiveDropdown(null);
     setMobileMenuOpen(false);
@@ -103,17 +108,24 @@ export const Navbar = memo(({
     setSupportsSvgBackdropFilter(Boolean(supportsSvgSyntax && !isFirefox && !isSafari));
   }, [enableBlur, liquidFilterId]);
 
-  const handleMouseEnter = (name: string) => {
+  const clearDropdownCloseTimer = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
+  };
+
+  const handleMouseEnter = (name: string) => {
+    clearDropdownCloseTimer();
     setActiveDropdown(name);
   };
 
   const handleMouseLeave = () => {
+    clearDropdownCloseTimer();
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 150); // 150ms delay to prevent accidental closing
+      timeoutRef.current = null;
+    }, DESKTOP_DROPDOWN_CLOSE_DELAY_MS);
   };
 
   const toggleDropdown = (name: string) => {
@@ -123,6 +135,12 @@ export const Navbar = memo(({
       setActiveDropdown(name);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      clearDropdownCloseTimer();
+    };
+  }, []);
 
   const liquidDisplacementScale = scrolled ? 10 : 8;
 
@@ -175,7 +193,7 @@ export const Navbar = memo(({
     return `md:hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 ${panelRadiusClass} overflow-hidden shadow-lg shadow-gray-200/20 dark:shadow-black/20`;
   }, [enableBlur, panelRadiusClass]);
 
-  const productDropdownPositionClass = "left-0 translate-x-0 origin-top-left";
+  const productDropdownPositionClass = "!left-0 !translate-x-0 origin-top-left";
   const solutionsDropdownPositionClass = "left-1/2 -translate-x-1/2 origin-top";
   const resourcesDropdownPositionClass = "right-0 left-auto translate-x-0 origin-top-right";
   const languageDropdownPositionClass = "right-0 left-auto translate-x-0 origin-top-right";
@@ -258,10 +276,15 @@ export const Navbar = memo(({
           <div className="hidden md:flex items-center justify-center gap-3">
             
             {/* Product Mega Menu */}
-            <div className="relative group">
+            <div
+              className="relative group"
+              onMouseEnter={() => handleMouseEnter('product')}
+              onMouseLeave={handleMouseLeave}
+            >
               <button 
+                type="button"
                 className={`${navItemBaseClass} ${activeDropdown === 'product' ? navItemActiveClass : navItemIdleClass}`}
-                onClick={() => toggleDropdown('product')}
+                onClick={(e) => e.preventDefault()}
               >
                 {t.product} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'product' ? 'rotate-180' : ''}`} />
               </button>
@@ -269,7 +292,6 @@ export const Navbar = memo(({
               <AnimatePresence>
             {activeDropdown === 'product' && (
               <>
-                <div className="fixed inset-0 z-0" onClick={() => setActiveDropdown(null)} />
                 <motion.div
                   initial={{ opacity: 0, y: 15, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -333,10 +355,15 @@ export const Navbar = memo(({
             </div>
 
             {/* Solutions Mega Menu */}
-            <div className="relative group">
+            <div
+              className="relative group"
+              onMouseEnter={() => handleMouseEnter('solutions')}
+              onMouseLeave={handleMouseLeave}
+            >
               <button 
+                type="button"
                 className={`${navItemBaseClass} ${activeDropdown === 'solutions' ? navItemActiveClass : navItemIdleClass}`}
-                onClick={() => toggleDropdown('solutions')}
+                onClick={(e) => e.preventDefault()}
               >
                 {nav.solutions || "Solutions"} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
               </button>
@@ -344,7 +371,6 @@ export const Navbar = memo(({
               <AnimatePresence>
             {activeDropdown === 'solutions' && (
               <>
-                <div className="fixed inset-0 z-0" onClick={() => setActiveDropdown(null)} />
                 <motion.div
                   initial={{ opacity: 0, y: 15, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -401,12 +427,15 @@ export const Navbar = memo(({
             </button>
 
             {/* Resources Mega Menu */}
-            <div 
-              className="relative group" 
+            <div
+              className="relative group"
+              onMouseEnter={() => handleMouseEnter('resources')}
+              onMouseLeave={handleMouseLeave}
             >
               <button 
+                type="button"
                 className={`${navItemBaseClass} ${activeDropdown === 'resources' ? navItemActiveClass : navItemIdleClass}`}
-                onClick={() => toggleDropdown('resources')}
+                onClick={(e) => e.preventDefault()}
               >
                 {t.resources} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
               </button>
@@ -414,10 +443,6 @@ export const Navbar = memo(({
               <AnimatePresence>
             {activeDropdown === 'resources' && (
               <>
-                <div 
-                  className="fixed inset-0 z-0" 
-                  onClick={() => setActiveDropdown(null)}
-                />
                 <motion.div
                   initial={{ opacity: 0, y: 15, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -476,10 +501,15 @@ export const Navbar = memo(({
             </div>
 
             {/* Language Switcher */}
-            <div className="relative group">
+            <div
+              className="relative group"
+              onMouseEnter={() => handleMouseEnter('language')}
+              onMouseLeave={handleMouseLeave}
+            >
               <button
+                type="button"
                 className={`${navIconButtonBaseClass} text-gray-700 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.88)] dark:text-slate-100 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
-                onClick={() => toggleDropdown('language')}
+                onClick={(e) => e.preventDefault()}
               >
                 <Globe className="w-5 h-5" />
               </button>
@@ -487,10 +517,6 @@ export const Navbar = memo(({
               <AnimatePresence>
                 {activeDropdown === 'language' && (
                   <>
-                    <div
-                      className="fixed inset-0 z-0"
-                      onClick={() => setActiveDropdown(null)}
-                    />
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}

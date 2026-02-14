@@ -20,7 +20,6 @@ import {
   ArrowDownRight,
 } from 'lucide-react';
 import { SidebarPro } from './SidebarPro';
-import { BottomTabBar } from './BottomTabBar';
 import { CopilotCTAButton } from './CopilotCTAButton';
 import { BenchmarkBar } from './BenchmarkBar';
 import { AudienceInsights } from './AudienceInsights';
@@ -296,11 +295,10 @@ export function DashboardMonitor({
       <SidebarPro
         activeItem={navigationItem}
         onNavigate={onNavigate}
-        className="hidden md:flex"
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden pb-[64px] md:pb-0">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 px-4 md:px-8 py-4 md:py-5 relative overflow-hidden transition-colors duration-300">
           <div className="flex items-center justify-between">
@@ -1047,12 +1045,6 @@ export function DashboardMonitor({
           </div>
         </div>
       </div>
-
-      {/* Bottom Tab Bar */}
-      <BottomTabBar
-        activeItem={navigationItem === 'home' ? 'home' : 'dashboard'}
-        onNavigate={onNavigate}
-      />
 
       {isSimulation && (
         <ConversionFab 

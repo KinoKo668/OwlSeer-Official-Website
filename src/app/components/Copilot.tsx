@@ -38,8 +38,6 @@ import {
 import { motion } from 'motion/react';
 import { SidebarPro } from './SidebarPro';
 import { ConversationSidebar } from './ConversationSidebar';
-import { CopilotMobile } from './CopilotMobile';
-import { useIsMobile } from './ui/use-mobile';
 import { useLocation } from 'react-router-dom';
 import { stripLanguagePrefix } from '../contexts';
 
@@ -202,8 +200,6 @@ export function Copilot({
   currentConversationId: externalCurrentConversationId,
   setCurrentConversationId: setExternalCurrentConversationId,
 }: CopilotProps = {}) {
-  const isMobile = useIsMobile();
-  
   // Use external state if provided, otherwise use internal state
   const [internalConversations, setInternalConversations] = React.useState<Conversation[]>([]);
   const [internalCurrentConversationId, setInternalCurrentConversationId] = React.useState<string | null>(null);
@@ -212,11 +208,6 @@ export function Copilot({
   const setConversations = setExternalConversations ?? setInternalConversations;
   const currentConversationId = externalCurrentConversationId ?? internalCurrentConversationId;
   const setCurrentConversationId = setExternalCurrentConversationId ?? setInternalCurrentConversationId;
-
-  // Show mobile version on mobile devices
-  if (isMobile) {
-    return <CopilotMobile onNavigate={onNavigate} prefilledQuestion={prefilledQuestion} />;
-  }
 
   const createNewConversation = () => {
     const newConversation: Conversation = {
@@ -269,7 +260,6 @@ export function Copilot({
         currentConversationId={currentConversationId}
         onSelectConversation={handleSelectConversation}
         onDeleteConversation={handleDeleteConversation}
-        className="hidden md:flex"
       />
       <CopilotContent
         conversations={conversations}
@@ -582,7 +572,7 @@ export function CopilotContent({
                     <div className="flex items-center gap-2.5">
                       {/* Press Enter hint - hide on mobile */}
                       {inputValue.trim() && (
-                        <div className="hidden md:flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5">
                           <span className="text-muted-foreground" style={{ fontSize: '12px' }}>
                             Press
                           </span>

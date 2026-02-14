@@ -2,7 +2,6 @@ import React from 'react';
 import { User, Mail, Globe, Clock, Camera, Upload, ChevronRight, X } from 'lucide-react';
 import { Card, CardContent } from '../Card';
 import { EmailVerificationModal } from './EmailVerificationModal';
-import { useIsMobile } from '../ui/use-mobile';
 
 const timeZones = [
   { value: 'America/New_York', label: 'Eastern Time (ET)' },
@@ -30,7 +29,7 @@ export function AccountSettings() {
   const [editingField, setEditingField] = React.useState<string | null>(null);
   const [tempValue, setTempValue] = React.useState('');
   const fileInputRef = React.useRef<HTMLInputElement>(null);
-  const isMobile = useIsMobile();
+  const isMobile = false;
 
   const handleAvatarClick = () => {
     fileInputRef.current?.click();

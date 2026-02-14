@@ -386,20 +386,20 @@ export function WeeklyOverviewCard({
                         {/* Send to Copilot Button */}
                         <button
                           onClick={localQuickWin.onGenerate}
-                          className="opacity-100 transition-all p-1.5 rounded-lg hover:bg-white/20 text-white flex-shrink-0"
+                          className="opacity-100 transition-all p-1.5 rounded-lg bg-white hover:bg-white/90 text-[#0F766E] shadow-sm flex-shrink-0"
                           title="Send to Copilot"
                         >
-                          <Sparkles className="w-4 h-4" />
+                          <Sparkles className="w-4 h-4 text-[#0F766E]" />
                         </button>
 
                         {/* More Menu */}
                         <div className="relative">
                           <button
                             onClick={() => setQuickWinMenuOpen(!quickWinMenuOpen)}
-                            className="opacity-0 group-hover:opacity-100 transition-all p-1.5 rounded-lg hover:bg-white/20 text-white flex-shrink-0"
+                            className="opacity-100 transition-all p-1.5 rounded-lg bg-white hover:bg-white/90 text-[#0F766E] shadow-sm flex-shrink-0"
                             title="More"
                           >
-                            <MoreVertical className="w-4 h-4" />
+                            <MoreVertical className="w-4 h-4 text-[#0F766E]" />
                           </button>
                           {quickWinMenuOpen && (
                             <>
