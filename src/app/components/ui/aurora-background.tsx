@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { cn } from './utils';
+import { usePerformance } from '../../contexts';
 
 const VERT = `#version 300 es
 in vec2 position;
@@ -119,19 +120,62 @@ interface AuroraBackgroundProps {
   speed?: number;
   time?: number; // Added to match Aurora.jsx props
   baseColor?: number;
+  disableAdaptiveQuality?: boolean;
+}
+
+function toColorStopsArray(stops: string[]): [number, number, number][] {
+  const fallback = ['#7DFF68', '#51FFB2', '#FFFFFF'];
+  const normalized = [
+    stops[0] || fallback[0],
+    stops[1] || stops[0] || fallback[1],
+    stops[2] || stops[1] || stops[0] || fallback[2],
+  ];
+  return normalized.map((hex) => {
+    const color = new Color(hex);
+    return [color.r, color.g, color.b];
+  }) as [number, number, number][];
 }
 
 export const AuroraBackground = ({
   children,
   className,
-  colorStops = ['#5227FF', '#7cff67', '#5227FF'],
+  colorStops = ['#7DFF68', '#51FFB2', '#FFFFFF'],
   amplitude = 1.0,
-  blend = 0.5,
-  speed = 1.0,
+  blend = 0.8,
+  speed = 0.5,
   time,
   baseColor = 0.0,
+  disableAdaptiveQuality = false,
   ...props
 }: AuroraBackgroundProps) => {
+  const { isWindows, isLowEndDevice, reduceMotion } = usePerformance();
+
+  const qualityProfile = useMemo(() => {
+    if (disableAdaptiveQuality) {
+      return {
+        constrained: false,
+        maxFPS: 60,
+        maxDpr: 2,
+        renderScale: 1,
+        amplitudeScale: 1,
+        blendScale: 1,
+        antialias: true,
+      };
+    }
+
+    const constrained = isWindows || isLowEndDevice;
+    return {
+      constrained,
+      // Keep dynamic effect while reducing GPU cost on Windows/low-end devices.
+      maxFPS: reduceMotion ? 24 : constrained ? 30 : 60,
+      maxDpr: constrained ? 1.25 : 2,
+      renderScale: constrained ? 0.82 : 1,
+      amplitudeScale: constrained ? 0.9 : 1,
+      blendScale: constrained ? 0.92 : 1,
+      antialias: !constrained,
+    };
+  }, [disableAdaptiveQuality, isLowEndDevice, isWindows, reduceMotion]);
+
   const propsRef = useRef({ colorStops, amplitude, blend, speed, time, baseColor });
   propsRef.current = { colorStops, amplitude, blend, speed, time, baseColor };
   const ctnDom = useRef<HTMLDivElement>(null);
@@ -140,10 +184,24 @@ export const AuroraBackground = ({
     const ctn = ctnDom.current;
     if (!ctn) return;
 
+    let isInViewport = true;
+    let isPageVisible = typeof document === 'undefined' ? true : document.visibilityState === 'visible';
+    let observer: IntersectionObserver | null = null;
+    let frameHandle = 0;
+    let lastRenderedAt = 0;
+    let currentDpr = Math.max(0.5, Math.min((window.devicePixelRatio || 1) * qualityProfile.renderScale, qualityProfile.maxDpr));
+    const frameIntervalMs = 1000 / qualityProfile.maxFPS;
+
+    const colorCache = {
+      key: colorStops.join('|'),
+      value: toColorStopsArray(colorStops),
+    };
+
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
-      antialias: true
+      antialias: qualityProfile.antialias,
+      dpr: currentDpr
     });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -157,6 +215,11 @@ export const AuroraBackground = ({
       if (!ctn) return;
       const width = ctn.offsetWidth;
       const height = ctn.offsetHeight;
+      const nextDpr = Math.max(0.5, Math.min((window.devicePixelRatio || 1) * qualityProfile.renderScale, qualityProfile.maxDpr));
+      if (nextDpr !== currentDpr) {
+        currentDpr = nextDpr;
+        renderer.dpr = currentDpr;
+      }
       renderer.setSize(width, height);
       if (program) {
         program.uniforms.uResolution.value = [width, height];
@@ -169,18 +232,13 @@ export const AuroraBackground = ({
       delete geometry.attributes.uv;
     }
 
-    const colorStopsArray = colorStops.map(hex => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
-
     program = new Program(gl, {
       vertex: VERT,
       fragment: FRAG,
       uniforms: {
         uTime: { value: 0 },
         uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray },
+        uColorStops: { value: colorCache.value },
         uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
         uBlend: { value: blend },
         uBaseColor: { value: baseColor }
@@ -190,27 +248,70 @@ export const AuroraBackground = ({
     const mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas);
 
-    let animateId = 0;
-    const update = (t: number) => {
-      animateId = requestAnimationFrame(update);
+    let update: (t: number) => void = () => {};
+    const canRender = () => isInViewport && isPageVisible;
+
+    const syncRenderLoop = () => {
+      if (canRender()) {
+        if (!frameHandle) {
+          frameHandle = requestAnimationFrame(update);
+        }
+      } else if (frameHandle) {
+        cancelAnimationFrame(frameHandle);
+        frameHandle = 0;
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      isPageVisible = document.visibilityState === 'visible';
+      syncRenderLoop();
+    };
+
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          isInViewport = entry.isIntersecting;
+          syncRenderLoop();
+        },
+        { threshold: 0.01 }
+      );
+      observer.observe(ctn);
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    update = (t: number) => {
+      frameHandle = requestAnimationFrame(update);
+      if (!canRender()) return;
+      if (t - lastRenderedAt < frameIntervalMs) return;
+      lastRenderedAt = t;
+
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
+      const nextColorKey = propsRef.current.colorStops.join('|');
+      if (nextColorKey !== colorCache.key) {
+        colorCache.key = nextColorKey;
+        colorCache.value = toColorStopsArray(propsRef.current.colorStops);
+        program.uniforms.uColorStops.value = colorCache.value;
+      }
+
       program.uniforms.uTime.value = time * speed * 0.1;
-      program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
-      program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+      program.uniforms.uAmplitude.value = (propsRef.current.amplitude ?? 1.0) * qualityProfile.amplitudeScale;
+      program.uniforms.uBlend.value = Math.min(1, (propsRef.current.blend ?? blend) * qualityProfile.blendScale);
       program.uniforms.uBaseColor.value = propsRef.current.baseColor ?? 0.0;
-      const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = stops.map(hex => {
-        const c = new Color(hex);
-        return [c.r, c.g, c.b];
-      });
       renderer.render({ scene: mesh });
     };
-    animateId = requestAnimationFrame(update);
+    syncRenderLoop();
 
     resize();
 
     return () => {
-      cancelAnimationFrame(animateId);
+      if (frameHandle) {
+        cancelAnimationFrame(frameHandle);
+      }
+      if (observer) {
+        observer.disconnect();
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', resize);
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
@@ -219,7 +320,7 @@ export const AuroraBackground = ({
       if (extension) extension.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amplitude]);
+  }, [qualityProfile]);
 
   return (
     <div

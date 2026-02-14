@@ -103,7 +103,7 @@ const SignalItem = ({
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();
-                      onNavigate('/auth');
+                      onNavigate('/social/auth');
                     }}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-black dark:bg-white text-white dark:text-black text-sm font-bold rounded-full hover:opacity-80 transition-opacity"
                   >
@@ -151,8 +151,8 @@ export const SignalsPage = ({ isDarkMode, setIsDarkMode, onNavigate }: SignalsPa
       />
 
       <Navbar 
-        onTrySample={() => onNavigate('/simulation')}
-        onSignUp={() => onNavigate('/auth')}
+        onTrySample={() => onNavigate('/social/simulation')}
+        onSignUp={() => onNavigate('/social/auth')}
         onNavigate={onNavigate}
         language={language}
         setLanguage={setLanguage}
@@ -365,7 +365,7 @@ export const SignalsPage = ({ isDarkMode, setIsDarkMode, onNavigate }: SignalsPa
               {tSignals.sections.contextualConversion.desc}
             </p>
             <button 
-              onClick={() => onNavigate('/auth')}
+              onClick={() => onNavigate('/social/auth')}
               className="px-8 py-4 bg-black dark:bg-white text-white dark:text-black hover:opacity-80 transition-opacity text-base font-bold rounded-full"
             >
               {tSignals.sections.contextualConversion.button}

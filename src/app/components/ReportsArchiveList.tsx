@@ -32,21 +32,21 @@ export function ReportsArchiveList({
   const statusConfig = {
     'on-track': {
       label: 'On track',
-      bg: 'bg-[#d1fae5]',
-      text: 'text-[#065f46]',
-      border: 'border-[#a7f3d0]',
+      bg: 'bg-emerald-100 dark:bg-emerald-950/50',
+      text: 'text-emerald-700 dark:text-emerald-300',
+      border: 'border-emerald-200 dark:border-emerald-900',
     },
     'at-risk': {
       label: 'At risk',
-      bg: 'bg-[#fef3c7]',
-      text: 'text-[#92400e]',
-      border: 'border-[#fde68a]',
+      bg: 'bg-amber-100 dark:bg-amber-950/50',
+      text: 'text-amber-700 dark:text-amber-300',
+      border: 'border-amber-200 dark:border-amber-900',
     },
     'off-track': {
       label: 'Off track',
-      bg: 'bg-[#fee2e2]',
-      text: 'text-[#991b1b]',
-      border: 'border-[#fecaca]',
+      bg: 'bg-red-100 dark:bg-red-950/50',
+      text: 'text-red-700 dark:text-red-300',
+      border: 'border-red-200 dark:border-red-900',
     },
   };
 
@@ -121,24 +121,24 @@ export function ReportsArchiveList({
       <div className="space-y-6">
         {/* Header */}
         <div className="mb-6">
-          <div className="h-7 w-48 bg-[#e0e0e0] rounded mb-2 animate-pulse" />
-          <div className="h-5 w-96 bg-[#e0e0e0] rounded animate-pulse" />
+          <div className="h-7 w-48 bg-slate-200 dark:bg-slate-700 rounded mb-2 animate-pulse" />
+          <div className="h-5 w-96 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
         </div>
 
         {/* Controls */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 mb-6">
-          <div className="flex-1 h-11 bg-[#e0e0e0] rounded-lg animate-pulse" />
-          <div className="h-11 w-24 bg-[#e0e0e0] rounded-lg animate-pulse" />
-          <div className="h-11 w-32 bg-[#e0e0e0] rounded-lg animate-pulse" />
+          <div className="flex-1 h-11 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse" />
+          <div className="h-11 w-24 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse" />
+          <div className="h-11 w-32 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse" />
         </div>
 
         {/* Skeleton rows */}
         <div className="space-y-4">
           {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="bg-white rounded-[12px] border border-[#e0e0e0] p-5 shadow-sm animate-pulse">
-              <div className="h-5 w-48 bg-[#e0e0e0] rounded mb-3" />
-              <div className="h-4 w-full bg-[#e0e0e0] rounded mb-3" />
-              <div className="h-4 w-2/3 bg-[#e0e0e0] rounded" />
+            <div key={i} className="bg-white dark:bg-slate-900 rounded-[12px] border border-slate-200 dark:border-slate-800 p-5 shadow-sm animate-pulse">
+              <div className="h-5 w-48 bg-slate-200 dark:bg-slate-700 rounded mb-3" />
+              <div className="h-4 w-full bg-slate-200 dark:bg-slate-700 rounded mb-3" />
+              <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-700 rounded" />
             </div>
           ))}
         </div>
@@ -152,31 +152,31 @@ export function ReportsArchiveList({
       <div className="space-y-6">
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-[#1a1a1a] mb-2" style={{ fontSize: '20px', fontWeight: '700' }}>
+          <h2 className="text-slate-900 dark:text-white mb-2" style={{ fontSize: '20px', fontWeight: '700' }}>
             Reports archive
           </h2>
-          <p className="text-[#666666]" style={{ fontSize: '14px' }}>
+          <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: '14px' }}>
             Browse and revisit past weekly reports.
           </p>
         </div>
 
         {/* Empty state */}
-        <div className="bg-white rounded-[12px] border border-[#e0e0e0] p-12 shadow-sm text-center">
+        <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-slate-200 dark:border-slate-800 p-12 shadow-sm text-center">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#f5f5f5] flex items-center justify-center">
-              <FileText className="w-8 h-8 text-[#999999]" />
+            <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <FileText className="w-8 h-8 text-slate-500 dark:text-slate-400" />
             </div>
             <div>
-              <h3 className="text-[#1a1a1a] mb-2" style={{ fontSize: '16px', fontWeight: '600' }}>
+              <h3 className="text-slate-900 dark:text-white mb-2" style={{ fontSize: '16px', fontWeight: '600' }}>
                 No reports yet
               </h3>
-              <p className="text-[#666666] mb-4" style={{ fontSize: '14px' }}>
+              <p className="text-slate-500 dark:text-slate-400 mb-4" style={{ fontSize: '14px' }}>
                 Your weekly reports will appear here once generated.
               </p>
               {onBackToOverview && (
                 <button
                   onClick={onBackToOverview}
-                  className="inline-flex items-center gap-2 text-[#10b981] hover:text-[#059669] transition-colors"
+                  className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
                   style={{ fontSize: '14px', fontWeight: '600' }}
                 >
                   <ArrowLeft className="w-4 h-4" />
@@ -195,10 +195,10 @@ export function ReportsArchiveList({
     <div className="space-y-6">
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-[#1a1a1a] mb-2" style={{ fontSize: '20px', fontWeight: '700' }}>
+        <h2 className="text-slate-900 dark:text-white mb-2" style={{ fontSize: '20px', fontWeight: '700' }}>
           Reports archive
         </h2>
-        <p className="text-[#666666]" style={{ fontSize: '14px' }}>
+        <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: '14px' }}>
           Browse and revisit past weekly reports.
         </p>
       </div>
@@ -207,25 +207,25 @@ export function ReportsArchiveList({
       <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 mb-6">
         {/* Search */}
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999999]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400" />
           <input
             type="text"
             placeholder="Search by topic, format, or notes…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-[#e0e0e0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10b981] focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             style={{ fontSize: '14px' }}
           />
         </div>
 
         {/* Filter */}
-        <button className="px-4 py-2.5 border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] transition-colors flex items-center gap-2 text-[#666666] hover:text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '500' }}>
+        <button className="px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-slate-400 dark:hover:border-slate-500 transition-colors flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" style={{ fontSize: '14px', fontWeight: '500' }}>
           <Filter className="w-4 h-4" />
           <span>Filter</span>
         </button>
 
         {/* Sort */}
-        <button className="px-4 py-2.5 border border-[#e0e0e0] rounded-lg hover:border-[#1a1a1a] transition-colors flex items-center gap-2 text-[#666666] hover:text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '500' }}>
+        <button className="px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-slate-400 dark:hover:border-slate-500 transition-colors flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" style={{ fontSize: '14px', fontWeight: '500' }}>
           <span>Sort: Newest</span>
           <ChevronDown className="w-4 h-4" />
         </button>
@@ -236,7 +236,7 @@ export function ReportsArchiveList({
         {Object.entries(groupedReports).map(([monthGroup, reports]) => (
           <div key={monthGroup} className="space-y-4">
             {/* Month Section Header */}
-            <h3 className="text-[#1a1a1a] px-1" style={{ fontSize: '14px', fontWeight: '700', letterSpacing: '0.02em' }}>
+            <h3 className="text-slate-900 dark:text-white px-1" style={{ fontSize: '14px', fontWeight: '700', letterSpacing: '0.02em' }}>
               {monthGroup}
             </h3>
 
@@ -248,12 +248,12 @@ export function ReportsArchiveList({
                 return (
                   <div
                     key={report.id}
-                    className="bg-white rounded-[12px] border border-[#e0e0e0] p-5 shadow-sm hover:shadow-md transition-shadow"
+                    className="bg-white dark:bg-slate-900 rounded-[12px] border border-slate-200 dark:border-slate-800 p-5 shadow-sm hover:shadow-md dark:hover:shadow-black/30 transition-shadow"
                   >
                     {/* Row 1: Week range + Status + Actions */}
                     <div className="flex items-center justify-between gap-4 mb-3">
                       <div className="flex items-center gap-3 flex-wrap">
-                        <h4 className="text-[#1a1a1a]" style={{ fontSize: '15px', fontWeight: '600' }}>
+                        <h4 className="text-slate-900 dark:text-white" style={{ fontSize: '15px', fontWeight: '600' }}>
                           {report.weekRange}
                         </h4>
                         {/* Status Pill */}
@@ -268,14 +268,14 @@ export function ReportsArchiveList({
                       {/* Actions */}
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <button
-                          className="text-[#999999] hover:text-[#666666] transition-colors hidden md:inline-flex"
+                          className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors hidden md:inline-flex"
                           style={{ fontSize: '13px', fontWeight: '500' }}
                         >
                           Export
                         </button>
                         <button
                           onClick={() => onOpenReport?.(report.id)}
-                          className="px-4 py-2 text-white bg-[#10b981] rounded-lg hover:bg-[#059669] transition-colors ml-2"
+                          className="px-4 py-2 text-white bg-emerald-500 rounded-lg hover:bg-emerald-600 transition-colors ml-2"
                           style={{ fontSize: '13px', fontWeight: '600' }}
                         >
                           Open
@@ -284,7 +284,7 @@ export function ReportsArchiveList({
                     </div>
 
                     {/* Row 2: Takeaway */}
-                    <p className="text-[#666666] mb-3 line-clamp-1" style={{ fontSize: '14px', fontWeight: '400' }}>
+                    <p className="text-slate-500 dark:text-slate-400 mb-3 line-clamp-1" style={{ fontSize: '14px', fontWeight: '400' }}>
                       {report.takeaway}
                     </p>
 
@@ -292,13 +292,13 @@ export function ReportsArchiveList({
                     <div className="flex items-center gap-6 flex-wrap">
                       {/* Views */}
                       <div className="flex items-center gap-2">
-                        <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                           Views
                         </span>
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '600' }}>
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>
                           {report.kpis.views.value}
                         </span>
-                        <span className={`flex items-center gap-0.5 ${report.kpis.views.isPositive ? 'text-[#16a34a]' : 'text-[#dc2626]'}`} style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className={`flex items-center gap-0.5 ${report.kpis.views.isPositive ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`} style={{ fontSize: '12px', fontWeight: '500' }}>
                           {report.kpis.views.isPositive ? (
                             <ChevronUp className="w-3 h-3" />
                           ) : (
@@ -310,13 +310,13 @@ export function ReportsArchiveList({
 
                       {/* Followers */}
                       <div className="flex items-center gap-2">
-                        <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                           Followers
                         </span>
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '600' }}>
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>
                           {report.kpis.followers.value}
                         </span>
-                        <span className={`flex items-center gap-0.5 ${report.kpis.followers.isPositive ? 'text-[#16a34a]' : 'text-[#dc2626]'}`} style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className={`flex items-center gap-0.5 ${report.kpis.followers.isPositive ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`} style={{ fontSize: '12px', fontWeight: '500' }}>
                           {report.kpis.followers.isPositive ? (
                             <ChevronUp className="w-3 h-3" />
                           ) : (
@@ -328,26 +328,26 @@ export function ReportsArchiveList({
 
                       {/* Posts */}
                       <div className="flex items-center gap-2">
-                        <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                           Posts
                         </span>
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '600' }}>
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>
                           {report.kpis.posts.value}
                         </span>
-                        <span className="text-[#666666]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                           ({report.kpis.posts.completion})
                         </span>
                       </div>
 
                       {/* Deals */}
                       <div className="flex items-center gap-2">
-                        <span className="text-[#999999]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px', fontWeight: '500' }}>
                           Deals
                         </span>
-                        <span className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '600' }}>
+                        <span className="text-slate-900 dark:text-white" style={{ fontSize: '14px', fontWeight: '600' }}>
                           {report.kpis.deals.value}
                         </span>
-                        <span className={`flex items-center gap-0.5 ${report.kpis.deals.isPositive ? 'text-[#16a34a]' : 'text-[#dc2626]'}`} style={{ fontSize: '12px', fontWeight: '500' }}>
+                        <span className={`flex items-center gap-0.5 ${report.kpis.deals.isPositive ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`} style={{ fontSize: '12px', fontWeight: '500' }}>
                           {report.kpis.deals.isPositive ? (
                             <ChevronUp className="w-3 h-3" />
                           ) : (

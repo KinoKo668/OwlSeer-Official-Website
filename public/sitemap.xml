@@ -1,124 +1,238 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <!-- Home Page -->
   <url>
     <loc>https://owlseer.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://owlseer.com/"/>
-    <lastmod>2026-02-04</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- How It Works -->
+
   <url>
-    <loc>https://owlseer.com/how-it-works</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/how-it-works"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/how-it-works"/>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://owlseer.com/social/how-it-works</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/how-it-works"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/how-it-works"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Features -->
+
   <url>
-    <loc>https://owlseer.com/features</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/features"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/features"/>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://owlseer.com/social/features</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/features"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/features"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Pricing -->
+
   <url>
-    <loc>https://owlseer.com/pricing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/pricing"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/pricing"/>
-    <lastmod>2026-02-04</lastmod>
+    <loc>https://owlseer.com/social/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/pricing"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/pricing"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- FAQ -->
+
   <url>
-    <loc>https://owlseer.com/faq</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/faq"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/faq"/>
-    <lastmod>2026-02-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://owlseer.com/social/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/blog"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/blog"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Blog -->
+
   <url>
-    <loc>https://owlseer.com/blog</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/blog"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/blog"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>daily</changefreq>
+    <loc>https://owlseer.com/social/blog/category/strategy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/blog/category/strategy"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/blog/category/strategy"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Contact -->
+
   <url>
-    <loc>https://owlseer.com/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/contact"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/contact"/>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://owlseer.com/social/trends</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/trends"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/trends"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/tools</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/tools"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/tools"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/tools/category/social</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/tools/category/social"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/tools/category/social"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/tools/category/commerce</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/tools/category/commerce"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/tools/category/commerce"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/tools/category/ads</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/tools/category/ads"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/tools/category/ads"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/tools/category/social/hashtag-optimizer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/tools/category/social/hashtag-optimizer"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/tools/category/social/hashtag-optimizer"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/links</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/links"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/links"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  
-  <!-- Privacy Policy -->
+
   <url>
-    <loc>https://owlseer.com/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/privacy"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/privacy"/>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://owlseer.com/social/commerce</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/commerce"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/commerce"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/ads</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/ads"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/ads"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/vs/all</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/vs/all"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/vs/all"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/vs/ai-tools-comparison</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/vs/ai-tools-comparison"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/vs/ai-tools-comparison"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/vs/tubespanner</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/vs/tubespanner"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/vs/tubespanner"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/vs/owlseer-vs-vidiq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/vs/owlseer-vs-vidiq"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/vs/owlseer-vs-vidiq"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/contact"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/contact"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/about"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/about"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/press</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/press"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/press"/>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://owlseer.com/social/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/privacy"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/privacy"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  <!-- Terms of Service -->
+
   <url>
-    <loc>https://owlseer.com/terms</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/terms"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/terms"/>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://owlseer.com/social/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/terms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/terms"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  <!-- Security -->
+
   <url>
-    <loc>https://owlseer.com/security</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/security"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/security"/>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://owlseer.com/social/security</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/security"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/security"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-  
-  <!-- Cookies Policy -->
+
   <url>
-    <loc>https://owlseer.com/cookies</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/cookies"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/cookies"/>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://owlseer.com/social/cookies</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlseer.com/social/cookies"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://owlseer.com/zh/social/cookies"/>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
-  
-  <!-- Sample Dashboard (interactive demo) -->
-  <url>
-    <loc>https://owlseer.com/sample/dashboard</loc>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 </urlset>

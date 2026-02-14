@@ -25,6 +25,7 @@ import {
   X,
   Shield,
   Zap,
+  Sparkles,
   Heart,
   MessageCircle,
   Share2,
@@ -34,11 +35,10 @@ import {
   BookOpen,
   HelpCircle,
   Layout,
-  PlayCircle,
+  CirclePlay,
   Monitor,
   Smartphone,
-  Laptop,
-  Chrome
+  Laptop
 } from 'lucide-react';
 
 import { Navbar } from './layout/Navbar';
@@ -49,8 +49,9 @@ import { PricingSection } from './PricingSection';
 import { OwlSeerLogo } from './OwlSeerLogo';
 import { translations, languages } from '../data/translations';
 import { SEO } from './SEO';
-import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
-import { AuroraBackground } from './ui/aurora-background';
+import { getCanonicalUrl, seoConfig, getLocalizedStructuredDataSchemas, generateAlternates } from '../data/seoConfig';
+import { HeroAuroraBackground } from './ui/hero-aurora-background';
+import avatarPng from '../../../头像.png';
 
 // --- Types & Interfaces ---
 
@@ -65,18 +66,6 @@ interface StatProps {
 
 // --- Components ---
 
-
-const AppleLogo = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.05 19.33c-.76 1.11-1.55 2.21-2.79 2.23-1.22.02-1.61-.72-3.03-.72-1.42 0-1.86.7-3.02.73-1.2.03-2.08-1.2-2.84-2.29-1.55-2.24-2.73-6.33-1.14-9.09.79-1.37 2.21-2.24 3.75-2.27 1.18-.02 2.3.79 3.02.79.72 0 2.06-1.01 3.48-.86 1.19.09 2.27.6 2.87 1.47-2.61 1.58-2.18 5.76.54 6.94-.58 1.45-1.32 2.9-2.04 4.07h-.01.01zM14.99 5.56c.64-.78 1.07-1.87.95-2.95-1.08.04-2.39.72-3.16 1.62-.69.79-1.29 2.05-1.13 3.05 1.2.09 2.42-.61 3.34-1.72z" />
-  </svg>
-);
-
-const AndroidLogo = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5 3l14 9-14 9V3z" />
-  </svg>
-);
 
 const RandomStars = () => {
   const [stars, setStars] = useState<Array<{ top: string; left: string; delay: number; duration: number; size: number; color: string }>>([]);
@@ -127,7 +116,7 @@ const RandomStars = () => {
 
 
 // Optimized Hero component with performance mode support
-const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
+const Hero = memo(({ onTrySample, onSignUp, t }: { onTrySample: () => void, onSignUp: () => void, t: any }) => {
   const { enableAnimations, enableParallax, enableBlur, reduceMotion } = usePerformance();
   const { scrollY } = useScroll();
   
@@ -179,10 +168,10 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
     return (
       <>
         {parts[0]}
-        <span className="inline-flex flex-col h-[1.5em] overflow-hidden align-middle relative -top-[5px] mx-1">
+        <span className="mx-1 inline-flex h-[1.2em] items-center overflow-hidden align-baseline leading-none">
           {reduceMotion ? (
             // Static version for reduced motion
-            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1AAE82] to-[#2DD4BF]">
+            <span className="inline-block leading-none font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1AAE82] to-[#2DD4BF]">
               {currentPlatform}
             </span>
           ) : (
@@ -193,7 +182,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -40, opacity: 0 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1AAE82] to-[#2DD4BF]"
+                className="inline-block leading-none font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1AAE82] to-[#2DD4BF]"
               >
                 {currentPlatform}
               </motion.span>
@@ -207,7 +196,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
 
   return (
     <section 
-      className="relative min-h-[100vh] pt-[72px] flex items-center justify-center overflow-hidden z-0"
+      className="relative z-0 flex min-h-[100svh] items-center justify-center overflow-hidden pb-10 pt-[78px] md:min-h-[100vh] md:pb-0 md:pt-[72px]"
       aria-label="Hero section - AI TikTok Content Strategy Platform"
     >
       
@@ -215,7 +204,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
 
       {/* --- Main Content --- */}
       <motion.div 
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center"
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-4 text-center sm:px-6 lg:px-8"
         style={enableParallax ? {
           opacity: heroContentOpacity,
           scale: heroContentScale,
@@ -225,7 +214,7 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
         <motion.h1
           {...animationConfig}
           transition={{ ...animationConfig.transition, delay: reduceMotion ? 0 : 0.1 } as any}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-6 font-display relative max-w-5xl mx-auto"
+          className="relative mx-auto mb-5 max-w-5xl font-display text-[2.45rem] font-bold leading-[1.08] tracking-tight text-gray-900 dark:text-white sm:mb-6 sm:text-5xl md:text-7xl lg:text-8xl"
           style={{ textShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
         >
           {t.title} <br className="md:hidden" />
@@ -243,174 +232,172 @@ const Hero = memo(({ onTrySample, t }: { onTrySample: () => void, t: any }) => {
         <motion.p
           {...animationConfig}
           transition={{ ...animationConfig.transition, delay: reduceMotion ? 0 : 0.2 } as any}
-          className="text-lg md:text-xl text-gray-500 dark:text-gray-300 max-w-2xl mb-10 leading-relaxed tracking-normal font-normal mx-auto"
+          className="mx-auto mb-8 max-w-xl text-base font-normal leading-relaxed tracking-normal text-gray-500 dark:text-gray-300 sm:mb-10 sm:max-w-2xl sm:text-lg md:text-xl"
         >
-          {renderSubtitle(t.subtitle)} <br className="hidden md:block" />
-          <span className="text-gray-900 dark:text-white font-semibold relative inline-block mt-1">
-            {t.subtitle2}
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#1AAE82] opacity-50"></span>
-          </span>
+          {renderSubtitle(t.subtitle)}
+          {t.subtitle2 ? (
+            <>
+              <br className="hidden md:block" />
+              <span className="text-gray-900 dark:text-white font-semibold relative inline-block mt-1">
+                {t.subtitle2}
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#1AAE82] opacity-50"></span>
+              </span>
+            </>
+          ) : null}
         </motion.p>
 
         {/* CTA Button Area */}
         <motion.div
           {...animationConfig}
           transition={{ ...animationConfig.transition, delay: reduceMotion ? 0 : 0.3 } as any}
-          className="flex flex-col sm:flex-row items-center gap-6"
+          className="mx-auto flex w-full max-w-sm flex-col items-center justify-center gap-4 sm:w-auto sm:max-w-none sm:flex-row sm:gap-6"
         >
           <button 
             onClick={onTrySample}
-            className="group relative px-8 py-4 bg-[#1AAE82] rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="group relative w-full overflow-hidden rounded-full bg-gray-900 px-7 py-3.5 shadow-[0_16px_40px_-22px_rgba(15,23,42,0.55)] will-change-transform transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_26px_58px_-26px_rgba(16,185,129,0.68)] dark:bg-white sm:w-auto sm:px-8 sm:py-4"
           >
-            {!reduceMotion && (
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-            )}
-            <span className="relative flex items-center gap-3 text-white font-bold text-lg">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#149A74] via-[#1AAE82] to-[#2DD4BF] bg-[length:180%_100%] opacity-0 transition-[opacity,background-position] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[position:100%_0] group-hover:opacity-100" />
+            <div className="pointer-events-none absolute -left-1/3 top-[-130%] h-[340%] w-1/3 -translate-x-full rotate-[20deg] bg-white/40 opacity-0 blur-xl transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[420%] group-hover:opacity-70 dark:bg-white/35" />
+            <span className="relative flex items-center justify-center gap-3 text-base font-bold text-white transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white dark:text-gray-900 sm:text-lg">
               {t.ctaPrimary} 
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5" />
             </span>
           </button>
           
-          <button className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium">
-            <div className="w-10 h-10 rounded-full border border-gray-200 dark:border-slate-700 flex items-center justify-center">
-              <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-[#1AAE82] border-b-[6px] border-b-transparent ml-1"></div>
+          <button 
+            onClick={onSignUp}
+            className="group flex w-full items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-semibold text-gray-600 transition-all hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-white sm:w-auto sm:py-4"
+          >
+            <div className="flex items-center justify-center">
+              <Zap className="w-4 h-4 text-[#1AAE82] fill-[#1AAE82] opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
             </div>
-            <span>Start Now</span>
+            <span className="text-[15px]">{t.ctaSecondaryButton || 'Start Now'}</span>
           </button>
         </motion.div>
-
-        {/* Platform Availability */}
-        <motion.div
-           initial={{ opacity: 0, y: 10 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ delay: 0.6, duration: 0.8 } as any}
-           className="mt-16 flex flex-col items-center gap-3"
-        >
-           <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Available On</span>
-           
-           <div className="flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
-             
-             {/* Web Part */}
-             <div className="flex items-center gap-2 hover:text-gray-900 dark:hover:text-white transition-colors cursor-default group">
-                <Chrome className="w-5 h-5" />
-                <span>Web</span>
-             </div>
-
-             {/* Divider */}
-             <div className="w-px h-4 bg-gray-300 dark:bg-slate-700" />
-
-             {/* Mobile Part - Split into Brand Icons */}
-             <div className="flex items-center gap-4">
-               {/* iOS */}
-               <div className="flex items-center gap-2 hover:text-gray-900 dark:hover:text-white transition-colors cursor-default group">
-                  <AppleLogo className="w-5 h-5" />
-                  <span>App Store</span>
-               </div>
-               
-               {/* Android */}
-               <div className="flex items-center gap-2 hover:text-gray-900 dark:hover:text-white transition-colors cursor-default group">
-                  <AndroidLogo className="w-5 h-5" />
-                  <span>Google Play</span>
-               </div>
-             </div>
-
-           </div>
-        </motion.div>
       </motion.div>
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-40 bg-gradient-to-b from-transparent via-white/70 to-white dark:via-[#070c14]/72 dark:to-[#070c14]"
+      />
     </section>
   );
 });
 
 
 
-const ValueProposition = ({ language, onTrySample, onNavigate }: { language: string, onTrySample: () => void, onNavigate: (page: string) => void }) => {
-  const content = {
-    en: {
-      title: "Stop guessing what to post",
-      subtitle: "OwlSeer tells you what to do next on TikTok.",
-      cards: [
-        { title: "Actionable Plans", desc: "Get a complete content plan in under 3 minutes.", icon: <Zap className="w-6 h-6 text-[#1AAE82]" /> },
-        { title: "AI Scripts", desc: "AI-generated scripts ready to shoot today.", icon: <PlayCircle className="w-6 h-6 text-[#1AAE82]" /> },
-        { title: "Data-Driven", desc: "For creators tired of random posting.", icon: <BarChart2 className="w-6 h-6 text-[#1AAE82]" /> }
-      ],
-      trust: ["No miracle promises", "No auto-posting", "No password required"],
-      cta: {
-        primary: "See It In Action",
-        secondary: "How it works"
-      }
-    },
-    zh: {
-      title: "不再猜测该发布什么",
-      subtitle: "OwlSeer 告诉你下一步该做什么。",
-      cards: [
-        { title: "可执行计划", desc: "在3分钟内提供可操作的内容计划", icon: <Zap className="w-6 h-6 text-[#1AAE82]" /> },
-        { title: "AI 脚本", desc: "AI生成的脚本，今天就可以拍摄", icon: <PlayCircle className="w-6 h-6 text-[#1AAE82]" /> },
-        { title: "数据驱动", desc: "为厌倦随机发布的创作者提供方向", icon: <BarChart2 className="w-6 h-6 text-[#1AAE82]" /> }
-      ],
-      trust: ["不做奇迹承诺", "不自动发布", "无需密码"],
-      cta: {
-        primary: "查看实际操作",
-        secondary: "它是如何工作的"
-      }
-    }
-  };
+const defaultValuePropositionContent = {
+  badge: 'Strategic Clarity',
+  title: 'Stop guessing what to post',
+  subtitle: 'OwlSeer tells you what to do next on TikTok.',
+  cards: [
+    { title: 'Actionable Plans', desc: 'Get a complete content plan in under 3 minutes.' },
+    { title: 'AI Scripts', desc: 'AI-generated scripts ready to shoot today.' },
+    { title: 'Data-Driven', desc: 'For creators tired of random posting.' }
+  ],
+  trust: ['No miracle promises', 'No auto-posting', 'No password required'],
+  metrics: [
+    { label: 'Plan turnaround', value: '< 3 min' },
+    { label: 'Signals analyzed', value: '30+' },
+    { label: 'Publishing rhythm', value: 'Weekly' }
+  ],
+  cta: {
+    primary: 'See It In Action',
+    secondary: 'How it works'
+  }
+};
 
-  const t = (content as any)[language] || content.en;
+const ValueProposition = ({ t, onTrySample, onNavigate, onSignUp }: { t: any; onTrySample: () => void; onNavigate: (page: string) => void; onSignUp: () => void }) => {
+  const { reduceMotion } = usePerformance();
+  const content = t || defaultValuePropositionContent;
+  const cards = (content.cards || defaultValuePropositionContent.cards).map((card: any, index: number) => {
+    const icons = [
+      <Zap key="plans" className="h-6 w-6 text-[#1AAE82]" />,
+      <CirclePlay key="scripts" className="h-6 w-6 text-[#1AAE82]" />,
+      <BarChart2 key="data" className="h-6 w-6 text-[#1AAE82]" />
+    ];
+    return { ...card, icon: icons[index] };
+  });
 
   return (
-    <section 
-      className="py-20 bg-white dark:bg-slate-900 relative overflow-hidden"
+    <section
+      className="perf-content-auto relative overflow-hidden py-20 md:py-24 lg:py-28"
       aria-label="Value proposition - Why choose OwlSeer"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-display tracking-tight">
-            {t.title}
-          </h2>
-          <p className="text-xl text-gray-500 dark:text-gray-400 leading-relaxed mb-10">
-            {t.subtitle}
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <button 
-              onClick={onTrySample}
-              className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-[#1AAE82]/30 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2"
-            >
-              {t.cta.primary} <ArrowRight className="w-5 h-5" />
-            </button>
-            <button 
-              onClick={() => onNavigate('how-it-works')}
-              className="px-8 py-4 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-900 dark:text-white text-lg font-medium rounded-xl transition-all duration-300 flex items-center gap-2"
-            >
-              {t.cta.secondary} <ArrowRight className="w-5 h-5" />
-            </button>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end">
+          <div>
+            <div className="inline-flex items-center rounded-full border border-emerald-200/70 bg-white/75 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-700 backdrop-blur-md dark:border-emerald-400/30 dark:bg-emerald-500/10 dark:text-emerald-200">
+              {content.badge || defaultValuePropositionContent.badge}
+            </div>
+            <h2 className="mt-6 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl md:text-5xl dark:text-white">
+              {content.title || defaultValuePropositionContent.title}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg dark:text-slate-300">
+              {content.subtitle || defaultValuePropositionContent.subtitle}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button
+                onClick={onSignUp}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1AAE82] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_45px_-26px_rgba(16,185,129,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#15956F] sm:w-auto"
+              >
+                {content.cta?.primary || defaultValuePropositionContent.cta.primary}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+              <button
+                onClick={() => onNavigate('how-it-works')}
+                className="inline-flex w-full items-center justify-center rounded-xl border border-slate-200 bg-white/80 px-7 py-3.5 text-sm font-semibold text-slate-700 backdrop-blur-md transition-all duration-300 hover:bg-white dark:border-white/15 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-900 sm:w-auto"
+              >
+                {content.cta?.secondary || defaultValuePropositionContent.cta.secondary}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-3">
+            {(content.metrics || defaultValuePropositionContent.metrics).map((metric: any) => (
+              <div
+                key={metric.label}
+                className="perf-lite-card rounded-2xl border border-white/85 bg-white/72 px-4 py-4 shadow-[0_20px_55px_-45px_rgba(15,23,42,0.95)] backdrop-blur-md dark:border-white/10 dark:bg-slate-900/60"
+              >
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{metric.label}</div>
+                <div className="mt-2 text-xl font-semibold text-slate-900 dark:text-white">{metric.value}</div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {t.cards.map((item: any, i: number) => (
-            <div key={i} className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-8 border border-gray-100 dark:border-slate-700 hover:border-[#1AAE82]/30 transition-colors">
-              <div className="w-12 h-12 bg-[#1AAE82]/10 rounded-xl flex items-center justify-center mb-6">
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {cards.map((item: any, i: number) => (
+            <div
+              key={item.title}
+              className={`perf-heavy-card group rounded-[26px] border border-white/85 bg-white/75 p-6 shadow-[0_24px_70px_-48px_rgba(15,23,42,0.9)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/60 ${
+                reduceMotion ? '' : 'transition-all duration-500 hover:-translate-y-1'
+              }`}
+              style={{ transitionDelay: `${i * 40}ms` }}
+            >
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-200/70 bg-emerald-500/10 dark:border-emerald-400/30 dark:bg-emerald-500/15">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{item.title}</h3>
-              <p className="text-gray-500 dark:text-gray-400">{item.desc}</p>
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-12 text-sm font-medium text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-slate-800 pt-12">
-          <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4 text-gray-400" />
-            {t.trust[0]}
+        <div className="perf-lite-card mt-10 flex flex-col items-start gap-3 rounded-2xl border border-white/85 bg-white/72 px-4 py-3 text-sm shadow-[0_20px_55px_-45px_rgba(15,23,42,0.95)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-center dark:border-white/10 dark:bg-slate-900/60">
+          <div className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300">
+            <Shield className="h-4 w-4 text-emerald-500" />
+            {(content.trust || defaultValuePropositionContent.trust)[0]}
           </div>
-          <div className="flex items-center gap-2">
-            <X className="w-4 h-4 text-gray-400" />
-            {t.trust[1]}
+          <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-600" />
+          <div className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300">
+            <X className="h-4 w-4 text-emerald-500" />
+            {(content.trust || defaultValuePropositionContent.trust)[1]}
           </div>
-          <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4 text-gray-400" />
-            {t.trust[2]}
+          <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-600" />
+          <div className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-300">
+            <Shield className="h-4 w-4 text-emerald-500" />
+            {(content.trust || defaultValuePropositionContent.trust)[2]}
           </div>
         </div>
       </div>
@@ -420,7 +407,20 @@ const ValueProposition = ({ language, onTrySample, onNavigate }: { language: str
 
 export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
   const { language, setLanguage } = useLanguage();
+  const { reduceMotion } = usePerformance();
   const t = translations[language as keyof typeof translations] || translations.en;
+  const isZh = language === 'zh';
+
+  const finalCtaCopy = {
+    badge: isZh ? 'AI 增长信号引擎（TikTok）' : 'AI Growth Signals for TikTok',
+    titlePrefix: isZh ? '在发布前就知道什么内容' : 'Know What',
+    titleHighlight: isZh ? '会增长' : 'Will Grow',
+    titleSuffix: isZh ? '。' : 'Before You Post.',
+    subtitle: isZh
+      ? 'OwlSeer 分析 30+ 预测信号，帮你优先发布高概率增长内容。用数据决策，不再靠猜。'
+      : 'OwlSeer analyzes 30+ predictive signals to identify high-probability content. Publish with data, not guesswork.',
+    trustNoCard: isZh ? '无需信用卡' : 'No credit card required'
+  };
 
   useEffect(() => {
     (window as any).navigateToHowItWorks = () => onNavigate('how-it-works');
@@ -460,10 +460,11 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
 
   // Get SEO config based on language
   const seo = seoConfig.home[language as 'en' | 'zh'] || seoConfig.home.en;
+  const localizedSchemas = getLocalizedStructuredDataSchemas(language);
   const homeStructuredData = [
-    structuredDataSchemas.organization,
-    structuredDataSchemas.softwareApplication,
-    structuredDataSchemas.webSite
+    localizedSchemas.organization,
+    localizedSchemas.softwareApplication,
+    localizedSchemas.webSite
   ];
 
   return (
@@ -473,7 +474,7 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl('/', language)}
         lang={language}
         alternates={generateAlternates('/')}
         structuredData={homeStructuredData}
@@ -516,52 +517,267 @@ export function LandingPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavig
       />
       
       <main className="relative bg-white dark:bg-[#020617]">
-        <AuroraBackground 
-          colorStops={isDarkMode ? ['#7BFF67', '#50FFB2', '#FFFFFF'] : ['#7BFF67', '#50FFB2', '#FFFFFF']} 
-          speed={0.5} 
-          blend={0.9}
+        <HeroAuroraBackground 
+          colorStops={['#7DFF68', '#51FFB2', '#FFFFFF']}
+          amplitude={1.0}
+          speed={1.0}
+          blend={0.5}
           baseColor={isDarkMode ? 0.0 : 1.0}
         >
-          <Hero onTrySample={handleTrySample} t={t.hero} />
-        </AuroraBackground>
-        <div className="relative z-10 mt-[-1px]">
-          <ProductShowcase t={t.productShowcase} />
-        <CoreFeatures t={t.coreFeatures} />
-        <ValueProposition language={language} onTrySample={handleTrySample} onNavigate={onNavigate} />
-        <PricingSection onSignUp={handleSignUp} t={t.pricingSection} />
-        </div>
+          <Hero onTrySample={handleTrySample} onSignUp={handleSignUp} t={t.hero} />
+        </HeroAuroraBackground>
+        <div className="relative z-10 mt-[-1px] overflow-hidden bg-gradient-to-b from-white via-[#f6f7fb] to-[#f6f7fb] dark:from-[#070c14] dark:via-[#070c14] dark:to-[#070c14]">
+          <ProductShowcase t={t.productShowcase} onNavigate={onNavigate} />
+          <CoreFeatures t={t.coreFeatures} />
+          <ValueProposition t={t.valueProposition} onTrySample={handleTrySample} onNavigate={onNavigate} onSignUp={handleSignUp} />
+          <PricingSection onSignUp={handleSignUp} t={t.pricingSection} />
         
-        {/* Final CTA Section */}
-        <section 
-          className="py-24 bg-[#111827] relative overflow-hidden"
+        <section
+          className="perf-content-auto relative overflow-hidden bg-gradient-to-b from-[#f6f7fb] via-[#effcf5] to-white py-20 md:py-24 lg:py-28 dark:from-[#070c14] dark:via-[#0b1721] dark:to-slate-900"
           aria-label="Call to action - Start your free trial"
         >
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#1AAE82]/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-          
-          <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-display">
-              {t.finalCta?.title || "Ready to see your future?"}
-            </h2>
-            <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-              {t.finalCta?.subtitle || "Join thousands of creators who stopped guessing and started growing. Experience the full dashboard instantly."}
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button 
-                onClick={handleSignUp}
-                className="w-full sm:w-auto px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-[#1AAE82]/30 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                {t.finalCta?.start || "Start Your Free Trial"} <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={handleTrySample}
-                className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 text-white text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300"
-              >
-                {t.finalCta?.demo || "View Live Demo"}
-              </button>
+          <div className="pointer-events-none absolute inset-0">
+            <div className="perf-decor-blur absolute -right-16 top-0 h-72 w-72 rounded-full bg-emerald-300/30 blur-3xl dark:bg-emerald-500/15" />
+            <div className="perf-decor-blur absolute -left-14 top-20 h-64 w-64 rounded-full bg-teal-200/35 blur-3xl dark:bg-teal-400/12" />
+            <div className="perf-decor-blur absolute bottom-[-140px] left-1/2 h-80 w-[52rem] -translate-x-1/2 rounded-full bg-emerald-200/35 blur-[130px] dark:bg-emerald-500/10" />
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+              <div className="space-y-8">
+
+
+                <h2 className="max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-white">
+                  {finalCtaCopy.titlePrefix}{' '}
+                  <span className="bg-gradient-to-r from-[#059669] via-[#10b981] to-[#047857] bg-clip-text text-transparent">
+                    {finalCtaCopy.titleHighlight}
+                  </span>
+                  <br />
+                  {finalCtaCopy.titleSuffix}
+                </h2>
+
+                <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300">
+                  {finalCtaCopy.subtitle}
+                </p>
+
+                <div className="flex flex-col gap-4 sm:flex-row">
+                  <button
+                    onClick={handleSignUp}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#059669] to-[#10b981] px-8 py-4 text-base font-semibold text-white shadow-[0_24px_60px_-32px_rgba(16,185,129,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:from-[#047857] hover:to-[#059669] sm:w-auto"
+                  >
+                    {t.finalCta?.start || 'Start Your Free Trial'}
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                  <button
+                    onClick={handleTrySample}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/85 px-8 py-4 text-base font-semibold text-slate-700 backdrop-blur-md transition-all duration-300 hover:bg-white sm:w-auto dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                  >
+                    <CirclePlay className="h-4 w-4" />
+                    {t.finalCta?.demo || 'View Sample'}
+                  </button>
+                </div>
+
+
+              </div>
+
+              <div className={`relative mx-auto -mt-8 w-full max-w-[52rem] lg:w-[108%] lg:max-w-none ${reduceMotion ? '' : '[perspective:1800px]'}`}>
+                <div className="perf-decor-blur pointer-events-none absolute inset-x-8 bottom-[-1.8rem] h-16 rounded-full bg-emerald-900/18 blur-3xl dark:bg-black/45" />
+
+                <div
+                  className={`relative origin-bottom-left ${reduceMotion ? '' : 'will-change-transform [transform-style:preserve-3d]'} md:-ml-6 lg:-ml-16`}
+                  style={reduceMotion ? undefined : { transform: 'rotateX(6deg) rotateY(-12deg) rotateZ(6deg)' }}
+                >
+                  <div className="perf-heavy-card relative rounded-[28px] border border-white/85 bg-white/90 p-4 shadow-[0_56px_120px_-60px_rgba(15,23,42,0.98)] backdrop-blur-xl sm:p-5 dark:border-white/10 dark:bg-slate-900/72">
+                    <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[linear-gradient(130deg,rgba(255,255,255,0.42)_0%,rgba(255,255,255,0)_45%)] dark:bg-[linear-gradient(130deg,rgba(255,255,255,0.09)_0%,rgba(255,255,255,0)_45%)]" />
+                    <div className="pointer-events-none absolute -right-2 top-3 h-[calc(100%-1.2rem)] w-2.5 rounded-r-[14px] bg-gradient-to-b from-slate-200/80 to-slate-400/70 dark:from-slate-700/75 dark:to-slate-900/80" />
+                    <div className="pointer-events-none absolute -bottom-2 left-4 right-3 h-2.5 rounded-b-[12px] bg-gradient-to-r from-slate-300/70 to-slate-500/70 dark:from-slate-700/80 dark:to-slate-900/90" />
+
+                    <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4 dark:border-white/10">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                      </div>
+                      <div className="rounded-lg bg-slate-100 px-3 py-1 text-xs text-slate-500 dark:bg-white/10 dark:text-slate-300">
+                        app.owlseer.com
+                      </div>
+                    </div>
+
+                    <div className="flex gap-5">
+                      {/* Sidebar Skeleton */}
+                      <div className="hidden w-12 flex-col gap-3 sm:flex">
+                        <div className="mb-2 grid h-8 w-8 place-items-center rounded-lg bg-emerald-600 text-white overflow-hidden">
+                          <img src={avatarPng} alt="OwlSeer Avatar" className="h-full w-full object-cover" />
+                        </div>
+                        {[1, 2, 3, 4, 5].map((i) => (
+                          <div key={i} className="h-1.5 w-6 rounded-full bg-slate-200 dark:bg-white/10" />
+                        ))}
+                      </div>
+
+                      {/* Main Dashboard Content */}
+                      <div className="flex-1 space-y-4">
+                        {/* Header Row */}
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold text-slate-800 dark:text-white">Dashboard</span>
+                          <div className="flex gap-2">
+                            <div className="h-2 w-16 rounded-full bg-slate-200 dark:bg-white/10" />
+                            <div className="h-6 w-6 rounded-full bg-slate-200 dark:bg-white/10" />
+                          </div>
+                        </div>
+
+                        {/* KPI Cards Row */}
+                        <div className="grid grid-cols-3 gap-3">
+                          {[1, 2, 3].map((i) => (
+                            <div key={i} className="rounded-lg bg-slate-50 p-2.5 dark:bg-white/5">
+                              <div className="mb-1.5 h-1.5 w-8 rounded-full bg-slate-200 dark:bg-white/10" />
+                              <div className="h-3 w-12 rounded-full bg-slate-300 dark:bg-white/20" />
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Chart Widget */}
+                        <div className="relative h-28 rounded-xl bg-slate-50 p-3 dark:bg-white/5">
+                          <div className="mb-2 flex justify-between">
+                            <div className="h-2 w-16 rounded-full bg-slate-200 dark:bg-white/10" />
+                            <div className="h-2 w-8 rounded-full bg-slate-200 dark:bg-white/10" />
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 top-8 opacity-60">
+                            <svg viewBox="0 0 400 100" className="h-full w-full" preserveAspectRatio="none">
+                              <path d="M0,80 C100,70 150,90 200,40 C250,-10 300,50 400,20" fill="none" stroke="#10b981" strokeWidth="3" vectorEffect="non-scaling-stroke" />
+                              <path d="M0,80 C100,70 150,90 200,40 C250,-10 300,50 400,20 V100 H0 Z" fill="url(#gradient)" opacity="0.2" />
+                              <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                  <stop offset="0%" stopColor="#10b981" />
+                                  <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                                </linearGradient>
+                              </defs>
+                            </svg>
+                          </div>
+                        </div>
+
+                        {/* List Items */}
+                        <div className="space-y-2">
+                          {[1, 2].map((i) => (
+                            <div key={i} className="flex items-center gap-3 rounded-lg border border-slate-100 p-2 dark:border-white/5">
+                              <div className="h-6 w-6 rounded bg-slate-100 dark:bg-white/10" />
+                              <div className="space-y-1">
+                                <div className="h-1.5 w-24 rounded-full bg-slate-200 dark:bg-white/10" />
+                                <div className="h-1.5 w-12 rounded-full bg-slate-100 dark:bg-white/5" />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {!reduceMotion && (
+                  <>
+                    <div
+                      className="perf-heavy-card absolute -right-4 -top-6 hidden w-40 rounded-xl border border-white/70 bg-white/90 p-3 shadow-[0_30px_65px_-35px_rgba(15,23,42,0.88)] backdrop-blur-lg sm:block dark:border-white/10 dark:bg-slate-900/70"
+                      style={{ transform: 'rotateX(6deg) rotateY(-12deg) rotateZ(6deg) translateZ(20px)' }}
+                    >
+                      <div className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <TrendingUp className="h-3.5 w-3.5 text-emerald-500" />
+                        Trend Velocity
+                      </div>
+                      <div className="text-2xl font-bold text-slate-900 dark:text-white">+138%</div>
+                      <div className="mt-2 flex items-end gap-1">
+                        <span className="h-3 w-2 rounded-t bg-emerald-200 dark:bg-emerald-500/30" />
+                        <span className="h-5 w-2 rounded-t bg-emerald-300 dark:bg-emerald-500/40" />
+                        <span className="h-4 w-2 rounded-t bg-emerald-400 dark:bg-emerald-500/50" />
+                        <span className="h-6 w-2 rounded-t bg-emerald-500 dark:bg-emerald-500/65" />
+                        <span className="h-8 w-2 rounded-t bg-emerald-600 dark:bg-emerald-400/80" />
+                      </div>
+                    </div>
+
+                    <div
+                      className="perf-heavy-card absolute -right-4 top-24 hidden w-40 rounded-xl border border-white/70 bg-white/90 p-3 shadow-[0_30px_65px_-35px_rgba(15,23,42,0.88)] backdrop-blur-lg md:block dark:border-white/10 dark:bg-slate-900/70"
+                      style={{ transform: 'rotateX(6deg) rotateY(-12deg) rotateZ(6deg) translateZ(40px)' }}
+                    >
+                      <div className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <BarChart2 className="h-3.5 w-3.5 text-indigo-500" />
+                        Script Performance
+                      </div>
+                      <div className="mb-2 inline-flex rounded-full bg-indigo-100 px-2 py-1 text-xs font-bold text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300">
+                        Top 13%
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="h-1.5 overflow-hidden rounded-full bg-indigo-100 dark:bg-indigo-500/15">
+                          <div className="h-full w-[87%] rounded-full bg-indigo-500" />
+                        </div>
+                        <div className="h-1.5 overflow-hidden rounded-full bg-emerald-100 dark:bg-emerald-500/15">
+                          <div className="h-full w-[65%] rounded-full bg-emerald-500" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                  className="perf-heavy-card absolute -right-4 top-48 hidden w-40 rounded-xl border border-white/70 bg-white/90 p-3 shadow-[0_30px_65px_-35px_rgba(15,23,42,0.88)] backdrop-blur-lg sm:block dark:border-white/10 dark:bg-slate-900/70"
+                  style={{ transform: 'rotateX(6deg) rotateY(-12deg) rotateZ(6deg) translateZ(60px)' }}
+                >
+                      <div className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <Shield className="h-3.5 w-3.5 text-emerald-500" />
+                        Viral Potential
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-3xl font-bold text-slate-900 dark:text-white">87%</span>
+                        <span className="grid h-9 w-9 place-items-center rounded-full bg-emerald-500 text-white">✓</span>
+                      </div>
+                      <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-white/10">
+                        <div className="h-full w-[87%] rounded-full bg-emerald-500" />
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="perf-lite-card flex items-center gap-4 rounded-2xl border border-white/85 bg-white/70 p-4 shadow-[0_20px_55px_-42px_rgba(15,23,42,0.95)] backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/55">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-300">
+                  <BarChart2 className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="font-semibold text-slate-900 dark:text-white">{isZh ? '30+ 预测信号' : '30+ Predictive'}</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{isZh ? 'Signals 引擎' : 'Signals'}</div>
+                </div>
+              </div>
+
+              <div className="perf-lite-card flex items-center gap-4 rounded-2xl border border-white/85 bg-white/70 p-4 shadow-[0_20px_55px_-42px_rgba(15,23,42,0.95)] backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/55">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-teal-50 text-teal-600 dark:bg-teal-500/15 dark:text-teal-300">
+                  <Zap className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="font-semibold text-slate-900 dark:text-white">{isZh ? '趋势增速' : 'Trend Velocity'}</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{isZh ? '实时更新' : 'Real-time'}</div>
+                </div>
+              </div>
+
+              <div className="perf-lite-card flex items-center gap-4 rounded-2xl border border-white/85 bg-white/70 p-4 shadow-[0_20px_55px_-42px_rgba(15,23,42,0.95)] backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/55">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-amber-50 text-amber-600 dark:bg-amber-500/15 dark:text-amber-300">
+                  <Shield className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="font-semibold text-slate-900 dark:text-white">{isZh ? '内容风险' : 'Content Risk'}</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{isZh ? '评分体系' : 'Score'}</div>
+                </div>
+              </div>
+
+              <div className="perf-lite-card flex items-center gap-4 rounded-2xl border border-white/85 bg-white/70 p-4 shadow-[0_20px_55px_-42px_rgba(15,23,42,0.95)] backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/55">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-violet-50 text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+                  <TrendingUp className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="font-semibold text-slate-900 dark:text-white">{isZh ? '爆款潜力' : 'Viral Potential'}</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{isZh ? '概率评估' : 'Forecast'}</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
+        </div>
       </main>
       
       <Footer t={t.footer} onNavigate={onNavigate} />

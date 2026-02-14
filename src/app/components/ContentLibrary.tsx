@@ -120,14 +120,14 @@ export function ContentLibrary({
     {
       id: '2',
       thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400',
-      title: 'You won\'t believe what this new feature can do 🔥 #Tech #Product #Software #Demo',
+      title: 'You won\'t believe what this new feature can do 🔥 #Tech #Product #Software #Sample',
       date: '2024-12-26',
       views: 48000,
       likes: 1100,
       comments: 45,
       saves: 250,
       shares: 180,
-      contentType: 'Product Demo',
+      contentType: 'Product Sample',
       structure: 'Single Segment',
       hookType: 'Bold Claim',
       visualStyle: ['Talking Head', 'Product Showcase'],
@@ -214,7 +214,7 @@ export function ContentLibrary({
       comments: 40,
       saves: 200,
       shares: 150,
-      contentType: 'Product Demo',
+      contentType: 'Product Sample',
       structure: 'Single Segment',
       hookType: 'Bold Claim',
       visualStyle: ['Product Showcase', 'Graphics'],
@@ -302,7 +302,7 @@ export function ContentLibrary({
   const videoCount = timeRange === '30' ? 30 : timeRange === '60' ? 60 : 90;
 
   return (
-    <div className="flex h-screen bg-[#F8F9FA]">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       {/* Sidebar */}
       <SidebarPro
         activeItem="library"
@@ -352,7 +352,7 @@ export function ContentLibrary({
               >
                 <option value="all">Content Type</option>
                 <option value="Tech Tutorial">Tech Tutorial</option>
-                <option value="Product Demo">Product Demo</option>
+                <option value="Product Sample">Product Sample</option>
                 <option value="Product Review">Product Review</option>
                 <option value="Tech News">Tech News</option>
               </select>
@@ -727,7 +727,7 @@ export function ContentLibrary({
                         style={{ fontSize: '13px' }}
                       >
                         <option>Tech Tutorial</option>
-                        <option>Product Demo</option>
+                        <option>Product Sample</option>
                         <option>Product Review</option>
                         <option>Tech News</option>
                         <option>Lifestyle Vlog</option>
@@ -990,7 +990,7 @@ export function ContentLibrary({
         </div>
       )}
 
-      {/* Badge System Demo Modal */}
+      {/* Badge System Sample Modal */}
       {showBadgeDemo && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-8" onClick={() => setShowBadgeDemo(false)}>
           <div className="bg-[#F8F9FA] rounded-xl w-[900px] max-h-[90vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
@@ -1012,25 +1012,25 @@ export function ContentLibrary({
               </p>
             </div>
 
-            {/* Demo Section */}
+            {/* Sample Section */}
             <div className="p-8">
-              {/* Demo Card Container */}
+              {/* Sample Card Container */}
               <div className="bg-white rounded-xl p-6 mb-6 border border-[#E5E7EB]">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
                   <span className="text-[#9CA3AF]" style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                    Interactive Demo
+                    Interactive Sample
                   </span>
                 </div>
 
-                {/* Video Card with Badge Demo */}
+                {/* Video Card with Badge Sample */}
                 <div className="relative max-w-[320px] mx-auto">
                   <div className="bg-white rounded-xl border border-[#E5E7EB] overflow-hidden shadow-lg">
                     {/* Thumbnail */}
                     <div className="relative aspect-[9/16] bg-[#f5f5f5]">
                       <img
                         src="https://images.unsplash.com/photo-1566915896913-549d796d2166?w=600"
-                        alt="Demo video"
+                        alt="Sample video"
                         loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover"

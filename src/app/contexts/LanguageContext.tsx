@@ -1,7 +1,15 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export type Language = 'en' | 'zh';
+import type { Language } from '../i18n/routing';
+export type { Language } from '../i18n/routing';
+
+import {
+  addLanguagePrefix as addLanguagePrefixInternal,
+  getLanguageFromPathname,
+  isSupportedLanguage,
+  stripLanguagePrefix as stripLanguagePrefixInternal,
+} from '../i18n/routing';
 
 interface LanguageContextType {
   language: Language;
@@ -17,63 +25,66 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const SOCIAL_BASE_PATH = '/social';
 
-// Public pages that support both languages
-const PUBLIC_PAGES = [
+// Public pages that should keep language prefix in the URL.
+const PUBLIC_PAGE_ROOTS = [
   '/',
+  '/signals',
   '/how-it-works',
+  '/methodology',
   '/features',
   '/pricing',
   '/blog',
+  '/trends',
+  '/tools',
   '/blog-post',
+  '/links',
+  '/about',
+  '/press',
+  '/commerce',
+  '/ads',
+  '/guides',
+  '/glossary',
   '/faq',
   '/contact',
   '/privacy',
   '/terms',
   '/security',
   '/cookies',
-];
+  '/use-cases',
+  '/solutions',
+  '/vs',
+  '/compare',
+] as const;
 
-/**
- * Extract language from URL path
- */
-function getLanguageFromPath(pathname: string): Language {
-  if (pathname.startsWith('/zh/') || pathname === '/zh') {
-    return 'zh';
-  }
-  return 'en';
-}
+export function isPublicPage(pathname: string): boolean {
+  const pathWithoutLanguage = stripLanguagePrefixInternal(pathname);
+  const cleanPath = (() => {
+    if (pathWithoutLanguage === SOCIAL_BASE_PATH || pathWithoutLanguage === `${SOCIAL_BASE_PATH}/`) return '/';
+    if (pathWithoutLanguage.startsWith(`${SOCIAL_BASE_PATH}/`)) {
+      return pathWithoutLanguage.slice(SOCIAL_BASE_PATH.length);
+    }
+    return pathWithoutLanguage;
+  })();
+  if (cleanPath === '/') return true;
 
-/**
- * Remove language prefix from path
- */
-function stripLanguagePrefix(pathname: string): string {
-  if (pathname.startsWith('/zh/')) {
-    return pathname.slice(3) || '/';
+  // Dynamic sub-routes for public sections.
+  if (
+    cleanPath.startsWith('/guides/') ||
+    cleanPath.startsWith('/glossary/') ||
+    cleanPath.startsWith('/use-cases/') ||
+    cleanPath.startsWith('/solutions/') ||
+    cleanPath.startsWith('/vs/') ||
+    cleanPath.startsWith('/compare/')
+  ) {
+    return true;
   }
-  if (pathname === '/zh') {
-    return '/';
-  }
-  return pathname;
-}
 
-/**
- * Add language prefix to path
- */
-function addLanguagePrefix(pathname: string, lang: Language): string {
-  const cleanPath = stripLanguagePrefix(pathname);
-  if (lang === 'zh') {
-    return cleanPath === '/' ? '/zh' : `/zh${cleanPath}`;
-  }
-  return cleanPath;
-}
-
-/**
- * Check if path is a public page
- */
-function isPublicPage(pathname: string): boolean {
-  const cleanPath = stripLanguagePrefix(pathname);
-  return PUBLIC_PAGES.includes(cleanPath);
+  return PUBLIC_PAGE_ROOTS.some((root) => {
+    if (root === '/') return false;
+    return cleanPath === root || cleanPath.startsWith(`${root}/`);
+  });
 }
 
 /**
@@ -81,9 +92,15 @@ function isPublicPage(pathname: string): boolean {
  */
 function getBrowserLanguage(): Language {
   const browserLang = navigator.language || (navigator as { userLanguage?: string }).userLanguage || 'en';
-  if (browserLang.startsWith('zh')) {
+  const normalized = browserLang.toLowerCase();
+  if (normalized.startsWith('zh')) {
     return 'zh';
   }
+  if (normalized.startsWith('ja')) return 'ja';
+  if (normalized.startsWith('ko')) return 'ko';
+  if (normalized.startsWith('es')) return 'es';
+  if (normalized.startsWith('fr')) return 'fr';
+  if (normalized.startsWith('de')) return 'de';
   return 'en';
 }
 
@@ -93,9 +110,7 @@ function getBrowserLanguage(): Language {
 function getStoredLanguage(): Language | null {
   try {
     const stored = localStorage.getItem('owlseer-language');
-    if (stored === 'en' || stored === 'zh') {
-      return stored;
-    }
+    if (stored && isSupportedLanguage(stored)) return stored;
   } catch {
     // localStorage not available
   }
@@ -116,44 +131,76 @@ function storeLanguage(lang: Language): void {
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const pendingLanguageRef = React.useRef<Language | null>(null);
   
-  // Determine initial language from URL, storage, or browser preference
-  const initialLanguage = useMemo(() => {
-    const urlLang = getLanguageFromPath(location.pathname);
-    // If URL has explicit language prefix, use it
-    if (location.pathname.startsWith('/zh')) {
-      return 'zh';
-    }
-    // Otherwise, check storage or browser preference for initial redirect
-    return getStoredLanguage() || 'en';
-  }, []);
-  
-  const [language, setLanguageState] = useState<Language>(initialLanguage);
+  const [language, setLanguageState] = useState<Language>(() => {
+    const urlLang = getLanguageFromPathname(location.pathname);
+    if (urlLang) return urlLang;
+    return getStoredLanguage() || getBrowserLanguage();
+  });
 
-  // Sync language state with URL changes
+  // Sync language state with URL changes + enforce language prefix on public pages.
   useEffect(() => {
-    const urlLang = getLanguageFromPath(location.pathname);
-    if (urlLang !== language && isPublicPage(location.pathname)) {
-      setLanguageState(urlLang);
+    if (!isPublicPage(location.pathname)) return;
+
+    const urlLang = getLanguageFromPathname(location.pathname);
+    const pendingLang = pendingLanguageRef.current;
+
+    if (urlLang && pendingLang === urlLang) {
+      pendingLanguageRef.current = null;
     }
-  }, [location.pathname]);
+
+    // If URL has an explicit language prefix, it wins.
+    if (urlLang && urlLang !== language) {
+      storeLanguage(urlLang);
+      setLanguageState(urlLang);
+      return;
+    }
+
+    if (!urlLang) {
+      const storedLang = getStoredLanguage();
+      const preferredLang = pendingLang || storedLang || language;
+
+      if (pendingLang && preferredLang === pendingLang && preferredLang !== language) {
+        setLanguageState(pendingLang);
+      } else if (storedLang && storedLang !== language) {
+        setLanguageState(storedLang);
+      }
+
+      if (preferredLang === 'en') {
+        if (pendingLang === 'en') pendingLanguageRef.current = null;
+        return;
+      }
+
+      const localizedPathname = addLanguagePrefixInternal(location.pathname, preferredLang);
+      const localizedUrl = `${localizedPathname}${location.search}${location.hash}`;
+      const currentUrl = `${location.pathname}${location.search}${location.hash}`;
+      if (localizedUrl !== currentUrl) {
+        navigate(localizedUrl, { replace: true });
+      }
+    }
+  }, [language, location.hash, location.pathname, location.search, navigate]);
 
   const getLocalizedPath = useCallback((targetLang: Language): string => {
-    return addLanguagePrefix(location.pathname, targetLang);
+    return addLanguagePrefixInternal(location.pathname, targetLang);
   }, [location.pathname]);
 
   const setLanguage = useCallback((lang: Language) => {
     if (lang === language) return;
     
+    pendingLanguageRef.current = lang;
     storeLanguage(lang);
-    setLanguageState(lang);
     
     // Only update URL for public pages
     if (isPublicPage(location.pathname)) {
-      const newPath = addLanguagePrefix(location.pathname, lang);
-      navigate(newPath, { replace: true });
+      const newPathname = addLanguagePrefixInternal(location.pathname, lang);
+      navigate(`${newPathname}${location.search}${location.hash}`, { replace: true });
+      return;
     }
-  }, [language, location.pathname, navigate]);
+
+    pendingLanguageRef.current = null;
+    setLanguageState(lang);
+  }, [language, location.hash, location.pathname, location.search, navigate]);
 
   const toggleLanguage = useCallback(() => {
     setLanguage(language === 'en' ? 'zh' : 'en');
@@ -187,7 +234,8 @@ export const useLanguage = (): LanguageContextType => {
  */
 export const useLanguageFromUrl = (): Language => {
   const location = useLocation();
-  return getLanguageFromPath(location.pathname);
+  return getLanguageFromPathname(location.pathname) || 'en';
 };
 
-export { stripLanguagePrefix, addLanguagePrefix, isPublicPage };
+export const stripLanguagePrefix = stripLanguagePrefixInternal;
+export const addLanguagePrefix = addLanguagePrefixInternal;

@@ -11,6 +11,7 @@
  */
 
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useLanguage } from '../contexts';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -29,7 +30,7 @@ import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { translations } from '../data/translations';
 import { SEO } from './SEO';
-import { seoConfig, generateAlternates } from '../data/seoConfig';
+import { getCanonicalUrl, seoConfig, generateAlternates } from '../data/seoConfig';
 
 // --- Types ---
 
@@ -133,6 +134,24 @@ const BLOG_POSTS: BlogPost[] = [
 ];
 
 const CATEGORIES = ["All", "Strategy", "Data Insights", "AI & Tech", "Case Studies", "Monetization", "Production"];
+
+const categoryToSlug = (category: string): string =>
+  category
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const CATEGORY_TO_SLUG = CATEGORIES.reduce<Record<string, string>>((acc, category) => {
+  if (category === 'All') return acc;
+  acc[category] = categoryToSlug(category);
+  return acc;
+}, {});
+
+const SLUG_TO_CATEGORY = Object.entries(CATEGORY_TO_SLUG).reduce<Record<string, string>>((acc, [category, slug]) => {
+  acc[slug] = category;
+  return acc;
+}, {});
 
 // --- Components ---
 
@@ -282,7 +301,10 @@ const NewsletterSignup = () => (
 // --- Main Page ---
 
 export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate?: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const { vertical } = useParams<{ vertical?: string }>();
+  const normalizedVertical = vertical?.toLowerCase() || '';
+  const categoryFromRoute = normalizedVertical ? (SLUG_TO_CATEGORY[normalizedVertical] || 'All') : 'All';
+  const [activeCategory, setActiveCategory] = useState(categoryFromRoute);
   const [searchQuery, setSearchQuery] = useState("");
   
   // Use global language context
@@ -300,6 +322,22 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
   const handlePostClick = () => {
     handleNavigate('blog-post');
   };
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    if (category === 'All') {
+      handleNavigate('blog');
+      return;
+    }
+    const slug = CATEGORY_TO_SLUG[category];
+    if (slug) {
+      handleNavigate(`blog/category/${slug}`);
+    }
+  };
+
+  React.useEffect(() => {
+    setActiveCategory(categoryFromRoute);
+  }, [categoryFromRoute]);
   
   const filteredPosts = BLOG_POSTS.filter(post => {
     const matchesCategory = activeCategory === "All" || post.category === activeCategory;
@@ -313,6 +351,8 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
 
   // Get SEO config
   const seo = seoConfig.blog[language as 'en' | 'zh'] || seoConfig.blog.en;
+  const isCategoryRoute = categoryFromRoute !== 'All';
+  const canonicalPath = isCategoryRoute ? `/blog/category/${CATEGORY_TO_SLUG[categoryFromRoute]}` : '/blog';
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans selection:bg-emerald-500/30">
@@ -321,9 +361,9 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl(canonicalPath, language)}
         lang={language}
-        alternates={generateAlternates('/blog')}
+        alternates={generateAlternates(canonicalPath)}
       />
       
       <Navbar 
@@ -372,7 +412,7 @@ export function BlogPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => handleCategoryChange(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
                     activeCategory === cat
                       ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'

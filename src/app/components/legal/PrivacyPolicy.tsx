@@ -44,7 +44,7 @@ export const PrivacyPolicy = () => (
 
       <div className="flex flex-col sm:flex-row items-center gap-4 border-t border-emerald-100 dark:border-emerald-900/30 pt-6">
         <button 
-          onClick={() => window.location.href = '/sample/dashboard'}
+          onClick={() => window.location.href = '/social/simulation/dashboard'}
           className="px-6 py-2.5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-lg font-bold shadow-lg shadow-[#1AAE82]/20 transition-all text-sm w-full sm:w-auto text-center"
         >
           Try Sample Without Connecting

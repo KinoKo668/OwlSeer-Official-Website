@@ -34,7 +34,7 @@ import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { translations } from '../data/translations';
 import { SEO } from './SEO';
-import { seoConfig, generateAlternates } from '../data/seoConfig';
+import { getCanonicalUrl, seoConfig, generateAlternates } from '../data/seoConfig';
 
 // --- Types ---
 
@@ -299,7 +299,7 @@ export function FAQPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate:
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl('/faq', language)}
         lang={language}
         alternates={generateAlternates('/faq')}
         structuredData={faqStructuredData}

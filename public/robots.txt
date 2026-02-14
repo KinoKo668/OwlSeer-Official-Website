@@ -5,48 +5,85 @@ User-agent: *
 Allow: /
 
 # Public marketing pages - Allow
-Allow: /
-Allow: /how-it-works
-Allow: /features
-Allow: /pricing
-Allow: /blog
-Allow: /blog-post
-Allow: /faq
-Allow: /contact
-Allow: /privacy
-Allow: /terms
-Allow: /security
-Allow: /cookies
+Allow: /social/how-it-works
+Allow: /social/features
+Allow: /social/pricing
+Allow: /social/blog
+Allow: /social/blog/category/
+Allow: /social/trends
+Allow: /social/tools
+Allow: /social/tools/category/
+Allow: /social/vs/
+Allow: /social/guides
+Allow: /social/glossary
+Allow: /social/links
+Allow: /social/about
+Allow: /social/press
+Allow: /social/commerce
+Allow: /social/ads
+Allow: /social/faq
+Allow: /social/contact
+Allow: /social/privacy
+Allow: /social/terms
+Allow: /social/security
+Allow: /social/cookies
 
-# Sample dashboard - Allow for product showcase
-Allow: /sample/dashboard
+# Public share permalink
+Allow: /share/
 
 # App pages - Disallow (requires authentication)
-Disallow: /simulation/
-Disallow: /auth
-Disallow: /account-selection
-Disallow: /account-connection
-Disallow: /content-profile
-Disallow: /creator-struggles
-Disallow: /goal-setting
-Disallow: /ai-processing
-Disallow: /insight-checkpoint
-Disallow: /home
-Disallow: /copilot
-Disallow: /dashboard
-Disallow: /monitor
-Disallow: /intelligence
-Disallow: /library
-Disallow: /hashtag
-Disallow: /trends
-Disallow: /scheduling
-Disallow: /studio
-Disallow: /studio-demo
-Disallow: /settings
-Disallow: /weekly-report
-Disallow: /weekly-report-detail
-Disallow: /reports-archive
-Disallow: /sidebar-demo
+Disallow: /social/simulation/
+Disallow: /social/auth
+Disallow: /social/account-selection
+Disallow: /social/account-connection
+Disallow: /social/content-profile
+Disallow: /social/creator-struggles
+Disallow: /social/goal-setting
+Disallow: /social/ai-processing
+Disallow: /social/insight-checkpoint
+Disallow: /social/home
+Disallow: /social/copilot
+Disallow: /social/dashboard
+Disallow: /social/monitor
+Disallow: /social/intelligence
+Disallow: /social/library
+Disallow: /social/hashtag
+Disallow: /social/trend-radar
+Disallow: /social/scheduling
+Disallow: /social/studio
+Disallow: /social/studio-demo
+Disallow: /social/settings
+Disallow: /social/weekly-report
+Disallow: /social/weekly-report-detail
+Disallow: /social/reports-archive
+Disallow: /social/sidebar-demo
+
+# Language-prefixed app pages (wildcard)
+Disallow: /*/social/simulation/
+Disallow: /*/social/auth
+Disallow: /*/social/account-selection
+Disallow: /*/social/account-connection
+Disallow: /*/social/content-profile
+Disallow: /*/social/creator-struggles
+Disallow: /*/social/goal-setting
+Disallow: /*/social/ai-processing
+Disallow: /*/social/insight-checkpoint
+Disallow: /*/social/home
+Disallow: /*/social/copilot
+Disallow: /*/social/dashboard
+Disallow: /*/social/monitor
+Disallow: /*/social/intelligence
+Disallow: /*/social/library
+Disallow: /*/social/hashtag
+Disallow: /*/social/trend-radar
+Disallow: /*/social/scheduling
+Disallow: /*/social/studio
+Disallow: /*/social/studio-demo
+Disallow: /*/social/settings
+Disallow: /*/social/weekly-report
+Disallow: /*/social/weekly-report-detail
+Disallow: /*/social/reports-archive
+Disallow: /*/social/sidebar-demo
 
 # Sitemap location
 Sitemap: https://owlseer.com/sitemap.xml

@@ -48,7 +48,7 @@ export function BottomTabBar({ activeItem = 'home', onNavigate }: BottomTabBarPr
 
   return (
     <div 
-      className="md:hidden absolute left-0 right-0 bg-white border-t border-[#e0e0e0]" 
+      className="md:hidden absolute left-0 right-0 bg-sidebar border-t border-sidebar-border" 
       style={{ 
         bottom: '21px', // Space for Home Indicator
         zIndex: 40, // Above content but below modals
@@ -66,13 +66,13 @@ export function BottomTabBar({ activeItem = 'home', onNavigate }: BottomTabBarPr
               className="flex-1 flex flex-col items-center justify-center py-2 px-1 min-h-[64px] transition-colors"
             >
               <div className={`w-6 h-6 mb-1 transition-colors ${
-                isActive ? 'text-[#1a1a1a]' : 'text-[#999999]'
+                isActive ? 'text-sidebar-foreground' : 'text-muted-foreground'
               }`}>
                 <Icon className="w-full h-full" strokeWidth={isActive ? 2 : 1.5} />
               </div>
               <span
                 className={`transition-colors ${
-                  isActive ? 'text-[#1a1a1a]' : 'text-[#999999]'
+                  isActive ? 'text-sidebar-foreground' : 'text-muted-foreground'
                 }`}
                 style={{
                   fontSize: '11px',

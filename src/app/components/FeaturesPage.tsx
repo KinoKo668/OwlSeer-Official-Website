@@ -33,7 +33,7 @@ import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { translations } from '../data/translations';
 import { SEO } from './SEO';
-import { seoConfig, generateAlternates } from '../data/seoConfig';
+import { getCanonicalUrl, seoConfig, generateAlternates } from '../data/seoConfig';
 
 // --- Visual Components ---
 
@@ -223,7 +223,7 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl('/features', language)}
         lang={language}
         alternates={generateAlternates('/features')}
       />
@@ -236,7 +236,7 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
         setLanguage={setLanguage}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
-        t={translations.en}
+        t={(translations[language as keyof typeof translations] as any) || translations.en}
       />
 
       <main className="pt-[72px]">
@@ -366,7 +366,7 @@ export function FeaturesPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
         </section>
       </main>
 
-      <Footer t={translations.en.footer} onNavigate={handleNavigate} />
+      <Footer t={(((translations[language as keyof typeof translations] as any) || translations.en) as any).footer} onNavigate={handleNavigate} />
     </div>
   );
 }

@@ -41,6 +41,7 @@ import { ConversationSidebar } from './ConversationSidebar';
 import { CopilotMobile } from './CopilotMobile';
 import { useIsMobile } from './ui/use-mobile';
 import { useLocation } from 'react-router-dom';
+import { stripLanguagePrefix } from '../contexts';
 
 type MessageRole = 'user' | 'assistant';
 
@@ -260,7 +261,7 @@ export function Copilot({
   };
 
   return (
-    <div className="flex h-screen bg-sidebar">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       <SidebarPro
         activeItem="copilot"
         onNavigate={onNavigate}
@@ -312,7 +313,8 @@ export function CopilotContent({
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const location = useLocation();
-  const isSimulation = location.pathname.startsWith('/simulation');
+  const normalizedPath = stripLanguagePrefix(location.pathname);
+  const isSimulation = normalizedPath.startsWith('/social/simulation') || normalizedPath.startsWith('/simulation');
 
   const handleInteraction = React.useCallback((e: React.SyntheticEvent) => {
     if (!isSimulation) return;

@@ -32,17 +32,19 @@ import { useSimulationGlobal } from './SimulationPageWrapper';
 interface DashboardMonitorProps {
   onNavigate?: (page: string) => void;
   isSimulation?: boolean;
+  navigationItem?: 'home' | 'dashboard';
 }
 
 export function DashboardMonitor({
   onNavigate,
   isSimulation = false,
+  navigationItem = 'dashboard',
 }: DashboardMonitorProps) {
   // Simulation Logic
   const [fabOpen, setFabOpen] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const { isTriggered, markTriggered } = useSimulationGlobal();
-  const pageId = '/simulation/dashboard';
+  const pageId = navigationItem === 'home' ? '/social/simulation' : '/social/simulation/dashboard';
 
   const trigger = React.useCallback(() => {
     if (isTriggered(pageId)) return;
@@ -289,10 +291,10 @@ export function DashboardMonitor({
   };
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       {/* Sidebar */}
       <SidebarPro
-        activeItem="dashboard"
+        activeItem={navigationItem}
         onNavigate={onNavigate}
         className="hidden md:flex"
       />
@@ -305,11 +307,13 @@ export function DashboardMonitor({
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-gray-900 dark:text-white" style={{ fontSize: '24px', fontWeight: '700' }}>
-                  Dashboard
+                  {navigationItem === 'home' ? 'Overview' : 'Dashboard'}
                 </h1>
               </div>
               <p className="text-gray-500 dark:text-gray-400" style={{ fontSize: '13px' }}>
-                Real-time operational monitoring · Account performance overview
+                {navigationItem === 'home'
+                  ? 'High-level account summary and key signals'
+                  : 'Real-time operational monitoring · Account performance overview'}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -1046,7 +1050,7 @@ export function DashboardMonitor({
 
       {/* Bottom Tab Bar */}
       <BottomTabBar
-        activeItem="dashboard"
+        activeItem={navigationItem === 'home' ? 'home' : 'dashboard'}
         onNavigate={onNavigate}
       />
 

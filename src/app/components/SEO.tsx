@@ -15,6 +15,15 @@ interface SEOProps {
 
 const BASE_URL = 'https://owlseer.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-default.png`;
+const LANGUAGE_TO_SCHEMA_LANG: Record<string, string> = {
+  en: 'en-US',
+  zh: 'zh-CN',
+  ja: 'ja-JP',
+  ko: 'ko-KR',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+};
 
 export const SEO = ({
   title,
@@ -29,11 +38,30 @@ export const SEO = ({
   alternates = []
 }: SEOProps) => {
   const fullTitle = title.includes('OwlSeer') ? title : `${title} | OwlSeer`;
-  
-  // Ensure structured data is an array for consistent handling
-  const structuredDataArray = structuredData 
+  const resolvedCanonicalUrl = canonicalUrl || `${BASE_URL}/`;
+  const schemaLanguage = LANGUAGE_TO_SCHEMA_LANG[lang] || lang;
+  const defaultStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": fullTitle,
+    "description": description,
+    "url": resolvedCanonicalUrl,
+    "inLanguage": schemaLanguage,
+    "publisher": {
+      "@type": "Organization",
+      "name": "OwlSeer",
+      "url": BASE_URL
+    },
+    "isPartOf": {
+      "@id": `${BASE_URL}/#website`
+    }
+  };
+
+  // Ensure structured data is an array for consistent handling.
+  // If page does not pass a schema, fallback to a WebPage schema.
+  const structuredDataArray = structuredData
     ? (Array.isArray(structuredData) ? structuredData : [structuredData])
-    : [];
+    : [defaultStructuredData];
 
   return (
     <Helmet>
@@ -63,7 +91,7 @@ export const SEO = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
-      <meta name="twitter:site" content="@owlseer" />
+      <meta name="twitter:site" content="@owlseer_ai" />
       
       {/* hreflang for multi-language support */}
       {alternates.map(alt => (

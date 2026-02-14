@@ -20,6 +20,8 @@ import { translations as globalTranslations } from '../../data/translations';
 import { Navbar } from '../layout/Navbar';
 import { Footer } from '../layout/Footer';
 import { SEO } from '../SEO';
+import { getPageSEO, getCanonicalUrl, generateAlternates } from '../../data/seoConfig';
+import { AuroraBackground } from '../ui/aurora-background';
 
 // --- Translations ---
 const pageTranslations = {
@@ -32,9 +34,10 @@ const pageTranslations = {
       title: "Generate TikTok Scripts from Your Data in 60 Seconds",
       lead: "OwlSeer creates ready-to-shoot scripts personalized to your audience — with hooks, body content, CTAs, sounds, and hashtags, all derived from your engagement signals.",
       ctaPrimary: "Start Free Trial",
-      ctaSecondary: "Try Script Studio Demo"
+      ctaSecondary: "Try Script Studio Sample"
     },
     tldr: {
+      title: "The Core Concept", // Renamed from TL;DR
       content: "Script block wastes hours. OwlSeer's Script Studio generates complete scripts from your account data in under 60 seconds. Each script follows a hook-body-CTA structure calibrated to your audience's retention patterns. Hooks are based on your hook rate data, sounds come from sound velocity trends, and hashtags from hashtag momentum. You keep full control — customize tone, edit sections, or regenerate individual parts.",
       link: "Script Studio"
     },
@@ -102,7 +105,7 @@ const pageTranslations = {
       title: "Write Your First Script in 60 Seconds",
       desc: "Connect your account and generate a personalized script immediately.",
       primary: "Start Free Trial",
-      secondary: "Try Script Studio Demo"
+      secondary: "Try Script Studio Sample"
     }
   },
   zh: {
@@ -117,6 +120,7 @@ const pageTranslations = {
       ctaSecondary: "试用脚本工作室演示"
     },
     tldr: {
+      title: "核心理念",
       content: "脚本写作浪费数小时。OwlSeer 的脚本工作室在 60 秒内从你的账号数据生成完整脚本。每个脚本都遵循针对你受众留存模式校准的钩子-正文-CTA 结构。钩子基于你的钩子率数据，音频来自音频速度趋势，标签来自标签势能。你保持完全控制——自定义语气、编辑部分或重新生成个别部分。",
       link: "脚本工作室"
     },
@@ -189,67 +193,481 @@ const pageTranslations = {
   }
 };
 
+const localizedPageTranslations = {
+  ...pageTranslations,
+  en: {
+    ...pageTranslations.en,
+    ui: {
+      newFeature: "New Feature",
+      generationTime: "Generation Time",
+      manual: "Manual",
+      manualHours: "2-4 Hours",
+      withOwlSeer: "With OwlSeer",
+      withOwlSeerMins: "15 Mins",
+      output: "The Output",
+      boundaryData: "Data",
+      boundaryLimitations: "Limitations",
+      boundaryNote: "Note"
+    }
+  },
+  zh: {
+    ...pageTranslations.zh,
+    ui: {
+      newFeature: "新功能",
+      generationTime: "生成耗时",
+      manual: "手动",
+      manualHours: "2-4 小时",
+      withOwlSeer: "使用 OwlSeer",
+      withOwlSeerMins: "15 分钟",
+      output: "输出结果",
+      boundaryData: "数据",
+      boundaryLimitations: "限制",
+      boundaryNote: "说明"
+    }
+  },
+  ja: {
+    ...pageTranslations.en,
+    meta: {
+      title: "60秒でTikTokスクリプト生成 | OwlSeer",
+      description: "エンゲージメントデータからTikTokスクリプトを自動生成。フック、本文、CTA、音源、ハッシュタグまで最適化。"
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "データからTikTokスクリプトを60秒で生成",
+      lead: "OwlSeerは視聴者データに基づき、すぐ撮影できるスクリプトを自動作成します。",
+      ctaPrimary: "無料トライアル開始",
+      ctaSecondary: "Script Studioサンプルを見る"
+    },
+    tldr: {
+      ...pageTranslations.en.tldr,
+      title: "コアコンセプト",
+      content: "スクリプト作成の停滞を解消。OwlSeerはアカウントデータを使って60秒以内に構成済みスクリプトを生成します。"
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "なぜ台本作成がボトルネックになるのか",
+      task: "多くのクリエイターが台本作成で時間を失う理由を確認します。",
+      action: "データ駆動スクリプトの違いを見る — Script Studioへ"
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "OwlSeerのスクリプト生成フロー",
+      task: "個別最適化を実現する3つの入力",
+      action: "スクリプトを生成してみる — Script Studioデモへ"
+    },
+    workflow: {
+      ...pageTranslations.en.workflow,
+      title: "スクリプト制作フロー",
+      task: "週次コンテンツ制作にどう組み込むかを確認。"
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "無料サンプルフックを生成",
+      desc: "ニッチとトピックを入力して、冒頭フックの例を確認できます。",
+      nichePlaceholder: "ニッチを選択",
+      topicPlaceholder: "トピックを入力（例: iPhone 16レビュー）",
+      button: "フックを生成",
+      niches: ["テック", "ビューティー", "フィットネス", "教育", "フード", "コメディ", "ビジネス"],
+      note: "無料で1件のサンプルフックを表示。連携後に完全な個別スクリプトを提供。"
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "透明性ボックス"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "60秒で最初のスクリプトを作成",
+      desc: "アカウント接続後、すぐに個別スクリプトを生成できます。",
+      primary: "無料トライアル開始",
+      secondary: "Script Studioサンプルを見る"
+    },
+    ui: {
+      newFeature: "新機能",
+      generationTime: "生成時間",
+      manual: "手動",
+      manualHours: "2-4時間",
+      withOwlSeer: "OwlSeer利用",
+      withOwlSeerMins: "15分",
+      output: "出力内容",
+      boundaryData: "データ",
+      boundaryLimitations: "制限事項",
+      boundaryNote: "補足"
+    }
+  },
+  ko: {
+    ...pageTranslations.en,
+    meta: {
+      title: "60초 TikTok 스크립트 생성 | OwlSeer",
+      description: "참여 데이터 기반으로 TikTok 스크립트를 60초 내 생성합니다. 훅, 본문, CTA, 사운드, 해시태그까지 최적화합니다."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "내 데이터로 TikTok 스크립트를 60초 안에 생성",
+      lead: "OwlSeer가 오디언스 신호를 바탕으로 바로 촬영 가능한 스크립트를 자동 생성합니다.",
+      ctaPrimary: "무료 체험 시작",
+      ctaSecondary: "Script Studio 샘플 보기"
+    },
+    tldr: {
+      ...pageTranslations.en.tldr,
+      title: "핵심 개념",
+      content: "스크립트 작성 병목을 줄입니다. OwlSeer는 계정 데이터로 60초 내 구조화된 스크립트를 생성합니다."
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "왜 스크립트 작성이 병목이 되는가",
+      task: "대부분의 크리에이터가 스크립트에서 지연되는 이유를 확인하세요.",
+      action: "데이터 기반 스크립트 차이 보기 — Script Studio 열기"
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "OwlSeer 스크립트 생성 방식",
+      task: "개인화를 만드는 3가지 입력",
+      action: "스크립트 생성해 보기 — Script Studio 데모"
+    },
+    workflow: {
+      ...pageTranslations.en.workflow,
+      title: "스크립트 워크플로",
+      task: "주간 제작 프로세스에 스크립트를 연결하는 방법"
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "무료 샘플 훅 받기",
+      desc: "니치와 주제를 입력하면 OwlSeer의 오프닝 훅 예시를 확인할 수 있습니다.",
+      nichePlaceholder: "니치 선택",
+      topicPlaceholder: "주제 입력 (예: iPhone 16 리뷰)",
+      button: "내 훅 생성하기",
+      niches: ["테크", "뷰티", "피트니스", "교육", "푸드", "코미디", "비즈니스"],
+      note: "무료 샘플 훅 1개 제공. 계정 연결 시 전체 개인화 스크립트 제공."
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "투명성 박스"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "60초 안에 첫 스크립트 작성",
+      desc: "계정을 연결하고 즉시 개인화 스크립트를 생성하세요.",
+      primary: "무료 체험 시작",
+      secondary: "Script Studio 샘플 보기"
+    },
+    ui: {
+      newFeature: "새 기능",
+      generationTime: "생성 시간",
+      manual: "수동",
+      manualHours: "2-4시간",
+      withOwlSeer: "OwlSeer 사용",
+      withOwlSeerMins: "15분",
+      output: "출력 결과",
+      boundaryData: "데이터",
+      boundaryLimitations: "제한사항",
+      boundaryNote: "참고"
+    }
+  },
+  es: {
+    ...pageTranslations.en,
+    meta: {
+      title: "Genera scripts de TikTok en 60 segundos | OwlSeer",
+      description: "Genera guiones de TikTok con tus datos de engagement. Hook, cuerpo, CTA, sonidos y hashtags optimizados para tu audiencia."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Genera guiones de TikTok con tus datos en 60 segundos",
+      lead: "OwlSeer crea guiones listos para grabar según tu audiencia.",
+      ctaPrimary: "Iniciar prueba gratis",
+      ctaSecondary: "Ver muestra de Script Studio"
+    },
+    tldr: {
+      ...pageTranslations.en.tldr,
+      title: "Concepto clave",
+      content: "El bloqueo al escribir guiones consume horas. OwlSeer genera guiones completos en menos de 60 segundos usando datos reales de tu cuenta."
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "Por qué escribir guiones es el cuello de botella",
+      task: "Entiende por qué esta etapa frena a la mayoría de creadores.",
+      action: "Ver diferencia entre guiones genéricos y guiados por datos — abrir Script Studio."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "Cómo OwlSeer genera guiones",
+      task: "Mira las tres señales que personalizan cada guion.",
+      action: "Generar un guion ahora — abrir demo de Script Studio."
+    },
+    workflow: {
+      ...pageTranslations.en.workflow,
+      title: "Flujo de trabajo de guiones",
+      task: "Cómo encaja en tu proceso semanal de contenido."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "Obtén un hook de muestra gratis",
+      desc: "Cuéntanos tu nicho y tema para ver cómo abre OwlSeer tu video.",
+      nichePlaceholder: "Selecciona nicho",
+      topicPlaceholder: "Escribe un tema (ej. review iPhone 16)",
+      button: "Generar mi hook",
+      niches: ["Tecnología", "Belleza", "Fitness", "Educación", "Comida", "Comedia", "Negocios"],
+      note: "Vista previa gratis de 1 hook. Conecta tu cuenta para guiones completos."
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "Marco de transparencia"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "Escribe tu primer guion en 60 segundos",
+      desc: "Conecta tu cuenta y genera un guion personalizado al instante.",
+      primary: "Iniciar prueba gratis",
+      secondary: "Ver muestra de Script Studio"
+    },
+    ui: {
+      newFeature: "Nueva función",
+      generationTime: "Tiempo de generación",
+      manual: "Manual",
+      manualHours: "2-4 horas",
+      withOwlSeer: "Con OwlSeer",
+      withOwlSeerMins: "15 min",
+      output: "Resultado",
+      boundaryData: "Datos",
+      boundaryLimitations: "Limitaciones",
+      boundaryNote: "Nota"
+    }
+  },
+  fr: {
+    ...pageTranslations.en,
+    meta: {
+      title: "Générez des scripts TikTok en 60 secondes | OwlSeer",
+      description: "Créez des scripts TikTok avec vos données d'engagement : hook, corps, CTA, sons et hashtags personnalisés."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Générez des scripts TikTok en 60 secondes avec vos données",
+      lead: "OwlSeer crée des scripts prêts à tourner selon votre audience.",
+      ctaPrimary: "Démarrer l'essai gratuit",
+      ctaSecondary: "Voir l'exemple Script Studio"
+    },
+    tldr: {
+      ...pageTranslations.en.tldr,
+      title: "Concept clé",
+      content: "Le blocage d'écriture fait perdre des heures. OwlSeer génère un script complet en moins de 60 secondes à partir de vos données."
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "Pourquoi l'écriture de script est un goulot d'étranglement",
+      task: "Comprenez pourquoi cette étape ralentit la plupart des créateurs.",
+      action: "Voir la différence entre script générique et script piloté par les données — ouvrir Script Studio."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "Comment OwlSeer génère vos scripts",
+      task: "Découvrez les 3 entrées qui personnalisent chaque script.",
+      action: "Générer un script maintenant — ouvrir la démo Script Studio."
+    },
+    workflow: {
+      ...pageTranslations.en.workflow,
+      title: "Workflow de script",
+      task: "Comment intégrer les scripts dans votre routine hebdomadaire."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "Obtenez un hook gratuit",
+      desc: "Indiquez votre niche et votre sujet pour voir l'ouverture proposée.",
+      nichePlaceholder: "Sélectionner une niche",
+      topicPlaceholder: "Saisir un sujet (ex. test iPhone 16)",
+      button: "Générer mon hook",
+      niches: ["Tech", "Beauté", "Fitness", "Éducation", "Food", "Comédie", "Business"],
+      note: "Aperçu gratuit d'un hook. Connectez votre compte pour des scripts complets."
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "Cadre de transparence"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "Écrivez votre premier script en 60 secondes",
+      desc: "Connectez votre compte et générez un script personnalisé immédiatement.",
+      primary: "Démarrer l'essai gratuit",
+      secondary: "Voir l'exemple Script Studio"
+    },
+    ui: {
+      newFeature: "Nouvelle fonctionnalité",
+      generationTime: "Temps de génération",
+      manual: "Manuel",
+      manualHours: "2-4 heures",
+      withOwlSeer: "Avec OwlSeer",
+      withOwlSeerMins: "15 min",
+      output: "Résultat",
+      boundaryData: "Données",
+      boundaryLimitations: "Limites",
+      boundaryNote: "Note"
+    }
+  },
+  de: {
+    ...pageTranslations.en,
+    meta: {
+      title: "TikTok-Skripte in 60 Sekunden erstellen | OwlSeer",
+      description: "Erstelle TikTok-Skripte aus deinen Engagement-Daten: Hook, Body, CTA, Sounds und Hashtags für deine Zielgruppe."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Erstelle TikTok-Skripte aus deinen Daten in 60 Sekunden",
+      lead: "OwlSeer erstellt drehfertige Skripte, abgestimmt auf deine Audience.",
+      ctaPrimary: "Kostenlos testen",
+      ctaSecondary: "Script-Studio-Beispiel ansehen"
+    },
+    tldr: {
+      ...pageTranslations.en.tldr,
+      title: "Kernkonzept",
+      content: "Skript-Blockaden kosten Stunden. OwlSeer erzeugt in unter 60 Sekunden ein vollständiges Skript aus deinen Account-Daten."
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "Warum Skripterstellung der Engpass ist",
+      task: "Verstehe, warum genau hier die meisten Creator Zeit verlieren.",
+      action: "Unterschied zwischen generischen und datenbasierten Skripten ansehen — Script Studio öffnen."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "So erzeugt OwlSeer Skripte",
+      task: "Drei Eingaben für personalisierte Skripte.",
+      action: "Jetzt ein Skript erstellen — Script-Studio-Demo öffnen."
+    },
+    workflow: {
+      ...pageTranslations.en.workflow,
+      title: "Skript-Workflow",
+      task: "So passt Skripterstellung in deinen Wochenprozess."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "Kostenlosen Hook-Vorschlag erhalten",
+      desc: "Wähle Nische und Thema, um deinen Hook-Entwurf zu sehen.",
+      nichePlaceholder: "Nische auswählen",
+      topicPlaceholder: "Thema eingeben (z. B. iPhone 16 Review)",
+      button: "Meinen Hook erstellen",
+      niches: ["Tech", "Beauty", "Fitness", "Bildung", "Food", "Comedy", "Business"],
+      note: "Kostenlose Vorschau mit 1 Hook. Verbinde dein Konto für volle Personalisierung."
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "Transparenz-Box"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "Schreibe dein erstes Skript in 60 Sekunden",
+      desc: "Konto verbinden und sofort ein personalisiertes Skript erzeugen.",
+      primary: "Kostenlos testen",
+      secondary: "Script-Studio-Beispiel ansehen"
+    },
+    ui: {
+      newFeature: "Neues Feature",
+      generationTime: "Generierungszeit",
+      manual: "Manuell",
+      manualHours: "2-4 Stunden",
+      withOwlSeer: "Mit OwlSeer",
+      withOwlSeerMins: "15 Min",
+      output: "Ergebnis",
+      boundaryData: "Daten",
+      boundaryLimitations: "Einschränkungen",
+      boundaryNote: "Hinweis"
+    }
+  }
+};
+
 // --- Components ---
 
-const TypingAnimation = () => {
-  const [text, setText] = useState('');
-  const [phase, setPhase] = useState(0); // 0: Hook, 1: Body, 2: CTA
+const ScriptEditorPreview = () => {
+  const [activeSection, setActiveSection] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
   
+  const scriptData = [
+    { type: 'HOOK', content: "Stop buying new phones until you see this...", color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/20" },
+    { type: 'BODY', content: "The tech industry is hiding a secret about release cycles. When you look at the specs, the upgrade is marginal at best.", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20" },
+    { type: 'CTA', content: "Comment 'Truth' for the full comparison list.", color: "text-orange-400", bg: "bg-orange-400/10", border: "border-orange-400/20" }
+  ];
+
   useEffect(() => {
-    const fullText = [
-      "HOOK: Stop buying new phones until you see this...",
-      "BODY: The tech industry is hiding a secret about release cycles. When you look at the specs...",
-      "CTA: Comment 'Truth' for the full list."
-    ];
+    let timeout: ReturnType<typeof setTimeout>;
     
-    let currentText = "";
-    let currentIndex = 0;
-    let currentPhase = 0;
-    
-    const interval = setInterval(() => {
-      if (currentPhase >= 3) {
-        clearInterval(interval);
-        return;
-      }
-      
-      const targetText = fullText[currentPhase];
-      
-      if (currentIndex < targetText.length) {
-        currentText += targetText[currentIndex];
-        setText(prev => prev + targetText[currentIndex]);
-        currentIndex++;
+    if (activeSection < scriptData.length) {
+      const section = scriptData[activeSection];
+      if (charIndex < section.content.length) {
+        timeout = setTimeout(() => {
+          setCharIndex(prev => prev + 1);
+        }, 30); // Typing speed
       } else {
-        setPhase(prev => prev + 1);
-        currentPhase++;
-        currentIndex = 0;
-        setText(prev => prev + "\n\n");
-        currentText = "";
+        timeout = setTimeout(() => {
+          setActiveSection(prev => prev + 1);
+          setCharIndex(0);
+        }, 800); // Pause between sections
       }
-    }, 50);
+    }
     
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [activeSection, charIndex]);
 
   return (
-    <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm shadow-2xl border border-gray-800 h-64 overflow-hidden relative">
-      <div className="absolute top-4 right-4 flex gap-2">
-        <div className={`px-2 py-0.5 rounded text-[10px] font-bold ${phase >= 1 ? 'bg-green-500/20 text-green-400' : 'bg-gray-800 text-gray-600'}`}>HOOK</div>
-        <div className={`px-2 py-0.5 rounded text-[10px] font-bold ${phase >= 2 ? 'bg-blue-500/20 text-blue-400' : 'bg-gray-800 text-gray-600'}`}>BODY</div>
-        <div className={`px-2 py-0.5 rounded text-[10px] font-bold ${phase >= 3 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-800 text-gray-600'}`}>CTA</div>
+    <div className="bg-[#0f172a] rounded-xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm leading-relaxed relative group h-[320px] flex flex-col">
+      {/* Window Header */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+        </div>
+        <div className="ml-4 text-xs text-slate-500 flex items-center gap-2">
+          <FileText className="w-3 h-3" />
+          <span>script_v1.txt</span>
+        </div>
       </div>
-      <div className="whitespace-pre-wrap text-gray-300">
-        {text}
-        <motion.span 
-          animate={{ opacity: [0, 1, 0] }} 
-          transition={{ duration: 0.8, repeat: Infinity }}
-          className="inline-block w-2 h-4 bg-[#1AAE82] ml-1 align-middle"
-        />
+
+      {/* Content Area */}
+      <div className="p-6 space-y-6 flex-1 overflow-hidden">
+        {scriptData.map((section, idx) => {
+          if (idx > activeSection) return null;
+          
+          const isTyping = idx === activeSection;
+          const textToShow = isTyping ? section.content.slice(0, charIndex) : section.content;
+          
+          return (
+            <div key={section.type} className="flex gap-4 group/line">
+              {/* Gutter / Line Label */}
+              <div className="flex-shrink-0 w-12 flex flex-col items-end pt-0.5">
+                 <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${section.bg} ${section.color} border ${section.border} opacity-80 group-hover/line:opacity-100 transition-opacity`}>
+                   {section.type}
+                 </span>
+              </div>
+              
+              {/* Text Content */}
+              <div className="flex-1 text-slate-300">
+                {textToShow}
+                {isTyping && (
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="inline-block w-2 h-4 bg-[#1AAE82] ml-1 align-middle rounded-sm"
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Footer status bar */}
+      <div className="px-4 py-2 border-t border-slate-800 bg-slate-900/30 text-[10px] text-slate-500 flex justify-between items-center">
+         <div className="flex gap-3">
+            <span>Ln {activeSection + 1}, Col {charIndex}</span>
+            <span>UTF-8</span>
+         </div>
+         <div className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#1AAE82] animate-pulse"></div>
+            <span className="text-[#1AAE82]">AI Generating...</span>
+         </div>
       </div>
     </div>
   );
 };
 
-const Timer = () => {
+const Timer = ({ label }: { label: string }) => {
   const [time, setTime] = useState(0);
   
   useEffect(() => {
@@ -264,7 +682,7 @@ const Timer = () => {
       <div className="text-4xl font-bold font-mono text-[#1AAE82] mb-1">
         0:{time.toString().padStart(2, '0')}
       </div>
-      <div className="text-xs text-gray-500 uppercase tracking-wider font-bold">Generation Time</div>
+      <div className="text-xs text-gray-500 uppercase tracking-wider font-bold">{label}</div>
     </div>
   );
 };
@@ -281,21 +699,25 @@ export const ScriptGenerationPage = ({
   setIsDarkMode: (isDark: boolean) => void 
 }) => {
   const { language, setLanguage } = useLanguage();
-  const t = (pageTranslations as any)[language] || pageTranslations.en;
+  const t = (localizedPageTranslations as any)[language] || localizedPageTranslations.en;
   const globalT = globalTranslations[language] || globalTranslations.en;
+  const canonicalPath = '/use-cases/script-generation';
+  const seo = getPageSEO('scriptGeneration', language);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] font-sans text-gray-900 dark:text-white selection:bg-[#1AAE82]/30 transition-colors duration-300">
       <SEO 
-        title={t.meta.title}
-        description={t.meta.description}
-        keywords={["tiktok script generator", "ai script writing", "content automation", "viral hooks"]}
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={getCanonicalUrl(canonicalPath, language)}
+        alternates={generateAlternates(canonicalPath)}
         lang={language}
       />
 
       <Navbar 
-        onTrySample={() => onNavigate('/simulation')}
-        onSignUp={() => onNavigate('/auth')}
+        onTrySample={() => onNavigate('/social/simulation')}
+        onSignUp={() => onNavigate('/social/auth')}
         onNavigate={onNavigate}
         language={language}
         setLanguage={setLanguage}
@@ -304,100 +726,123 @@ export const ScriptGenerationPage = ({
         t={globalT} 
       />
 
-      <main className="pt-24 pb-20">
-        {/* Hero Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1AAE82]/10 text-[#1AAE82] text-xs font-bold uppercase tracking-wider mb-6 border border-[#1AAE82]/20">
-              <PenTool className="w-3 h-3" /> New Feature
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-gray-900 dark:text-white font-display">
-              {t.hero.title}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-              {t.hero.lead}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => onNavigate('/auth')}
-                className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
-              >
-                {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => onNavigate('/simulation/script-studio')}
-                className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2"
-              >
-                <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
-              </button>
-            </div>
-          </motion.div>
-        </section>
+      <main className="bg-white dark:bg-[#020617]">
+        {/* Hero Section with Aurora Background */}
+        <div className="relative overflow-hidden">
+          <AuroraBackground 
+            colorStops={isDarkMode ? ['#020617', '#1AAE82', '#020617'] : ['#FFFFFF', '#1AAE82', '#FFFFFF']} 
+            speed={0.3} 
+            blend={0.5}
+            baseColor={isDarkMode ? 0.0 : 1.0}
+            className="absolute inset-0 z-0 opacity-30"
+          />
+          
+          <section className="relative z-10 pt-40 pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1AAE82]/5 border border-[#1AAE82]/20 text-[#1AAE82] text-sm font-semibold tracking-wide mb-8 backdrop-blur-sm">
+                <PenTool className="w-4 h-4" /> 
+                <span className="opacity-90">{t.ui.newFeature}</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-gray-900 dark:text-white font-display max-w-5xl mx-auto">
+                {t.hero.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed font-normal opacity-90">
+                {t.hero.lead}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                <button 
+                  onClick={() => onNavigate('/social/auth')}
+                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-xl shadow-[#1AAE82]/20 hover:shadow-[#1AAE82]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={() => onNavigate('/social/simulation/script-studio')}
+                  className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2 hover:border-gray-300 dark:hover:border-slate-600"
+                >
+                  <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
+                </button>
+              </div>
+            </motion.div>
+          </section>
+        </div>
 
-        {/* TL;DR Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="bg-[#FEFCE8] dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-2xl p-6 md:p-8 relative">
-            <div className="absolute -top-3 -left-3 bg-yellow-400 text-yellow-900 p-2 rounded-full shadow-sm">
-              <Zap className="w-5 h-5" fill="currentColor" />
-            </div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-500 mb-3 ml-2">TL;DR</h3>
-            <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed font-medium">
-              {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
-                <React.Fragment key={i}>
-                  {part}
-                  {i < arr.length - 1 && (
-                    <button 
-                      onClick={() => onNavigate('/simulation/script-studio')}
-                      className="text-[#1AAE82] underline decoration-2 underline-offset-2 hover:text-[#15956F] font-bold mx-1"
-                    >
-                      {t.tldr.link}
-                    </button>
-                  )}
-                </React.Fragment>
-              ))}
-            </p>
+        {/* Core Concept Section (Redesigned TL;DR) */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mb-32 -mt-10 relative z-20">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-100 dark:border-slate-800 ring-1 ring-black/5">
+             <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="flex-shrink-0 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-900/30">
+                   <Zap className="w-8 h-8 text-[#1AAE82]" strokeWidth={1.5} />
+                </div>
+                <div>
+                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 font-display">
+                     {t.tldr.title}
+                   </h3>
+                   <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-2">
+                     {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
+                        <React.Fragment key={i}>
+                          {part}
+                          {i < arr.length - 1 && (
+                            <button 
+                              onClick={() => onNavigate('/social/simulation/script-studio')}
+                              className="text-[#1AAE82] font-semibold hover:text-[#15956F] transition-colors inline-flex items-center gap-0.5 border-b-2 border-[#1AAE82]/20 hover:border-[#1AAE82] mx-1"
+                            >
+                              {t.tldr.link}
+                            </button>
+                          )}
+                        </React.Fragment>
+                      ))}
+                   </p>
+                </div>
+             </div>
           </div>
         </section>
 
         {/* Problem Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl">
-                  <Clock className="w-6 h-6" />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 bg-red-50 dark:bg-red-900/10 text-red-500 dark:text-red-400 rounded-2xl border border-red-100 dark:border-red-900/20">
+                  <Clock className="w-6 h-6" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t.problem.title}</h2>
-                  <p className="text-[#1AAE82] font-medium">{t.problem.task}</p>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white font-display">{t.problem.title}</h2>
+                  <p className="text-[#1AAE82] font-medium mt-1">{t.problem.task}</p>
                 </div>
               </div>
-              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 <p>{t.problem.desc1}</p>
                 <p>{t.problem.desc2}</p>
                 <p>{t.problem.desc3}</p>
                 <button 
-                  onClick={() => onNavigate('/simulation/script-studio')}
-                  className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mt-2"
+                  onClick={() => onNavigate('/social/simulation/script-studio')}
+                  className="text-[#1AAE82] font-bold hover:text-[#15956F] flex items-center gap-2 mt-4 group transition-colors"
                 >
-                  {t.problem.action} <ArrowRight className="w-4 h-4" />
+                  {t.problem.action} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>
-            <div className="space-y-6">
-              <TypingAnimation />
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-50 dark:bg-slate-800 p-4 rounded-xl border border-gray-100 dark:border-slate-700">
-                  <div className="text-xs text-gray-500 uppercase mb-1">Manual</div>
-                  <div className="text-2xl font-bold text-gray-400 line-through">2-4 Hours</div>
+            <div className="space-y-6 relative group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="relative">
+                <ScriptEditorPreview />
+              </div>
+              <div className="grid grid-cols-2 gap-4 relative z-10">
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm text-center">
+                  <div className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-bold">{t.ui.manual}</div>
+                  <div className="text-3xl font-bold text-gray-400 line-through">{t.ui.manualHours}</div>
                 </div>
-                <div className="bg-[#1AAE82]/10 p-4 rounded-xl border border-[#1AAE82]/20">
-                  <div className="text-xs text-[#1AAE82] uppercase mb-1">With OwlSeer</div>
-                  <div className="text-2xl font-bold text-[#1AAE82]">15 Mins</div>
+                <div className="bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/20 text-center">
+                  <div className="text-xs text-[#1AAE82] uppercase tracking-wider mb-2 font-bold">{t.ui.withOwlSeer}</div>
+                  <div className="text-3xl font-bold text-[#1AAE82]">{t.ui.withOwlSeerMins}</div>
                 </div>
               </div>
             </div>
@@ -405,42 +850,48 @@ export const ScriptGenerationPage = ({
         </section>
 
         {/* Solution Section */}
-        <section className="bg-gray-50 dark:bg-slate-900/50 py-24 mb-32">
-          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.solution.title}</h2>
-              <p className="text-xl text-gray-500 dark:text-gray-400">{t.solution.task}</p>
+        <section className="bg-gray-50 dark:bg-slate-900/50 py-32 mb-32 relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-800 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-800 to-transparent" />
+
+          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-display">{t.solution.title}</h2>
+              <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t.solution.task}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {t.solution.sources.map((source: any, i: number) => (
-                <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-[#1AAE82]/10 text-[#1AAE82] rounded-xl flex items-center justify-center mb-6">
+                <div key={i} className="group bg-white dark:bg-slate-900 p-10 rounded-3xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/10 text-[#1AAE82] rounded-2xl flex items-center justify-center mb-8 font-bold text-xl group-hover:scale-110 transition-transform duration-300">
                     {source.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{source.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{source.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                     {source.desc}
                   </p>
                 </div>
               ))}
             </div>
             
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-200 dark:border-slate-800 max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-12 bg-white dark:bg-slate-900 p-10 rounded-3xl border border-gray-200 dark:border-slate-800 max-w-5xl mx-auto shadow-sm">
                <div className="flex-1">
-                 <h4 className="font-bold text-lg mb-2">The Output</h4>
-                 <p className="text-gray-600 dark:text-gray-300 text-sm">{t.solution.output}</p>
+                 <h4 className="font-bold text-2xl mb-4 font-display">{t.ui.output}</h4>
+                 <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">{t.solution.output}</p>
                </div>
-               <div className="w-px h-16 bg-gray-200 dark:bg-slate-700 hidden md:block"></div>
-               <Timer />
+               <div className="w-px h-24 bg-gray-200 dark:bg-slate-800 hidden md:block"></div>
+               <div className="transform scale-110">
+                 <Timer label={t.ui.generationTime} />
+               </div>
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-16 text-center">
               <button 
-                onClick={() => onNavigate('/simulation/script-studio')}
-                className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mx-auto"
+                onClick={() => onNavigate('/social/simulation/script-studio')}
+                className="text-[#1AAE82] font-bold hover:text-[#15956F] flex items-center gap-2 mx-auto text-lg transition-colors group"
               >
-                {t.solution.action} <ArrowRight className="w-4 h-4" />
+                {t.solution.action} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -448,20 +899,20 @@ export const ScriptGenerationPage = ({
 
         {/* Workflow Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">{t.workflow.title}</h2>
-          <p className="text-[#1AAE82] font-medium mb-12 text-center">{t.workflow.task}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center font-display">{t.workflow.title}</h2>
+          <p className="text-[#1AAE82] font-medium mb-16 text-center text-lg">{t.workflow.task}</p>
           
-          <div className="relative">
+          <div className="relative max-w-5xl mx-auto">
              {/* Connector Line */}
              <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-100 dark:bg-slate-800 -translate-y-1/2 z-0"></div>
              
-             <div className="grid md:grid-cols-4 gap-6 relative z-10">
+             <div className="grid md:grid-cols-4 gap-8 relative z-10">
                {t.workflow.steps.map((step: any, i: number) => (
-                 <div key={i} className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-200 dark:border-slate-800 text-center shadow-sm">
-                   <div className="inline-block px-3 py-1 bg-gray-100 dark:bg-slate-800 rounded-full text-xs font-bold text-gray-500 mb-4">
+                 <div key={i} className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-200 dark:border-slate-800 text-center shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                   <div className="inline-block px-4 py-1.5 bg-gray-50 dark:bg-slate-800 rounded-full text-sm font-bold text-gray-500 mb-6 group-hover:bg-[#1AAE82]/10 group-hover:text-[#1AAE82] transition-colors">
                      {step.day}
                    </div>
-                   <p className="font-medium text-gray-900 dark:text-white text-sm">
+                   <p className="font-medium text-gray-900 dark:text-white text-base leading-snug">
                      {step.task}
                    </p>
                  </div>
@@ -469,23 +920,23 @@ export const ScriptGenerationPage = ({
              </div>
           </div>
           
-          <p className="text-center mt-12 text-gray-500 italic">{t.workflow.stat}</p>
+          <p className="text-center mt-12 text-gray-500 italic text-lg">{t.workflow.stat}</p>
         </section>
 
         {/* Contextual Conversion (Mini Tool) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto mb-24">
-          <div className="bg-gradient-to-br from-[#111827] to-[#0f172a] rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#1AAE82]/20 rounded-full blur-[80px]" />
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-32">
+          <div className="bg-gradient-to-br from-[#111827] to-[#0f172a] rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#1AAE82]/20 rounded-full blur-[100px] pointer-events-none" />
             
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-4 font-display">{t.conversion.title}</h3>
-              <p className="text-gray-300 mb-8 max-w-lg mx-auto">
+              <h3 className="text-3xl font-bold mb-6 font-display">{t.conversion.title}</h3>
+              <p className="text-gray-300 mb-10 max-w-lg mx-auto text-lg leading-relaxed">
                 {t.conversion.desc}
               </p>
               
-              <div className="flex flex-col gap-4 max-w-sm mx-auto mb-8">
-                <select className="px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm cursor-pointer">
-                   <option className="bg-slate-900">{t.conversion.nichePlaceholder}</option>
+              <div className="flex flex-col gap-4 max-w-md mx-auto mb-8">
+                <select className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm cursor-pointer hover:bg-white/10 transition-colors text-lg">
+                   <option className="bg-slate-900 text-gray-400">{t.conversion.nichePlaceholder}</option>
                    {t.conversion.niches.map((niche: string) => (
                      <option key={niche} value={niche} className="bg-slate-900">{niche}</option>
                    ))}
@@ -493,52 +944,52 @@ export const ScriptGenerationPage = ({
                 <input 
                   type="text" 
                   placeholder={t.conversion.topicPlaceholder}
-                  className="px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm"
+                  className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm hover:bg-white/10 transition-colors text-lg"
                 />
                 <button 
-                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl transition-colors shadow-lg"
+                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl transition-colors shadow-lg hover:shadow-[#1AAE82]/30 text-lg mt-2"
                 >
                   {t.conversion.button}
                 </button>
               </div>
               
-              <p className="text-xs text-gray-500">{t.conversion.note}</p>
+              <p className="text-sm text-gray-500">{t.conversion.note}</p>
             </div>
           </div>
         </section>
 
         {/* Boundary Box */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="border border-gray-200 dark:border-slate-800 rounded-xl p-6 bg-gray-50/50 dark:bg-slate-900/50">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <Lock size={18} className="text-gray-400" /> {t.boundary.title}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-32">
+          <div className="border border-gray-200 dark:border-slate-800 rounded-2xl p-8 bg-gray-50/50 dark:bg-slate-900/30 backdrop-blur-sm">
+            <h3 className="font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 text-lg">
+              <Lock size={20} className="text-gray-400" /> {t.boundary.title}
             </h3>
-            <div className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
-              <p><strong className="text-gray-700 dark:text-gray-300">Data:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Limitations:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Note:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
+            <div className="space-y-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p><strong className="text-gray-900 dark:text-gray-200">{t.ui.boundaryData}:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
+              <p><strong className="text-gray-900 dark:text-gray-200">{t.ui.boundaryLimitations}:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
+              <p><strong className="text-gray-900 dark:text-gray-200">{t.ui.boundaryNote}:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight font-display">
             {t.cta.title}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto font-light">
             {t.cta.desc}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <button 
-              onClick={() => onNavigate('/auth')}
-              className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+              onClick={() => onNavigate('/social/auth')}
+              className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-xl shadow-xl hover:shadow-2xl hover:shadow-[#1AAE82]/30 transition-all duration-300 hover:-translate-y-1"
             >
               {t.cta.primary}
             </button>
             <button 
-              onClick={() => onNavigate('/simulation/script-studio')}
-              className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all"
+              onClick={() => onNavigate('/social/simulation/script-studio')}
+              className="px-10 py-5 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium text-xl transition-all hover:shadow-lg"
             >
               {t.cta.secondary}
             </button>

@@ -440,7 +440,7 @@ const mockScripts: Script[] = [
         role: 'Value / Main Point',
         intent: 'Deliver value',
         scriptContent: 'After using it for 2 weeks, here\'s what actually works and what\'s just marketing hype.',
-        executionNotes: 'Demo clips of product in action',
+        executionNotes: 'Sample clips of product in action',
         durationHint: '6s',
         isAIGenerated: true,
         lastEditedBy: 'user',
@@ -548,7 +548,7 @@ const mockScripts: Script[] = [
         role: 'Value / Main Point',
         intent: 'Deliver value',
         scriptContent: 'Progressive overload works anywhere. All you need is your body weight and a pull-up bar.',
-        executionNotes: 'Demo basic exercises',
+        executionNotes: 'Sample basic exercises',
         durationHint: '6s',
         isAIGenerated: true,
         lastEditedBy: 'user',
@@ -1845,7 +1845,7 @@ export function ContentStudio({
   const editingScript = editingScriptId ? scripts.find(s => s.id === editingScriptId) : null;
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-slate-950">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       <SidebarPro 
         activeItem="studio" 
         onNavigate={onNavigate}

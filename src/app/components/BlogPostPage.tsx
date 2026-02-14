@@ -10,7 +10,7 @@
  * 中文关键词: TikTok技巧文章 | 内容策略指南 | 创作者教程 | 短视频营销文章 | 详细增长攻略
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLanguage } from '../contexts';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { 
@@ -20,16 +20,15 @@ import {
   Share2, 
   Twitter, 
   Linkedin, 
-  Facebook,
-  MessageCircle,
   ThumbsUp,
-  Bookmark,
   Zap,
   Check
 } from 'lucide-react';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { translations } from '../data/translations';
+import { SEO } from './SEO';
+import { getCanonicalUrl, generateAlternates } from '../data/seoConfig';
 
 // --- Types ---
 
@@ -135,6 +134,16 @@ const SAMPLE_ARTICLE: Article = {
   ]
 };
 
+const LANGUAGE_TO_SCHEMA_LANG: Record<string, string> = {
+  en: 'en-US',
+  zh: 'zh-CN',
+  ja: 'ja-JP',
+  ko: 'ko-KR',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+};
+
 // --- Components ---
 
 const ProgressBar = () => {
@@ -214,8 +223,44 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
   const t = translations[language as keyof typeof translations] || translations.en;
   
   const article = SAMPLE_ARTICLE;
-
-  // Removed local useEffect for dark mode
+  const canonicalPath = '/blog-post';
+  const canonicalUrl = getCanonicalUrl(canonicalPath, language);
+  const schemaLanguage = LANGUAGE_TO_SCHEMA_LANG[language] || 'en-US';
+  const seoTitle = `${article.title} | OwlSeer Blog`;
+  const seoDescription = article.subtitle;
+  const seoKeywords = [
+    'TikTok strategy article',
+    'content creator growth guide',
+    'viral video hooks',
+    'TikTok algorithm insights',
+    'OwlSeer blog'
+  ];
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.title,
+    "description": article.subtitle,
+    "image": article.image,
+    "datePublished": "2025-10-22",
+    "dateModified": "2025-10-22",
+    "inLanguage": schemaLanguage,
+    "author": {
+      "@type": "Person",
+      "name": article.author.name
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "OwlSeer",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://owlseer.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    }
+  };
 
   const handleNavigate = (page: string) => {
     onNavigate(page);
@@ -223,6 +268,16 @@ export function BlogPostPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavi
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] font-sans selection:bg-[#1AAE82]/30 text-gray-900 dark:text-gray-100">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        canonicalUrl={canonicalUrl}
+        lang={language}
+        alternates={generateAlternates(canonicalPath)}
+        ogType="article"
+        structuredData={articleStructuredData}
+      />
       
       <ProgressBar />
 

@@ -42,7 +42,7 @@ export function MobileLayout({
   hasNotifications = true,
 }: MobileLayoutProps) {
   return (
-    <div className="relative flex flex-col h-screen bg-[#fafafa]">
+    <div className="simulation-overview-theme simulation-dark-surface relative flex flex-col h-screen bg-sidebar transition-colors duration-300">
       {/* Top Header */}
       {showHeader && currentAccount && (
         <MobileHeader

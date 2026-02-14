@@ -77,31 +77,31 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
   const getStatusStyles = () => {
     switch (currentGoal.status) {
       case 'On track':
-        return 'bg-[#D1FAE5] text-[#059669] border border-[#6EE7B7]';
+        return 'bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900';
       case 'Needs attention':
-        return 'bg-[#FEF3C7] text-[#D97706] border border-[#FCD34D]';
+        return 'bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-900';
       default:
-        return 'bg-[#F3F4F6] text-[#6B7280] border border-[#D1D5DB]';
+        return 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700';
     }
   };
 
   // Empty state
   if (!hasGoal) {
     return (
-      <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-8 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
         <div className="max-w-lg mx-auto text-center">
-          <div className="w-12 h-12 bg-[#E0F2FE] rounded-full flex items-center justify-center mx-auto mb-3">
-            <Sparkles className="w-6 h-6 text-[#0F766E]" />
+          <div className="w-12 h-12 bg-cyan-100 dark:bg-cyan-950/60 rounded-full flex items-center justify-center mx-auto mb-3">
+            <Sparkles className="w-6 h-6 text-teal-700 dark:text-teal-300" />
           </div>
-          <h3 className="text-[#111827] mb-2" style={{ fontSize: '16px', fontWeight: '700' }}>
+          <h3 className="text-slate-900 dark:text-white mb-2" style={{ fontSize: '16px', fontWeight: '700' }}>
             Set your first goal
           </h3>
-          <p className="text-[#6B7280] mb-4" style={{ fontSize: '14px', lineHeight: '1.5' }}>
+          <p className="text-slate-500 dark:text-slate-400 mb-4" style={{ fontSize: '14px', lineHeight: '1.5' }}>
             Describe your goal in plain English. AI turns it into a trackable plan.
           </p>
           <button
             onClick={() => setIsAdjustModalOpen(true)}
-            className="px-5 py-2.5 bg-[#0F766E] text-white rounded-lg hover:bg-[#0d6559] transition-colors"
+            className="px-5 py-2.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-colors"
             style={{ fontSize: '14px', fontWeight: '600' }}
           >
             Adjust goal
@@ -114,18 +114,18 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
   // Loading state
   if (isLoading) {
     return (
-      <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
         <div className="flex items-start justify-between mb-5">
           <div>
-            <div className="h-5 w-48 bg-[#F3F4F6] rounded animate-pulse mb-2" />
-            <div className="h-3 w-72 bg-[#F3F4F6] rounded animate-pulse" />
+            <div className="h-5 w-48 bg-slate-100 dark:bg-slate-700 rounded animate-pulse mb-2" />
+            <div className="h-3 w-72 bg-slate-100 dark:bg-slate-700 rounded animate-pulse" />
           </div>
-          <div className="h-9 w-32 bg-[#F3F4F6] rounded animate-pulse" />
+          <div className="h-9 w-32 bg-slate-100 dark:bg-slate-700 rounded animate-pulse" />
         </div>
         <div className="space-y-3">
-          <div className="h-4 w-32 bg-[#F3F4F6] rounded animate-pulse" />
-          <div className="h-2 w-full bg-[#F3F4F6] rounded animate-pulse" />
-          <div className="h-3 w-64 bg-[#F3F4F6] rounded animate-pulse" />
+          <div className="h-4 w-32 bg-slate-100 dark:bg-slate-700 rounded animate-pulse" />
+          <div className="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded animate-pulse" />
+          <div className="h-3 w-64 bg-slate-100 dark:bg-slate-700 rounded animate-pulse" />
         </div>
       </div>
     );
@@ -133,21 +133,21 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
 
   return (
     <>
-      <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 rounded-[12px] border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
         {/* Header */}
         <div className="flex items-start justify-between mb-5">
           <div>
-            <h3 className="text-[#111827] mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
+            <h3 className="text-slate-900 dark:text-white mb-1" style={{ fontSize: '16px', fontWeight: '700' }}>
               AI Goals (Next 4–12 weeks)
             </h3>
-            <p className="text-[#9CA3AF]" style={{ fontSize: '12px' }}>
+            <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px' }}>
               Describe your goal in plain English. AI turns it into a trackable plan.
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={handleRegenerate}
-              className="px-3 py-1.5 text-[#6B7280] hover:bg-[#F3F4F6] rounded-lg transition-colors"
+              className="px-3 py-1.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
               style={{ fontSize: '13px', fontWeight: '500' }}
             >
               <RefreshCw className="w-4 h-4 inline mr-1" />
@@ -155,7 +155,7 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
             </button>
             <button
               onClick={() => setIsAdjustModalOpen(true)}
-              className="px-4 py-2 bg-[#0F766E] text-white rounded-lg hover:bg-[#0d6559] transition-colors"
+              className="px-4 py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-colors"
               style={{ fontSize: '13px', fontWeight: '600' }}
             >
               <Edit2 className="w-4 h-4 inline mr-1.5" />
@@ -165,13 +165,13 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
         </div>
 
         {/* Current Goal */}
-        <div className="mb-5 pb-5 border-b border-[#E5E7EB]">
+        <div className="mb-5 pb-5 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-start justify-between mb-3">
             <div>
-              <h4 className="text-[#111827] mb-1" style={{ fontSize: '15px', fontWeight: '600' }}>
+              <h4 className="text-slate-900 dark:text-white mb-1" style={{ fontSize: '15px', fontWeight: '600' }}>
                 {currentGoal.title}
               </h4>
-              <p className="text-[#6B7280]" style={{ fontSize: '13px' }}>
+              <p className="text-slate-500 dark:text-slate-400" style={{ fontSize: '13px' }}>
                 {currentGoal.target.toLocaleString()} by {currentGoal.deadline}
               </p>
             </div>
@@ -182,34 +182,34 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
 
           {/* Progress Bar */}
           <div className="mb-3">
-            <div className="h-2 bg-[#F3F4F6] rounded-full overflow-hidden">
+            <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#0F766E] rounded-full transition-all duration-500"
+                className="h-full bg-teal-700 dark:bg-teal-500 rounded-full transition-all duration-500"
                 style={{ width: `${currentGoal.percentage}%` }}
               />
             </div>
             <div className="flex items-center justify-between mt-1.5">
-              <span className="text-[#6B7280]" style={{ fontSize: '12px' }}>
+              <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px' }}>
                 Current: {currentGoal.current.toLocaleString()}
               </span>
-              <span className="text-[#111827] font-mono" style={{ fontSize: '12px', fontWeight: '600' }}>
+              <span className="text-slate-900 dark:text-white font-mono" style={{ fontSize: '12px', fontWeight: '600' }}>
                 {currentGoal.percentage}%
               </span>
-              <span className="text-[#6B7280]" style={{ fontSize: '12px' }}>
+              <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px' }}>
                 Target: {currentGoal.target.toLocaleString()}
               </span>
             </div>
           </div>
 
           {/* Next Action */}
-          <div className="bg-[#F0FDFA] border border-[#99F6E4] rounded-lg p-3">
+          <div className="bg-teal-50 dark:bg-teal-950/40 border border-teal-100 dark:border-teal-900/70 rounded-lg p-3">
             <div className="flex items-start gap-2">
-              <Sparkles className="w-4 h-4 text-[#0F766E] mt-0.5 flex-shrink-0" />
+              <Sparkles className="w-4 h-4 text-teal-700 dark:text-teal-300 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-[#0F766E]" style={{ fontSize: '12px', fontWeight: '600' }}>
+                <span className="text-teal-700 dark:text-teal-300" style={{ fontSize: '12px', fontWeight: '600' }}>
                   Do next:{' '}
                 </span>
-                <span className="text-[#0d6559]" style={{ fontSize: '12px' }}>
+                <span className="text-teal-800 dark:text-teal-200" style={{ fontSize: '12px' }}>
                   {currentGoal.nextAction}
                 </span>
               </div>
@@ -221,7 +221,7 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
         <div>
           <button
             onClick={() => setIsSupportingExpanded(!isSupportingExpanded)}
-            className="flex items-center gap-1.5 text-[#6B7280] hover:text-[#111827] transition-colors mb-3"
+            className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-3"
             style={{ fontSize: '13px', fontWeight: '500' }}
           >
             {isSupportingExpanded ? (
@@ -237,12 +237,12 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
               {supportingGoals.map((goal, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between py-2 px-3 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg"
+                  className="flex items-center justify-between py-2 px-3 bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 rounded-lg"
                 >
-                  <span className="text-[#374151]" style={{ fontSize: '13px', fontWeight: '500' }}>
+                  <span className="text-slate-700 dark:text-slate-200" style={{ fontSize: '13px', fontWeight: '500' }}>
                     {goal.title}
                   </span>
-                  <span className="text-[#6B7280]" style={{ fontSize: '12px' }}>
+                  <span className="text-slate-500 dark:text-slate-400" style={{ fontSize: '12px' }}>
                     {goal.target}
                   </span>
                 </div>
@@ -262,15 +262,15 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
           />
 
           {/* Modal */}
-          <div className="relative bg-white rounded-[16px] shadow-2xl max-w-lg w-full">
+          <div className="relative bg-white dark:bg-slate-900 rounded-[16px] shadow-2xl max-w-lg w-full border border-slate-200 dark:border-slate-700">
             {/* Header */}
-            <div className="px-6 py-5 border-b border-[#E5E7EB] flex items-center justify-between">
-              <h2 className="text-[#111827]" style={{ fontSize: '18px', fontWeight: '700' }}>
+            <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+              <h2 className="text-slate-900 dark:text-white" style={{ fontSize: '18px', fontWeight: '700' }}>
                 Adjust your goal
               </h2>
               <button
                 onClick={() => setIsAdjustModalOpen(false)}
-                className="p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-lg transition-colors"
+                className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -284,42 +284,42 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
                   onChange={(e) => setUserInput(e.target.value)}
                   placeholder="e.g., I want +10k followers in the next 2 months, posting 4 times per week."
                   rows={4}
-                  className="w-full px-4 py-3 border border-[#D1D5DB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent resize-none"
                   style={{ fontSize: '14px', lineHeight: '1.6' }}
                 />
               </div>
 
               {/* AI Parsed Preview */}
               {userInput && (
-                <div className="bg-[#F0FDFA] border border-[#99F6E4] rounded-lg p-4 space-y-2">
+                <div className="bg-teal-50 dark:bg-teal-950/40 border border-teal-100 dark:border-teal-900/70 rounded-lg p-4 space-y-2">
                   <div className="flex items-center gap-2 mb-2">
-                    <Sparkles className="w-4 h-4 text-[#0F766E]" />
-                    <span className="text-[#0F766E]" style={{ fontSize: '12px', fontWeight: '600' }}>
+                    <Sparkles className="w-4 h-4 text-teal-700 dark:text-teal-300" />
+                    <span className="text-teal-700 dark:text-teal-300" style={{ fontSize: '12px', fontWeight: '600' }}>
                       AI parsed preview
                     </span>
                   </div>
                   <div className="space-y-1.5">
                     <div className="flex items-center">
-                      <span className="text-[#6B7280] w-20" style={{ fontSize: '12px' }}>
+                      <span className="text-slate-500 dark:text-slate-400 w-20" style={{ fontSize: '12px' }}>
                         Goal:
                       </span>
-                      <span className="text-[#111827]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                      <span className="text-slate-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '500' }}>
                         {parsedGoal.goal}
                       </span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-[#6B7280] w-20" style={{ fontSize: '12px' }}>
+                      <span className="text-slate-500 dark:text-slate-400 w-20" style={{ fontSize: '12px' }}>
                         Target:
                       </span>
-                      <span className="text-[#111827]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                      <span className="text-slate-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '500' }}>
                         {parsedGoal.target}
                       </span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-[#6B7280] w-20" style={{ fontSize: '12px' }}>
+                      <span className="text-slate-500 dark:text-slate-400 w-20" style={{ fontSize: '12px' }}>
                         Deadline:
                       </span>
-                      <span className="text-[#111827]" style={{ fontSize: '12px', fontWeight: '500' }}>
+                      <span className="text-slate-900 dark:text-white" style={{ fontSize: '12px', fontWeight: '500' }}>
                         {parsedGoal.deadline}
                       </span>
                     </div>
@@ -329,10 +329,10 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t border-[#E5E7EB] flex items-center justify-end gap-3 bg-[#F9FAFB]">
+            <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-end gap-3 bg-slate-50 dark:bg-slate-800">
               <button
                 onClick={() => setIsAdjustModalOpen(false)}
-                className="px-4 py-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#E5E7EB] rounded-lg transition-colors"
+                className="px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 style={{ fontSize: '14px', fontWeight: '500' }}
               >
                 Cancel
@@ -340,7 +340,7 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
               <button
                 onClick={handleApply}
                 disabled={!userInput.trim()}
-                className="px-6 py-2 bg-[#0F766E] text-white rounded-lg hover:bg-[#0d6559] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ fontSize: '14px', fontWeight: '600' }}
               >
                 Apply
@@ -352,7 +352,7 @@ export function AIGoalsCard({ hasGoal = true }: AIGoalsCardProps) {
 
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1a1a] text-white px-6 py-3 rounded-lg shadow-xl z-50 animate-fade-in">
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-6 py-3 rounded-lg shadow-xl z-50 animate-fade-in">
           <p style={{ fontSize: '14px', fontWeight: '500' }}>
             Goal updated by AI.
           </p>

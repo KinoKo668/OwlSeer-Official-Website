@@ -51,7 +51,7 @@ export function HashtagRadar({
   };
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-slate-950">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       <SidebarPro 
         activeItem="hashtag" 
         onNavigate={onNavigate}
@@ -946,7 +946,7 @@ function HashtagRadarContent() {
   const paginatedDeclining = getPaginatedData(decliningHashtags, decliningPage);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+    <div className="simulation-overview-theme simulation-dark-surface min-h-screen bg-sidebar transition-colors duration-300">
       {/* Page Header */}
       <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
         <div className="max-w-[1600px] mx-auto px-8 py-6">

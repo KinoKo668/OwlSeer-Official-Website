@@ -19,6 +19,8 @@ import { translations as globalTranslations } from '../../data/translations';
 import { Navbar } from '../layout/Navbar';
 import { Footer } from '../layout/Footer';
 import { SEO } from '../SEO';
+import { getPageSEO, getCanonicalUrl, generateAlternates } from '../../data/seoConfig';
+import { AuroraBackground } from '../ui/aurora-background';
 
 // --- Translations ---
 const pageTranslations = {
@@ -31,7 +33,7 @@ const pageTranslations = {
       title: "Build a TikTok Hashtag Strategy That Actually Works",
       lead: "OwlSeer tracks hashtag momentum, competition, and niche relevance to recommend the right tags for every video — no guessing, no copying competitors.",
       ctaPrimary: "Start Free Trial",
-      ctaSecondary: "Try Trend Radar Demo"
+      ctaSecondary: "Try Trend Radar Sample"
     },
     tldr: {
       content: "Hashtags are not decorative. They are a discovery mechanism. OwlSeer's Trend Radar tracks hashtag momentum — the growth rate of hashtag usage over time — and combines it with competition level and your personal match score to recommend hashtags that maximize discoverability for each video.",
@@ -125,7 +127,7 @@ const pageTranslations = {
       title: "Get Personalized Hashtag Recommendations",
       desc: "Connect your account and see which hashtags match your niche right now.",
       primary: "Start Free Trial",
-      secondary: "Try Trend Radar Demo"
+      secondary: "Try Trend Radar Sample"
     }
   },
   zh: {
@@ -236,9 +238,353 @@ const pageTranslations = {
   }
 };
 
+const localizedPageTranslations = {
+  ...pageTranslations,
+  en: {
+    ...pageTranslations.en,
+    ui: {
+      newFeature: "New Feature",
+      lowComp: "Low Comp",
+      medComp: "Med Comp",
+      highComp: "High Comp",
+      broad: "Broad",
+      niche: "Niche",
+      trending: "Trending",
+      boundaryData: "Data",
+      boundaryLimitations: "Limitations",
+      boundaryNote: "Note"
+    }
+  },
+  zh: {
+    ...pageTranslations.zh,
+    ui: {
+      newFeature: "新功能",
+      lowComp: "低竞争",
+      medComp: "中竞争",
+      highComp: "高竞争",
+      broad: "广泛",
+      niche: "细分",
+      trending: "趋势",
+      boundaryData: "数据",
+      boundaryLimitations: "限制",
+      boundaryNote: "说明"
+    }
+  },
+  ja: {
+    ...pageTranslations.en,
+    meta: {
+      title: "TikTokハッシュタグ戦略 | OwlSeer",
+      description: "勢い・競合・一致度でTikTokハッシュタグを最適化。"
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "成果につながるTikTokハッシュタグ戦略",
+      lead: "OwlSeerが勢い・競合・関連性を分析し、動画ごとに最適なタグを提案します。",
+      ctaPrimary: "無料トライアル開始",
+      ctaSecondary: "Trend Radarサンプルを見る"
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "よくある3つのハッシュタグ失敗",
+      task: "主要なミスとその影響を確認します。"
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "OwlSeerの推奨ロジック",
+      task: "データでハッシュタグ選定を最適化します。",
+      action: "サンプルデータで推奨タグを見る — Trend Radarへ"
+    },
+    evidence: {
+      ...pageTranslations.en.evidence,
+      title: "ハッシュタグデータ実例",
+      task: "指標が選定にどう効くかを確認。"
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "あなたのニッチで上昇中のタグを確認",
+      desc: "ニッチを選択して上昇タグと飽和タグを可視化。",
+      placeholder: "ニッチを選択",
+      niches: ["テック", "ビューティー", "フィットネス", "教育", "フード", "コメディ", "ビジネス"],
+      button: "タグを確認",
+      note: "5タグを無料表示 · 連携後に個別提案を提供"
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "透明性ボックス"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "個別ハッシュタグ提案を取得",
+      desc: "アカウント連携で、今あなたに合うタグを提示。",
+      primary: "無料トライアル開始",
+      secondary: "Trend Radarサンプルを見る"
+    },
+    ui: {
+      newFeature: "新機能",
+      lowComp: "低競合",
+      medComp: "中競合",
+      highComp: "高競合",
+      broad: "広域",
+      niche: "ニッチ",
+      trending: "トレンド",
+      boundaryData: "データ",
+      boundaryLimitations: "制限事項",
+      boundaryNote: "補足"
+    }
+  },
+  ko: {
+    ...pageTranslations.en,
+    meta: {
+      title: "TikTok 해시태그 전략 | OwlSeer",
+      description: "모멘텀, 경쟁도, 니치 매치 기반으로 해시태그를 추천합니다."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "실제로 통하는 TikTok 해시태그 전략",
+      lead: "OwlSeer가 해시태그 모멘텀, 경쟁도, 관련성을 분석해 영상별 최적 태그를 제안합니다.",
+      ctaPrimary: "무료 체험 시작",
+      ctaSecondary: "Trend Radar 샘플 보기"
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "해시태그 3가지 실수",
+      task: "가장 흔한 오류와 영향을 확인하세요."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "OwlSeer 추천 방식",
+      task: "감이 아닌 데이터로 태그를 선택합니다。",
+      action: "샘플 데이터로 추천 태그 보기 — Trend Radar 열기"
+    },
+    evidence: {
+      ...pageTranslations.en.evidence,
+      title: "해시태그 데이터 실제 사례",
+      task: "지표가 선택에 미치는 영향을 확인하세요."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "내 니치의 상승 해시태그 5개 보기",
+      desc: "니치를 선택해 상승/포화 태그를 확인하세요.",
+      placeholder: "니치 선택",
+      niches: ["테크", "뷰티", "피트니스", "교육", "푸드", "코미디", "비즈니스"],
+      button: "내 해시태그 보기",
+      note: "5개 무료 미리보기 · 연결 시 개인화 조합 제공"
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "투명성 박스"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "개인화 해시태그 추천 받기",
+      desc: "계정을 연결하고 지금 내 니치에 맞는 태그를 확인하세요.",
+      primary: "무료 체험 시작",
+      secondary: "Trend Radar 샘플 보기"
+    },
+    ui: {
+      newFeature: "새 기능",
+      lowComp: "낮은 경쟁",
+      medComp: "중간 경쟁",
+      highComp: "높은 경쟁",
+      broad: "광범위",
+      niche: "니치",
+      trending: "트렌드",
+      boundaryData: "데이터",
+      boundaryLimitations: "제한사항",
+      boundaryNote: "참고"
+    }
+  },
+  es: {
+    ...pageTranslations.en,
+    meta: {
+      title: "Estrategia de hashtags TikTok con IA | OwlSeer",
+      description: "Construye una estrategia de hashtags con datos de momentum, competencia y match por nicho."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Crea una estrategia de hashtags que sí funciona",
+      lead: "OwlSeer analiza momentum, competencia y relevancia para recomendar etiquetas por video.",
+      ctaPrimary: "Iniciar prueba gratis",
+      ctaSecondary: "Ver muestra de Trend Radar"
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "Los tres errores de hashtags",
+      task: "Identifica los errores más comunes y su impacto."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "Cómo OwlSeer recomienda hashtags",
+      task: "Datos en lugar de intuición para elegir etiquetas.",
+      action: "Ver recomendaciones con datos de muestra — abrir Trend Radar."
+    },
+    evidence: {
+      ...pageTranslations.en.evidence,
+      title: "Hashtags en acción",
+      task: "Cómo las métricas guían decisiones concretas."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "Mira 5 hashtags en tendencia en tu nicho",
+      desc: "Selecciona tu nicho y detecta qué sube y qué se satura.",
+      placeholder: "Seleccionar nicho",
+      niches: ["Tecnología", "Belleza", "Fitness", "Educación", "Comida", "Comedia", "Negocios"],
+      button: "Ver mis hashtags",
+      note: "5 etiquetas gratis · Conecta tu cuenta para mezcla personalizada"
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "Marco de transparencia"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "Obtén recomendaciones personalizadas",
+      desc: "Conecta tu cuenta y descubre qué hashtags encajan con tu nicho.",
+      primary: "Iniciar prueba gratis",
+      secondary: "Ver muestra de Trend Radar"
+    },
+    ui: {
+      newFeature: "Nueva función",
+      lowComp: "Baja comp.",
+      medComp: "Comp. media",
+      highComp: "Alta comp.",
+      broad: "Amplio",
+      niche: "Nicho",
+      trending: "Tendencia",
+      boundaryData: "Datos",
+      boundaryLimitations: "Limitaciones",
+      boundaryNote: "Nota"
+    }
+  },
+  fr: {
+    ...pageTranslations.en,
+    meta: {
+      title: "Stratégie hashtags TikTok avec IA | OwlSeer",
+      description: "Construisez une stratégie hashtags basée sur momentum, concurrence et adéquation niche."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Construisez une stratégie hashtags qui fonctionne",
+      lead: "OwlSeer suit momentum, concurrence et pertinence pour recommander les bons hashtags.",
+      ctaPrimary: "Démarrer l'essai gratuit",
+      ctaSecondary: "Voir l'exemple Trend Radar"
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "Les 3 erreurs hashtags",
+      task: "Identifiez les erreurs les plus fréquentes et leur impact."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "Comment OwlSeer recommande les hashtags",
+      task: "Des données plutôt que des suppositions.",
+      action: "Voir les recommandations sur données de démo — ouvrir Trend Radar."
+    },
+    evidence: {
+      ...pageTranslations.en.evidence,
+      title: "Les données hashtags en action",
+      task: "Comment les métriques orientent les choix concrets."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "Voir 5 hashtags tendances dans votre niche",
+      desc: "Sélectionnez votre niche et identifiez ce qui monte.",
+      placeholder: "Sélectionner une niche",
+      niches: ["Tech", "Beauté", "Fitness", "Éducation", "Food", "Comédie", "Business"],
+      button: "Voir mes hashtags",
+      note: "Aperçu gratuit de 5 tags · Connectez votre compte pour personnaliser"
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "Cadre de transparence"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "Recevez des recommandations personnalisées",
+      desc: "Connectez votre compte et voyez les hashtags adaptés à votre niche.",
+      primary: "Démarrer l'essai gratuit",
+      secondary: "Voir l'exemple Trend Radar"
+    },
+    ui: {
+      newFeature: "Nouvelle fonctionnalité",
+      lowComp: "Faible conc.",
+      medComp: "Conc. moyenne",
+      highComp: "Forte conc.",
+      broad: "Large",
+      niche: "Niche",
+      trending: "Tendance",
+      boundaryData: "Données",
+      boundaryLimitations: "Limites",
+      boundaryNote: "Note"
+    }
+  },
+  de: {
+    ...pageTranslations.en,
+    meta: {
+      title: "TikTok-Hashtag-Strategie mit KI | OwlSeer",
+      description: "Baue eine datenbasierte Hashtag-Strategie mit Momentum, Wettbewerb und Nischen-Match."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Erstelle eine TikTok-Hashtag-Strategie, die wirkt",
+      lead: "OwlSeer analysiert Momentum, Wettbewerb und Relevanz für passende Tags pro Video.",
+      ctaPrimary: "Kostenlos testen",
+      ctaSecondary: "Trend-Radar-Beispiel ansehen"
+    },
+    problem: {
+      ...pageTranslations.en.problem,
+      title: "Die drei Hashtag-Fehler",
+      task: "Erkenne die häufigsten Fehler und ihre Folgen."
+    },
+    solution: {
+      ...pageTranslations.en.solution,
+      title: "So empfiehlt OwlSeer Hashtags",
+      task: "Daten ersetzen Bauchgefühl bei der Tag-Auswahl.",
+      action: "Empfehlungen auf Demodaten ansehen — Trend Radar öffnen."
+    },
+    evidence: {
+      ...pageTranslations.en.evidence,
+      title: "Hashtag-Daten in der Praxis",
+      task: "So steuern Metriken konkrete Entscheidungen."
+    },
+    conversion: {
+      ...pageTranslations.en.conversion,
+      title: "Sieh 5 trendende Hashtags in deiner Nische",
+      desc: "Wähle deine Nische und erkenne steigende oder gesättigte Tags.",
+      placeholder: "Nische auswählen",
+      niches: ["Tech", "Beauty", "Fitness", "Bildung", "Food", "Comedy", "Business"],
+      button: "Meine Hashtags anzeigen",
+      note: "5 Tags kostenlos · Konto verbinden für personalisierte Mischung"
+    },
+    boundary: {
+      ...pageTranslations.en.boundary,
+      title: "Transparenz-Box"
+    },
+    cta: {
+      ...pageTranslations.en.cta,
+      title: "Erhalte personalisierte Hashtag-Empfehlungen",
+      desc: "Konto verbinden und passende Hashtags für deine Nische sehen.",
+      primary: "Kostenlos testen",
+      secondary: "Trend-Radar-Beispiel ansehen"
+    },
+    ui: {
+      newFeature: "Neues Feature",
+      lowComp: "Niedrige Konkurrenz",
+      medComp: "Mittlere Konkurrenz",
+      highComp: "Hohe Konkurrenz",
+      broad: "Breit",
+      niche: "Nische",
+      trending: "Trend",
+      boundaryData: "Daten",
+      boundaryLimitations: "Einschränkungen",
+      boundaryNote: "Hinweis"
+    }
+  }
+};
+
 // --- Components ---
 
-const HashtagCloud = () => {
+const HashtagCloud = ({ ui }: { ui: any }) => {
   const tags = [
     { name: "#TechTok", size: 1.2, color: "bg-emerald-500", x: 20, y: 30 },
     { name: "#AI", size: 1.5, color: "bg-emerald-400", x: 50, y: 50 },
@@ -274,21 +620,21 @@ const HashtagCloud = () => {
         </motion.div>
       ))}
       <div className="absolute bottom-4 left-4 flex gap-4 text-[10px] text-gray-400">
-        <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-emerald-500"></div> Low Comp</div>
-        <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-yellow-500"></div> Med Comp</div>
-        <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-red-500"></div> High Comp</div>
+        <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-emerald-500"></div> {ui.lowComp}</div>
+        <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-yellow-500"></div> {ui.medComp}</div>
+        <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-red-500"></div> {ui.highComp}</div>
       </div>
     </div>
   );
 };
 
-const MixBar = ({ t }: { t: any }) => (
+const MixBar = ({ t, ui }: { t: any, ui: any }) => (
   <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-6 shadow-sm">
     <h4 className="font-bold text-gray-900 dark:text-white mb-4">{t.title}</h4>
     <div className="flex h-4 rounded-full overflow-hidden mb-4">
-      <div className="w-[20%] bg-blue-500" title="Broad"></div>
-      <div className="w-[50%] bg-[#1AAE82]" title="Niche"></div>
-      <div className="w-[30%] bg-purple-500" title="Trending"></div>
+      <div className="w-[20%] bg-blue-500" title={ui.broad}></div>
+      <div className="w-[50%] bg-[#1AAE82]" title={ui.niche}></div>
+      <div className="w-[30%] bg-purple-500" title={ui.trending}></div>
     </div>
     <div className="grid grid-cols-3 gap-2 text-xs">
       <div className="flex items-center gap-1.5">
@@ -307,90 +653,152 @@ const MixBar = ({ t }: { t: any }) => (
   </div>
 );
 
+const WorkflowStep = ({
+  step,
+  isActive,
+  onClick,
+}: {
+  step: any;
+  isActive: boolean;
+  onClick: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className={`group relative w-full overflow-hidden rounded-3xl border p-6 text-left transition-all duration-300 ${
+      isActive
+        ? 'border-[#1AAE82] bg-white dark:bg-slate-800 shadow-xl shadow-[#1AAE82]/10'
+        : 'border-transparent bg-white/60 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-800/80'
+    }`}
+  >
+    <div className="relative z-10 flex items-start gap-4">
+      <div
+        className={`flex h-10 w-10 items-center justify-center rounded-xl ${
+          isActive
+            ? 'bg-[#1AAE82] text-white shadow-lg shadow-[#1AAE82]/30'
+            : 'bg-gray-100 text-gray-400 dark:bg-slate-800 dark:text-slate-500'
+        }`}
+      >
+        {step.id}
+      </div>
+      <div className="flex-1">
+        <h3
+          className={`mb-2 text-lg font-bold ${
+            isActive ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-200'
+          }`}
+        >
+          {step.title}
+        </h3>
+        <p className={`${isActive ? 'text-gray-600 dark:text-gray-300' : 'text-gray-500 dark:text-gray-400'}`}>
+          {step.desc}
+        </p>
+      </div>
+    </div>
+  </button>
+);
+
 // --- Main Page Component ---
 
-export const HashtagStrategyPage = ({ 
-  onNavigate, 
-  isDarkMode, 
-  setIsDarkMode 
-}: { 
-  onNavigate: (page: string) => void, 
-  isDarkMode: boolean, 
-  setIsDarkMode: (isDark: boolean) => void 
+export const HashtagStrategyPage = ({
+  onNavigate,
+  isDarkMode,
+  setIsDarkMode,
+}: {
+  onNavigate: (page: string) => void;
+  isDarkMode: boolean;
+  setIsDarkMode: (isDark: boolean) => void;
 }) => {
   const { language, setLanguage } = useLanguage();
-  const t = (pageTranslations as any)[language] || pageTranslations.en;
+  const t = (localizedPageTranslations as any)[language] || localizedPageTranslations.en;
   const globalT = globalTranslations[language] || globalTranslations.en;
+  const canonicalPath = '/use-cases/hashtag-strategy';
+  const seo = getPageSEO('hashtagStrategy', language);
+  const [activeStep, setActiveStep] = useState(1);
+  const activeStepData = t.solution.points.find((step: any) => step.id === activeStep) || t.solution.points[0];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#020617] font-sans text-gray-900 dark:text-white selection:bg-[#1AAE82]/30 transition-colors duration-300">
-      <SEO 
-        title={t.meta.title}
-        description={t.meta.description}
-        keywords={["tiktok hashtag strategy", "hashtag analytics", "tiktok trends", "hashtag generator"]}
+    <div className="min-h-screen bg-white font-sans text-gray-900 transition-colors duration-300 selection:bg-[#1AAE82]/30 dark:bg-[#020617] dark:text-white">
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={getCanonicalUrl(canonicalPath, language)}
+        alternates={generateAlternates(canonicalPath)}
         lang={language}
       />
 
-      <Navbar 
-        onTrySample={() => onNavigate('/simulation')}
-        onSignUp={() => onNavigate('/auth')}
+      <Navbar
+        onTrySample={() => onNavigate('/social/simulation')}
+        onSignUp={() => onNavigate('/social/auth')}
         onNavigate={onNavigate}
         language={language}
         setLanguage={setLanguage}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
-        t={globalT} 
+        t={globalT}
       />
 
-      <main className="pt-24 pb-20">
-        {/* Hero Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1AAE82]/10 text-[#1AAE82] text-xs font-bold uppercase tracking-wider mb-6 border border-[#1AAE82]/20">
-              <Hash className="w-3 h-3" /> New Feature
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-gray-900 dark:text-white font-display">
-              {t.hero.title}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-              {t.hero.lead}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => onNavigate('/auth')}
-                className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
-              >
-                {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => onNavigate('/simulation/trends')}
-                className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2"
-              >
-                <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
-              </button>
-            </div>
-          </motion.div>
-        </section>
+      <main className="bg-white dark:bg-[#020617]">
+        <div className="relative overflow-hidden">
+          <AuroraBackground
+            colorStops={isDarkMode ? ['#020617', '#1AAE82', '#020617'] : ['#FFFFFF', '#E0F2FE', '#FFFFFF']}
+            speed={0.3}
+            blend={0.5}
+            baseColor={isDarkMode ? 0.0 : 1.0}
+            className="absolute inset-0 z-0 opacity-40"
+          />
 
-        {/* TL;DR Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="bg-[#FEFCE8] dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-2xl p-6 md:p-8 relative">
-            <div className="absolute -top-3 -left-3 bg-yellow-400 text-yellow-900 p-2 rounded-full shadow-sm">
-              <Zap className="w-5 h-5" fill="currentColor" />
+          <section className="relative z-10 mx-auto max-w-7xl px-4 pb-28 pt-40 text-center sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#1AAE82]/20 bg-[#1AAE82]/10 px-4 py-2 text-sm font-bold uppercase tracking-widest text-[#1AAE82]">
+                <Hash className="h-4 w-4" />
+                <span>{t.ui.newFeature}</span>
+              </div>
+
+              <h1 className="mx-auto mb-8 max-w-5xl text-5xl font-bold leading-[1.1] tracking-tight text-gray-900 dark:text-white md:text-7xl lg:text-8xl">
+                {t.hero.title}
+              </h1>
+
+              <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:text-2xl">
+                {t.hero.lead}
+              </p>
+
+              <div className="flex flex-col justify-center gap-5 sm:flex-row">
+                <button
+                  onClick={() => onNavigate('/social/auth')}
+                  className="flex items-center justify-center gap-2 rounded-full bg-[#1AAE82] px-8 py-4 text-lg font-bold text-white shadow-xl shadow-[#1AAE82]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#15956F] hover:shadow-[#1AAE82]/40"
+                >
+                  {t.hero.ctaPrimary}
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={() => onNavigate('/social/simulation/trends')}
+                  className="flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-8 py-4 font-medium text-gray-900 transition-all hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
+                >
+                  <Play className="h-4 w-4" />
+                  {t.hero.ctaSecondary}
+                </button>
+              </div>
+            </motion.div>
+          </section>
+        </div>
+
+        <section className="relative z-20 mx-auto -mt-8 mb-32 max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border-white/50 bg-white/80 p-10 text-center shadow-2xl ring-1 ring-black/5 backdrop-blur-xl dark:border-slate-700/50 dark:bg-slate-900/80 md:flex-row md:text-left">
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-gradient-to-br from-[#1AAE82] to-emerald-600 text-white shadow-lg shadow-[#1AAE82]/30">
+              <Zap className="h-10 w-10" fill="currentColor" />
             </div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-500 mb-3 ml-2">TL;DR</h3>
-            <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed font-medium">
+            <p className="text-xl leading-relaxed text-gray-900 dark:text-white md:text-2xl">
               {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
                 <React.Fragment key={i}>
                   {part}
                   {i < arr.length - 1 && (
-                    <button 
-                      onClick={() => onNavigate('/simulation/trends')}
-                      className="text-[#1AAE82] underline decoration-2 underline-offset-2 hover:text-[#15956F] font-bold mx-1"
+                    <button
+                      onClick={() => onNavigate('/social/simulation/trends')}
+                      className="mx-1 inline-flex items-center gap-1 border-b-2 border-[#1AAE82]/30 font-bold text-[#1AAE82] transition-colors hover:border-[#1AAE82] hover:text-[#15956F]"
                     >
                       {t.tldr.link}
                     </button>
@@ -401,104 +809,164 @@ export const HashtagStrategyPage = ({
           </div>
         </section>
 
-        {/* Problem Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl">
-                  <AlertTriangle className="w-6 h-6" />
+        <section className="mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-20 lg:grid-cols-2">
+            <div className="order-2 lg:order-1">
+              <div className="mb-8 flex items-center gap-4">
+                <div className="rounded-2xl border border-red-100 bg-red-50 p-3 text-red-500 dark:border-red-900/20 dark:bg-red-900/10 dark:text-red-300">
+                  <AlertTriangle className="h-6 w-6" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t.problem.title}</h2>
-                  <p className="text-[#1AAE82] font-medium">{t.problem.task}</p>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">{t.problem.title}</h2>
+                  <p className="mt-1 font-medium text-[#1AAE82]">{t.problem.task}</p>
                 </div>
               </div>
-              <div className="space-y-6">
-                {t.problem.mistakes.map((mistake: any, i: number) => (
-                  <div key={i} className="bg-gray-50 dark:bg-slate-800/50 p-4 rounded-xl border border-gray-100 dark:border-slate-800">
-                    <h4 className="font-bold text-gray-900 dark:text-white mb-1">{mistake.title}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{mistake.desc}</p>
-                  </div>
-                ))}
-                <p className="text-gray-600 dark:text-gray-300 mt-4 italic">{t.problem.fix}</p>
-                <button 
-                  onClick={() => onNavigate('/signals')}
-                  className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mt-2"
+
+              <div className="space-y-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+                <p>{t.problem.desc1}</p>
+                <p>{t.problem.desc2}</p>
+                <div className="rounded-r-2xl border-l-4 border-red-500 bg-red-50 p-6 dark:bg-red-900/10">
+                  <p className="font-medium italic text-red-900 dark:text-red-200">"{t.problem.cost}"</p>
+                </div>
+                <button
+                  onClick={() => onNavigate('/social/signals')}
+                  className="inline-flex items-center gap-2 font-bold text-[#1AAE82] transition-colors hover:text-[#15956F]"
                 >
-                  {t.problem.action} <ArrowRight className="w-4 h-4" />
+                  {t.problem.action}
+                  <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
             </div>
-            <div className="order-first lg:order-last">
-              <HashtagCloud />
+
+            <div className="order-1 lg:order-2">
+              <HashtagCloud ui={t.ui} />
             </div>
           </div>
         </section>
 
-        {/* Solution Section */}
-        <section className="bg-gray-50 dark:bg-slate-900/50 py-24 mb-32">
-          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.solution.title}</h2>
-              <p className="text-xl text-gray-500 dark:text-gray-400">{t.solution.task}</p>
+        <section className="relative mb-32 overflow-hidden bg-gray-50 py-32 dark:bg-slate-900/50">
+          <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent dark:via-slate-800" />
+          <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent dark:via-slate-800" />
+
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-20 text-center">
+              <h2 className="mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">{t.solution.title}</h2>
+              <p className="mx-auto max-w-2xl text-xl text-gray-500 dark:text-gray-400">{t.solution.task}</p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
-                {t.solution.points.map((point: any, i: number) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-10 h-10 bg-[#1AAE82]/10 text-[#1AAE82] rounded-full flex items-center justify-center font-bold shrink-0">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{point.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{point.desc}</p>
-                    </div>
-                  </div>
+            <div className="grid items-start gap-16 lg:grid-cols-2">
+              <div className="space-y-5">
+                {t.solution.points.map((step: any) => (
+                  <WorkflowStep
+                    key={step.id}
+                    step={step}
+                    isActive={activeStep === step.id}
+                    onClick={() => setActiveStep(step.id)}
+                  />
                 ))}
+
+                <button
+                  onClick={() => onNavigate('/social/simulation/trends')}
+                  className="mt-4 inline-flex items-center gap-2 font-bold text-[#1AAE82] transition-colors hover:text-[#15956F]"
+                >
+                  {t.solution.action}
+                  <ArrowRight className="h-4 w-4" />
+                </button>
               </div>
-              
-              <div className="space-y-8">
-                <MixBar t={t.solution.mix} />
-                <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-200 dark:border-slate-800 shadow-sm text-center">
-                  <p className="text-gray-600 dark:text-gray-300 italic mb-4">
-                    "{t.evidence.comparison}"
-                  </p>
-                  <button 
-                    onClick={() => onNavigate('/simulation/trends')}
-                    className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mx-auto"
-                  >
-                    {t.solution.action} <ArrowRight className="w-4 h-4" />
-                  </button>
+
+              <div className="rounded-[2.5rem] border border-gray-200 bg-white p-8 shadow-2xl dark:border-slate-800 dark:bg-slate-900/90 lg:sticky lg:top-32">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#1AAE82]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#1AAE82]">
+                    {activeStepData.id}
+                    <span>{activeStepData.title}</span>
+                  </div>
+
+                  <p className="mb-6 leading-relaxed text-gray-600 dark:text-gray-300">{activeStepData.desc}</p>
+
+                  {activeStep === 1 ? (
+                    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-slate-700 dark:bg-slate-800/50">
+                      <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+                        <Search className="h-3 w-3" />
+                        <span>{t.evidence.subtitle}</span>
+                      </div>
+                      <div className="space-y-2">
+                        {t.evidence.table.headers.map((header: string, index: number) => (
+                          <div key={header} className="flex items-center justify-between rounded-lg bg-white px-3 py-2 dark:bg-slate-900/60">
+                            <span className="text-sm text-gray-500 dark:text-gray-400">{header}</span>
+                            <span className="text-sm font-bold text-gray-900 dark:text-white">
+                              {t.evidence.table.rows[0][index]}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : activeStep === 2 ? (
+                    <MixBar t={t.solution.mix} ui={t.ui} />
+                  ) : (
+                    <div className="space-y-4 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-slate-700 dark:bg-slate-800/50">
+                      <h4 className="font-bold text-gray-900 dark:text-white">{t.evidence.recommendation.title}</h4>
+                      {t.evidence.recommendation.items.map((item: any) => (
+                        <div key={`${item.type}-${item.tag}`} className="flex items-start gap-3">
+                          <span className="mt-1 rounded bg-[#1AAE82]/10 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#1AAE82]">
+                            {item.type}
+                          </span>
+                          <div>
+                            <p className="font-bold text-gray-900 dark:text-white">{item.tag}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{item.reason}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto mb-32 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">{t.evidence.title}</h2>
+            <p className="text-lg font-medium text-[#1AAE82]">{t.evidence.task}</p>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-3">
+            <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-lg dark:border-slate-800 dark:bg-slate-900 lg:col-span-2">
+              <div className="flex items-center justify-between border-b border-gray-100 bg-gray-50/70 px-6 py-4 dark:border-slate-800 dark:bg-slate-800/40">
+                <h3 className="font-bold text-gray-700 dark:text-gray-200">{t.evidence.subtitle}</h3>
+                <div className="flex gap-2">
+                  <div className="h-3 w-3 rounded-full bg-red-400" />
+                  <div className="h-3 w-3 rounded-full bg-yellow-400" />
+                  <div className="h-3 w-3 rounded-full bg-green-400" />
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Evidence Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <div className="flex flex-col md:flex-row items-start gap-12">
-            <div className="flex-1">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{t.evidence.title}</h2>
-              <p className="text-[#1AAE82] font-medium mb-6">{t.evidence.task}</p>
-              <p className="text-gray-500 dark:text-gray-400 mb-8">{t.evidence.subtitle}</p>
-              
               <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left">
-                  <thead className="text-xs text-gray-500 uppercase bg-gray-50 dark:bg-slate-800">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-gray-50/50 text-xs uppercase text-gray-500 dark:bg-slate-800/30">
                     <tr>
-                      {t.evidence.table.headers.map((h: string, i: number) => (
-                        <th key={i} className="px-4 py-3 rounded-t-lg">{h}</th>
+                      {t.evidence.table.headers.map((header: string) => (
+                        <th key={header} className="px-6 py-4 font-semibold tracking-wider">
+                          {header}
+                        </th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody>
-                    {t.evidence.table.rows.map((row: string[], i: number) => (
-                      <tr key={i} className="bg-white dark:bg-slate-900 border-b dark:border-slate-800">
-                        {row.map((cell, j) => (
-                          <td key={j} className={`px-4 py-3 ${j === 0 ? 'font-bold text-[#1AAE82]' : 'text-gray-600 dark:text-gray-300'}`}>
+                  <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
+                    {t.evidence.table.rows.map((row: string[], rowIndex: number) => (
+                      <tr key={rowIndex} className="transition-colors hover:bg-gray-50 dark:hover:bg-slate-800/50">
+                        {row.map((cell: string, cellIndex: number) => (
+                          <td
+                            key={cellIndex}
+                            className={`px-6 py-4 ${
+                              cellIndex === 0 ? 'font-bold text-[#1AAE82]' : 'text-gray-600 dark:text-gray-300'
+                            }`}
+                          >
                             {cell}
                           </td>
                         ))}
@@ -508,92 +976,97 @@ export const HashtagStrategyPage = ({
                 </table>
               </div>
             </div>
-            
-            <div className="flex-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8">
-              <h3 className="font-bold text-lg mb-4">{t.evidence.recommendation.title}</h3>
-              <div className="space-y-4">
-                {t.evidence.recommendation.items.map((item: any, i: number) => (
-                  <div key={i} className="flex gap-3">
-                    <span className={`px-2 py-1 rounded text-xs font-bold h-fit shrink-0 ${
-                      item.type === 'Broad' || item.type === '广泛' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
-                      item.type === 'Niche' || item.type === '利基' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' :
-                      'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
-                    }`}>
+
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-white shadow-2xl">
+              <div className="absolute -right-16 -top-16 opacity-10">
+                <Hash size={180} />
+              </div>
+              <h3 className="relative z-10 mb-6 text-xl font-bold">{t.evidence.recommendation.title}</h3>
+              <div className="relative z-10 space-y-5">
+                {t.evidence.recommendation.items.map((item: any) => (
+                  <div key={`${item.type}-${item.tag}`} className="flex items-start gap-3">
+                    <span className="mt-1 rounded border border-[#1AAE82]/30 bg-[#1AAE82]/10 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#7BE4C4]">
                       {item.type}
                     </span>
                     <div>
-                      <div className="font-bold text-gray-900 dark:text-white">{item.tag}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">{item.reason}</div>
+                      <p className="font-bold">{item.tag}</p>
+                      <p className="text-xs text-slate-300">{item.reason}</p>
                     </div>
                   </div>
                 ))}
               </div>
+              <div className="relative z-10 mt-8 rounded-xl border border-white/10 bg-white/5 p-4 text-sm italic text-slate-300">
+                "{t.evidence.comparison}"
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Contextual Conversion (Mini Tool) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto mb-24">
-          <div className="bg-gradient-to-br from-[#111827] to-[#0f172a] rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#1AAE82]/20 rounded-full blur-[80px]" />
-            
-            <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-4 font-display">{t.conversion.title}</h3>
-              <p className="text-gray-300 mb-8 max-w-lg mx-auto">
-                {t.conversion.desc}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
-                <select className="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm cursor-pointer">
-                   <option className="bg-slate-900">{t.conversion.placeholder}</option>
-                   {t.conversion.niches.map((niche: string) => (
-                     <option key={niche} value={niche} className="bg-slate-900">{niche}</option>
-                   ))}
+        <section className="mx-auto mb-32 max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-[#0F172A] to-[#1E293B] p-10 text-white shadow-2xl md:p-14">
+            <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-[#1AAE82]/20 blur-[100px]" />
+            <div className="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-blue-500/10 blur-[80px]" />
+
+            <div className="relative z-10 grid gap-8 md:grid-cols-2 md:items-center">
+              <div>
+                <h3 className="mb-4 text-3xl font-bold md:text-4xl">{t.conversion.title}</h3>
+                <p className="mb-6 text-lg text-slate-300">{t.conversion.desc}</p>
+                <p className="text-xs uppercase tracking-widest text-slate-400">{t.conversion.note}</p>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+                <select className="mb-4 w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-[#1AAE82]">
+                  <option className="bg-slate-900">{t.conversion.placeholder}</option>
+                  {t.conversion.niches.map((niche: string) => (
+                    <option key={niche} value={niche} className="bg-slate-900">
+                      {niche}
+                    </option>
+                  ))}
                 </select>
-                <button 
-                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl transition-colors shadow-lg"
-                >
+                <button className="w-full rounded-2xl bg-[#1AAE82] px-8 py-4 font-bold text-white shadow-lg shadow-[#1AAE82]/20 transition-all hover:-translate-y-0.5 hover:bg-[#15956F] hover:shadow-[#1AAE82]/40">
                   {t.conversion.button}
                 </button>
               </div>
-              
-              <p className="text-xs text-gray-500">{t.conversion.note}</p>
             </div>
           </div>
         </section>
 
-        {/* Boundary Box */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="border border-gray-200 dark:border-slate-800 rounded-xl p-6 bg-gray-50/50 dark:bg-slate-900/50">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <Lock size={18} className="text-gray-400" /> {t.boundary.title}
+        <section className="mx-auto mb-32 max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50/50 p-8 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/30">
+            <h3 className="mb-6 flex items-center gap-3 text-lg font-bold text-gray-900 dark:text-white">
+              <Lock size={20} className="text-gray-400" />
+              {t.boundary.title}
             </h3>
-            <div className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
-              <p><strong className="text-gray-700 dark:text-gray-300">Data:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Limitations:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Note:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
+            <div className="space-y-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+              <p>
+                <strong className="text-gray-900 dark:text-gray-200">{t.ui.boundaryData}:</strong>{' '}
+                {t.boundary.data.replace('Data we use:', '')}
+              </p>
+              <p>
+                <strong className="text-gray-900 dark:text-gray-200">{t.ui.boundaryLimitations}:</strong>{' '}
+                {t.boundary.limit.replace('What we do not do:', '')}
+              </p>
+              <p>
+                <strong className="text-gray-900 dark:text-gray-200">{t.ui.boundaryNote}:</strong>{' '}
+                {t.boundary.note.replace('Variability note:', '')}
+              </p>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
-            {t.cta.title}
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10">
-            {t.cta.desc}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => onNavigate('/auth')}
-              className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+        <section className="mx-auto mb-20 max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-6xl">{t.cta.title}</h2>
+          <p className="mx-auto mb-12 max-w-2xl text-xl text-gray-600 dark:text-gray-300 md:text-2xl">{t.cta.desc}</p>
+          <div className="flex flex-col justify-center gap-5 sm:flex-row">
+            <button
+              onClick={() => onNavigate('/social/auth')}
+              className="rounded-full bg-[#1AAE82] px-10 py-5 text-xl font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#15956F]"
             >
               {t.cta.primary}
             </button>
-            <button 
-              onClick={() => onNavigate('/simulation/trends')}
-              className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all"
+            <button
+              onClick={() => onNavigate('/social/simulation/trends')}
+              className="rounded-full border border-gray-200 bg-white px-10 py-5 text-xl font-medium text-gray-900 transition-all hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
             >
               {t.cta.secondary}
             </button>

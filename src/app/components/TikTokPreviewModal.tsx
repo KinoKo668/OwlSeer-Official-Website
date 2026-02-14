@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Play, Heart, MessageCircle, Share2, Bookmark, Search, Plus, Film, PlayCircle } from 'lucide-react';
+import { X, Play, Heart, MessageCircle, Share2, Bookmark, Search, Plus, Film } from 'lucide-react';
 
 interface StoryboardFrame {
   id: string;

@@ -4,6 +4,8 @@ import { translations } from '../data/translations';
 import { useLanguage, usePerformance } from '../contexts';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
+import { SEO } from './SEO';
+import { getCanonicalUrl, seoConfig, getLocalizedStructuredDataSchemas, generateAlternates } from '../data/seoConfig';
 import { 
   Check, 
   Lock, 
@@ -255,6 +257,8 @@ export const HowItWorksPage = ({
   const { language, setLanguage } = useLanguage();
   const t = translations[language]?.howItWorksPage || translations.en.howItWorksPage;
   const navT = translations[language] || translations.en;
+  const seo = seoConfig.howItWorks[language as 'en' | 'zh'] || seoConfig.howItWorks.en;
+  const localizedSchemas = getLocalizedStructuredDataSchemas(language);
   
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -265,6 +269,16 @@ export const HowItWorksPage = ({
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] text-gray-900 dark:text-white font-sans selection:bg-[#1AAE82]/20 selection:text-[#1AAE82]">
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={getCanonicalUrl('/how-it-works', language)}
+        lang={language}
+        alternates={generateAlternates('/how-it-works')}
+        structuredData={localizedSchemas.howTo}
+      />
+
       <Navbar 
         onTrySample={() => onNavigate('landing')} 
         onSignUp={() => onNavigate('auth')}
@@ -306,7 +320,7 @@ export const HowItWorksPage = ({
              </p>
              
              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               <Link to="/pricing" className="inline-flex items-center justify-center px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all shadow-xl shadow-[#1AAE82]/20 hover:-translate-y-1">
+               <Link to="/social/pricing" className="inline-flex items-center justify-center px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all shadow-xl shadow-[#1AAE82]/20 hover:-translate-y-1">
                  {t.hero.cta}
                </Link>
                <button className="inline-flex items-center justify-center px-10 py-5 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white rounded-full font-bold text-lg hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors gap-3">
@@ -409,7 +423,7 @@ export const HowItWorksPage = ({
           </div>
           
           <div className="text-center mt-16">
-             <Link to="/methodology" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#1AAE82] font-medium transition-colors">
+             <Link to="/social/methodology" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#1AAE82] font-medium transition-colors">
                Read full methodology <ArrowRight className="w-4 h-4" />
              </Link>
           </div>
@@ -430,10 +444,10 @@ export const HowItWorksPage = ({
                 {t.cta.desc}
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link to="/pricing" className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-lg">
+                <Link to="/social/pricing" className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-lg">
                   {t.cta.primary}
                 </Link>
-                <Link to="/sample-explorer" className="px-10 py-5 bg-white/10 border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-colors backdrop-blur-sm">
+                <Link to="/social/simulation" className="px-10 py-5 bg-white/10 border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-colors backdrop-blur-sm">
                   {t.cta.secondary}
                 </Link>
               </div>

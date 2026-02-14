@@ -36,7 +36,7 @@ export function ReportsArchive({
   onDeleteConversation,
 }: ReportsArchiveProps) {
   return (
-    <div className="flex h-screen bg-[#fafafa]">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       {/* Sidebar */}
       <SidebarPro
         activeItem="reports-archive"

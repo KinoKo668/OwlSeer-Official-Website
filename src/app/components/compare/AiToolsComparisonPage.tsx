@@ -14,7 +14,7 @@ import {
   Footer 
 } from '../layout/Footer';
 import { SEO } from '../SEO';
-import { seoConfig, generateAlternates } from '../../data/seoConfig';
+import { getCanonicalUrl, seoConfig, generateAlternates } from '../../data/seoConfig';
 import { translations } from '../../data/translations';
 import { 
   Check, 
@@ -24,157 +24,165 @@ import {
   BarChart2, 
   Youtube, 
   Zap,
-  Info
+  Info,
+  BrainCircuit,
+  LayoutDashboard
 } from 'lucide-react';
 
 // --- Local Content ---
 const localContent = {
   en: {
     hero: {
-      title: "AI Tools for TikTok Content: A Comprehensive Comparison",
-      lead: "From general-purpose AI (ChatGPT, Claude) to specialized tools (OwlSeer, VidIQ), this page compares the AI landscape for TikTok content creation — what each tool does well and where it falls short.",
+      title: "AI Tools for TikTok: The Complete Landscape",
+      lead: "From generic chat bots to specialized growth engines. Understand the trade-offs between General AI, Analytics Tools, and TikTok-Native solutions.",
       primaryCta: "Start Free Trial",
-      secondaryCta: "Explore Demo"
+      secondaryCta: "Explore Sample"
     },
-    tldr: "General-purpose AI generates text without account data. TikTok analytics tools provide metrics without content generation. OwlSeer bridges both — analyzing your account through 30+ signals and generating personalized scripts visible in the Script Studio grid. This comparison maps the landscape honestly.",
+    insight: {
+      title: "Core Distinction",
+      content: "The market is split: General AI writes text but lacks data. Analytics tools show data but can't write. OwlSeer bridges this gap by using your account signals to drive content generation.",
+    },
     landscape: {
-      title: "The AI Tool Landscape for TikTok",
+      title: "The Four Categories",
       categories: [
         {
-          title: "Category 1 — General-Purpose AI",
-          examples: "(ChatGPT, Claude, Gemini)",
+          title: "General-Purpose AI",
+          examples: "ChatGPT, Claude, Gemini",
           strengths: "Versatile text generation, brainstorming, editing.",
-          weaknesses: "No access to your TikTok data, no trend awareness, no audience personalization.",
-          output: "Generic scripts that work for any creator — which means they are optimized for none.",
-          icon: <Sparkles className="w-6 h-6 text-blue-500" />
+          weaknesses: "Blind to your actual data. No trend awareness. Zero personalization.",
+          output: "Generic scripts that sound like everyone else.",
+          icon: <BrainCircuit className="w-6 h-6 text-blue-400" />
         },
         {
-          title: "Category 2 — TikTok Analytics Tools",
-          examples: "(TikTok Creator Tools, Pentos, Exolyt)",
-          strengths: "Platform metrics, audience demographics, video-level analytics.",
-          weaknesses: "Data without recommendations, no script generation, no trend prediction with timing.",
-          output: "Numbers without a strategy.",
-          icon: <BarChart2 className="w-6 h-6 text-purple-500" />
+          title: "TikTok Analytics",
+          examples: "TikTok Native, Pentos, Exolyt",
+          strengths: "Raw metrics, demographics, video-level stats.",
+          weaknesses: "Data without direction. No content generation or strategy advice.",
+          output: "Spreadsheets and charts without a plan.",
+          icon: <BarChart2 className="w-6 h-6 text-purple-400" />
         },
         {
-          title: "Category 3 — YouTube-First Tools",
-          examples: "(VidIQ, TubeSpanner)",
-          strengths: "Cross-platform coverage, YouTube SEO expertise.",
-          weaknesses: "TikTok features are secondary, limited signal depth, no TikTok-specific script generation.",
-          output: "YouTube-optimized insights applied to a different platform.",
-          icon: <Youtube className="w-6 h-6 text-red-500" />
+          title: "YouTube-First Tools",
+          examples: "VidIQ, TubeSpanner",
+          strengths: "Great for YouTube SEO and cross-platform management.",
+          weaknesses: "TikTok features are often an afterthought. Shallow signal analysis.",
+          output: "YouTube strategies forced onto TikTok.",
+          icon: <Youtube className="w-6 h-6 text-red-400" />
         },
         {
-          title: "Category 4 — TikTok-Native AI Strategy",
-          examples: "(OwlSeer)",
-          strengths: "30+ TikTok-specific signals, AI trend prediction, data-driven script generation, automated reports.",
-          weaknesses: "TikTok only — not a multi-platform solution.",
-          output: "Personalized TikTok strategy from data to ready-to-shoot scripts.",
+          title: "TikTok-Native AI",
+          examples: "OwlSeer",
+          strengths: "30+ dedicated signals. Real-time trend prediction. Data-driven scripts.",
+          weaknesses: "Specialized only for TikTok (for now).",
+          output: "Ready-to-shoot scripts based on what's working now.",
           icon: <Zap className="w-6 h-6 text-[#1AAE82]" />
         }
       ]
     },
     matrix: {
-      title: "Feature Matrix",
+      title: "Capability Matrix",
       columns: ["Capability", "General AI", "Analytics Tools", "YouTube-First", "OwlSeer"],
       rows: [
-        { cap: "Script generation", vals: ["Generic text", "None", "None", "Data-driven, personalized"] },
-        { cap: "TikTok signal depth", vals: ["None", "Basic metrics", "Basic metrics", "30+ weighted signals"] },
-        { cap: "Trend prediction", vals: ["No real-time data", "Historical trends", "Trending lists", "AI velocity + competition"] },
-        { cap: "Posting schedule", vals: ["Generic advice", "Historical best times", "Generic best times", "Personalized heatmap"] },
-        { cap: "Content diagnosis", vals: ["Generic feedback", "Performance metrics", "Performance overview", "Signal-level detection"] },
-        { cap: "AI conversation", vals: ["Yes (no data)", "None", "None", "Yes (with account data)"] },
-        { cap: "Weekly reports", vals: ["None", "Manual export", "Some automation", "Automated + recommendations"] },
-        { cap: "Audience personalization", vals: ["None", "Limited", "Limited", "Deep (30+ signals)"] }
+        { cap: "Script Generation", vals: ["Generic Text", "—", "—", "Data-Driven"] },
+        { cap: "Signal Depth", vals: ["—", "Basic", "Basic", "30+ Signals"] },
+        { cap: "Trend Prediction", vals: ["—", "Historical", "Lists", "Velocity + Comp"] },
+        { cap: "Schedule", vals: ["Generic", "Historical", "Generic", "Heatmap"] },
+        { cap: "Diagnosis", vals: ["—", "Metrics", "Overview", "Signal-Level"] },
+        { cap: "AI Copilot", vals: ["Yes (No Data)", "—", "—", "Yes (With Data)"] },
+        { cap: "Reports", vals: ["—", "Manual", "Partial", "Automated"] },
+        { cap: "Personalization", vals: ["None", "Limited", "Limited", "Deep"] }
       ]
     },
     honest: {
-      title: "The Honest Take",
-      p1: "OwlSeer is not the right tool for everyone. If you primarily create for YouTube, VidIQ is better. If you need multi-platform analytics, TubeSpanner or Pentos cover more ground. If you want free brainstorming and editing, ChatGPT or Claude work well.",
-      p2: "OwlSeer's advantage is specific: it is the only tool that connects TikTok account data → signal analysis → trend prediction → script generation → scheduling in a single workflow. If TikTok is where you invest your content effort, this integration saves hours and produces better-targeted content.",
-      p3: "The trade-off is platform exclusivity. OwlSeer does one platform deeply, not many platforms broadly."
+      title: "The Honest Verdict",
+      p1: "OwlSeer isn't for everyone. If you're a YouTuber first, stick with VidIQ. If you just want free brainstorming, use ChatGPT.",
+      p2: "But if TikTok is your battleground, you need a specialized weapon. OwlSeer is the only tool that connects the dots between your data, current trends, and the scripts you write.",
+      p3: "We chose depth over breadth. We don't do everything — we do TikTok mastery."
     },
     boundary: {
-      note: "Data we use: Comparisons are based on publicly available product information as of February 2026. We represent competitor features in good faith. This is not a sponsored or affiliate comparison. Features evolve — verify directly with each tool."
+      note: "Transparency: Comparison based on public features as of Feb 2026. We respect our competitors; this is simply a guide to finding the right tool for your specific needs."
     },
     cta: {
-      title: "See the Difference in Action",
+      title: "Experience the Difference",
       primary: "Start Free Trial",
-      secondary: "Explore Demo"
+      secondary: "View Sample"
     }
   },
   zh: {
     hero: {
-      title: "TikTok 内容 AI 工具：全面对比",
-      lead: "从通用 AI (ChatGPT, Claude) 到专用工具 (OwlSeer, VidIQ)，本页面对比了 TikTok 内容创作的 AI 版图——每款工具的优势和不足。",
+      title: "TikTok AI 工具全景图",
+      lead: "从通用聊天机器人到专用增长引擎。了解通用 AI、分析工具和 TikTok 原生解决方案之间的权衡。",
       primaryCta: "开始免费试用",
       secondaryCta: "探索演示"
     },
-    tldr: "通用 AI 生成没有账号数据的文本。TikTok 分析工具提供没有内容生成的指标。OwlSeer 连接两者——通过 30+ 信号分析您的账号，并在脚本工作室网格中生成个性化脚本。此对比诚实地映射了这一版图。",
+    insight: {
+      title: "核心区别",
+      content: "市场是分裂的：通用 AI 能写文本但缺数据；分析工具由数据但不会写。OwlSeer 通过利用你的账户信号驱动内容生成，架起了这座桥梁。",
+    },
     landscape: {
-      title: "TikTok AI 工具版图",
+      title: "四大类别",
       categories: [
         {
-          title: "类别 1 — 通用 AI",
-          examples: "(ChatGPT, Claude, Gemini)",
-          strengths: "多功能文本生成、头脑风暴、编辑。",
-          weaknesses: "无法访问您的 TikTok 数据，无趋势感知，无受众个性化。",
-          output: "适合任何创作者的通用脚本——这意味着它们不针对任何人优化。",
-          icon: <Sparkles className="w-6 h-6 text-blue-500" />
+          title: "通用型 AI",
+          examples: "ChatGPT, Claude, Gemini",
+          strengths: "多功能文本生成、头脑风暴、润色。",
+          weaknesses: "对你的数据一无所知。无趋势感知。零个性化。",
+          output: "听起来像其他人的通用脚本。",
+          icon: <BrainCircuit className="w-6 h-6 text-blue-400" />
         },
         {
-          title: "类别 2 — TikTok 分析工具",
-          examples: "(TikTok Creator Tools, Pentos, Exolyt)",
-          strengths: "平台指标、受众人口统计、视频级分析。",
-          weaknesses: "有数据无建议，无脚本生成，无带时机的趋势预测。",
-          output: "没有策略的数字。",
-          icon: <BarChart2 className="w-6 h-6 text-purple-500" />
+          title: "TikTok 分析工具",
+          examples: "TikTok 原生, Pentos, Exolyt",
+          strengths: "原始指标、人口统计、视频级数据。",
+          weaknesses: "有数据无方向。没有内容生成或策略建议。",
+          output: "没有计划的表格和图表。",
+          icon: <BarChart2 className="w-6 h-6 text-purple-400" />
         },
         {
-          title: "类别 3 — YouTube 优先工具",
-          examples: "(VidIQ, TubeSpanner)",
-          strengths: "跨平台覆盖，YouTube SEO 专业知识。",
-          weaknesses: "TikTok 功能是次要的，信号深度有限，无 TikTok 专用脚本生成。",
-          output: "应用于不同平台的 YouTube 优化洞察。",
-          icon: <Youtube className="w-6 h-6 text-red-500" />
+          title: "YouTube 优先工具",
+          examples: "VidIQ, TubeSpanner",
+          strengths: "擅长 YouTube SEO 和跨平台管理。",
+          weaknesses: "TikTok 功能通常是事后补充。信号分析浅薄。",
+          output: "强加于 TikTok 的 YouTube 策略。",
+          icon: <Youtube className="w-6 h-6 text-red-400" />
         },
         {
-          title: "类别 4 — TikTok 原生 AI 策略",
-          examples: "(OwlSeer)",
-          strengths: "30+ TikTok 专用信号，AI 趋势预测，数据驱动脚本生成，自动化报告。",
-          weaknesses: "仅限 TikTok——不是多平台解决方案。",
-          output: "从数据到可拍摄脚本的个性化 TikTok 策略。",
+          title: "TikTok 原生 AI",
+          examples: "OwlSeer",
+          strengths: "30+ 专用信号。实时趋势预测。数据驱动脚本。",
+          weaknesses: "目前仅专注于 TikTok。",
+          output: "基于当前有效策略的可拍摄脚本。",
           icon: <Zap className="w-6 h-6 text-[#1AAE82]" />
         }
       ]
     },
     matrix: {
-      title: "功能矩阵",
+      title: "能力矩阵",
       columns: ["能力", "通用 AI", "分析工具", "YouTube 优先", "OwlSeer"],
       rows: [
-        { cap: "脚本生成", vals: ["通用文本", "无", "无", "数据驱动，个性化"] },
-        { cap: "TikTok 信号深度", vals: ["无", "基础指标", "基础指标", "30+ 加权信号"] },
-        { cap: "趋势预测", vals: ["无实时数据", "历史趋势", "趋势列表", "AI 速度 + 竞争"] },
-        { cap: "发布时间表", vals: ["通用建议", "历史最佳时间", "通用最佳时间", "个性化热力图"] },
-        { cap: "内容诊断", vals: ["通用反馈", "表现指标", "表现概览", "信号级问题检测"] },
-        { cap: "AI 对话", vals: ["是 (无数据)", "无", "无", "是 (带账号数据)"] },
-        { cap: "周报", vals: ["无", "手动导出", "部分自动化", "全自动 + 建议"] },
-        { cap: "受众个性化", vals: ["无", "有限", "有限", "深度 (30+ 信号)"] }
+        { cap: "脚本生成", vals: ["通用文本", "—", "—", "数据驱动"] },
+        { cap: "信号深度", vals: ["—", "基础", "基础", "30+ 信号"] },
+        { cap: "趋势预测", vals: ["—", "历史数据", "列表", "速度 + 竞争"] },
+        { cap: "发布排期", vals: ["通用", "历史数据", "通用", "热力图"] },
+        { cap: "问题诊断", vals: ["—", "指标", "概览", "信号级"] },
+        { cap: "AI Copilot", vals: ["是 (无数据)", "—", "—", "是 (带数据)"] },
+        { cap: "周报", vals: ["—", "手动", "部分", "全自动"] },
+        { cap: "个性化", vals: ["无", "有限", "有限", "深度"] }
       ]
     },
     honest: {
-      title: "诚实评价",
-      p1: "OwlSeer 并不适合所有人。如果您主要为 YouTube 创作，VidIQ 更好。如果您需要多平台分析，TubeSpanner 或 Pentos 覆盖面更广。如果您想要免费的头脑风暴和编辑，ChatGPT 或 Claude 很好用。",
-      p2: "OwlSeer 的优势是具体的：它是唯一在单一工作流中连接 TikTok 账号数据 → 信号分析 → 趋势预测 → 脚本生成 → 排期的工具。如果 TikTok 是您投入内容精力的地方，这种整合可以节省数小时并产出针对性更好的内容。",
-      p3: "权衡是平台排他性。OwlSeer 深度专注于一个平台，而不是广泛覆盖多个平台。"
+      title: "诚恳的结论",
+      p1: "OwlSeer 不适合所有人。如果你是 YouTube 优先，请坚持使用 VidIQ。如果你只想要免费的头脑风暴，请使用 ChatGPT。",
+      p2: "但如果 TikTok 是你的主战场，你需要一件专用武器。OwlSeer 是唯一能连接你的数据、当前趋势和你编写的脚本的工具。",
+      p3: "我们选择了深度而非广度。我们不做所有事——我们只做 TikTok 精通。"
     },
     boundary: {
-      note: "我们使用的数据：对比基于 2026 年 2 月的公开产品信息。我们真诚地展示竞品功能。这不是赞助或联盟对比。功能会演变——请直接向各工具核实。"
+      note: "透明度：对比基于 2026 年 2 月的公开功能。我们尊重竞争对手；这只是帮助你找到适合需求的工具的指南。"
     },
     cta: {
-      title: "看看实际差异",
+      title: "体验不同之处",
       primary: "开始免费试用",
-      secondary: "探索演示"
+      secondary: "查看演示"
     }
   }
 };
@@ -188,30 +196,34 @@ const LandscapeCard = ({ item, index }: { item: any, index: number }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow"
+      className="group rounded-[28px] border border-white/85 bg-white/75 p-6 shadow-[0_26px_76px_-54px_rgba(15,23,42,0.92)] backdrop-blur-xl transition-all duration-300 hover:border-emerald-200/80 dark:border-white/10 dark:bg-slate-900/58 dark:hover:border-emerald-500/30 sm:p-8"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <div className="p-3 bg-gray-50 dark:bg-slate-800 rounded-xl">
+      <div className="flex items-center gap-4 mb-6">
+        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-slate-700 transition-transform duration-300 group-hover:scale-105 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
           {item.icon}
         </div>
         <div>
-          <h3 className="font-bold text-gray-900 dark:text-white text-lg">{item.title}</h3>
-          <p className="text-sm text-gray-500">{item.examples}</p>
+          <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">{item.title}</h3>
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{item.examples}</p>
         </div>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div>
-          <span className="text-xs font-bold text-green-600 uppercase tracking-wider">Strengths</span>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{item.strengths}</p>
+          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+            <Check className="w-3 h-3" strokeWidth={3} /> Strengths
+          </span>
+          <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.strengths}</p>
         </div>
         <div>
-          <span className="text-xs font-bold text-red-500 uppercase tracking-wider">Weaknesses</span>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{item.weaknesses}</p>
+          <span className="text-xs font-bold text-red-500 dark:text-red-400 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+            <X className="w-3 h-3" strokeWidth={3} /> Weaknesses
+          </span>
+          <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.weaknesses}</p>
         </div>
-        <div className="pt-4 border-t border-gray-100 dark:border-slate-800">
-          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Output</span>
-          <p className="text-sm font-medium text-gray-900 dark:text-white mt-1 italic">"{item.output}"</p>
+        <div className="border-t border-slate-100 pt-5 dark:border-white/10">
+          <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">Output Reality</span>
+          <p className="text-sm font-medium italic text-slate-900 dark:text-white">"{item.output}"</p>
         </div>
       </div>
     </motion.div>
@@ -220,25 +232,27 @@ const LandscapeCard = ({ item, index }: { item: any, index: number }) => {
 
 const FeatureMatrix = ({ content }: { content: any }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm text-left">
-        <thead>
-          <tr className="bg-gray-50 dark:bg-slate-800/50">
+    <div className="overflow-x-auto rounded-[28px] border border-white/85 bg-white/75 shadow-[0_26px_76px_-54px_rgba(15,23,42,0.92)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/58">
+      <table className="w-full text-sm text-left border-collapse">
+        <thead className="bg-white/55 dark:bg-slate-900/35">
+          <tr>
             {content.columns.map((col: string, idx: number) => (
-              <th key={idx} className={`p-4 font-bold text-gray-900 dark:text-white whitespace-nowrap ${idx === 4 ? 'text-[#1AAE82]' : ''}`}>
+              <th key={idx} className={`p-5 text-base font-bold whitespace-nowrap text-slate-900 dark:text-white sm:p-6 ${idx === 4 ? 'text-[#1AAE82] bg-[#1AAE82]/8 rounded-t-2xl' : ''}`}>
                 {col}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
+        <tbody className="divide-y divide-slate-100 dark:divide-white/10">
           {content.rows.map((row: any, idx: number) => (
-            <tr key={idx} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/30 transition-colors">
-              <td className="p-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{row.cap}</td>
-              <td className="p-4 text-gray-600 dark:text-gray-400">{row.vals[0]}</td>
-              <td className="p-4 text-gray-600 dark:text-gray-400">{row.vals[1]}</td>
-              <td className="p-4 text-gray-600 dark:text-gray-400">{row.vals[2]}</td>
-              <td className="p-4 font-bold text-[#1AAE82] bg-[#1AAE82]/5">{row.vals[3]}</td>
+            <tr key={idx} className="group transition-colors hover:bg-slate-50/65 dark:hover:bg-slate-800/30">
+              <td className="p-5 font-bold whitespace-nowrap text-slate-900 dark:text-white sm:p-6">{row.cap}</td>
+              <td className="p-5 text-center font-medium text-slate-500 dark:text-slate-400 sm:p-6">{row.vals[0]}</td>
+              <td className="p-5 text-center font-medium text-slate-500 dark:text-slate-400 sm:p-6">{row.vals[1]}</td>
+              <td className="p-5 text-center font-medium text-slate-500 dark:text-slate-400 sm:p-6">{row.vals[2]}</td>
+              <td className="p-5 text-center font-bold text-[#1AAE82] bg-[#1AAE82]/8 shadow-[inset_0_0_20px_rgba(26,174,130,0.06)] group-last:rounded-b-2xl sm:p-6">
+                {row.vals[3]}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -256,7 +270,7 @@ export function AiToolsComparisonPage({ onNavigate, isDarkMode, setIsDarkMode }:
     title: 'AI TikTok Tools Compared | OwlSeer',
     description: 'Compare AI tools for TikTok: ChatGPT, analytics platforms, YouTube-first tools, and OwlSeer. Feature matrix with honest trade-offs.',
     keywords: ['ai tools tiktok comparison', 'chatgpt tiktok', 'tiktok ai tools', 'tiktok content ai'],
-    canonicalUrl: 'https://owlseer.com/compare/ai-tools-comparison'
+    canonicalUrl: 'https://owlseer.com/vs/ai-tools-comparison'
   };
 
   // Local Content
@@ -267,14 +281,14 @@ export function AiToolsComparisonPage({ onNavigate, isDarkMode, setIsDarkMode }:
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans selection:bg-[#1AAE82]/30 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-white dark:bg-[#020617] font-sans selection:bg-[#1AAE82]/30 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <SEO
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl('/vs/ai-tools-comparison', language)}
         lang={language}
-        alternates={generateAlternates('/compare/ai-tools-comparison')}
+        alternates={generateAlternates('/vs/ai-tools-comparison')}
       />
 
       <Navbar 
@@ -288,139 +302,129 @@ export function AiToolsComparisonPage({ onNavigate, isDarkMode, setIsDarkMode }:
         t={t}
       />
 
-      <main className="pt-[72px]">
-        {/* 1. HERO SECTION */}
-        <section className="relative pt-20 pb-20 overflow-hidden">
-           <div className="absolute inset-0 bg-white dark:bg-[#020617]">
-             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-             <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-[#1AAE82] opacity-20 blur-[100px]"></div>
-           </div>
-
-           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-             <motion.div
-               initial={{ opacity: 0, y: 20 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.6 }}
-             >
-               <h1 className="text-4xl md:text-6xl font-bold font-display text-gray-900 dark:text-white mb-6 leading-tight">
-                 {content.hero.title}
-               </h1>
-               <p className="text-xl text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
-                 {content.hero.lead}
-               </p>
-               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                 <button 
-                   onClick={() => handleNavigate('auth')}
-                   className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl shadow-lg shadow-[#1AAE82]/20 transition-all hover:-translate-y-1"
-                 >
-                   {content.hero.primaryCta}
-                 </button>
-                 <button 
-                   onClick={() => handleNavigate('landing')}
-                   className="px-8 py-4 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white font-bold rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700 transition-all"
-                 >
-                   {content.hero.secondaryCta}
-                 </button>
-               </div>
-             </motion.div>
-           </div>
-        </section>
-
-        {/* 2. TL;DR SECTION */}
-        <section className="py-12 bg-white dark:bg-slate-900 border-y border-gray-100 dark:border-slate-800">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-6 md:p-8 flex gap-4 items-start">
-              <div className="p-2 bg-[#1AAE82]/10 rounded-lg text-[#1AAE82] shrink-0 mt-1">
-                <Info className="w-5 h-5" />
+      <main className="relative bg-white pt-[72px] dark:bg-[#020617]">
+        <section className="perf-content-auto relative z-10 overflow-hidden pt-32 pb-40">
+          <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+            <div>
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-300/55 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1AAE82] backdrop-blur-md dark:border-emerald-500/35 dark:bg-slate-900/60">
+                <LayoutDashboard className="h-3.5 w-3.5" /> Market Analysis
               </div>
-              <div>
-                <h3 className="text-sm font-bold text-[#1AAE82] uppercase tracking-wider mb-2">TL;DR</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {content.tldr}
-                </p>
+              <h1 className="mx-auto mb-8 max-w-5xl font-display text-5xl font-bold leading-[1.1] text-gray-900 dark:text-white md:text-7xl lg:text-8xl">
+                {content.hero.title}
+              </h1>
+              <p className="mx-auto mb-12 max-w-3xl text-xl font-normal leading-relaxed text-gray-600 dark:text-gray-300 md:text-2xl">
+                {content.hero.lead}
+              </p>
+              <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-5">
+                <button
+                  onClick={() => handleNavigate('auth')}
+                  className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#059669] to-[#10b981] px-8 py-4 text-base font-semibold text-white shadow-[0_20px_48px_-30px_rgba(16,185,129,0.9)] transition-all duration-300 hover:from-[#047857] hover:to-[#059669] sm:text-lg"
+                >
+                  {content.hero.primaryCta}
+                </button>
+                <button
+                  onClick={() => handleNavigate('landing')}
+                  className="inline-flex items-center justify-center rounded-2xl border border-white/85 bg-white/75 px-8 py-4 text-base font-semibold text-gray-800 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.85)] backdrop-blur-md transition-all duration-300 hover:bg-white dark:border-white/12 dark:bg-slate-900/60 dark:text-white dark:hover:bg-slate-900/75 sm:text-lg"
+                >
+                  {content.hero.secondaryCta}
+                </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 3. LANDSCAPE SECTION */}
-        <section className="py-24 bg-[#F8FAFC] dark:bg-[#020617]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">
+        <div className="relative z-10 mt-[-1px] overflow-hidden bg-[#f6f7fb] dark:bg-[#070c14]">
+          {/* 2. CORE INSIGHT */}
+          <section className="perf-content-auto mx-auto mb-24 max-w-4xl px-4 pt-20 sm:mb-28 sm:px-6 lg:px-8 lg:pt-24">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-[30px] border border-white/85 bg-white/72 p-7 shadow-[0_30px_85px_-58px_rgba(15,23,42,0.95)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/60 sm:p-10"
+            >
+              <div className="absolute left-0 top-0 h-full w-1 bg-[#1AAE82]" />
+              <div className="flex items-start gap-5 sm:gap-6">
+                <div className="hidden shrink-0 rounded-xl bg-[#1AAE82]/10 p-3 text-[#1AAE82] md:block">
+                  <Info className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-[#1AAE82]">{content.insight.title}</h3>
+                  <p className="font-display text-lg leading-relaxed text-slate-800 dark:text-slate-200 sm:text-xl">
+                    {content.insight.content}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 3. LANDSCAPE SECTION */}
+          <section className="perf-content-auto mx-auto mb-24 max-w-7xl px-4 sm:mb-28 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center sm:mb-14">
+              <h2 className="font-display text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
                 {content.landscape.title}
               </h2>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
               {content.landscape.categories.map((cat: any, idx: number) => (
                 <LandscapeCard key={idx} item={cat} index={idx} />
               ))}
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* 4. MATRIX SECTION */}
-        <section className="py-24 bg-white dark:bg-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">
+          {/* 4. MATRIX SECTION */}
+          <section className="perf-content-auto mx-auto mb-24 max-w-7xl px-4 sm:mb-28 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center sm:mb-14">
+              <h2 className="font-display text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
                 {content.matrix.title}
               </h2>
             </div>
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-xl overflow-hidden">
-              <FeatureMatrix content={content.matrix} />
+            <FeatureMatrix content={content.matrix} />
+          </section>
+
+          {/* 5. HONEST TAKE SECTION */}
+          <section className="perf-content-auto mx-auto mb-24 max-w-6xl px-4 sm:mb-28 sm:px-6 lg:px-8">
+            <div className="relative overflow-hidden rounded-[34px] border border-white/85 bg-gradient-to-br from-white/88 via-white/72 to-emerald-50/65 p-8 text-center shadow-[0_34px_95px_-62px_rgba(15,23,42,0.95)] backdrop-blur-xl dark:border-white/10 dark:from-slate-900/80 dark:via-slate-900/65 dark:to-emerald-900/15 md:p-14">
+              <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-transparent via-emerald-300/80 to-transparent dark:via-emerald-500/45" />
+              <h2 className="mb-8 font-display text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
+                {content.honest.title}
+              </h2>
+              <div className="mx-auto max-w-3xl space-y-6 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg md:text-xl md:font-light">
+                <p>{content.honest.p1}</p>
+                <p className="font-medium text-slate-900 dark:text-white">{content.honest.p2}</p>
+                <p>{content.honest.p3}</p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* 5. HONEST TAKE SECTION */}
-        <section className="py-24 bg-gray-50 dark:bg-slate-800/30">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-8">
-              {content.honest.title}
-            </h2>
-            <div className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              <p>{content.honest.p1}</p>
-              <p className="font-medium text-gray-900 dark:text-white">{content.honest.p2}</p>
-              <p>{content.honest.p3}</p>
+          {/* 6. BOUNDARY & CTA */}
+          <section className="perf-content-auto bg-gradient-to-b from-[#f6f7fb] via-[#ecfaf3] to-white px-4 pb-24 text-center dark:from-[#070c14] dark:via-[#0b1721] dark:to-slate-900 sm:px-6 sm:pb-28 lg:px-8">
+            <div className="mx-auto max-w-4xl">
+              <div className="mb-12 inline-block rounded-2xl border border-white/85 bg-white/80 p-5 text-left shadow-[0_20px_44px_-34px_rgba(15,23,42,0.9)] backdrop-blur-md dark:border-white/10 dark:bg-slate-900/62">
+                <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                  {content.boundary.note}
+                </p>
+              </div>
+
+              <h2 className="mb-8 font-display text-4xl font-bold text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
+                {content.cta.title}
+              </h2>
+              <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-5">
+                <button
+                  onClick={() => handleNavigate('auth')}
+                  className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#059669] to-[#10b981] px-10 py-4 text-base font-semibold text-white shadow-[0_22px_50px_-32px_rgba(16,185,129,0.9)] transition-all duration-300 hover:from-[#047857] hover:to-[#059669] sm:text-lg"
+                >
+                  {content.cta.primary}
+                </button>
+                <button
+                  onClick={() => handleNavigate('landing')}
+                  className="inline-flex items-center justify-center rounded-2xl border border-white/85 bg-white/82 px-10 py-4 text-base font-semibold text-slate-800 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.85)] backdrop-blur-md transition-all duration-300 hover:bg-white dark:border-white/12 dark:bg-slate-900/62 dark:text-white dark:hover:bg-slate-900/75 sm:text-lg"
+                >
+                  {content.cta.secondary}
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
-
-        {/* 6. BOUNDARY & CTA */}
-        <section className="py-24 bg-[#111827] text-white overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#1AAE82]/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]" />
-
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-12 text-left">
-              <h4 className="text-[#1AAE82] font-bold mb-2 text-sm uppercase tracking-wider">Transparency Note</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {content.boundary.note}
-              </p>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold font-display mb-8">
-              {content.cta.title}
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => handleNavigate('auth')}
-                className="px-10 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl shadow-lg shadow-[#1AAE82]/30 transition-all hover:-translate-y-1"
-              >
-                {content.cta.primary}
-              </button>
-              <button 
-                onClick={() => handleNavigate('landing')}
-                className="px-10 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all"
-              >
-                {content.cta.secondary}
-              </button>
-            </div>
-          </div>
-        </section>
-
+          </section>
+        </div>
       </main>
 
       <Footer t={t.footer} onNavigate={handleNavigate} />

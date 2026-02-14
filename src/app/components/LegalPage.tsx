@@ -21,7 +21,7 @@ import { SecurityPolicy } from './legal/SecurityPolicy';
 import { CookiePolicy } from './legal/CookiePolicy';
 import { Shield, FileText, Lock, Cookie, ChevronRight } from 'lucide-react';
 import { SEO } from './SEO';
-import { seoConfig, generateAlternates } from '../data/seoConfig';
+import { getCanonicalUrl, seoConfig, generateAlternates } from '../data/seoConfig';
 
 export type LegalSection = 'privacy' | 'terms' | 'security' | 'cookies';
 
@@ -84,7 +84,7 @@ export function LegalPage({ onNavigate, activeSection, isDarkMode, setIsDarkMode
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl(`/${activeSection}`, language)}
         lang={language}
         alternates={generateAlternates(`/${activeSection}`)}
       />

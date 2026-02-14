@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { usePerformance, useLanguage } from '../../contexts';
+import { addLanguagePrefix, type Language, usePerformance } from '../../contexts';
 import { 
   ArrowRight, 
   ChevronDown,
@@ -9,7 +9,7 @@ import {
   Sun,
   Moon,
   Globe,
-  PlayCircle
+  CirclePlay
 } from 'lucide-react';
 import { OwlSeerLogo } from '../OwlSeerLogo';
 import { languages } from '../../data/translations';
@@ -18,8 +18,8 @@ interface NavbarProps {
   onTrySample: () => void;
   onSignUp: () => void;
   onNavigate?: (page: string) => void;
-  language: string;
-  setLanguage: (lang: any) => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
   isDarkMode: boolean;
   setIsDarkMode: (isDark: boolean) => void;
   t: any;
@@ -40,31 +40,34 @@ export const Navbar = memo(({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const timeoutRef = React.useRef<any>(null);
+  const liquidFilterId = 'owlseer-navbar-liquid-distort';
+  const [supportsSvgBackdropFilter, setSupportsSvgBackdropFilter] = useState(false);
+  const capsuleRadiusClass = 'rounded-full';
+  const panelRadiusClass = 'rounded-[20px]';
+  const nav = t?.nav || {};
+  const navLinks = nav.links || {};
+  const navDesc = nav.desc || {};
+  const navActions = nav.actions || {};
+  const navDarkMode = nav.darkMode || {};
 
   const handleNav = (page: string) => {
     if (onNavigate) {
-      // Map legacy page names to routes for internal navigation
-      let route = page;
-      if (page === 'landing') {
-        route = language === 'zh' ? '/zh' : '/';
-      } else if (!page.startsWith('/')) {
-        const prefix = language === 'zh' ? '/zh' : '';
-        route = `${prefix}/${page}`;
-      }
-      onNavigate(route);
+      onNavigate(page);
     } else {
       // Fallback for window globals
       if (page === 'pricing') (window as any).navigateToPricing?.();
       if (page === 'features') (window as any).navigateToFeatures?.();
       if (page === 'how-it-works') (window as any).navigateToHowItWorks?.();
       if (page === 'blog') (window as any).navigateToBlog?.();
+      if (page === 'trends-hub') window.location.href = addLanguagePrefix('/social/trends', language);
+      if (page === 'tools') window.location.href = addLanguagePrefix('/social/tools', language);
        if (page === 'faq') (window as any).navigateToFAQ?.();
        if (page === 'contact') (window as any).navigateToContact?.();
        if (page === 'security') (window as any).navigateToSecurity?.();
        if (page === 'privacy') (window as any).navigateToPrivacy?.();
        if (page === 'terms') (window as any).navigateToTerms?.();
        if (page === 'cookies') (window as any).navigateToCookies?.();
-       if (page === 'landing') window.location.href = language === 'zh' ? '/zh' : '/'; 
+       if (page === 'landing') window.location.href = addLanguagePrefix('/', language); 
     }
     setActiveDropdown(null);
     setMobileMenuOpen(false);
@@ -75,6 +78,30 @@ export const Navbar = memo(({
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!enableBlur || typeof window === 'undefined' || typeof CSS === 'undefined') {
+      setSupportsSvgBackdropFilter(false);
+      return;
+    }
+
+    const supportsBackdrop =
+      CSS.supports('backdrop-filter: blur(1px)') ||
+      CSS.supports('-webkit-backdrop-filter: blur(1px)');
+    if (!supportsBackdrop) {
+      setSupportsSvgBackdropFilter(false);
+      return;
+    }
+
+    const userAgent = window.navigator.userAgent;
+    const isFirefox = /firefox/i.test(userAgent);
+    const isSafari = /^((?!chrome|chromium|android).)*safari/i.test(userAgent);
+    const supportsSvgSyntax =
+      CSS.supports('backdrop-filter', `url("#${liquidFilterId}") blur(2px)`) ||
+      CSS.supports('-webkit-backdrop-filter', `url("#${liquidFilterId}") blur(2px)`);
+
+    setSupportsSvgBackdropFilter(Boolean(supportsSvgSyntax && !isFirefox && !isSafari));
+  }, [enableBlur, liquidFilterId]);
 
   const handleMouseEnter = (name: string) => {
     if (timeoutRef.current) {
@@ -97,29 +124,129 @@ export const Navbar = memo(({
     }
   };
 
-  // Performance-aware background classes
-  const navBgClass = useMemo(() => {
-    const base = "border-b transition-all duration-300";
-      
-    // Liquid glass effect
-    return enableBlur
-      ? `${base} bg-white/10 dark:bg-slate-900/20 backdrop-blur-xl border-white/20 dark:border-white/10 supports-[backdrop-filter]:bg-white/10`
-      : `${base} bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800`;
-  }, [enableBlur]);
+  const liquidDisplacementScale = scrolled ? 10 : 8;
+
+  const navShellClass = useMemo(() => {
+    const base =
+      `relative overflow-visible ${capsuleRadiusClass} border-[0.5px] transition-all duration-300`;
+    if (enableBlur) {
+      return scrolled
+        ? `${base} border-white/52 bg-white/42 shadow-[0_24px_62px_-38px_rgba(15,23,42,0.48),inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-1px_0_rgba(255,255,255,0.22)] dark:border-white/16 dark:bg-[#0b1220]/46 dark:shadow-[0_28px_72px_-40px_rgba(2,6,23,0.84),inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-1px_0_rgba(255,255,255,0.05)]`
+        : `${base} border-white/44 bg-white/30 shadow-[0_20px_54px_-36px_rgba(15,23,42,0.4),inset_0_1px_0_rgba(255,255,255,0.7),inset_0_-1px_0_rgba(255,255,255,0.18)] dark:border-white/14 dark:bg-[#0b1220]/36 dark:shadow-[0_24px_62px_-38px_rgba(2,6,23,0.76),inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(255,255,255,0.04)]`;
+    }
+    return scrolled
+      ? `${base} border-black/10 bg-white/94 shadow-[0_20px_52px_-36px_rgba(15,23,42,0.38)] dark:border-white/18 dark:bg-slate-950/90`
+      : `${base} border-black/8 bg-white/92 shadow-[0_16px_42px_-32px_rgba(15,23,42,0.3)] dark:border-white/16 dark:bg-slate-950/84`;
+  }, [capsuleRadiusClass, enableBlur, scrolled]);
+
+  const shellBackdropStyle = useMemo<React.CSSProperties | undefined>(() => {
+    if (!enableBlur) return undefined;
+    const filterValue = supportsSvgBackdropFilter
+      ? `url("#${liquidFilterId}") blur(${scrolled ? 14 : 12}px) saturate(${scrolled ? 168 : 158}%) brightness(1.03)`
+      : `blur(${scrolled ? 17 : 15}px) saturate(${scrolled ? 165 : 155}%) brightness(1.03)`;
+    return {
+      backdropFilter: filterValue,
+      WebkitBackdropFilter: filterValue
+    };
+  }, [enableBlur, liquidFilterId, scrolled, supportsSvgBackdropFilter]);
+
+  const navItemBaseClass =
+    `${capsuleRadiusClass} inline-flex h-9 items-center gap-1.5 px-3.5 text-base font-bold transition-[background-color,color,box-shadow] duration-300`;
+  const navItemActiveClass =
+    "bg-white/62 dark:bg-white/16 text-[#15956F] shadow-[inset_0_1px_0_rgba(255,255,255,0.88),0_10px_26px_-18px_rgba(15,23,42,0.5)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.24),0_12px_28px_-20px_rgba(2,6,23,0.9)]";
+  const navItemIdleClass =
+    "text-gray-700 dark:text-slate-100 hover:text-[#15956F] hover:bg-white/46 dark:hover:bg-white/10";
+  const navIconButtonBaseClass =
+    `${capsuleRadiusClass} inline-flex h-9 w-9 items-center justify-center transition-[background-color,color,box-shadow] duration-300`;
+  const navTextButtonBaseClass =
+    `${capsuleRadiusClass} inline-flex h-9 items-center justify-center px-5 text-base font-bold transition-[background-color,color,box-shadow] duration-300 whitespace-nowrap`;
+
+  const dropdownPanelClass = useMemo(() => {
+    if (enableBlur) {
+      return `absolute top-full left-1/2 -translate-x-1/2 mt-3 ${panelRadiusClass} border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 p-6 overflow-hidden shadow-[0_30px_80px_-44px_rgba(15,23,42,0.46)] dark:shadow-[0_34px_90px_-48px_rgba(2,6,23,0.86)] ring-1 ring-black/5 dark:ring-white/10 z-10`;
+    }
+    return `absolute top-full left-1/2 -translate-x-1/2 mt-2 ${panelRadiusClass} border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 overflow-hidden shadow-2xl ring-1 ring-black/5 z-10`;
+  }, [enableBlur, panelRadiusClass]);
+
+  const mobilePanelClass = useMemo(() => {
+    if (enableBlur) {
+      return `md:hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 ${panelRadiusClass} overflow-hidden shadow-[0_30px_84px_-46px_rgba(15,23,42,0.48)] dark:shadow-[0_32px_88px_-48px_rgba(2,6,23,0.84)]`;
+    }
+    return `md:hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 ${panelRadiusClass} overflow-hidden shadow-lg shadow-gray-200/20 dark:shadow-black/20`;
+  }, [enableBlur, panelRadiusClass]);
+
+  const productDropdownPositionClass = "left-0 translate-x-0 origin-top-left";
+  const solutionsDropdownPositionClass = "left-1/2 -translate-x-1/2 origin-top";
+  const resourcesDropdownPositionClass = "right-0 left-auto translate-x-0 origin-top-right";
+  const languageDropdownPositionClass = "right-0 left-auto translate-x-0 origin-top-right";
 
   return (
     <motion.nav
       initial={reduceMotion ? false : { y: -100 }}
       animate={{ y: 0 }}
       transition={reduceMotion ? { duration: 0 } : undefined}
-      className={`fixed top-0 left-0 w-full z-50 ${navBgClass}`}
+      className="fixed inset-x-0 top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-3 lg:px-6"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative flex md:grid md:grid-cols-[1fr_auto_1fr] justify-between items-center h-[72px]">
+      <svg className="pointer-events-none absolute h-0 w-0 opacity-0" aria-hidden>
+        <defs>
+          <filter id={liquidFilterId} x="-20%" y="-20%" width="140%" height="140%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.007 0.025" numOctaves="3" seed="23" result="noise">
+              {!reduceMotion && (
+                <animate
+                  attributeName="baseFrequency"
+                  dur="22s"
+                  values="0.007 0.025;0.006 0.021;0.008 0.028;0.007 0.025"
+                  repeatCount="indefinite"
+                />
+              )}
+            </feTurbulence>
+            <feGaussianBlur in="noise" stdDeviation="0.35" result="softNoise" />
+            <feDisplacementMap in="SourceGraphic" in2="softNoise" scale={liquidDisplacementScale} xChannelSelector="R" yChannelSelector="G">
+              {!reduceMotion && supportsSvgBackdropFilter && (
+                <animate
+                  attributeName="scale"
+                  dur="14s"
+                  values={`${liquidDisplacementScale};${liquidDisplacementScale + 2};${liquidDisplacementScale}`}
+                  repeatCount="indefinite"
+                />
+              )}
+            </feDisplacementMap>
+          </filter>
+        </defs>
+      </svg>
+
+      <div className={`mx-auto max-w-7xl ${navShellClass}`} style={shellBackdropStyle}>
+        <div
+          className={`pointer-events-none absolute inset-0 ${capsuleRadiusClass}`}
+          style={{
+            background: isDarkMode
+              ? 'radial-gradient(190px 82px at 50% -12%, rgba(226,232,240,0.2) 0%, rgba(148,163,184,0.1) 34%, rgba(148,163,184,0.03) 58%, rgba(15,23,42,0) 80%), linear-gradient(116deg, rgba(148,163,184,0.14) 0%, rgba(15,23,42,0.2) 46%, rgba(226,232,240,0.1) 100%)'
+              : 'radial-gradient(220px 96px at 50% -12%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.34) 34%, rgba(255,255,255,0.12) 57%, rgba(255,255,255,0) 78%), linear-gradient(116deg, rgba(255,255,255,0.56) 0%, rgba(255,255,255,0.2) 46%, rgba(255,255,255,0.44) 100%)'
+          }}
+        />
+        <div className={`pointer-events-none absolute inset-[1px] ${capsuleRadiusClass} border border-white/60 dark:border-white/12`} />
+        <div className="pointer-events-none absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent dark:via-white/20" />
+        <div
+          className={`pointer-events-none absolute inset-[1px] ${capsuleRadiusClass} opacity-[0.08] mix-blend-soft-light dark:opacity-[0.06]`}
+          style={{
+            backgroundImage: 'radial-gradient(rgba(255,255,255,0.92) 0.65px, transparent 0.75px)',
+            backgroundSize: '2.6px 2.6px'
+          }}
+        />
+        {enableBlur && !reduceMotion && (
+          <motion.div
+            className="pointer-events-none absolute -top-14 h-20 w-48 rounded-full bg-white/45 blur-3xl dark:bg-sky-100/12"
+            animate={{ x: [0, 160, 0], opacity: [0.08, 0.22, 0.08] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          />
+        )}
+
+        <div className="relative px-3 sm:px-4 lg:px-5">
+          <div className="relative flex h-[64px] items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]">
           {/* Logo */}
           <div className="flex items-center justify-start">
             <a 
-              href={language === 'zh' ? '/zh' : '/'}
+              href={addLanguagePrefix('/', language)}
               className="flex items-center gap-2 cursor-pointer" 
               onClick={(e) => { e.preventDefault(); handleNav('landing'); }}
             >
@@ -128,19 +255,15 @@ export const Navbar = memo(({
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center justify-center gap-2">
+          <div className="hidden md:flex items-center justify-center gap-3">
             
             {/* Product Mega Menu */}
             <div className="relative group">
               <button 
-                className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
-                  activeDropdown === 'product' 
-                    ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
-                }`}
+                className={`${navItemBaseClass} ${activeDropdown === 'product' ? navItemActiveClass : navItemIdleClass}`}
                 onClick={() => toggleDropdown('product')}
               >
-                Product <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'product' ? 'rotate-180' : ''}`} />
+                {t.product} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'product' ? 'rotate-180' : ''}`} />
               </button>
               
               <AnimatePresence>
@@ -152,53 +275,53 @@ export const Navbar = memo(({
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 15, scale: 0.98 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-6 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
+                  className={`${dropdownPanelClass} ${productDropdownPositionClass} w-[600px]`}
                 >
                   <div className="grid grid-cols-2 gap-8">
                         {/* Platform Column */}
                         <div className="space-y-4">
-                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">PLATFORM</div>
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{nav.platform || "Platform"}</div>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="block group/item">
                             <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors">{t.howItWorks}</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Get started in 3 steps</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{navDesc.howItWorks || "Get started in 3 steps"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('methodology'); }} className="block group/item">
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors">{t.methodology}</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Our 5-step AI process</div>
+                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors">{t.methodology || "Methodology"}</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{navDesc.methodology || "Our 5-step AI process"}</div>
                           </a>
-                          <a href={language === 'zh' ? '/zh/signals' : '/signals'} onClick={(e) => { e.preventDefault(); handleNav('signals'); }} className="block group/item">
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors">30+ Signals</div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">What we track</div>
+                          <a href={addLanguagePrefix('/social/signals', language)} onClick={(e) => { e.preventDefault(); handleNav('signals'); }} className="block group/item">
+                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors">{navLinks.signals || "30+ Signals"}</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{navDesc.signals || "What we track"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="block group/item">
-                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors flex items-center gap-1">Interactive Demo <PlayCircle className="w-3 h-3" /></div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">See OwlSeer in action</div>
+                            <div className="text-sm font-bold text-gray-900 dark:text-white group-hover/item:text-[#1AAE82] transition-colors flex items-center gap-1">{navLinks.interactiveSample || "Interactive Sample"} <CirclePlay className="w-3 h-3" /></div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{navDesc.interactiveSample || "See OwlSeer in action"}</div>
                           </a>
                         </div>
 
                         {/* Use Cases Column */}
                         <div className="space-y-4">
-                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">USE CASES</div>
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{nav.useCases || "Use Cases"}</div>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/trend-prediction'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Trend Prediction</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.trendPrediction || "Trend Prediction"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/content-diagnosis'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Content Diagnosis</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.contentDiagnosis || "Content Diagnosis"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/script-generation'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Script Generation</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.scriptGeneration || "Script Generation"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/posting-schedule'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Posting Schedule</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.postingSchedule || "Posting Schedule"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/hashtag-strategy'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Hashtag Strategy</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.hashtagStrategy || "Hashtag Strategy"}</div>
                           </a>
                           
                           <div className="pt-2 border-t border-gray-100 dark:border-slate-800">
                              <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="block group/item">
-                                <div className="text-sm font-bold text-[#1AAE82] group-hover/item:underline flex items-center gap-1">TRY THE DEMO <ArrowRight className="w-3 h-3" /></div>
-                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">See it on real data</div>
+                                <div className="text-sm font-bold text-[#1AAE82] group-hover/item:underline flex items-center gap-1">{navActions.trySampleCta || "TRY THE SAMPLE"} <ArrowRight className="w-3 h-3" /></div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{navDesc.trySample || "See it on real data"}</div>
                              </a>
                           </div>
                         </div>
@@ -212,14 +335,10 @@ export const Navbar = memo(({
             {/* Solutions Mega Menu */}
             <div className="relative group">
               <button 
-                className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
-                  activeDropdown === 'solutions' 
-                    ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
-                }`}
+                className={`${navItemBaseClass} ${activeDropdown === 'solutions' ? navItemActiveClass : navItemIdleClass}`}
                 onClick={() => toggleDropdown('solutions')}
               >
-                Solutions <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
+                {nav.solutions || "Solutions"} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
               </button>
               
               <AnimatePresence>
@@ -231,26 +350,40 @@ export const Navbar = memo(({
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 15, scale: 0.98 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 w-[500px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-6 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
+                  className={`${dropdownPanelClass} ${solutionsDropdownPositionClass} w-[560px]`}
                 >
                   <div className="grid grid-cols-2 gap-8">
                         {/* By Role Column */}
                         <div className="space-y-4">
-                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">BY ROLE</div>
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{nav.byRole || "By Role"}</div>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/content-creators'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Content Creators</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.contentCreators || "Content Creators"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/local-business'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Local Business</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.localBusiness || "Local Business"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/agencies'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Agencies</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.agencies || "Agencies"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/brands'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Brands</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.brands || "Brands"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/ecommerce'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">E-commerce Sellers</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.ecommerceSellers || "E-commerce Sellers"}</div>
+                          </a>
+                        </div>
+
+                        {/* Compare Column */}
+                        <div className="space-y-4">
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{(t?.compare as string) || (language === 'zh' ? '对比' : 'Compare')}</div>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('compare/ai-tools-comparison'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareAiTools || "AI Tools Comparison"}</div>
+                          </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('compare/tubespanner'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareTubeSpanner || "OwlSeer vs TubeSpanner"}</div>
+                          </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('compare/owlseer-vs-vidiq'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareVidIQ || "OwlSeer vs VidIQ"}</div>
                           </a>
                         </div>
                       </div>
@@ -261,7 +394,7 @@ export const Navbar = memo(({
             </div>
 
             <button 
-              className="text-sm font-medium text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-all px-4 py-2 rounded-full"
+              className={`${navItemBaseClass} ${navItemIdleClass}`}
               onClick={() => handleNav('pricing')}
             >
               {t.pricing}
@@ -272,11 +405,7 @@ export const Navbar = memo(({
               className="relative group" 
             >
               <button 
-                className={`text-sm font-medium transition-all px-4 py-2 rounded-full flex items-center gap-1.5 ${
-                  activeDropdown === 'resources' 
-                    ? 'bg-gray-100 dark:bg-slate-800 text-[#1AAE82]' 
-                    : 'text-gray-600 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-800/50'
-                }`}
+                className={`${navItemBaseClass} ${activeDropdown === 'resources' ? navItemActiveClass : navItemIdleClass}`}
                 onClick={() => toggleDropdown('resources')}
               >
                 {t.resources} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'resources' ? 'rotate-180' : ''}`} />
@@ -294,40 +423,49 @@ export const Navbar = memo(({
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 15, scale: 0.98 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 w-[500px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 p-6 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
+                  className={`${dropdownPanelClass} ${resourcesDropdownPositionClass} w-[500px]`}
                 >
                   <div className="grid grid-cols-2 gap-8">
                         {/* Learn Column */}
                         <div className="space-y-4">
-                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">LEARN</div>
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{nav.learn || "Learn"}</div>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Blog</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{t.blog}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('guides'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Guides</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{t.guides}</div>
+                          </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('trends-hub'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.trends || "Trends"}</div>
+                          </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('tools'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.tools || "Tools"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('glossary'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Glossary</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{nav.glossary || "Glossary"}</div>
                           </a>
                         </div>
 
                         {/* Trust & Support Column */}
                         <div className="space-y-4">
-                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">TRUST & SUPPORT</div>
+                          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{nav.trustSupport || "Trust & Support"}</div>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Privacy</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.privacy || "Privacy"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('terms'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Terms</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.terms || "Terms"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Cookies</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.cookies || "Cookies"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">Security</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.security || "Security"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">FAQ</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{t.faq}</div>
+                          </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.contact || "Contact"}</div>
                           </a>
                         </div>
                       </div>
@@ -336,85 +474,82 @@ export const Navbar = memo(({
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Language Switcher */}
+            <div className="relative group">
+              <button
+                className={`${navIconButtonBaseClass} text-gray-700 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.88)] dark:text-slate-100 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
+                onClick={() => toggleDropdown('language')}
+              >
+                <Globe className="w-5 h-5" />
+              </button>
+
+              <AnimatePresence>
+                {activeDropdown === 'language' && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-0"
+                      onClick={() => setActiveDropdown(null)}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className={`${dropdownPanelClass} ${languageDropdownPositionClass} w-48 p-2`}
+                    >
+                      <div className="flex flex-col">
+                        {languages.map((lang) => (
+                          <button
+                            key={lang.code}
+                            onClick={() => {
+                              setLanguage(lang.code as Language);
+                              setActiveDropdown(null);
+                            }}
+                            className={`px-4 py-2.5 text-sm text-left rounded-lg transition-colors flex items-center justify-between group ${
+                              language === (lang.code as Language)
+                                ? 'bg-emerald-50 dark:bg-emerald-900/20 text-[#1AAE82] font-semibold'
+                                : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800'
+                            }`}
+                          >
+                            {lang.name}
+                            {language === (lang.code as Language) && <div className="w-1.5 h-1.5 rounded-full bg-[#1AAE82]" />}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className={`${navIconButtonBaseClass} text-gray-700 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.88)] dark:text-slate-100 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
+              title={navDarkMode.toggle || "Toggle Dark Mode"}
+              aria-label={navDarkMode.toggle || "Toggle Dark Mode"}
+            >
+              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
           </div>
 
         {/* Actions */}
         <div className="hidden md:flex items-center justify-end gap-3">
-          {/* Language Switcher */}
-          <div 
-            className="relative group" 
-          >
-            <button 
-              className="p-2.5 text-gray-500 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
-              onClick={() => toggleDropdown('language')}
-            >
-              <Globe className="w-5 h-5" />
-            </button>
-
-            <AnimatePresence>
-              {activeDropdown === 'language' && (
-                <>
-                  <div 
-                    className="fixed inset-0 z-0" 
-                    onClick={() => setActiveDropdown(null)}
-                  />
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full right-0 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-gray-100 dark:border-slate-800 p-2 mt-2 overflow-hidden ring-1 ring-black/5 z-10"
-                  >
-                    <div className="flex flex-col">
-                      {languages.map((lang) => (
-                        <button
-                          key={lang.code}
-                          onClick={() => {
-                            setLanguage(lang.code);
-                            setActiveDropdown(null);
-                          }}
-                          className={`px-4 py-2.5 text-sm text-left rounded-lg transition-colors flex items-center justify-between group ${
-                            language === lang.code 
-                              ? 'bg-emerald-50 dark:bg-emerald-900/20 text-[#1AAE82] font-semibold' 
-                              : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800'
-                          }`}
-                        >
-                          {lang.name}
-                          {language === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-[#1AAE82]" />}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Dark Mode Toggle */}
           <button 
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2.5 text-gray-500 dark:text-white hover:text-[#1AAE82] dark:hover:text-[#1AAE82] transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
-            title="Toggle Dark Mode"
-          >
-            {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
-
-          <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-2" />
-
-          <button 
-            className="text-sm font-semibold text-gray-700 dark:text-white hover:text-[#1AAE82] transition-colors px-4 py-2 whitespace-nowrap"
+            className={`${navTextButtonBaseClass} text-gray-700 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] dark:text-slate-100 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
             onClick={onTrySample}
           >
-            Try Sample
+            {navActions.trySample || "Try Sample"}
           </button>
           
           <button 
             onClick={onSignUp}
-            className="group relative px-6 py-2.5 bg-[#111827] dark:bg-white text-white dark:text-[#111827] text-sm font-bold rounded-full overflow-hidden shadow-lg shadow-gray-200 dark:shadow-none hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
+            className={`group relative overflow-hidden ${navTextButtonBaseClass} border border-white/64 bg-white/56 font-bold text-[#0F172A] shadow-[0_12px_30px_-20px_rgba(15,23,42,0.55),inset_0_1px_0_rgba(255,255,255,0.92)] hover:shadow-[0_18px_36px_-22px_rgba(16,185,129,0.4),inset_0_1px_0_rgba(255,255,255,0.96)] dark:border-white/16 dark:bg-white/12 dark:text-white dark:shadow-[0_14px_32px_-22px_rgba(2,6,23,0.88),inset_0_1px_0_rgba(255,255,255,0.18)]`}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1AAE82] to-[#15956F] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1AAE82]/90 to-[#15956F]/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             <span className="relative flex items-center gap-2">
-              Start Free <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              {navActions.startFree || "Start Free"} <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </button>
         </div>
@@ -423,12 +558,28 @@ export const Navbar = memo(({
           <div className="md:hidden flex items-center gap-3">
             <button 
                 onClick={onSignUp}
-                className="px-3 py-1.5 bg-[#1AAE82] text-white text-xs font-bold rounded-full shadow-sm"
+                className={`${capsuleRadiusClass} inline-flex h-8 items-center justify-center border border-white/62 bg-white/58 px-3.5 text-sm font-bold text-[#0F172A] shadow-[0_10px_22px_-16px_rgba(15,23,42,0.45),inset_0_1px_0_rgba(255,255,255,0.9)] transition-[background-color,color,box-shadow] duration-300 dark:border-white/16 dark:bg-white/12 dark:text-white dark:shadow-[0_12px_24px_-16px_rgba(2,6,23,0.86),inset_0_1px_0_rgba(255,255,255,0.2)]`}
               >
-                Start Free
+                {navActions.startFree || "Start Free"}
+            </button>
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className={`${capsuleRadiusClass} inline-flex h-8 w-8 items-center justify-center text-gray-700 transition-[background-color,color,box-shadow] duration-300 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.86)] dark:text-gray-200 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
+              title={
+                isDarkMode
+                  ? (navDarkMode.switchToLight || 'Switch to Light Mode')
+                  : (navDarkMode.switchToDark || 'Switch to Dark Mode')
+              }
+              aria-label={
+                isDarkMode
+                  ? (navDarkMode.switchToLight || 'Switch to Light Mode')
+                  : (navDarkMode.switchToDark || 'Switch to Dark Mode')
+              }
+            >
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <button 
-              className="p-2 text-gray-600 dark:text-gray-300"
+              className={`${capsuleRadiusClass} inline-flex h-8 w-8 items-center justify-center text-gray-700 transition-[background-color,color,box-shadow] duration-300 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.86)] dark:text-gray-200 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X /> : <Menu />}
@@ -444,7 +595,7 @@ export const Navbar = memo(({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-slate-900 border-x border-b border-gray-100 dark:border-slate-800 rounded-b-2xl overflow-hidden absolute top-full left-[-1px] right-[-1px] shadow-lg shadow-gray-200/20 dark:shadow-black/20"
+            className={mobilePanelClass}
           >
             <div className="px-4 py-6 space-y-4 h-[calc(100vh-120px)] overflow-y-auto pb-24">
               {/* Product Section */}
@@ -466,17 +617,17 @@ export const Navbar = memo(({
                     >
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('how-it-works'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.howItWorks}</a>
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('methodology'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.methodology}</a>
-                      <a href={language === 'zh' ? '/zh/signals' : '/signals'} onClick={(e) => { e.preventDefault(); handleNav('signals'); }} className="block text-sm text-gray-600 dark:text-gray-400">30+ Signals</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="block text-sm text-[#1AAE82] font-medium">Interactive Demo ★</a>
+                      <a href={addLanguagePrefix('/social/signals', language)} onClick={(e) => { e.preventDefault(); handleNav('signals'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.signals || "30+ Signals"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); onTrySample(); }} className="block text-sm text-[#1AAE82] font-medium">{navLinks.interactiveSample || "Interactive Sample"} ★</a>
                       
                       {/* Nested Use Cases */}
                       <div className="pl-4 border-l-2 border-gray-100 dark:border-slate-800 mt-2 space-y-3 py-1">
-                         <div className="text-xs font-semibold text-gray-400 uppercase">Use Cases</div>
-                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/trend-prediction'); }} className="block text-sm text-gray-600 dark:text-gray-400">Trend Prediction</a>
-                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/content-diagnosis'); }} className="block text-sm text-gray-600 dark:text-gray-400">Content Diagnosis</a>
-                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/script-generation'); }} className="block text-sm text-gray-600 dark:text-gray-400">Script Generation</a>
-                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/posting-schedule'); }} className="block text-sm text-gray-600 dark:text-gray-400">Posting Schedule</a>
-                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/hashtag-strategy'); }} className="block text-sm text-gray-600 dark:text-gray-400">Hashtag Strategy</a>
+                         <div className="text-xs font-semibold text-gray-400 uppercase">{nav.useCases || "Use Cases"}</div>
+                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/trend-prediction'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.trendPrediction || "Trend Prediction"}</a>
+                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/content-diagnosis'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.contentDiagnosis || "Content Diagnosis"}</a>
+                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/script-generation'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.scriptGeneration || "Script Generation"}</a>
+                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/posting-schedule'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.postingSchedule || "Posting Schedule"}</a>
+                         <a href="#" onClick={(e) => { e.preventDefault(); handleNav('use-cases/hashtag-strategy'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.hashtagStrategy || "Hashtag Strategy"}</a>
                       </div>
                     </motion.div>
                   )}
@@ -489,7 +640,7 @@ export const Navbar = memo(({
                   onClick={() => toggleDropdown('mobile-solutions')}
                   className="flex items-center justify-between w-full py-2 text-base font-bold text-gray-900 dark:text-white"
                 >
-                  Solutions
+                  {nav.solutions || "Solutions"}
                   <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'mobile-solutions' ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
@@ -500,11 +651,11 @@ export const Navbar = memo(({
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden pl-4 space-y-3"
                     >
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/content-creators'); }} className="block text-sm text-gray-600 dark:text-gray-400">Content Creators</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/local-business'); }} className="block text-sm text-gray-600 dark:text-gray-400">Local Business</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/agencies'); }} className="block text-sm text-gray-600 dark:text-gray-400">Agencies</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/brands'); }} className="block text-sm text-gray-600 dark:text-gray-400">Brands</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/ecommerce'); }} className="block text-sm text-gray-600 dark:text-gray-400">E-commerce Sellers</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/content-creators'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.contentCreators || "Content Creators"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/local-business'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.localBusiness || "Local Business"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/agencies'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.agencies || "Agencies"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/brands'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.brands || "Brands"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('solutions/ecommerce'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.ecommerceSellers || "E-commerce Sellers"}</a>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -528,9 +679,10 @@ export const Navbar = memo(({
                       className="overflow-hidden pl-4 space-y-3"
                     >
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.blog}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('guides'); }} className="block text-sm text-gray-600 dark:text-gray-400">Guides</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('glossary'); }} className="block text-sm text-gray-600 dark:text-gray-400">Glossary</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.faq}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('guides'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.guides}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('trends-hub'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.trends || "Trends"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('tools'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.tools || "Tools"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('glossary'); }} className="block text-sm text-gray-600 dark:text-gray-400">{nav.glossary || "Glossary"}</a>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -545,7 +697,7 @@ export const Navbar = memo(({
                   onClick={() => toggleDropdown('mobile-trust')}
                   className="flex items-center justify-between w-full py-2 text-base font-bold text-gray-900 dark:text-white"
                 >
-                  Trust & Security
+                  {nav.trustSecurity || "Trust & Security"}
                   <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'mobile-trust' ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
@@ -556,10 +708,12 @@ export const Navbar = memo(({
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden pl-4 space-y-3"
                     >
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="block text-sm text-gray-600 dark:text-gray-400">Privacy</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('terms'); }} className="block text-sm text-gray-600 dark:text-gray-400">Terms</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="block text-sm text-gray-600 dark:text-gray-400">Cookies</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="block text-sm text-gray-600 dark:text-gray-400">Security</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.privacy || "Privacy"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('terms'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.terms || "Terms"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.cookies || "Cookies"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.security || "Security"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.faq}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.contact || "Contact"}</a>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -571,7 +725,7 @@ export const Navbar = memo(({
                   onClick={() => toggleDropdown('mobile-lang')}
                   className="flex items-center justify-between w-full py-2 text-base font-medium text-gray-900 dark:text-white"
                 >
-                  <span className="flex items-center gap-2"><Globe className="w-4 h-4" /> Language</span>
+                  <span className="flex items-center gap-2"><Globe className="w-4 h-4" /> {nav.language || "Language"}</span>
                   <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'mobile-lang' ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
@@ -586,11 +740,11 @@ export const Navbar = memo(({
                         <button
                           key={lang.code}
                           onClick={() => {
-                            setLanguage(lang.code);
+                            setLanguage(lang.code as Language);
                             setMobileMenuOpen(false);
                           }}
                           className={`px-3 py-2 text-sm text-left rounded-lg transition-colors ${
-                            language === lang.code 
+                            language === (lang.code as Language) 
                               ? 'bg-[#1AAE82]/10 text-[#1AAE82] font-medium' 
                               : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800'
                           }`}
@@ -608,19 +762,20 @@ export const Navbar = memo(({
                    onClick={onTrySample}
                    className="w-full py-3.5 text-center font-bold text-gray-900 dark:text-white bg-white border border-gray-200 dark:bg-slate-800 dark:border-slate-700 rounded-xl shadow-sm"
                 >
-                  Try Sample
+                  {navActions.trySample || "Try Sample"}
                 </button>
                 <button 
                   onClick={onSignUp}
                   className="w-full py-3.5 text-center font-bold text-white bg-[#1AAE82] rounded-xl shadow-lg shadow-[#1AAE82]/20"
                 >
-                  Start Free Trial
+                  {navActions.startFreeTrial || "Start Free Trial"}
                 </button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </motion.nav>
   );
 });

@@ -245,8 +245,8 @@ export function PricingModal({ isOpen, onClose, currentPlan }: PricingModalProps
         <div className="px-6 py-3 border-t border-[#E5E7EB] bg-[#F8F9FA] flex-shrink-0">
           <p className="text-center text-[#9CA3AF]" style={{ fontSize: '12px' }}>
             {billingCycle === 'yearly' 
-              ? '14-day free trial · Billed annually · Cancel anytime'
-              : '14-day free trial · Cancel anytime · No hidden fees'}
+              ? '7-day free trial · Billed annually · Cancel anytime'
+              : '7-day free trial · Cancel anytime · No hidden fees'}
           </p>
         </div>
       </div>

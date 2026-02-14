@@ -61,7 +61,7 @@ export function StudioMobile({ onNavigate }: StudioMobileProps) {
         { id: 's1', role: 'Hook', content: 'Apple keeps these features hidden in your iPhone settings...', duration: '3s' },
         { id: 's2', role: 'Context', content: 'Most people never discover these game-changing features because Apple buries them deep in settings.', duration: '5s' },
         { id: 's3', role: 'Value', content: 'Let me show you the 5 most powerful hidden features that will change how you use your iPhone.', duration: '4s' },
-        { id: 's4', role: 'Proof', content: '[Demo each feature with screen recording]', duration: '40s' },
+        { id: 's4', role: 'Proof', content: '[Sample each feature with screen recording]', duration: '40s' },
         { id: 's5', role: 'CTA', content: 'Which one surprised you most? Comment below!', duration: '3s' },
       ],
     },

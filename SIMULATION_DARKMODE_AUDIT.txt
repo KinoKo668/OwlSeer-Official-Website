@@ -1,0 +1,100 @@
+# Simulation Dark Mode Audit
+
+- 生成时间: 2026-02-14
+- 范围: `/simulation` 路由入口组件 + 传递依赖组件 + `settings/*` 全部子组件
+- 结果: 检测到 **63** 个组件没有任何 `dark:` 适配且存在浅色硬编码。
+
+## P0 先处理（主路径可见）
+
+| 组件 | dark:计数 | 浅色硬编码计数 |
+|---|---:|---:|
+| `src/app/components/SchedulingSlotsNew.tsx` | 0 | 440 |
+| `src/app/components/ContentLibrary.tsx` | 0 | 409 |
+| `src/app/components/settings/TeamSettings.tsx` | 0 | 351 |
+| `src/app/components/settings/ConnectedAccountsSettings.tsx` | 0 | 146 |
+| `src/app/components/settings/CancelSubscriptionModal.tsx` | 0 | 141 |
+| `src/app/components/WeeklyReportDetail.tsx` | 0 | 135 |
+| `src/app/components/settings/AccountSettings.tsx` | 0 | 126 |
+| `src/app/components/settings/BillingUsageSettings.tsx` | 0 | 105 |
+| `src/app/components/settings/TeamMembersMobile.tsx` | 0 | 104 |
+| `src/app/components/settings/SecuritySettingsMobile.tsx` | 0 | 70 |
+| `src/app/components/settings/TeamOverviewMobile.tsx` | 0 | 66 |
+| `src/app/components/settings/AuditLogMobile.tsx` | 0 | 60 |
+| `src/app/components/MeMobile.tsx` | 0 | 57 |
+| `src/app/components/settings/EmailVerificationModal.tsx` | 0 | 46 |
+| `src/app/components/settings/NotificationsSettings.tsx` | 0 | 41 |
+| `src/app/components/settings/PendingInvitesMobile.tsx` | 0 | 41 |
+| `src/app/components/settings/RolesPermissionsMobile.tsx` | 0 | 29 |
+| `src/app/components/ReportsArchive.tsx` | 0 | 26 |
+| `src/app/components/settings/AIPreferencesSettings.tsx` | 0 | 23 |
+| `src/app/components/settings/SettingsOverview.tsx` | 0 | 20 |
+| `src/app/components/settings/SecurityPrivacySettings.tsx` | 0 | 18 |
+| `src/app/components/settings/TeamSettingsMobile.tsx` | 0 | 17 |
+| `src/app/components/settings/ContentAutomationSettings.tsx` | 0 | 16 |
+| `src/app/components/SettingsLayout.tsx` | 0 | 12 |
+| `src/app/components/MobileSettingsPage.tsx` | 0 | 7 |
+| `src/app/components/BottomTabBar.tsx` | 0 | 6 |
+
+## P1 次优先（重度未适配）
+
+| 组件 | dark:计数 | 浅色硬编码计数 |
+|---|---:|---:|
+| `src/app/components/PublishPlanModal.tsx` | 0 | 89 |
+| `src/app/components/CreateScriptModal.tsx` | 0 | 80 |
+| `src/app/components/AIGoalsCard.tsx` | 0 | 78 |
+| `src/app/components/ReportsArchiveList.tsx` | 0 | 66 |
+| `src/app/components/LatestWeeklyReportCard.tsx` | 0 | 64 |
+| `src/app/components/SlotSelectorModal.tsx` | 0 | 51 |
+| `src/app/components/CreditsPurchaseModal.tsx` | 0 | 46 |
+
+## P2 批量收尾
+
+| 组件 | dark:计数 | 浅色硬编码计数 |
+|---|---:|---:|
+| `src/app/components/PricingModal.tsx` | 0 | 39 |
+| `src/app/components/ScriptSelectorModal.tsx` | 0 | 39 |
+| `src/app/components/skeletons/ReportSkeletons.tsx` | 0 | 35 |
+| `src/app/components/GoalRow.tsx` | 0 | 29 |
+| `src/app/components/InsightAccordion.tsx` | 0 | 29 |
+| `src/app/components/ScriptPreview.tsx` | 0 | 27 |
+| `src/app/components/MobileHeader.tsx` | 0 | 25 |
+| `src/app/components/RegenerateReportModal.tsx` | 0 | 24 |
+| `src/app/components/IssueRow.tsx` | 0 | 22 |
+| `src/app/components/BenchmarkBar.tsx` | 0 | 20 |
+| `src/app/components/TikTokPreviewInline.tsx` | 0 | 20 |
+| `src/app/components/ContentCategoryInsight.tsx` | 0 | 19 |
+| `src/app/components/DiagnosisIssuesList.tsx` | 0 | 18 |
+| `src/app/components/SidebarPro.tsx` | 0 | 18 |
+| `src/app/components/CopilotMobile.tsx` | 0 | 16 |
+| `src/app/components/ActionRow.tsx` | 0 | 14 |
+| `src/app/components/CustomLineChart.tsx` | 0 | 14 |
+| `src/app/components/CustomBarChart.tsx` | 0 | 13 |
+| `src/app/components/TikTokPreviewModal.tsx` | 0 | 12 |
+| `src/app/components/AdjustedGoalRow.tsx` | 0 | 10 |
+| `src/app/components/ConversionFab.tsx` | 0 | 10 |
+| `src/app/components/ScoreDimension.tsx` | 0 | 10 |
+| `src/app/components/CopilotCTAButton.tsx` | 0 | 9 |
+| `src/app/components/MobileTabBarWithIndicator.tsx` | 0 | 8 |
+| `src/app/components/Toast.tsx` | 0 | 8 |
+| `src/app/components/skeletons/KPIItem.tsx` | 0 | 5 |
+| `src/app/components/skeletons/SidebarNavItem.tsx` | 0 | 5 |
+| `src/app/components/DayScheduleRow.tsx` | 0 | 4 |
+| `src/app/components/skeletons/SectionCard.tsx` | 0 | 4 |
+| `src/app/components/MobileLayout.tsx` | 0 | 1 |
+
+## 已有 dark: 但风格未统一（建议二期）
+
+| 组件 | dark:计数 | 浅色硬编码计数 |
+|---|---:|---:|
+| `src/app/components/DashboardMonitor.tsx` | 208 | 243 |
+| `src/app/components/HashtagRadar.tsx` | 206 | 212 |
+| `src/app/components/ScriptEditorNew.tsx` | 203 | 180 |
+| `src/app/components/ContentStudioNew.tsx` | 183 | 144 |
+| `src/app/components/Copilot.tsx` | 43 | 99 |
+
+## 处理准备（执行顺序）
+
+1. 建立统一 token（surface/text/border/accent/muted）并在 `theme.css` 中补齐 light/dark 变量。
+2. 先改 P0（确保 Simulation 主流程在深色模式可用）。
+3. 再改 P1（体量大、影响广的子组件与弹窗）。
+4. 最后收 P2，并做一次全量对比截图与对比测试。

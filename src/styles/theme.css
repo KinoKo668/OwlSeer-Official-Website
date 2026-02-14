@@ -91,6 +91,440 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* Keep onboarding cards readable in dark mode */
+.onboarding-light-surface {
+  --foreground: oklch(0.145 0 0);
+  --muted-foreground: #6b7280;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+.dark .onboarding-light-surface {
+  --foreground: oklch(0.985 0 0);
+  --muted-foreground: #cbd5e1;
+  --card-border: rgba(148, 163, 184, 0.35);
+  --border: rgba(148, 163, 184, 0.35);
+}
+
+.dark .onboarding-light-surface [class*="bg-gradient-to-br"][class*="from-[#F8F9FA]"],
+.dark .onboarding-light-surface [class*="bg-gradient-to-br"][class*="from-[#f8f9fa]"] {
+  background-image: linear-gradient(135deg, #020617 0%, #0f172a 55%, #020617 100%) !important;
+}
+
+.dark .onboarding-light-surface [class*="bg-[#F8F9FA]"],
+.dark .onboarding-light-surface [class*="bg-[#f8f9fa]"],
+.dark .onboarding-light-surface [class*="bg-[#F9FAFB]"],
+.dark .onboarding-light-surface [class*="bg-[#f9fafb]"] {
+  background-color: rgba(15, 23, 42, 0.82) !important;
+}
+
+.dark .onboarding-light-surface [class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.88) !important;
+}
+
+.dark .onboarding-light-surface [class*="border-[#E5E7EB]"],
+.dark .onboarding-light-surface [class*="border-[#e5e7eb]"],
+.dark .onboarding-light-surface [class*="border-[#D1D5DB]"],
+.dark .onboarding-light-surface [class*="border-[#d1d5db]"],
+.dark .onboarding-light-surface [class*="border-gray-200"],
+.dark .onboarding-light-surface [class*="border-gray-100"],
+.dark .onboarding-light-surface [class*="border-[#e0e0e0]"] {
+  border-color: rgba(148, 163, 184, 0.35) !important;
+}
+
+.dark .onboarding-light-surface [class*="text-[#111827]"],
+.dark .onboarding-light-surface [class*="text-foreground"] {
+  color: #f8fafc !important;
+}
+
+.dark .onboarding-light-surface [class*="text-[#374151]"],
+.dark .onboarding-light-surface [class*="text-[#6B7280]"],
+.dark .onboarding-light-surface [class*="text-[#6b7280]"],
+.dark .onboarding-light-surface [class*="text-muted-foreground"] {
+  color: #cbd5e1 !important;
+}
+
+.dark .onboarding-light-surface [class*="text-[#9CA3AF]"],
+.dark .onboarding-light-surface [class*="text-[#9ca3af]"] {
+  color: #94a3b8 !important;
+}
+
+.dark .onboarding-light-surface input,
+.dark .onboarding-light-surface textarea,
+.dark .onboarding-light-surface select {
+  color: #f8fafc !important;
+  background-color: rgba(15, 23, 42, 0.9) !important;
+}
+
+.dark .onboarding-light-surface input::placeholder,
+.dark .onboarding-light-surface textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Normalize legacy Simulation screens in dark mode (P0 batch) */
+.dark .simulation-dark-surface {
+  --sim-bg: #020617;
+  --sim-surface: #111827;
+  --sim-surface-soft: #1f2937;
+  --sim-border: rgba(148, 163, 184, 0.35);
+  --sim-text-primary: #f8fafc;
+  --sim-text-secondary: #cbd5e1;
+  --sim-text-muted: #94a3b8;
+}
+
+.dark .simulation-dark-surface,
+.dark .simulation-dark-surface [class*="bg-[#fafafa]"],
+.dark .simulation-dark-surface [class*="bg-[#FAFAFA]"],
+.dark .simulation-dark-surface [class*="bg-[#F8F9FA]"],
+.dark .simulation-dark-surface [class*="bg-[#f8f9fa]"] {
+  background-color: var(--sim-bg) !important;
+}
+
+.dark .simulation-dark-surface [class*="bg-white"],
+.dark .simulation-dark-surface [class*="bg-[#ffffff]"],
+.dark .simulation-dark-surface [class*="bg-[#f9fafb]"],
+.dark .simulation-dark-surface [class*="bg-[#F9FAFB]"] {
+  background-color: var(--sim-surface) !important;
+}
+
+.dark .simulation-dark-surface [class*="bg-[#f5f5f5]"],
+.dark .simulation-dark-surface [class*="bg-[#f3f4f6]"],
+.dark .simulation-dark-surface [class*="bg-[#f0f0f0]"],
+.dark .simulation-dark-surface [class*="bg-[#e0e0e0]"],
+.dark .simulation-dark-surface [class*="bg-[#E5E7EB]"] {
+  background-color: var(--sim-surface-soft) !important;
+}
+
+.dark .simulation-dark-surface [class*="border-[#e0e0e0]"],
+.dark .simulation-dark-surface [class*="border-[#E5E7EB]"],
+.dark .simulation-dark-surface [class*="border-[#e5e7eb]"],
+.dark .simulation-dark-surface [class*="border-[#d1d5db]"],
+.dark .simulation-dark-surface [class*="border-[#f0f0f0]"],
+.dark .simulation-dark-surface [class*="border-[#cccccc]"],
+.dark .simulation-dark-surface [class*="border-gray-100"],
+.dark .simulation-dark-surface [class*="border-gray-200"] {
+  border-color: var(--sim-border) !important;
+}
+
+.dark .simulation-dark-surface [class*="text-[#1a1a1a]"],
+.dark .simulation-dark-surface [class*="text-[#111827]"],
+.dark .simulation-dark-surface [class*="text-[#0f172a]"] {
+  color: var(--sim-text-primary) !important;
+}
+
+.dark .simulation-dark-surface [class*="text-[#374151]"],
+.dark .simulation-dark-surface [class*="text-[#4B5563]"],
+.dark .simulation-dark-surface [class*="text-[#666666]"],
+.dark .simulation-dark-surface [class*="text-[#6b7280]"] {
+  color: var(--sim-text-secondary) !important;
+}
+
+.dark .simulation-dark-surface [class*="text-[#999999]"],
+.dark .simulation-dark-surface [class*="text-[#9ca3af]"],
+.dark .simulation-dark-surface [class*="text-[#cccccc]"] {
+  color: var(--sim-text-muted) !important;
+}
+
+.dark .simulation-dark-surface [class*="bg-[#1a1a1a]"][class*="text-white"],
+.dark .simulation-dark-surface [class*="bg-[#111827]"][class*="text-white"] {
+  background-color: #0f766e !important;
+  color: #ecfeff !important;
+}
+
+.dark .simulation-dark-surface input,
+.dark .simulation-dark-surface textarea,
+.dark .simulation-dark-surface select {
+  color: var(--sim-text-primary) !important;
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  border-color: var(--sim-border) !important;
+}
+
+.dark .simulation-dark-surface input::placeholder,
+.dark .simulation-dark-surface textarea::placeholder {
+  color: var(--sim-text-muted) !important;
+}
+
+/* Align all Simulation pages to Overview color composition */
+.simulation-overview-theme {
+  --sim-overview-bg: #f8fafc;
+  --sim-overview-card-bg: #ffffff;
+  --sim-overview-card-soft: #f1f5f9;
+  --sim-overview-card-border: rgba(15, 23, 42, 0.1);
+  --sim-overview-text-primary: #0f172a;
+  --sim-overview-text-secondary: #475569;
+  --sim-overview-text-muted: #94a3b8;
+  --sim-overview-accent: #0f766e;
+  --sim-overview-accent-hover: #0d9488;
+
+  --background: var(--sim-overview-bg);
+  --card: var(--sim-overview-card-bg);
+  --popover: var(--sim-overview-card-bg);
+  --muted: var(--sim-overview-card-soft);
+  --border: var(--sim-overview-card-border);
+  --sidebar: var(--sim-overview-bg);
+  --sidebar-foreground: var(--sim-overview-text-primary);
+  --sidebar-primary: var(--sim-overview-accent);
+  --sidebar-primary-foreground: #ecfeff;
+  --sidebar-accent: rgba(15, 23, 42, 0.06);
+  --sidebar-accent-foreground: var(--sim-overview-text-primary);
+  --sidebar-border: var(--sim-overview-card-border);
+  --sidebar-ring: rgba(15, 118, 110, 0.35);
+  --foreground: var(--sim-overview-text-primary);
+  --card-foreground: var(--sim-overview-text-primary);
+  --popover-foreground: var(--sim-overview-text-primary);
+  --muted-foreground: var(--sim-overview-text-secondary);
+}
+
+.dark .simulation-overview-theme {
+  --sim-overview-bg: #020617;
+  --sim-overview-card-bg: #111827;
+  --sim-overview-card-soft: #1f2937;
+  --sim-overview-card-border: rgba(148, 163, 184, 0.35);
+  --sim-overview-text-primary: #f8fafc;
+  --sim-overview-text-secondary: #cbd5e1;
+  --sim-overview-text-muted: #94a3b8;
+  --sim-overview-accent: #2dd4bf;
+  --sim-overview-accent-hover: #5eead4;
+
+  --background: var(--sim-overview-bg);
+  --card: var(--sim-overview-card-bg);
+  --popover: var(--sim-overview-card-bg);
+  --muted: var(--sim-overview-card-soft);
+  --border: var(--sim-overview-card-border);
+  --sidebar: var(--sim-overview-bg);
+  --sidebar-foreground: var(--sim-overview-text-primary);
+  --sidebar-primary: var(--sim-overview-accent);
+  --sidebar-primary-foreground: #042f2e;
+  --sidebar-accent: rgba(148, 163, 184, 0.12);
+  --sidebar-accent-foreground: var(--sim-overview-text-primary);
+  --sidebar-border: var(--sim-overview-card-border);
+  --sidebar-ring: rgba(45, 212, 191, 0.35);
+  --foreground: var(--sim-overview-text-primary);
+  --card-foreground: var(--sim-overview-text-primary);
+  --popover-foreground: var(--sim-overview-text-primary);
+  --muted-foreground: var(--sim-overview-text-secondary);
+}
+
+.simulation-overview-theme [class*="bg-[#fafafa]"],
+.simulation-overview-theme [class*="bg-[#FAFAFA]"],
+.simulation-overview-theme [class*="bg-[#F8F9FA]"],
+.simulation-overview-theme [class*="bg-[#f8f9fa]"] {
+  background-color: var(--sim-overview-bg) !important;
+}
+
+.simulation-overview-theme [class*="bg-white"][class*="border"],
+.simulation-overview-theme [class*="bg-white"][class*="shadow"],
+.simulation-overview-theme [class*="bg-white"][class*="rounded"],
+.simulation-overview-theme [class*="bg-[#ffffff]"][class*="border"],
+.simulation-overview-theme [class*="bg-[#ffffff]"][class*="shadow"],
+.simulation-overview-theme [class*="bg-[#ffffff]"][class*="rounded"],
+.simulation-overview-theme [class*="bg-[#F9FAFB]"],
+.simulation-overview-theme [class*="bg-[#f9fafb]"] {
+  background-color: var(--sim-overview-card-bg) !important;
+}
+
+.simulation-overview-theme [class*="bg-[#f5f5f5]"],
+.simulation-overview-theme [class*="bg-[#F5F5F5]"],
+.simulation-overview-theme [class*="bg-[#f3f4f6]"],
+.simulation-overview-theme [class*="bg-[#F3F4F6]"],
+.simulation-overview-theme [class*="bg-[#f0f0f0]"],
+.simulation-overview-theme [class*="bg-[#F0F0F0]"],
+.simulation-overview-theme [class*="bg-[#E5E7EB]"],
+.simulation-overview-theme [class*="bg-gray-50"],
+.simulation-overview-theme [class*="bg-gray-100"],
+.simulation-overview-theme [class*="bg-slate-50"],
+.simulation-overview-theme [class*="bg-slate-100"] {
+  background-color: var(--sim-overview-card-soft) !important;
+}
+
+.dark .simulation-overview-theme [class*="dark:bg-slate-900"],
+.dark .simulation-overview-theme [class*="dark:bg-slate-950"] {
+  background-color: var(--sim-overview-card-bg) !important;
+}
+
+.dark .simulation-overview-theme [class*="bg-slate-900"],
+.dark .simulation-overview-theme [class*="bg-slate-950"],
+.dark .simulation-overview-theme [class*="bg-[#0E172C]"],
+.dark .simulation-overview-theme [class*="bg-[#0e172c]"],
+.dark .simulation-overview-theme [class*="bg-[#0F172A]"],
+.dark .simulation-overview-theme [class*="bg-[#0f172a]"] {
+  background-color: var(--sim-overview-card-bg) !important;
+}
+
+.dark .simulation-overview-theme [class*="dark:bg-slate-800"],
+.dark .simulation-overview-theme [class*="dark:bg-slate-700"] {
+  background-color: var(--sim-overview-card-soft) !important;
+}
+
+.dark .simulation-overview-theme [class*="bg-slate-800"],
+.dark .simulation-overview-theme [class*="bg-slate-700"],
+.dark .simulation-overview-theme [class*="bg-[#1E293B]"],
+.dark .simulation-overview-theme [class*="bg-[#1e293b]"] {
+  background-color: var(--sim-overview-card-soft) !important;
+}
+
+.dark .simulation-overview-theme [style*="background"][style*="#0E172C"],
+.dark .simulation-overview-theme [style*="background"][style*="#0e172c"],
+.dark .simulation-overview-theme [style*="background"][style*="#0F172A"],
+.dark .simulation-overview-theme [style*="background"][style*="#0f172a"],
+.dark .simulation-overview-theme [style*="background-color"][style*="#0E172C"],
+.dark .simulation-overview-theme [style*="background-color"][style*="#0e172c"],
+.dark .simulation-overview-theme [style*="background-color"][style*="#0F172A"],
+.dark .simulation-overview-theme [style*="background-color"][style*="#0f172a"] {
+  background-color: var(--sim-overview-card-bg) !important;
+}
+
+.simulation-overview-theme [class*="border-[#e0e0e0]"],
+.simulation-overview-theme [class*="border-[#E5E7EB]"],
+.simulation-overview-theme [class*="border-[#e5e7eb]"],
+.simulation-overview-theme [class*="border-[#d1d5db]"],
+.simulation-overview-theme [class*="border-[#f0f0f0]"],
+.simulation-overview-theme [class*="border-[#cccccc]"],
+.simulation-overview-theme [class*="border-gray-100"],
+.simulation-overview-theme [class*="border-gray-200"],
+.simulation-overview-theme [class*="border-gray-300"],
+.simulation-overview-theme [class*="border-slate-100"],
+.simulation-overview-theme [class*="border-slate-200"],
+.simulation-overview-theme [class*="border-slate-300"],
+.simulation-overview-theme [class*="border-slate-700"],
+.simulation-overview-theme [class*="border-slate-800"] {
+  border-color: var(--sim-overview-card-border) !important;
+}
+
+.simulation-overview-theme [class*="text-[#1a1a1a]"],
+.simulation-overview-theme [class*="text-[#111827]"],
+.simulation-overview-theme [class*="text-[#0f172a]"],
+.simulation-overview-theme [class*="text-gray-900"],
+.simulation-overview-theme [class*="text-gray-800"],
+.simulation-overview-theme [class*="text-slate-900"],
+.simulation-overview-theme [class*="text-slate-800"] {
+  color: var(--sim-overview-text-primary) !important;
+}
+
+.simulation-overview-theme [class*="text-[#374151]"],
+.simulation-overview-theme [class*="text-[#4B5563]"],
+.simulation-overview-theme [class*="text-[#666666]"],
+.simulation-overview-theme [class*="text-[#6B7280]"],
+.simulation-overview-theme [class*="text-[#6b7280]"],
+.simulation-overview-theme [class*="text-gray-700"],
+.simulation-overview-theme [class*="text-gray-600"],
+.simulation-overview-theme [class*="text-gray-500"],
+.simulation-overview-theme [class*="text-slate-700"],
+.simulation-overview-theme [class*="text-slate-600"],
+.simulation-overview-theme [class*="text-slate-500"] {
+  color: var(--sim-overview-text-secondary) !important;
+}
+
+.simulation-overview-theme [class*="text-[#999999]"],
+.simulation-overview-theme [class*="text-[#9CA3AF]"],
+.simulation-overview-theme [class*="text-[#9ca3af]"],
+.simulation-overview-theme [class*="text-[#e0e0e0]"],
+.simulation-overview-theme [class*="text-[#cccccc]"],
+.simulation-overview-theme [class*="text-gray-400"],
+.simulation-overview-theme [class*="text-gray-300"],
+.simulation-overview-theme [class*="text-slate-400"],
+.simulation-overview-theme [class*="text-slate-300"] {
+  color: var(--sim-overview-text-muted) !important;
+}
+
+.simulation-overview-theme input,
+.simulation-overview-theme textarea,
+.simulation-overview-theme select {
+  border-color: var(--sim-overview-card-border) !important;
+  color: var(--sim-overview-text-primary) !important;
+}
+
+.dark .simulation-overview-theme input,
+.dark .simulation-overview-theme textarea,
+.dark .simulation-overview-theme select {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+}
+
+/* Inline style fallback for legacy Simulation blocks */
+.dark .simulation-overview-theme [style*="background-color: #ffffff"],
+.dark .simulation-overview-theme [style*="background-color:#ffffff"],
+.dark .simulation-overview-theme [style*="background-color: #fff"],
+.dark .simulation-overview-theme [style*="background-color:#fff"],
+.dark .simulation-overview-theme [style*="background-color: #fafafa"],
+.dark .simulation-overview-theme [style*="background-color:#fafafa"],
+.dark .simulation-overview-theme [style*="background-color: #F8F9FA"],
+.dark .simulation-overview-theme [style*="background-color:#F8F9FA"],
+.dark .simulation-overview-theme [style*="background: #ffffff"],
+.dark .simulation-overview-theme [style*="background:#ffffff"],
+.dark .simulation-overview-theme [style*="background: #fff"],
+.dark .simulation-overview-theme [style*="background:#fff"],
+.dark .simulation-overview-theme [style*="background: #fafafa"],
+.dark .simulation-overview-theme [style*="background:#fafafa"] {
+  background-color: var(--sim-overview-card-bg) !important;
+}
+
+.dark .simulation-overview-theme [style*="background-color: #f8f9fa"],
+.dark .simulation-overview-theme [style*="background-color:#f8f9fa"],
+.dark .simulation-overview-theme [style*="background-color: #f5f5f5"],
+.dark .simulation-overview-theme [style*="background-color:#f5f5f5"],
+.dark .simulation-overview-theme [style*="background-color: #f3f4f6"],
+.dark .simulation-overview-theme [style*="background-color:#f3f4f6"],
+.dark .simulation-overview-theme [style*="background-color: #e5e7eb"],
+.dark .simulation-overview-theme [style*="background-color:#e5e7eb"],
+.dark .simulation-overview-theme [style*="background: #f8f9fa"],
+.dark .simulation-overview-theme [style*="background:#f8f9fa"],
+.dark .simulation-overview-theme [style*="background: #f5f5f5"],
+.dark .simulation-overview-theme [style*="background:#f5f5f5"],
+.dark .simulation-overview-theme [style*="background: #f3f4f6"],
+.dark .simulation-overview-theme [style*="background:#f3f4f6"],
+.dark .simulation-overview-theme [style*="background: #e5e7eb"],
+.dark .simulation-overview-theme [style*="background:#e5e7eb"] {
+  background-color: var(--sim-overview-card-soft) !important;
+}
+
+.dark .simulation-overview-theme [style*="border-color: #e0e0e0"],
+.dark .simulation-overview-theme [style*="border-color:#e0e0e0"],
+.dark .simulation-overview-theme [style*="border-color: #E5E7EB"],
+.dark .simulation-overview-theme [style*="border-color:#E5E7EB"],
+.dark .simulation-overview-theme [style*="border-color: #e5e7eb"],
+.dark .simulation-overview-theme [style*="border-color:#e5e7eb"],
+.dark .simulation-overview-theme [style*="border-color: #d1d5db"],
+.dark .simulation-overview-theme [style*="border-color:#d1d5db"],
+.dark .simulation-overview-theme [style*="border-color: #f0f0f0"],
+.dark .simulation-overview-theme [style*="border-color:#f0f0f0"],
+.dark .simulation-overview-theme [style*="border-color: #cccccc"],
+.dark .simulation-overview-theme [style*="border-color:#cccccc"] {
+  border-color: var(--sim-overview-card-border) !important;
+}
+
+.dark .simulation-overview-theme [style*="color: #1a1a1a"],
+.dark .simulation-overview-theme [style*="color:#1a1a1a"],
+.dark .simulation-overview-theme [style*="color: #111827"],
+.dark .simulation-overview-theme [style*="color:#111827"] {
+  color: var(--sim-overview-text-primary) !important;
+}
+
+.dark .simulation-overview-theme [style*="color: #374151"],
+.dark .simulation-overview-theme [style*="color:#374151"],
+.dark .simulation-overview-theme [style*="color: #4B5563"],
+.dark .simulation-overview-theme [style*="color:#4B5563"],
+.dark .simulation-overview-theme [style*="color: #666666"],
+.dark .simulation-overview-theme [style*="color:#666666"],
+.dark .simulation-overview-theme [style*="color: #6B7280"],
+.dark .simulation-overview-theme [style*="color:#6B7280"],
+.dark .simulation-overview-theme [style*="color: #6b7280"],
+.dark .simulation-overview-theme [style*="color:#6b7280"] {
+  color: var(--sim-overview-text-secondary) !important;
+}
+
+.dark .simulation-overview-theme [style*="color: #999999"],
+.dark .simulation-overview-theme [style*="color:#999999"],
+.dark .simulation-overview-theme [style*="color: #9CA3AF"],
+.dark .simulation-overview-theme [style*="color:#9CA3AF"],
+.dark .simulation-overview-theme [style*="color: #9ca3af"],
+.dark .simulation-overview-theme [style*="color:#9ca3af"],
+.dark .simulation-overview-theme [style*="color: #cccccc"],
+.dark .simulation-overview-theme [style*="color:#cccccc"],
+.dark .simulation-overview-theme [style*="color: #e0e0e0"],
+.dark .simulation-overview-theme [style*="color:#e0e0e0"] {
+  color: var(--sim-overview-text-muted) !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -240,6 +674,19 @@
   /* ============================================
    * Performance Mode Styles
    * ============================================ */
+
+  .perf-content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
+  }
+
+  .perf-heavy-card {
+    contain: paint;
+  }
+
+  .perf-lite-card {
+    contain: paint;
+  }
   
   /* Reduce motion mode - disable animations */
   .reduce-motion *,
@@ -271,6 +718,34 @@
 
   .dark.no-blur .backdrop-blur-fallback {
     background-color: rgba(15, 23, 42, 0.98) !important;
+  }
+
+  .no-blur .perf-heavy-card,
+  .reduce-motion .perf-heavy-card {
+    box-shadow: 0 18px 44px -34px rgba(15, 23, 42, 0.68) !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .no-blur .perf-lite-card,
+  .reduce-motion .perf-lite-card {
+    box-shadow: 0 10px 28px -24px rgba(15, 23, 42, 0.52) !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .no-blur .perf-decor-blur,
+  .reduce-motion .perf-decor-blur {
+    filter: blur(28px) !important;
+    opacity: 0.45 !important;
+  }
+
+  @media (hover: none) {
+    .perf-heavy-card,
+    .perf-lite-card {
+      transition: none !important;
+      transform: none !important;
+    }
   }
 
   /* Performance mode indicator */

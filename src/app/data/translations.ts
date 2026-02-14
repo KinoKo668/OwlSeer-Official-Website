@@ -21,6 +21,54 @@ export const translations = {
     faq: 'FAQ',
     security: 'Security & Privacy',
     blog: 'Blog',
+    guides: 'Guides',
+    nav: {
+      solutions: "Solutions",
+      platform: "Platform",
+      useCases: "Use Cases",
+      byRole: "By Role",
+      learn: "Learn",
+      trustSupport: "Trust & Support",
+      trustSecurity: "Trust & Security",
+      language: "Language",
+      glossary: "Glossary",
+      links: {
+        signals: "30+ Signals",
+        interactiveSample: "Interactive Sample",
+        trendPrediction: "Trend Prediction",
+        contentDiagnosis: "Content Diagnosis",
+        scriptGeneration: "Script Generation",
+        postingSchedule: "Posting Schedule",
+        hashtagStrategy: "Hashtag Strategy",
+        contentCreators: "Content Creators",
+        localBusiness: "Local Business",
+        agencies: "Agencies",
+        brands: "Brands",
+        ecommerceSellers: "E-commerce Sellers",
+        privacy: "Privacy",
+        terms: "Terms",
+        cookies: "Cookies",
+        security: "Security"
+      },
+      desc: {
+        howItWorks: "Get started in 3 steps",
+        methodology: "Our 5-step AI process",
+        signals: "What we track",
+        interactiveSample: "See OwlSeer in action",
+        trySample: "See it on real data"
+      },
+      actions: {
+        trySample: "Try Sample",
+        startFree: "Start Free",
+        startFreeTrial: "Start Free Trial",
+        trySampleCta: "TRY THE SAMPLE"
+      },
+      darkMode: {
+        toggle: "Toggle Dark Mode",
+        switchToLight: "Switch to Light Mode",
+        switchToDark: "Switch to Dark Mode"
+      }
+    },
     featuresPage: {
       hero: {
         title: "Intelligence that",
@@ -71,9 +119,10 @@ export const translations = {
       badge: 'v2.0 is now live',
       title: "See What's",
       titleHighlight: "Next",
-      subtitle: "Your {platform} analytics don't tell you what to do.",
-      subtitle2: "We do.",
+      subtitle: "Stop guessing. Get AI-backed trends and scripts built from your data.",
+      subtitle2: "",
       ctaPrimary: "Try Sample",
+      ctaSecondaryButton: "Start Now",
       ctaSecondary: "No signup needed",
       ctaInstant: "Instant access",
       availableOn: "Available On",
@@ -84,35 +133,185 @@ export const translations = {
       }
     },
     productShowcase: {
-      opportunities: { title: "Spot Trends Before They Peak", desc: "Stop chasing yesterday’s viral hits. Our AI analyzes millions of signals to find high-potential topics tailored specifically to your niche." },
-      planning: { title: "Execution, Not Just Planning", desc: "Turn strategy into action. Get a weekly production schedule that balances high-growth risks with stable, trust-building content." },
-      analytics: { title: "Decode Your Content DNA", desc: "Understand exactly why your best videos perform. We break down your content into structural elements to replicate success." }
+      heading: {
+        title: "From insight to publish-ready output in one flow",
+        subtitle:
+          "OwlSeer removes the gap between strategy and execution so creators can move from signal to script with confidence."
+      },
+      highlights: {
+        decisionCycle: { label: "Decision Cycle", desc: "Signal detection to execution in minutes, not days." },
+        growthSignal: { label: "Growth Signal", desc: "Prioritize opportunities with velocity and niche fit." },
+        executionQuality: { label: "Execution Quality", desc: "Every recommendation includes reasoning you can trust." }
+      },
+      labels: {
+        capability: "Capability",
+        outcome: "Outcome",
+        learnMore: "Learn more"
+      },
+      opportunities: {
+        step: "Step 01",
+        title: "Spot Trends Before They Peak",
+        desc: "Stop chasing yesterday’s viral hits. Our AI analyzes millions of signals to find high-potential topics tailored specifically to your niche.",
+        statA: "24/7 signal scan",
+        statB: "Opportunity-first ranking",
+        bullets: ["Find rising topics before saturation.", "Prioritize topics with proven niche fit."],
+        mock: {
+          eyebrow: "Trend Radar",
+          title: "High-fit opportunity detected",
+          score: "94 score",
+          metrics: [
+            { label: "Velocity", value: "+128%" },
+            { label: "Competition", value: "Low" },
+            { label: "View Pool", value: "45M" }
+          ],
+          bullets: [
+            "High overlap with your top-performing audience segment.",
+            "Recommended posting window opens in the next 6 hours."
+          ]
+        }
+      },
+      planning: {
+        step: "Step 02",
+        title: "Execution, Not Just Planning",
+        desc: "Turn strategy into action. Get a weekly production schedule that balances high-growth risks with stable, trust-building content.",
+        statA: "Weekly cadence map",
+        statB: "Balanced content mix",
+        bullets: ["Convert recommendations into an exact shoot calendar.", "Maintain consistency without burning creative energy."],
+        mock: {
+          eyebrow: "Execution Plan",
+          title: "This week's production cadence",
+          postCount: "3 posts",
+          schedule: [
+            { day: "Mon", date: "24", task: "Trend-first opener", tag: "Growth" },
+            { day: "Wed", date: "26", task: "Trust-building story", tag: "Community" },
+            { day: "Fri", date: "28", task: "Conversion CTA video", tag: "Revenue" }
+          ]
+        }
+      },
+      analytics: {
+        step: "Step 03",
+        title: "Decode Your Content DNA",
+        desc: "Understand exactly why your best videos perform. We break down your content into structural elements to replicate success.",
+        statA: "Frame-level diagnosis",
+        statB: "Repeatable winning patterns",
+        bullets: ["Pinpoint what drives retention and completion.", "Iterate faster with evidence-backed edits."],
+        mock: {
+          eyebrow: "Performance DNA",
+          title: "Replicate what already wins",
+          pill: "Top 5%",
+          metrics: [
+            { label: "Hook Strength", value: "9.8/10", width: "w-[95%]" },
+            { label: "Audience Retention", value: "72%", width: "w-[72%]" },
+            { label: "CTA Completion", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "Powerhouse",
       title: "Everything you need to",
       titleHighlight: "dominate",
       subtitle: "A unified operating system for modern creators. Stop juggling disjointed tools.",
-      copilot: { title: "AI Strategy Copilot", desc: "Your 24/7 creative partner. Generate high-conversion scripts, brainstorm hooks, and get instant feedback on your ideas." },
-      trend: { title: "Trend Intelligence", desc: "Spot opportunities before they peak. Our AI analyzes millions of data points to find *your* next viral topic.", liveSignals: "Live Signals" },
-      goals: { title: "Smart Goals", desc: "Turn vague ambitions into actionable daily tasks." },
-      analytics: { title: "Deep Analytics" },
+      metrics: [
+        { label: "Publishing speed", value: "3x faster" },
+        { label: "Planning confidence", value: "Signal-backed" },
+        { label: "Execution consistency", value: "Weekly cadence" }
+      ],
+      copilot: {
+        title: "AI Strategy Copilot",
+        desc: "Your 24/7 creative partner. Generate high-conversion scripts, brainstorm hooks, and get instant feedback on your ideas.",
+        badge: "Real-time generation",
+        chat: {
+          user: "Give me a stronger hook for my next niche video.",
+          assistantLabel: "Suggested Hook",
+          assistant: "Stop copying generic intros. Here's the 3-second opener that keeps your viewers."
+        }
+      },
+      trend: {
+        title: "Trend Intelligence",
+        desc: "Spot opportunities before they peak. Our AI analyzes millions of data points to find *your* next viral topic.",
+        liveSignals: "Live Signals",
+        list: { viewsLabel: "views" }
+      },
+      goals: {
+        title: "Smart Goals",
+        desc: "Turn vague ambitions into actionable daily tasks.",
+        ringLabel: "Goal",
+        tasks: [
+          { task: "Record opening hook variation", done: true },
+          { task: "Review trend shortlist", done: false },
+          { task: "Schedule high-intent post", done: false }
+        ]
+      },
+      analytics: { title: "Deep Analytics", badge: "+124% YoY" },
       features: { scheduling: "Smart Scheduling", prediction: "Viral Prediction", multiAccount: "Multi-Account", reports: "Instant Reports" }
+    },
+    valueProposition: {
+      badge: "Strategic Clarity",
+      title: "Stop guessing what to post",
+      subtitle: "OwlSeer tells you what to do next on TikTok.",
+      cards: [
+        { title: "Actionable Plans", desc: "Get a complete content plan in under 3 minutes." },
+        { title: "AI Scripts", desc: "AI-generated scripts ready to shoot today." },
+        { title: "Data-Driven", desc: "For creators tired of random posting." }
+      ],
+      trust: ["No miracle promises", "No auto-posting", "No password required"],
+      metrics: [
+        { label: "Plan turnaround", value: "< 3 min" },
+        { label: "Signals analyzed", value: "30+" },
+        { label: "Publishing rhythm", value: "Weekly" }
+      ],
+      cta: {
+        primary: "See It In Action",
+        secondary: "How it works"
+      }
     },
     pricingSection: {
       title: "Simple, Transparent Pricing",
-      subtitle: "Start your 14-day free trial. Cancel anytime.",
+      subtitle: "Start your 7-day free trial. Cancel anytime.",
+      labels: { mostPopular: "Most Popular" },
       monthly: "Monthly",
       yearly: "Yearly",
       save: "20% OFF",
       period: "mo",
       plans: {
-        creator: { name: "Creator", features: ["Up to 3 TikTok accounts", "AI content suggestions", "Basic analytics", "Content scheduling", "Email support"] },
-        growth: { name: "Growth", features: ["Up to 10 TikTok accounts", "Advanced AI optimization", "Advanced analytics", "Team collaboration", "Priority support", "Weekly consultations"] },
-        scale: { name: "Scale", features: ["Unlimited accounts", "Enterprise AI", "Custom analytics", "Advanced team tools", "White-label options", "Dedicated manager", "24/7 priority support"] }
+        creator: {
+          name: "Basic",
+          summary: "Solo creator plan to launch your content flywheel fast.",
+          features: [
+            "1 account / 1 seat for focused solo execution",
+            "30 free video analyses per month",
+            "600 monthly credits for Copilot chats",
+            "AI content pipeline: profile, diagnosis, goals, scripts",
+            "Essential AI Copilot for real-time guidance"
+          ]
+        },
+        growth: {
+          name: "Growth",
+          summary: "Small-team plan for repeatable, high-volume content output.",
+          features: [
+            "3 accounts / 4 seats for cross-role collaboration",
+            "120 free video analyses per month",
+            "1,200 monthly credits for intensive ideation",
+            "End-to-end scheduling and script workflow",
+            "Batch task processing for multiple topics",
+            "Basic report export for weekly and monthly reviews"
+          ]
+        },
+        scale: {
+          name: "Pro",
+          summary: "Agency and multi-account plan focused on conversion and speed.",
+          features: [
+            "8 accounts / 10 seats for multi-role operations",
+            "400 free video analyses per month",
+            "4,000 monthly credits for heavy reasoning tasks",
+            "Priority compute queue for peak-time speed",
+            "High-capacity AI Copilot with longer context"
+          ]
+        }
       },
       cta: { trial: "Start Free Trial", buy: "Buy Now" },
-      footer: { secure: "Secure payment", trial: "14-day free trial", cancel: "Cancel anytime" }
+      footer: { secure: "Secure payment", trial: "7-day free trial", cancel: "Cancel anytime" }
     },
     pricingPage: {
       hero: {
@@ -137,9 +336,9 @@ export const translations = {
         title: "Frequently Asked Questions",
         items: [
           { q: "Can I cancel my subscription anytime?", a: "Yes, absolutely. There are no long-term contracts for monthly plans. You can cancel directly from your dashboard at any time." },
-          { q: "How does the 14-day free trial work?", a: "You'll get full access to the Pro plan features for 14 days. We won't charge your card until the trial ends. You can cancel anytime during the trial to avoid being charged." },
+          { q: "How does the 7-day free trial work?", a: "You'll get full access to the Pro plan features for 7 days. We won't charge your card until the trial ends. You can cancel anytime during the trial to avoid being charged." },
           { q: "Do I need to give you my TikTok password?", a: "No! We use the official TikTok API and OAuth 2.0 for secure connection. We never see or store your password, and we only have the permissions you explicitly grant." },
-          { q: "What happens if I add more accounts?", a: "The Pro plan covers up to 3 accounts. If you need more, you can upgrade to the Agency plan which supports 10+ accounts and offers volume discounts." },
+          { q: "What happens if I add more accounts?", a: "Upgrade to the next tier as you scale. Basic supports 1 account, Growth supports 3 accounts, and Pro supports up to 8 accounts with 10 team seats." },
           { q: "Do you offer refunds?", a: "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with the results, simply reach out to our support team for a full refund." }
         ]
       },
@@ -153,7 +352,7 @@ export const translations = {
       title: "Ready to see your future?",
       subtitle: "Join thousands of creators who stopped guessing and started growing. Experience the full dashboard instantly.",
       start: "Start Your Free Trial",
-      demo: "View Live Demo"
+      demo: "View Sample"
     },
     faqPage: {
       title: "How can we",
@@ -180,67 +379,67 @@ export const translations = {
         {
           id: 'q1',
           question: "Is there a free demo I can try?",
-          answer: "Yes. We provide a public Sample experience that shows the full product UI using an example creator account. You can explore every feature—strategy overview, script suggestions, trend radar, and posting calendar—without creating an account or providing any personal information.\n\nThe Sample uses realistic demo data from a fictional creator account, so you can see exactly what kind of outputs and analysis you would get with your own account.\n\nVerify: 🔗 [Dashboard (/simulation/dashboard)](/simulation/dashboard), 🔗 [Trend Radar (/simulation/trend-radar)](/simulation/trend-radar), 🔗 [Content Studio (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "Yes. We provide a public Sample experience that shows the full product UI using an example creator account. You can explore every feature—strategy overview, script suggestions, trend radar, and posting calendar—without creating an account or providing any personal information.\n\nThe Sample uses realistic demo data from a fictional creator account, so you can see exactly what kind of outputs and analysis you would get with your own account.\n\nVerify: 🔗 [Dashboard (/social/simulation/dashboard)](/social/simulation/dashboard), 🔗 [Trend Radar (/social/simulation/trends)](/social/simulation/trends), 🔗 [Content Studio (/social/simulation/studio)](/social/simulation/studio)",
           category: "Sample"
         },
         {
           id: 'q2',
           question: "Is the Sample the full product or a limited preview?",
-          answer: "The Sample is the full product—same interface, same features, same AI analysis. The only difference is the data source: Sample uses a pre-configured demo account, while the real product uses your connected TikTok account.\n\nWhat's the same:\n- Complete dashboard with all modules accessible\n- Real AI analysis running on the data\n- Full script generation capabilities\n- Interactive calendar and scheduling views\n\nWhat's different:\n- Data comes from a fictional \"TechReviews_US\" creator account\n- You can't save changes or export personalized reports\n- Signup prompts appear when you try account-specific actions\n\nVerify: 🔗 [Dashboard (/simulation/dashboard)](/simulation/dashboard)",
+          answer: "The Sample is the full product—same interface, same features, same AI analysis. The only difference is the data source: Sample uses a pre-configured demo account, while the real product uses your connected TikTok account.\n\nWhat's the same:\n- Complete dashboard with all modules accessible\n- Real AI analysis running on the data\n- Full script generation capabilities\n- Interactive calendar and scheduling views\n\nWhat's different:\n- Data comes from a fictional \"TechReviews_US\" creator account\n- You can't save changes or export personalized reports\n- Signup prompts appear when you try account-specific actions\n\nVerify: 🔗 [Dashboard (/social/simulation/dashboard)](/social/simulation/dashboard)",
           category: "Sample"
         },
         {
           id: 'q3',
           question: "Do I need to connect my TikTok account to see value?",
-          answer: "No—you can get significant value from Sample without connecting anything.\n\nSample lets you:\n- Understand what OwlSeer outputs look like\n- Learn our methodology and signal categories\n- See how scripts and calendars are structured\n- Evaluate if the tool fits your workflow\n\nConnecting your TikTok is only needed when you want:\n- Analysis based on YOUR account's actual performance\n- Personalized recommendations for YOUR niche and audience\n- Saved strategies and exportable reports\n\nMany users spend 10-15 minutes in Sample before deciding whether to connect. That's exactly how we designed it.\n\nVerify: 🔗 [Dashboard (/simulation/dashboard)](/simulation/dashboard)",
+          answer: "No—you can get significant value from Sample without connecting anything.\n\nSample lets you:\n- Understand what OwlSeer outputs look like\n- Learn our methodology and signal categories\n- See how scripts and calendars are structured\n- Evaluate if the tool fits your workflow\n\nConnecting your TikTok is only needed when you want:\n- Analysis based on YOUR account's actual performance\n- Personalized recommendations for YOUR niche and audience\n- Saved strategies and exportable reports\n\nMany users spend 10-15 minutes in Sample before deciding whether to connect. That's exactly how we designed it.\n\nVerify: 🔗 [Dashboard (/social/simulation/dashboard)](/social/simulation/dashboard)",
           category: "Sample"
         },
         {
           id: 'q4',
           question: "What does OwlSeer actually output?",
-          answer: "OwlSeer outputs four main deliverables:\n\n1. **Strategy Overview**\n- Weekly content direction and priorities\n- Goals aligned with your stated objectives\n- Key metrics to focus on\n\n2. **Content Ideas**\n- Topic suggestions based on your niche and trends\n- Each idea includes \"why this could work for you\"\n- Difficulty/effort estimates\n\n3. **Scripts**\n- Full script structure: hook → body → CTA\n- Multiple variations per idea\n- Customizable to your style\n\n4. **Posting Calendar**\n- Optimal posting times based on your audience\n- Weekly/monthly view\n- Integration-ready format\n\nEvery output includes a \"Why this recommendation\" section that traces back to specific signals and templates.\n\nVerify: 🔗 [Dashboard (/simulation/dashboard)](/simulation/dashboard), 🔗 [Content Studio (/simulation/content-studio)](/simulation/content-studio), 🔗 [Scheduling (/simulation/scheduling-slot)](/simulation/scheduling-slot)",
+          answer: "OwlSeer outputs four main deliverables:\n\n1. **Strategy Overview**\n- Weekly content direction and priorities\n- Goals aligned with your stated objectives\n- Key metrics to focus on\n\n2. **Content Ideas**\n- Topic suggestions based on your niche and trends\n- Each idea includes \"why this could work for you\"\n- Difficulty/effort estimates\n\n3. **Scripts**\n- Full script structure: hook → body → CTA\n- Multiple variations per idea\n- Customizable to your style\n\n4. **Posting Calendar**\n- Optimal posting times based on your audience\n- Weekly/monthly view\n- Integration-ready format\n\nEvery output includes a \"Why this recommendation\" section that traces back to specific signals and templates.\n\nVerify: 🔗 [Dashboard (/social/simulation/dashboard)](/social/simulation/dashboard), 🔗 [Content Studio (/social/simulation/studio)](/social/simulation/studio), 🔗 [Scheduling (/social/simulation/scheduling)](/social/simulation/scheduling)",
           category: "Outputs"
         },
         {
           id: 'q5',
           question: "What do the scripts look like?",
-          answer: "Our scripts are structured for TikTok's format:\n\n**Hook (0-3 seconds)**\n- Attention-grabbing opener\n- Multiple hook variations to test\n- Notes on why this hook style matches your audience\n\n**Body (3-45 seconds)**\n- Main content beats\n- Visual/action suggestions\n- Pacing recommendations\n\n**CTA (final seconds)**\n- Clear call-to-action\n- Options: follow, comment, save, visit link\n- Matched to your current goals\n\n**Example structure:**\n\nHook: \"Stop doing [X]—here's what actually works\"\nBody: \n- Beat 1: State the problem (5-10s)\n- Beat 2: Show the solution (15-20s)\n- Beat 3: Proof/result (10-15s)\nCTA: \"Save this for later and follow for more [niche] tips\"\n\nWhy this works for you: Your educational content performs 2.1x better than entertainment. Question-based hooks get 34% higher completion on your account.\n\nVerify: 🔗 [Content Studio (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "Our scripts are structured for TikTok's format:\n\n**Hook (0-3 seconds)**\n- Attention-grabbing opener\n- Multiple hook variations to test\n- Notes on why this hook style matches your audience\n\n**Body (3-45 seconds)**\n- Main content beats\n- Visual/action suggestions\n- Pacing recommendations\n\n**CTA (final seconds)**\n- Clear call-to-action\n- Options: follow, comment, save, visit link\n- Matched to your current goals\n\n**Example structure:**\n\nHook: \"Stop doing [X]—here's what actually works\"\nBody: \n- Beat 1: State the problem (5-10s)\n- Beat 2: Show the solution (15-20s)\n- Beat 3: Proof/result (10-15s)\nCTA: \"Save this for later and follow for more [niche] tips\"\n\nWhy this works for you: Your educational content performs 2.1x better than entertainment. Question-based hooks get 34% higher completion on your account.\n\nVerify: 🔗 [Content Studio (/social/simulation/studio)](/social/simulation/studio)",
           category: "Outputs"
         },
         {
           id: 'q6',
           question: "Can I export my strategy and scripts?",
-          answer: "Export options depend on your plan:\n\n**Free Tier:**\n- Copy individual scripts to clipboard\n- Screenshot/print any page\n\n**Growth Tier ($19/mo):**\n- Export scripts to PDF\n- Export calendar to Google Calendar / iCal\n- Basic Notion integration\n\n**Scale Tier ($49/mo):**\n- Full strategy export (PDF, Notion, Google Docs)\n- API access for custom integrations\n- Team sharing and collaboration exports\n\nAll exports preserve the \"why\" reasoning, so you can reference it later.\n\nNote: In Sample mode, exports are disabled since you're viewing demo data. Connect your account to enable exports.\n\nVerify: 🔗 [Pricing (/pricing)](/pricing), 🔗 [Content Studio (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "Export options depend on your plan:\n\n**Free Tier:**\n- Copy individual scripts to clipboard\n- Screenshot/print any page\n\n**Growth Tier ($19/mo):**\n- Export scripts to PDF\n- Export calendar to Google Calendar / iCal\n- Basic Notion integration\n\n**Scale Tier ($49/mo):**\n- Full strategy export (PDF, Notion, Google Docs)\n- API access for custom integrations\n- Team sharing and collaboration exports\n\nAll exports preserve the \"why\" reasoning, so you can reference it later.\n\nNote: In Sample mode, exports are disabled since you're viewing demo data. Connect your account to enable exports.\n\nVerify: 🔗 [Pricing (/social/pricing)](/social/pricing), 🔗 [Content Studio (/social/simulation/studio)](/social/simulation/studio)",
           category: "Outputs"
         },
         {
           id: 'q7',
           question: "How does OwlSeer analyze my account?",
-          answer: "Our analysis examines 30+ signals across six categories:\n\n**1. Engagement Signals**\n- View-to-like ratio, comment sentiment, share frequency\n- Save rate, profile visits, watch time, replay rate\n\n**2. Timing Patterns**\n- Peak activity hours, day-of-week trends\n- Follower timezone distribution, posting consistency\n\n**3. Content DNA**\n- Hook style effectiveness, optimal video length\n- Music usage patterns, hashtag strategy, caption structure\n\n**4. Audience Insights**\n- Follower growth rate, demographic patterns\n- Interest clusters, engagement personas\n\n**5. Competitive Signals**\n- Niche benchmarks, top performer gaps\n- Content gap analysis, timing comparison\n\n**6. Trend Matching**\n- Trending sounds, viral formats\n- Emerging topics, platform shifts\n\nEach signal is weighted based on your specific goals and niche. The analysis typically completes in 30-60 seconds.\n\nVerify: 🔗 [Signals (/how-it-works#signals)](/how-it-works#signals), 🔗 [Account Intelligence (/simulation/intelligence)](/simulation/intelligence)",
+          answer: "Our analysis examines 30+ signals across six categories:\n\n**1. Engagement Signals**\n- View-to-like ratio, comment sentiment, share frequency\n- Save rate, profile visits, watch time, replay rate\n\n**2. Timing Patterns**\n- Peak activity hours, day-of-week trends\n- Follower timezone distribution, posting consistency\n\n**3. Content DNA**\n- Hook style effectiveness, optimal video length\n- Music usage patterns, hashtag strategy, caption structure\n\n**4. Audience Insights**\n- Follower growth rate, demographic patterns\n- Interest clusters, engagement personas\n\n**5. Competitive Signals**\n- Niche benchmarks, top performer gaps\n- Content gap analysis, timing comparison\n\n**6. Trend Matching**\n- Trending sounds, viral formats\n- Emerging topics, platform shifts\n\nEach signal is weighted based on your specific goals and niche. The analysis typically completes in 30-60 seconds.\n\nVerify: 🔗 [Signals (/social/how-it-works#signals)](/social/how-it-works#signals), 🔗 [Account Intelligence (/social/simulation/intelligence)](/social/simulation/intelligence)",
           category: "Methodology"
         },
         {
           id: 'q8',
           question: "What are the \"30+ signals\" you mention?",
-          answer: "\"30+ signals\" refers to the distinct data points we analyze per account. Here's the breakdown:\n\n**Engagement (7 signals)**\n- View-to-like ratio\n- Comment sentiment score\n- Share frequency\n- Save rate\n- Profile visit rate\n- Average watch time\n- Replay rate\n\n**Timing (5 signals)**\n- Peak activity hours\n- Day-of-week patterns\n- Timezone distribution\n- Posting consistency score\n- Seasonal trends\n\n**Content DNA (7 signals)**\n- Hook effectiveness score\n- Optimal video length\n- Music impact\n- Hashtag performance\n- Caption engagement\n- Thumbnail click rate\n- Format preferences\n\n**Audience (5 signals)**\n- Growth velocity\n- Demographic clusters\n- Interest mapping\n- Engagement personas\n- Loyalty indicators\n\n**Competitive (4 signals)**\n- Niche benchmarks\n- Gap analysis\n- Timing comparison\n- Content differentiation\n\n**Trends (4+ signals)**\n- Sound velocity\n- Format emergence\n- Topic momentum\n- Platform shifts\n\nTotal: 32 core signals, with additional sub-signals depending on data availability.\n\nVerify: 🔗 [Signals (/trust#signals)](/trust#signals), 🔗 [How It Works (/how-it-works#signals)](/how-it-works#signals)",
+          answer: "\"30+ signals\" refers to the distinct data points we analyze per account. Here's the breakdown:\n\n**Engagement (7 signals)**\n- View-to-like ratio\n- Comment sentiment score\n- Share frequency\n- Save rate\n- Profile visit rate\n- Average watch time\n- Replay rate\n\n**Timing (5 signals)**\n- Peak activity hours\n- Day-of-week patterns\n- Timezone distribution\n- Posting consistency score\n- Seasonal trends\n\n**Content DNA (7 signals)**\n- Hook effectiveness score\n- Optimal video length\n- Music impact\n- Hashtag performance\n- Caption engagement\n- Thumbnail click rate\n- Format preferences\n\n**Audience (5 signals)**\n- Growth velocity\n- Demographic clusters\n- Interest mapping\n- Engagement personas\n- Loyalty indicators\n\n**Competitive (4 signals)**\n- Niche benchmarks\n- Gap analysis\n- Timing comparison\n- Content differentiation\n\n**Trends (4+ signals)**\n- Sound velocity\n- Format emergence\n- Topic momentum\n- Platform shifts\n\nTotal: 32 core signals, with additional sub-signals depending on data availability.\n\nVerify: 🔗 [Signals (/trust#signals)](/trust#signals), 🔗 [How It Works (/social/how-it-works#signals)](/social/how-it-works#signals)",
           category: "Methodology"
         },
         {
           id: 'q9',
           question: "How do you generate script recommendations?",
-          answer: "Script generation follows a four-step process:\n\n**Step 1: Signal Analysis**\n- Analyze your 30+ signals\n- Identify strengths (what's working)\n- Identify gaps (what to improve)\n\n**Step 2: Template Matching**\n- Cross-reference with 200+ content templates\n- Filter by your niche (50+ categories)\n- Filter by your stage (beginner/growing/established)\n- Filter by your goals (growth/engagement/monetization)\n\n**Step 3: Personalization**\n- Adapt template to your content DNA\n- Match your typical video length\n- Align with your hook style preferences\n- Incorporate trending elements relevant to you\n\n**Step 4: Reasoning Documentation**\n- Attach \"why\" to every recommendation\n- Link back to specific signals\n- Provide confidence indicators\n\nThe result: scripts that feel like they were written for you, because they were—based on data, not guesses.\n\nVerify: 🔗 [Methodology (/how-it-works#synthesize)](/how-it-works#synthesize), 🔗 [Content Studio (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "Script generation follows a four-step process:\n\n**Step 1: Signal Analysis**\n- Analyze your 30+ signals\n- Identify strengths (what's working)\n- Identify gaps (what to improve)\n\n**Step 2: Template Matching**\n- Cross-reference with 200+ content templates\n- Filter by your niche (50+ categories)\n- Filter by your stage (beginner/growing/established)\n- Filter by your goals (growth/engagement/monetization)\n\n**Step 3: Personalization**\n- Adapt template to your content DNA\n- Match your typical video length\n- Align with your hook style preferences\n- Incorporate trending elements relevant to you\n\n**Step 4: Reasoning Documentation**\n- Attach \"why\" to every recommendation\n- Link back to specific signals\n- Provide confidence indicators\n\nThe result: scripts that feel like they were written for you, because they were—based on data, not guesses.\n\nVerify: 🔗 [Methodology (/social/how-it-works#synthesize)](/social/how-it-works#synthesize), 🔗 [Content Studio (/social/simulation/studio)](/social/simulation/studio)",
           category: "Methodology"
         },
         {
           id: 'q10',
           question: "Does OwlSeer guarantee viral content?",
-          answer: "No—and we're skeptical of any tool that claims to.\n\n**What we CAN do:**\n- Increase your probability of creating content that resonates\n- Identify patterns in what works for your specific account\n- Suggest optimal timing, topics, and formats based on data\n- Help you post more consistently with better structure\n\n**What we CANNOT do:**\n- Guarantee any video will go viral\n- Control TikTok's algorithm\n- Predict exactly how the platform will distribute your content\n- Override the inherent unpredictability of social media\n\n**Our philosophy:**\nVirality is partly luck. Strategy improves your odds. We focus on the controllable factors—content quality, timing, consistency—while being honest that no tool can guarantee outcomes.\n\nWe'd rather you succeed with realistic expectations than fail with inflated promises.\n\nVerify: 🔗 [Limits (/how-it-works#limits)](/how-it-works#limits), 🔗 [Boundaries (/faq#boundaries)](/faq#boundaries)",
+          answer: "No—and we're skeptical of any tool that claims to.\n\n**What we CAN do:**\n- Increase your probability of creating content that resonates\n- Identify patterns in what works for your specific account\n- Suggest optimal timing, topics, and formats based on data\n- Help you post more consistently with better structure\n\n**What we CANNOT do:**\n- Guarantee any video will go viral\n- Control TikTok's algorithm\n- Predict exactly how the platform will distribute your content\n- Override the inherent unpredictability of social media\n\n**Our philosophy:**\nVirality is partly luck. Strategy improves your odds. We focus on the controllable factors—content quality, timing, consistency—while being honest that no tool can guarantee outcomes.\n\nWe'd rather you succeed with realistic expectations than fail with inflated promises.\n\nVerify: 🔗 [Limits (/social/how-it-works#limits)](/social/how-it-works#limits), 🔗 [Boundaries (/social/faq#boundaries)](/social/faq#boundaries)",
           category: "Boundaries"
         },
         {
           id: 'q11',
           question: "Will OwlSeer auto-post for me?",
-          answer: "No—we intentionally don't offer auto-posting.\n\n**Why we don't auto-post:**\n\n1. **Creative control**: You should review and potentially edit every piece before it goes live\n\n2. **Platform compliance**: Auto-posting can violate TikTok's terms in some implementations\n\n3. **Quality assurance**: AI-generated scripts benefit from human review before posting\n\n4. **Authenticity**: Your audience follows YOU—automated posting can feel inauthentic\n\n**What we DO provide:**\n- Scripts ready to record\n- Optimal timing suggestions\n- Calendar reminders\n- Integration with scheduling tools (you still approve each post)\n\n**Our philosophy:**\nWe're a strategy partner, not an automation bot. We do the analysis and planning; you maintain creative control.\n\nVerify: 🔗 [Boundaries (/faq#boundaries)](/faq#boundaries), 🔗 [Scheduling (/simulation/scheduling-slot)](/simulation/scheduling-slot)",
+          answer: "No—we intentionally don't offer auto-posting.\n\n**Why we don't auto-post:**\n\n1. **Creative control**: You should review and potentially edit every piece before it goes live\n\n2. **Platform compliance**: Auto-posting can violate TikTok's terms in some implementations\n\n3. **Quality assurance**: AI-generated scripts benefit from human review before posting\n\n4. **Authenticity**: Your audience follows YOU—automated posting can feel inauthentic\n\n**What we DO provide:**\n- Scripts ready to record\n- Optimal timing suggestions\n- Calendar reminders\n- Integration with scheduling tools (you still approve each post)\n\n**Our philosophy:**\nWe're a strategy partner, not an automation bot. We do the analysis and planning; you maintain creative control.\n\nVerify: 🔗 [Boundaries (/social/faq#boundaries)](/social/faq#boundaries), 🔗 [Scheduling (/social/simulation/scheduling)](/social/simulation/scheduling)",
           category: "Boundaries"
         },
         {
@@ -264,13 +463,13 @@ export const translations = {
         {
           id: 'q15',
           question: "What's the difference between Free, Growth, and Scale plans?",
-          answer: "Here's a detailed breakdown:\n\n**Free Plan ($0/mo)**\n- 1 strategy analysis per month\n- Basic engagement insights\n- Access to Sample dashboard\n- Community support (forum)\n- Best for: Trying the tool, occasional use\n\n**Growth Plan ($19/mo)**\n- 10 strategy analyses per month\n- Full script generation with export\n- Posting calendar integration\n- Trend radar access\n- Email support (48h response)\n- Best for: Active creators, regular content producers\n\n**Scale Plan ($49/mo)**\n- Unlimited strategy analyses\n- Priority support (24h response)\n- Team collaboration (up to 5 seats)\n- API access for custom integrations\n- Advanced analytics dashboard\n- Dedicated account manager (optional)\n- Best for: Agencies, serious creators, teams\n\nAll plans include access to Sample mode and the core methodology documentation.\n\nVerify: 🔗 [Pricing (/pricing#compare)](/pricing#compare), 🔗 [Simulation (/simulation)](/simulation)",
+          answer: "Here's a detailed breakdown:\n\n**Free Plan ($0/mo)**\n- 1 strategy analysis per month\n- Basic engagement insights\n- Access to Sample dashboard\n- Community support (forum)\n- Best for: Trying the tool, occasional use\n\n**Growth Plan ($19/mo)**\n- 10 strategy analyses per month\n- Full script generation with export\n- Posting calendar integration\n- Trend radar access\n- Email support (48h response)\n- Best for: Active creators, regular content producers\n\n**Scale Plan ($49/mo)**\n- Unlimited strategy analyses\n- Priority support (24h response)\n- Team collaboration (up to 5 seats)\n- API access for custom integrations\n- Advanced analytics dashboard\n- Dedicated account manager (optional)\n- Best for: Agencies, serious creators, teams\n\nAll plans include access to Sample mode and the core methodology documentation.\n\nVerify: 🔗 [Pricing (/social/pricing#compare)](/social/pricing#compare), 🔗 [Simulation (/social/simulation)](/social/simulation)",
           category: "Billing"
         },
         {
           id: 'q16',
           question: "Can I cancel my subscription anytime?",
-          answer: "Yes—we believe in earning your subscription every month.\n\n**How to cancel:**\n1. Go to Settings → Billing\n2. Click \"Cancel Subscription\"\n3. Confirm (no survey required, no retention tactics)\n4. Done\n\n**What happens after cancellation:**\n- You keep full access until the end of your current billing period\n- Generated strategies and scripts remain accessible\n- On the last day, your account downgrades to Free tier\n- Your data stays unless you delete it\n\n**Refund policy:**\n- Annual plans: Prorated refund within 30 days\n- Monthly plans: No refund for current month, no future charges\n- Disputes: Contact support@owlseer.com\n\n**Re-subscribing:**\n- You can re-subscribe anytime\n- Your history and settings are preserved\n- No penalty for canceling and returning\n\nVerify: 🔗 [Billing (/pricing#billing)](/pricing#billing)",
+          answer: "Yes—we believe in earning your subscription every month.\n\n**How to cancel:**\n1. Go to Settings → Billing\n2. Click \"Cancel Subscription\"\n3. Confirm (no survey required, no retention tactics)\n4. Done\n\n**What happens after cancellation:**\n- You keep full access until the end of your current billing period\n- Generated strategies and scripts remain accessible\n- On the last day, your account downgrades to Free tier\n- Your data stays unless you delete it\n\n**Refund policy:**\n- Annual plans: Prorated refund within 30 days\n- Monthly plans: No refund for current month, no future charges\n- Disputes: Contact support@owlseer.com\n\n**Re-subscribing:**\n- You can re-subscribe anytime\n- Your history and settings are preserved\n- No penalty for canceling and returning\n\nVerify: 🔗 [Billing (/social/pricing#billing)](/social/pricing#billing)",
           category: "Billing"
         }
       ]
@@ -280,7 +479,7 @@ export const translations = {
         title: "Your TikTok Strategy in",
         titleHighlight: "3 Steps",
         lead: "OwlSeer connects to your TikTok account, analyzes your data through 30+ signals, and delivers a personalized content strategy — all in under three minutes. Here is exactly what to expect.",
-        cta: "Try Free Demo",
+        cta: "Try Free Sample",
         video: "Watch 1 Min Overview"
       },
       step1: {
@@ -357,7 +556,7 @@ export const translations = {
         title: "Ready to Start?",
         desc: "Connect your TikTok account and receive your personalized strategy in under three minutes. Free trial, no credit card required. Or explore sample data first.",
         primary: "Start Free Trial",
-        secondary: "Explore Interactive Demo"
+        secondary: "Explore Interactive Sample"
       }
     },
     contentDiagnosisPage: {
@@ -441,26 +640,47 @@ export const translations = {
         title: "Diagnose Your Content",
         desc: "Connect your account and find out exactly what to fix.",
         primary: "Start Free Trial",
-        secondary: "Try Intelligence Demo"
+        secondary: "Try Intelligence Sample"
       }
     },
     footer: {
       tagline: "The AI-powered foresight platform for TikTok creators. See what's next before everyone else.",
       product: "Product",
+      solutions: "Solutions",
+      useCases: "Use Cases",
       resources: "Resources",
       legal: "Legal",
       rights: "© 2026 OwlSeer. All rights reserved.",
+      mobileProductAndSolutions: "Product & Solutions",
       links: {
         howItWorks: "How It Works",
+        methodology: "Methodology",
+        signals: "30+ Signals",
         pricing: "Pricing",
         trySample: "Try Sample",
         blog: "Blog",
+        guides: "Guides",
+        glossary: "Glossary",
         faq: "FAQ",
         contact: "Contact",
+        contentCreators: "Content Creators",
+        localBusiness: "Local Business",
+        agencies: "Agencies",
+        brands: "Brands",
+        ecommerceSellers: "E-commerce Sellers",
+        trendPrediction: "Trend Prediction",
+        contentDiagnosis: "Content Diagnosis",
+        scriptGeneration: "Script Generation",
+        postingSchedule: "Posting Schedule",
+        hashtagStrategy: "Hashtag Strategy",
         privacy: "Privacy Policy",
         terms: "Terms of Service",
         security: "Security",
         cookies: "Cookie Policy"
+      },
+      meta: {
+        developers: "Developers",
+        sitemap: "Sitemap"
       }
     },
     signalsPage: {
@@ -483,8 +703,8 @@ export const translations = {
           task: "Understand how OwlSeer measures the way viewers interact with your content.",
           desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
           linkText: "AER card",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/social/dashboard#aer-card).",
           signals: [
             { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
             { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
@@ -505,8 +725,8 @@ export const translations = {
           task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
           desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
           linkText: "Trend Radar",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/social/simulation/trends).",
           signals: [
             { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
             { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
@@ -525,8 +745,8 @@ export const translations = {
           task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
           desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
           linkText: "Intelligence Hub",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          linkUrl: "/social/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/social/intelligence).",
           signals: [
             { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
             { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
@@ -576,7 +796,7 @@ export const translations = {
         titleHighlight: "60 Seconds",
         desc: "OwlSeer creates ready-to-shoot scripts personalized to your audience — with hooks, body content, CTAs, sounds, and hashtags, all derived from your engagement signals.",
         cta: "Start Free Trial",
-        demo: "Try Demo"
+        demo: "Try Sample"
       },
       problem: {
         title: "Why Script Writing Is the Bottleneck",
@@ -642,7 +862,7 @@ export const translations = {
         title: "Data-Driven TikTok Growth: The AI Engine Behind Viral Creators",
         lead: "Stop guessing. Leverage 10M+ viral data points to generate scripts, predict trends, and automate engagement. The only tool that optimizes your hook rate and retention using deep learning.",
         primaryCta: "Start Free Trial",
-        secondaryCta: "See the Demo"
+        secondaryCta: "See the Sample"
       },
       tldr: "OwlSeer helps individual TikTok creators grow by replacing guesswork with data. Every week you receive trend alerts matched to your niche, content recommendations based on your engagement signals, ready-to-shoot scripts, and a personalized posting schedule. Your Content Supply Rhythm is tracked so you maintain the consistency that the algorithm rewards.",
       painPoints: {
@@ -708,7 +928,7 @@ export const translations = {
         title: "Ready to Stop Guessing?",
         subtitle: "Join 10,000+ creators who use data-driven strategy. Free trial, no credit card required.",
         primary: "Start Free Trial",
-        secondary: "See the Demo"
+        secondary: "See the Sample"
       },
       miniTool: {
         title: "See what OwlSeer would recommend for YOUR next post.",
@@ -739,7 +959,7 @@ export const translations = {
           title: "AI-Driven TikTok Marketing for Local Business: Turn Views into Foot Traffic",
           lead: "OwlSeer automates local growth. We analyze 30+ signals to match your business with hyper-local trends, generate service-focused scripts, and target your community when they are most active. Stop posting for likes; start posting for leads.",
           primary: "Start Free Trial",
-          secondary: "See the Demo"
+          secondary: "See the Sample"
         },
         tldr: "Local businesses do not need millions of views. They need the right 5,000 people — the ones who live within driving distance and want what you offer. OwlSeer tracks the signals that matter for local: profile visit rate, save rate, and geographic spread. AI Goals track the metrics that turn views into foot traffic.",
         painPoints: {
@@ -767,35 +987,23 @@ export const translations = {
               desc: "Trend Radar scans TikTok for trends that work in local business content — restaurant reviews, salon transformations, gym challenges. Match scores factor in your business type.",
               icon: "Trend"
             },
-            {
-              title: "Service-Focused Scripts",
-              desc: "Script Studio generates scripts designed for local formats — behind-the-scenes tours, customer reaction videos, and seasonal promotion hooks.",
-              icon: "Script"
-            },
-            {
-              title: "Local Audience Scheduling",
-              desc: "Your customers are not online at the same times as a national audience. Best-time badges ensure you post when your community is scrolling.",
-              icon: "Schedule"
-            },
-            {
-              title: "Foot Traffic Goals",
-              desc: "AI Goals let you set objectives that match a local business: \"Increase profile visits by 50%\" or \"Get 10 DM inquiries per week.\"",
-              icon: "Goal"
-            }
-          ]
-        },
-        results: {
-          title: "What Local Business Owners Are Seeing",
-          stats: [
-            { value: "3x", label: "More content output", desc: "AI scripts eliminate the \"what do I post?\" bottleneck" },
-            { value: "65%", label: "More profile visits", desc: "Better hooks drive more people to your profile" },
-            { value: "2x", label: "Increase in DMs", desc: "Service-focused CTAs convert viewers into leads" }
-          ]
-        },
-        formats: {
-          title: "Content Formats That Work for Local",
-          items: [
-            { title: "Behind-the-Scenes", desc: "Show what happens in the kitchen or studio." },
+          { title: "Service-Focused Scripts", desc: "Script Studio generates scripts designed for local formats — behind-the-scenes tours, customer reaction videos, and seasonal promotion hooks.", icon: "Script" },
+          { title: "Local Audience Scheduling", desc: "Your customers are not online at the same times as a national audience. Best-time badges ensure you post when your community is scrolling.", icon: "Schedule" },
+          { title: "Foot Traffic Goals", desc: "AI Goals let you set objectives that match a local business: \"Increase profile visits by 50%\" or \"Get 10 DM inquiries per week.\"", icon: "Goal" }
+        ]
+      },
+      results: {
+        title: "What Local Business Owners Are Seeing",
+        stats: [
+          { value: "3x", label: "More content output", desc: "AI scripts eliminate the \"what do I post?\" bottleneck" },
+          { value: "65%", label: "More profile visits", desc: "Better hooks drive more people to your profile" },
+          { value: "2x", label: "Increase in DMs", desc: "Service-focused CTAs convert viewers into leads" }
+        ]
+      },
+      formats: {
+        title: "Content Formats That Work for Local",
+        items: [
+          { title: "Behind-the-Scenes", desc: "Show what happens in the kitchen or studio." },
             { title: "Customer Reactions", desc: "Real reactions from happy customers." },
             { title: "Before/After", desc: "Visual transformations earn saves." },
             { title: "Day in the Life", desc: "Humanizes the brand and triggers local pride." },
@@ -820,7 +1028,7 @@ export const translations = {
           title: "Ready to Bring Customers Through Your Door?",
           subtitle: "Your next regular might be scrolling TikTok right now. Connect your account and start reaching your local audience.",
           primary: "Start Free Trial",
-          secondary: "See the Demo"
+          secondary: "See the Sample"
         }
       },
     compareVidIQ: {
@@ -877,7 +1085,25 @@ export const translations = {
           title: "Ready to Try TikTok-Native Strategy?",
           subtitle: "See how OwlSeer works on sample data. Or start your free trial.",
           primary: "Start Free Trial",
-          secondary: "Explore Demo"
+          secondary: "Explore Sample"
+        },
+        ui: {
+          loading: "Loading content...",
+          badge: "Head-to-Head",
+          coreInsight: "Core Insight",
+          tableHeaders: {
+            feature: "Feature",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "Experience what VidIQ is missing",
+          actionButtons: {
+            trendRadar: "Trend Radar",
+            scriptStudio: "Script Studio",
+            weeklyReport: "Weekly Report"
+          },
+          platformFocusLabel: "Platform Focus",
+          transparencyNote: "Transparency Note"
         }
       }
     },
@@ -893,6 +1119,54 @@ export const translations = {
     faq: '常见问题',
     security: '安全与隐私',
     blog: '博客',
+    guides: '指南',
+    nav: {
+      solutions: "解决方案",
+      platform: "平台",
+      useCases: "使用场景",
+      byRole: "按角色",
+      learn: "学习",
+      trustSupport: "信任与支持",
+      trustSecurity: "信任与安全",
+      language: "语言",
+      glossary: "术语表",
+      links: {
+        signals: "30+ 信号",
+        interactiveSample: "互动示例",
+        trendPrediction: "趋势预测",
+        contentDiagnosis: "内容诊断",
+        scriptGeneration: "脚本生成",
+        postingSchedule: "发布排期",
+        hashtagStrategy: "标签策略",
+        contentCreators: "内容创作者",
+        localBusiness: "本地商家",
+        agencies: "机构",
+        brands: "品牌方",
+        ecommerceSellers: "电商卖家",
+        privacy: "隐私",
+        terms: "条款",
+        cookies: "Cookie",
+        security: "安全"
+      },
+      desc: {
+        howItWorks: "3 步快速上手",
+        methodology: "我们的 5 步 AI 流程",
+        signals: "我们追踪什么",
+        interactiveSample: "看看 OwlSeer 如何运作",
+        trySample: "在示例数据上体验"
+      },
+      actions: {
+        trySample: "体验示例",
+        startFree: "免费开始",
+        startFreeTrial: "开始免费试用",
+        trySampleCta: "体验示例"
+      },
+      darkMode: {
+        toggle: "切换深色模式",
+        switchToLight: "切换到浅色模式",
+        switchToDark: "切换到深色模式"
+      }
+    },
     hero: {
       badge: 'v2.0 现已上线',
       title: "预见",
@@ -900,39 +1174,186 @@ export const translations = {
       subtitle: "{platform} 数据分析不会告诉你该做什么。",
       subtitle2: "我们会。",
       ctaPrimary: "体验演示",
+      ctaSecondaryButton: "立即开始",
       ctaSecondary: "无需注册",
       ctaInstant: "即刻访问"
     },
     productShowcase: {
-      opportunities: { title: "在爆发前发现趋势", desc: "停止追逐昨天的热门。我们的 AI 分析数百万个信号，为您量身定制高潜力的利基话题。" },
-      planning: { title: "执行，而不只是计划", desc: "将策略转化为行动。获得每周制作时间表，平衡高增长风险与稳定的信任建立内容。" },
-      analytics: { title: "解码您的内容 DNA", desc: "准确了解您最佳视频的表现原因。我们将您的内容分解为结构元素以复制成功。" }
+      heading: {
+        title: "从洞察到可发布内容，一条流程完成",
+        subtitle: "OwlSeer 消除策略与执行之间的鸿沟，让创作者从信号到脚本都更有把握。"
+      },
+      highlights: {
+        decisionCycle: { label: "决策周期", desc: "从信号发现到执行，只需分钟而非数天。" },
+        growthSignal: { label: "增长信号", desc: "用增速与利基匹配度优先排序机会。" },
+        executionQuality: { label: "执行质量", desc: "每条建议都附带可信的推理依据。" }
+      },
+      labels: {
+        capability: "能力",
+        outcome: "结果",
+        learnMore: "了解更多"
+      },
+      opportunities: {
+        step: "步骤 01",
+        title: "在爆发前发现趋势",
+        desc: "停止追逐昨天的热门。我们的 AI 分析数百万个信号，为您量身定制高潜力的利基话题。",
+        statA: "24/7 信号扫描",
+        statB: "机会优先排序",
+        bullets: ["在趋势饱和前捕捉上升话题。", "优先选择已验证的利基匹配话题。"],
+        mock: {
+          eyebrow: "趋势雷达",
+          title: "发现高匹配机会",
+          score: "94 分",
+          metrics: [
+            { label: "增速", value: "+128%" },
+            { label: "竞争度", value: "低" },
+            { label: "观看池", value: "45M" }
+          ],
+          bullets: ["与您的高表现受众细分高度重合。", "推荐发布窗口在未来 6 小时内开启。"]
+        }
+      },
+      planning: {
+        step: "步骤 02",
+        title: "执行，而不只是计划",
+        desc: "将策略转化为行动。获得每周制作时间表，平衡高增长风险与稳定的信任建立内容。",
+        statA: "每周节奏地图",
+        statB: "均衡内容组合",
+        bullets: ["把推荐直接转成可拍摄的日程表。", "保持一致，不耗尽创意能量。"],
+        mock: {
+          eyebrow: "执行计划",
+          title: "本周的制作节奏",
+          postCount: "3 条内容",
+          schedule: [
+            { day: "周一", date: "24", task: "趋势优先开场", tag: "增长" },
+            { day: "周三", date: "26", task: "建立信任故事", tag: "社区" },
+            { day: "周五", date: "28", task: "转化 CTA 视频", tag: "收入" }
+          ]
+        }
+      },
+      analytics: {
+        step: "步骤 03",
+        title: "解码您的内容 DNA",
+        desc: "准确了解您最佳视频的表现原因。我们将您的内容分解为结构元素以复制成功。",
+        statA: "逐帧诊断",
+        statB: "可复用胜出模式",
+        bullets: ["定位驱动留存与完播的关键因素。", "用证据支持的修改更快迭代。"],
+        mock: {
+          eyebrow: "表现 DNA",
+          title: "复制已经奏效的打法",
+          pill: "前 5%",
+          metrics: [
+            { label: "钩子强度", value: "9.8/10", width: "w-[95%]" },
+            { label: "受众留存", value: "72%", width: "w-[72%]" },
+            { label: "CTA 完成率", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "强大引擎",
       title: "您需要的一切",
       titleHighlight: "统治力",
       subtitle: "现代创作者的统一操作系统。停止在脱节的工具之间切换。",
-      copilot: { title: "AI 策略副驾驶", desc: "您的 24/7 创意伙伴。生成高转化脚本，头脑风暴钩子，并即时获得创意反馈。" },
-      trend: { title: "趋势情报", desc: "在机会见顶前发现它们。我们的 AI 分析数百万个数据点以找到*您的*下一个病毒话题。", liveSignals: "实时信号" },
-      goals: { title: "智能目标", desc: "将模糊的雄心转化为可操作的日常任务。" },
-      analytics: { title: "深度分析" },
+      metrics: [
+        { label: "发布速度", value: "快 3 倍" },
+        { label: "规划把握", value: "信号支撑" },
+        { label: "执行一致性", value: "周节奏" }
+      ],
+      copilot: {
+        title: "AI 策略副驾驶",
+        desc: "您的 24/7 创意伙伴。生成高转化脚本，头脑风暴钩子，并即时获得创意反馈。",
+        badge: "实时生成",
+        chat: {
+          user: "帮我为下一个利基视频写一个更强的开场钩子。",
+          assistantLabel: "建议开场",
+          assistant: "别再复制千篇一律的开场了。这句 3 秒开场能把观众留住。"
+        }
+      },
+      trend: {
+        title: "趋势情报",
+        desc: "在机会见顶前发现它们。我们的 AI 分析数百万个数据点以找到*您的*下一个病毒话题。",
+        liveSignals: "实时信号",
+        list: { viewsLabel: "次观看" }
+      },
+      goals: {
+        title: "智能目标",
+        desc: "将模糊的雄心转化为可操作的日常任务。",
+        ringLabel: "目标",
+        tasks: [
+          { task: "录制开场钩子变体", done: true },
+          { task: "复盘趋势候选清单", done: false },
+          { task: "安排高意图内容发布", done: false }
+        ]
+      },
+      analytics: { title: "深度分析", badge: "+124% 同比" },
       features: { scheduling: "智能调度", prediction: "病毒预测", multiAccount: "多账号管理", reports: "即时报告" }
+    },
+    valueProposition: {
+      badge: "策略清晰度",
+      title: "不再猜测该发布什么",
+      subtitle: "OwlSeer 告诉你下一步该做什么。",
+      cards: [
+        { title: "可执行计划", desc: "在 3 分钟内提供可操作的内容计划。" },
+        { title: "AI 脚本", desc: "AI 生成脚本，今天就可以拍摄。" },
+        { title: "数据驱动", desc: "为厌倦随机发布的创作者提供方向。" }
+      ],
+      trust: ["不做奇迹承诺", "不自动发布", "无需密码"],
+      metrics: [
+        { label: "计划产出速度", value: "< 3 分钟" },
+        { label: "分析信号数量", value: "30+" },
+        { label: "内容节奏", value: "周级闭环" }
+      ],
+      cta: {
+        primary: "查看实际操作",
+        secondary: "工作原理"
+      }
     },
     pricingSection: {
       title: "简单，透明的定价",
-      subtitle: "开始您的 14 天免费试用。随时取消。",
+      subtitle: "开始您的 7 天免费试用。随时取消。",
+      labels: { mostPopular: "最受欢迎" },
       monthly: "月付",
       yearly: "年付",
       save: "省 20%",
       period: "月",
       plans: {
-        creator: { name: "创作者", features: ["最多 3 个 TikTok 账号", "AI 内容建议", "基础分析", "内容调度", "邮件支持"] },
-        growth: { name: "增长", features: ["最多 10 个 TikTok 账号", "高级 AI 优化", "高级分析", "团队协作", "优先支持", "每周咨询"] },
-        scale: { name: "规模化", features: ["无限账号", "企业级 AI", "自定义分析", "高级团队工具", "白标选项", "专属经理", "24/7 优先支持"] }
+        creator: {
+          name: "Basic（个人创作版）",
+          summary: "单兵作战，快速启动内容飞轮。",
+          features: [
+            "1 账号 / 1 席位，专注个人创作",
+            "每月 30 条免费视频分析",
+            "600 月度 Credits，支持高频 Copilot 辅助",
+            "AI 内容全链路：画像、诊断、目标解析、脚本生成",
+            "基础版 AI Copilot，实时解答创作疑惑"
+          ]
+        },
+        growth: {
+          name: "Growth（团队增长版）",
+          summary: "小团队协作，规模化产出爆款。",
+          features: [
+            "3 账号 / 4 席位，支持多角色协作",
+            "每月 120 条免费视频分析",
+            "1200 月度 Credits，支撑高密度创意推演",
+            "完整排期与脚本链路，提升分工效率",
+            "支持批量任务处理，减少重复劳动",
+            "基础数据报表导出，用于周/月复盘"
+          ]
+        },
+        scale: {
+          name: "Pro（规模扩展版）",
+          summary: "机构与多账号团队，追求极致转化与效率。",
+          features: [
+            "8 账号 / 10 席位，覆盖多角色并行运营",
+            "每月 400 条免费视频分析，覆盖全行业动态",
+            "4000 月度 Credits，支持重推理模型调用",
+            "优先计算队列，高峰期任务快速响应",
+            "高上限 AI Copilot，支持更长上下文"
+          ]
+        }
       },
       cta: { trial: "开始免费试用", buy: "立即购买" },
-      footer: { secure: "安全支付", trial: "14 天免费试用", cancel: "随时取消" }
+      footer: { secure: "安全支付", trial: "7 天免费试用", cancel: "随时取消" }
     },
     pricingPage: {
       hero: {
@@ -957,9 +1378,9 @@ export const translations = {
         title: "常见问题",
         items: [
           { q: "我可以随时取消订阅吗？", a: "是的，当然。月度计划没有长期合同。您可以随时直接从您的仪表板取消。" },
-          { q: "14 天免费试用如何运作？", a: "您将获得 14 天的 Pro 计划功能的完全访问权限。试用结束前我们不会从您的卡中扣款。您可以在试用期间随时取消以避免被收费。" },
+          { q: "7 天免费试用如何运作？", a: "您将获得 7 天的 Pro 计划功能的完全访问权限。试用结束前我们不会从您的卡中扣款。您可以在试用期间随时取消以避免被收费。" },
           { q: "我需要提供我的 TikTok 密码吗？", a: "不！我们使用官方 TikTok API 和 OAuth 2.0 进行安全连接。我们永远不会看到或存储您的密码，我们只有您明确授予的权限。" },
-          { q: "如果我添加更多账号会怎样？", a: "Pro 计划涵盖最多 3 个账号。如果您需要更多，可以升级到支持 10+ 账号并提供批量折扣的 Agency 计划。" },
+          { q: "如果我添加更多账号会怎样？", a: "可以按规模升级档位。Basic 支持 1 个账号，Growth 支持 3 个账号，Pro 支持最多 8 个账号与 10 个团队席位。" },
           { q: "你们提供退款吗？", a: "是的，我们提供 30 天退款保证。如果您对结果不满意，只需联系我们的支持团队即可获得全额退款。" }
         ]
       },
@@ -973,7 +1394,7 @@ export const translations = {
       title: "准备好预见未来了吗？",
       subtitle: "加入成千上万不再猜测、开始增长的创作者。立即体验完整仪表板。",
       start: "开始免费试用",
-      demo: "查看实时演示"
+      demo: "查看 Sample"
     },
     faqPage: {
       title: "我们需要",
@@ -1000,67 +1421,67 @@ export const translations = {
         {
           id: 'q1',
           question: "是的，有免费的演示可以试用吗？",
-          answer: "是的。我们提供一个公共示例体验，展示完整的产品界面，使用示例创作者账户。您可以探索每个功能——战略概述、脚本建议、趋势雷达和发布日历——无需创建账户或提供任何个人信息。\n\n示例使用来自虚拟创作者账户的真实演示数据，因此您可以确切地看到使用自己的账户会得到什么样的输出和分析。\n\n验证：🔗 [数据看板 (/simulation/dashboard)](/simulation/dashboard), 🔗 [趋势雷达 (/simulation/trend-radar)](/simulation/trend-radar), 🔗 [内容工作室 (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "是的。我们提供一个公共示例体验，展示完整的产品界面，使用示例创作者账户。您可以探索每个功能——战略概述、脚本建议、趋势雷达和发布日历——无需创建账户或提供任何个人信息。\n\n示例使用来自虚拟创作者账户的真实演示数据，因此您可以确切地看到使用自己的账户会得到什么样的输出和分析。\n\n验证：🔗 [数据看板 (/social/simulation/dashboard)](/social/simulation/dashboard), 🔗 [趋势雷达 (/social/simulation/trends)](/social/simulation/trends), 🔗 [内容工作室 (/social/simulation/studio)](/social/simulation/studio)",
           category: "Sample"
         },
         {
           id: 'q2',
           question: "示例是完整的产品还是有限的预览？",
-          answer: "示例是完整的产品——相同的界面，相同的功能，相同的AI分析。唯一的区别是数据源：示例使用预配置的演示账户，而真实产品使用您连接的TikTok账户。\n\n相同之处：\n- 完整的仪表盘，所有模块可访问\n- 实时AI分析\n- 完整的脚本生成能力\n- 互动日历和调度视图\n\n不同之处：\n- 数据来自虚拟的“TechReviews_US”创作者账户\n- 不能保存更改或导出个性化报告\n- 当您尝试进行账户特定操作时，会出现注册提示\n\n验证：🔗 [数据看板 (/simulation/dashboard)](/simulation/dashboard)",
+          answer: "示例是完整的产品——相同的界面，相同的功能，相同的AI分析。唯一的区别是数据源：示例使用预配置的演示账户，而真实产品使用您连接的TikTok账户。\n\n相同之处：\n- 完整的仪表盘，所有模块可访问\n- 实时AI分析\n- 完整的脚本生成能力\n- 互动日历和调度视图\n\n不同之处：\n- 数据来自虚拟的“TechReviews_US”创作者账户\n- 不能保存更改或导出个性化报告\n- 当您尝试进行账户特定操作时，会出现注册提示\n\n验证：🔗 [数据看板 (/social/simulation/dashboard)](/social/simulation/dashboard)",
           category: "Sample"
         },
         {
           id: 'q3',
           question: "我需要连接我的 TikTok 账户才能看到价值吗？",
-          answer: "不——您可以从示例中获得显著的价值，而无需连接任何东西。\n\n示例让您：\n- 了解 OwlSeer 输出的内容\n- 学习我们的工作方法和信号类别\n- 查看脚本和日历的结构\n- 评估该工具是否适合您的工作流程\n\n连接您的 TikTok 仅在您想要：\n- 基于您账户的实际表现进行分析\n- 为您的细分市场和受众提供个性化推荐\n- 保存策略和可导出报告时才需要连接\n\n许多用户在示例中花费 10-15 分钟，然后决定是否连接。正是我们设计的方式。\n\n验证：🔗 [数据看板 (/simulation/dashboard)](/simulation/dashboard)",
+          answer: "不——您可以从示例中获得显著的价值，而无需连接任何东西。\n\n示例让您：\n- 了解 OwlSeer 输出的内容\n- 学习我们的工作方法和信号类别\n- 查看脚本和日历的结构\n- 评估该工具是否适合您的工作流程\n\n连接您的 TikTok 仅在您想要：\n- 基于您账户的实际表现进行分析\n- 为您的细分市场和受众提供个性化推荐\n- 保存策略和可导出报告时才需要连接\n\n许多用户在示例中花费 10-15 分钟，然后决定是否连接。正是我们设计的方式。\n\n验证：🔗 [数据看板 (/social/simulation/dashboard)](/social/simulation/dashboard)",
           category: "Sample"
         },
         {
           id: 'q4',
           question: "OwlSeer 实际上输出什么？",
-          answer: "OwlSeer 输出四个主要交付物：\n\n1. **战略概述**\n- 每周内容方向和优先级\n- 与您的目标对齐的目标\n- 需要关注的关键指标\n\n2. **内容创意**\n- 基于您的细分市场和趋势的主题建议\n- 每个创意都包括“为什么这对您有用”\n- 难度/努力估算\n\n3. **脚本**\n- 完整的脚本结构：钩子 → 正文 → 号召性用语\n- 每个创意的多个变体\n- 可根据您的风格自定义\n\n4. **发布日历**\n- 基于您的受众的最佳发布时间\n- 每周/每月视图\n- 可集成的格式\n\n每个输出都包括“为什么推荐”部分，追溯到特定信号和模板。\n\n验证：🔗 [数据看板 (/simulation/dashboard)](/simulation/dashboard), 🔗 [内容工作室 (/simulation/content-studio)](/simulation/content-studio), 🔗 [发布排期 (/simulation/scheduling-slot)](/simulation/scheduling-slot)",
+          answer: "OwlSeer 输出四个主要交付物：\n\n1. **战略概述**\n- 每周内容方向和优先级\n- 与您的目标对齐的目标\n- 需要关注的关键指标\n\n2. **内容创意**\n- 基于您的细分市场和趋势的主题建议\n- 每个创意都包括“为什么这对您有用”\n- 难度/努力估算\n\n3. **脚本**\n- 完整的脚本结构：钩子 → 正文 → 号召性用语\n- 每个创意的多个变体\n- 可根据您的风格自定义\n\n4. **发布日历**\n- 基于您的受众的最佳发布时间\n- 每周/每月视图\n- 可集成的格式\n\n每个输出都包括“为什么推荐”部分，追溯到特定信号和模板。\n\n验证：🔗 [数据看板 (/social/simulation/dashboard)](/social/simulation/dashboard), 🔗 [内容工作室 (/social/simulation/studio)](/social/simulation/studio), 🔗 [发布排期 (/social/simulation/scheduling)](/social/simulation/scheduling)",
           category: "Outputs"
         },
         {
           id: 'q5',
           question: "脚本看起来像什么？",
-          answer: "我们的脚本结构适用于 TikTok 格式：\n\n**钩子（0-3 秒）**\n- 引人注目的开场白\n- 多个钩子变体供测试\n- 关于为什么这种钩子风格适合您的受众的说明\n\n**正文（3-45 秒）**\n- 主要内容要点\n- 视觉/行动建议\n- 节奏建议\n\n**号召性用语（最后几秒）**\n- 清晰的号召性用语\n- 选项：关注、评论、保存、访问链接\n- 与您的当前目标匹配\n\n**示例结构：**\n\n钩子：“停止做 [X]——这是有效的做法”\n正文：\n- 要点 1：陈述问题（5-10 秒）\n- 要点 2：展示解决方案（15-20 秒）\n- 要点 3：证据/结果（10-15 秒）\n号召性用语：“保存以备后用，并关注获取更多 [领域] 提示”\n\n为什么这对您有效：您的教育内容比娱乐内容表现好 2.1 倍。基于问题的钩子在您的账户上能获得 34% 更高的完成率。\n\n验证：🔗 [内容工作室 (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "我们的脚本结构适用于 TikTok 格式：\n\n**钩子（0-3 秒）**\n- 引人注目的开场白\n- 多个钩子变体供测试\n- 关于为什么这种钩子风格适合您的受众的说明\n\n**正文（3-45 秒）**\n- 主要内容要点\n- 视觉/行动建议\n- 节奏建议\n\n**号召性用语（最后几秒）**\n- 清晰的号召性用语\n- 选项：关注、评论、保存、访问链接\n- 与您的当前目标匹配\n\n**示例结构：**\n\n钩子：“停止做 [X]——这是有效的做法”\n正文：\n- 要点 1：陈述问题（5-10 秒）\n- 要点 2：展示解决方案（15-20 秒）\n- 要点 3：证据/结果（10-15 秒）\n号召性用语：“保存以备后用，并关注获取更多 [领域] 提示”\n\n为什么这对您有效：您的教育内容比娱乐内容表现好 2.1 倍。基于问题的钩子在您的账户上能获得 34% 更高的完成率。\n\n验证：🔗 [内容工作室 (/social/simulation/studio)](/social/simulation/studio)",
           category: "Outputs"
         },
         {
           id: 'q6',
           question: "我可以导出我的策略和脚本吗？",
-          answer: "导出选项取决于您的套餐：\n\n**免费套餐：**\n- 复制单个脚本到剪贴板\n- 截图/打印任何页面\n\n**成长套餐（$19/月）：**\n- 导出脚本为 PDF\n- 导出日历到 Google 日历 / iCal\n- 基本的 Notion 集成\n\n**规模套餐（$49/月）：**\n- 完整的战略导出（PDF、Notion、Google Docs）\n- API 访问用于自定义集成\n- 团队共享与协作导出\n\n所有导出都保留“为什么”理由，您可以稍后参考。\n\n注意：在示例模式下，由于您查看的是演示数据，导出功能被禁用。连接您的账户以启用导出。\n\n验证：🔗 [价格 (/pricing)](/pricing), 🔗 [内容工作室 (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "导出选项取决于您的套餐：\n\n**免费套餐：**\n- 复制单个脚本到剪贴板\n- 截图/打印任何页面\n\n**成长套餐（$19/月）：**\n- 导出脚本为 PDF\n- 导出日历到 Google 日历 / iCal\n- 基本的 Notion 集成\n\n**规模套餐（$49/月）：**\n- 完整的战略导出（PDF、Notion、Google Docs）\n- API 访问用于自定义集成\n- 团队共享与协作导出\n\n所有导出都保留“为什么”理由，您可以稍后参考。\n\n注意：在示例模式下，由于您查看的是演示数据，导出功能被禁用。连接您的账户以启用导出。\n\n验证：🔗 [价格 (/social/pricing)](/social/pricing), 🔗 [内容工作室 (/social/simulation/studio)](/social/simulation/studio)",
           category: "Outputs"
         },
         {
           id: 'q7',
           question: "OwlSeer 如何分析我的账户？",
-          answer: "我们的分析涵盖了六大类别的 30 多个信号：\n\n**1. 参与度信号**\n- 浏览与点赞比率、评论情感、分享频率\n- 保存率、个人资料访问、观看时长、重播率\n\n**2. 时间模式**\n- 活跃高峰时段、一周内的趋势\n- 粉丝时区分布、发布一致性\n\n**3. 内容DNA**\n- 钩子风格效果、最佳视频时长\n- 音乐使用模式、标签策略、字幕结构\n\n**4. 受众洞察**\n- 粉丝增长率、人口统计模式\n- 兴趣聚集、参与度画像\n\n**5. 竞争信号**\n- 领域基准、顶尖表现差距\n- 内容差距分析、时间对比\n\n**6. 趋势匹配**\n- 流行声音、病毒式格式\n- 新兴话题、平台变化\n\n每个信号根据您的具体目标和细分市场加权。分析通常在 30-60 秒内完成。\n\n验证：🔗 [信号 (/how-it-works#signals)](/how-it-works#signals), 🔗 [账户智能分析 (/simulation/intelligence)](/simulation/intelligence)",
+          answer: "我们的分析涵盖了六大类别的 30 多个信号：\n\n**1. 参与度信号**\n- 浏览与点赞比率、评论情感、分享频率\n- 保存率、个人资料访问、观看时长、重播率\n\n**2. 时间模式**\n- 活跃高峰时段、一周内的趋势\n- 粉丝时区分布、发布一致性\n\n**3. 内容DNA**\n- 钩子风格效果、最佳视频时长\n- 音乐使用模式、标签策略、字幕结构\n\n**4. 受众洞察**\n- 粉丝增长率、人口统计模式\n- 兴趣聚集、参与度画像\n\n**5. 竞争信号**\n- 领域基准、顶尖表现差距\n- 内容差距分析、时间对比\n\n**6. 趋势匹配**\n- 流行声音、病毒式格式\n- 新兴话题、平台变化\n\n每个信号根据您的具体目标和细分市场加权。分析通常在 30-60 秒内完成。\n\n验证：🔗 [信号 (/social/how-it-works#signals)](/social/how-it-works#signals), 🔗 [账户智能分析 (/social/simulation/intelligence)](/social/simulation/intelligence)",
           category: "Methodology"
         },
         {
           id: 'q8',
           question: "你们提到的“30+ 信号”是什么？",
-          answer: "“30+ 信号”指的是我们每个账户分析的独特数据点。以下是详细分类：\n\n**参与度（7 个信号）**\n- 浏览与点赞比率\n- 评论情感得分\n- 分享频率\n- 保存率\n- 个人资料访问率\n- 平均观看时长\n- 重播率\n\n**时间（5 个信号）**\n- 活跃高峰时段\n- 一周内的趋势\n- 时区分布\n- 发布一致性得分\n- 季节性趋势\n\n**内容 DNA（7 个信号）**\n- 钩子效果得分\n- 最佳视频时长\n- 音乐影响\n- 标签表现\n- 字幕互动\n- 缩略图点击率\n- 格式偏好\n\n**受众（5 个信号）**\n- 增长速度\n- 人口统计聚集\n- 兴趣映射\n- 互动画像\n- 忠诚度指标\n\n**竞争（4 个信号）**\n- 领域基准\n- 差距分析\n- 时间对比\n- 内容差异化\n\n**趋势（4 个以上信号）**\n- 音频速度\n- 格式出现\n- 话题势头\n- 平台变化\n\n总计：32 个核心信号，根据数据可用性可能会有额外的子信号。\n\n验证：🔗 [信号 (/trust#signals)](/trust#signals), 🔗 [工作原理 (/how-it-works#signals)](/how-it-works#signals)",
+          answer: "“30+ 信号”指的是我们每个账户分析的独特数据点。以下是详细分类：\n\n**参与度（7 个信号）**\n- 浏览与点赞比率\n- 评论情感得分\n- 分享频率\n- 保存率\n- 个人资料访问率\n- 平均观看时长\n- 重播率\n\n**时间（5 个信号）**\n- 活跃高峰时段\n- 一周内的趋势\n- 时区分布\n- 发布一致性得分\n- 季节性趋势\n\n**内容 DNA（7 个信号）**\n- 钩子效果得分\n- 最佳视频时长\n- 音乐影响\n- 标签表现\n- 字幕互动\n- 缩略图点击率\n- 格式偏好\n\n**受众（5 个信号）**\n- 增长速度\n- 人口统计聚集\n- 兴趣映射\n- 互动画像\n- 忠诚度指标\n\n**竞争（4 个信号）**\n- 领域基准\n- 差距分析\n- 时间对比\n- 内容差异化\n\n**趋势（4 个以上信号）**\n- 音频速度\n- 格式出现\n- 话题势头\n- 平台变化\n\n总计：32 个核心信号，根据数据可用性可能会有额外的子信号。\n\n验证：🔗 [信号 (/trust#signals)](/trust#signals), 🔗 [工作原理 (/social/how-it-works#signals)](/social/how-it-works#signals)",
           category: "Methodology"
         },
         {
           id: 'q9',
           question: "你们如何生成脚本推荐？",
-          answer: "脚本生成遵循四个步骤的过程：\n\n**步骤 1：信号分析**\n- 分析您的 30 多个信号\n- 识别优势（有效的部分）\n- 识别差距（需要改进的部分）\n\n**步骤 2：模板匹配**\n- 与 200 多个内容模板进行交叉参考\n- 按您的细分市场（50 多个类别）筛选\n- 按您的阶段（初学者/成长/成熟）筛选\n- 按您的目标（增长/互动/变现）筛选\n\n**步骤 3：个性化**\n- 将模板调整为您的内容 DNA\n- 匹配您典型的视频时长\n- 对齐您的钩子风格偏好\n- 融入与您相关的流行元素\n\n**步骤 4：理由文档**\n- 为每个推荐附上“为什么”\n- 追溯到特定信号\n- 提供信心指标\n\n结果：脚本就像是为您量身定做的，因为它们确实是基于数据，而不是猜测。\n\n验证：🔗 [方法论 (/how-it-works#synthesize)](/how-it-works#synthesize), 🔗 [内容工作室 (/simulation/content-studio)](/simulation/content-studio)",
+          answer: "脚本生成遵循四个步骤的过程：\n\n**步骤 1：信号分析**\n- 分析您的 30 多个信号\n- 识别优势（有效的部分）\n- 识别差距（需要改进的部分）\n\n**步骤 2：模板匹配**\n- 与 200 多个内容模板进行交叉参考\n- 按您的细分市场（50 多个类别）筛选\n- 按您的阶段（初学者/成长/成熟）筛选\n- 按您的目标（增长/互动/变现）筛选\n\n**步骤 3：个性化**\n- 将模板调整为您的内容 DNA\n- 匹配您典型的视频时长\n- 对齐您的钩子风格偏好\n- 融入与您相关的流行元素\n\n**步骤 4：理由文档**\n- 为每个推荐附上“为什么”\n- 追溯到特定信号\n- 提供信心指标\n\n结果：脚本就像是为您量身定做的，因为它们确实是基于数据，而不是猜测。\n\n验证：🔗 [方法论 (/social/how-it-works#synthesize)](/social/how-it-works#synthesize), 🔗 [内容工作室 (/social/simulation/studio)](/social/simulation/studio)",
           category: "Methodology"
         },
         {
           id: 'q10',
           question: "OwlSeer 保证病毒式内容吗？",
-          answer: "不——我们对任何声称可以做到的工具持怀疑态度。\n\n**我们可以做的：**\n- 提高您创作出引起共鸣内容的概率\n- 识别哪些内容在您的账户中有效的模式\n- 基于数据建议最佳的发布时间、话题和格式\n- 帮助您更一致地发布内容，具有更好的结构\n\n**我们不能做的：**\n- 保证任何视频会成为病毒式传播\n- 控制 TikTok 的算法\n- 精确预测平台如何分发您的内容\n- 覆盖社交媒体的固有不可预测性\n\n**我们的理念：**\n病毒式传播部分是运气。战略提高了您的成功概率。我们专注于可控因素——内容质量、时机、一致性——并且诚实地告诉您，没有工具能保证结果。\n\n我们宁愿您带着现实的期望成功，也不希望您带着夸大的承诺失败。\n\n验证：🔗 [限制 (/how-it-works#limits)](/how-it-works#limits), 🔗 [边界 (/faq#boundaries)](/faq#boundaries)",
+          answer: "不——我们对任何声称可以做到的工具持怀疑态度。\n\n**我们可以做的：**\n- 提高您创作出引起共鸣内容的概率\n- 识别哪些内容在您的账户中有效的模式\n- 基于数据建议最佳的发布时间、话题和格式\n- 帮助您更一致地发布内容，具有更好的结构\n\n**我们不能做的：**\n- 保证任何视频会成为病毒式传播\n- 控制 TikTok 的算法\n- 精确预测平台如何分发您的内容\n- 覆盖社交媒体的固有不可预测性\n\n**我们的理念：**\n病毒式传播部分是运气。战略提高了您的成功概率。我们专注于可控因素——内容质量、时机、一致性——并且诚实地告诉您，没有工具能保证结果。\n\n我们宁愿您带着现实的期望成功，也不希望您带着夸大的承诺失败。\n\n验证：🔗 [限制 (/social/how-it-works#limits)](/social/how-it-works#limits), 🔗 [边界 (/social/faq#boundaries)](/social/faq#boundaries)",
           category: "Boundaries"
         },
         {
           id: 'q11',
           question: "OwlSeer 会为我自动发布吗？",
-          answer: "不——我们故意不提供自动发布功能。\n\n**我们为什么不提供自动发布：**\n\n1. **创意控制**：您应该在发布前审查并可能编辑每个内容\n\n2. **平台合规性**：自动发布可能会违反 TikTok 的某些条款\n\n3. **质量保证**：AI 生成的脚本在发布前经过人工审查更能保证质量\n\n4. **真实性**：您的受众关注的是您——自动发布可能显得不够真实\n\n**我们提供的功能：**\n- 准备好录制的脚本\n- 最佳发布时间建议\n- 日历提醒\n- 与调度工具的集成（您仍然需要审批每个发布）\n\n**我们的理念：**\n我们是战略合作伙伴，而非自动化机器人。我们进行分析和规划；您保持创意控制。\n\n验证：🔗 [边界 (/faq#boundaries)](/faq#boundaries), 🔗 [发布排期 (/simulation/scheduling-slot)](/simulation/scheduling-slot)",
+          answer: "不——我们故意不提供自动发布功能。\n\n**我们为什么不提供自动发布：**\n\n1. **创意控制**：您应该在发布前审查并可能编辑每个内容\n\n2. **平台合规性**：自动发布可能会违反 TikTok 的某些条款\n\n3. **质量保证**：AI 生成的脚本在发布前经过人工审查更能保证质量\n\n4. **真实性**：您的受众关注的是您——自动发布可能显得不够真实\n\n**我们提供的功能：**\n- 准备好录制的脚本\n- 最佳发布时间建议\n- 日历提醒\n- 与调度工具的集成（您仍然需要审批每个发布）\n\n**我们的理念：**\n我们是战略合作伙伴，而非自动化机器人。我们进行分析和规划；您保持创意控制。\n\n验证：🔗 [边界 (/social/faq#boundaries)](/social/faq#boundaries), 🔗 [发布排期 (/social/simulation/scheduling)](/social/simulation/scheduling)",
           category: "Boundaries"
         },
         {
@@ -1084,13 +1505,13 @@ export const translations = {
         {
           id: 'q15',
           question: "免费、成长和规模计划有什么区别？",
-          answer: "以下是详细的套餐分类：\n\n**免费套餐（$0/月）**\n- 每月 1 个策略分析\n- 基本的互动洞察\n- 访问示例仪表盘\n- 社区支持（论坛）\n- 最适合：试用工具，偶尔使用\n\n**成长套餐（$19/月）**\n- 每月 10 个策略分析\n- 完整的脚本生成与导出\n- 发布日历集成\n- 趋势雷达访问\n- 电子邮件支持（48 小时响应）\n- 最适合：活跃创作者，定期内容生产者\n\n**规模套餐（$49/月）**\n- 无限策略分析\n- 优先支持（24 小时响应）\n- 团队协作（最多 5 个席位）\n- API 访问用于自定义集成\n- 高级分析仪表盘\n- 专属客户经理（可选）\n- 最适合：代理机构，专业创作者，团队\n\n所有套餐均包括访问示例模式和核心方法论文档。\n\n验证：🔗 [价格 (/pricing#compare)](/pricing#compare), 🔗 [模拟 (/simulation)](/simulation)",
+          answer: "以下是详细的套餐分类：\n\n**免费套餐（$0/月）**\n- 每月 1 个策略分析\n- 基本的互动洞察\n- 访问示例仪表盘\n- 社区支持（论坛）\n- 最适合：试用工具，偶尔使用\n\n**成长套餐（$19/月）**\n- 每月 10 个策略分析\n- 完整的脚本生成与导出\n- 发布日历集成\n- 趋势雷达访问\n- 电子邮件支持（48 小时响应）\n- 最适合：活跃创作者，定期内容生产者\n\n**规模套餐（$49/月）**\n- 无限策略分析\n- 优先支持（24 小时响应）\n- 团队协作（最多 5 个席位）\n- API 访问用于自定义集成\n- 高级分析仪表盘\n- 专属客户经理（可选）\n- 最适合：代理机构，专业创作者，团队\n\n所有套餐均包括访问示例模式和核心方法论文档。\n\n验证：🔗 [价格 (/social/pricing#compare)](/social/pricing#compare), 🔗 [模拟 (/social/simulation)](/social/simulation)",
           category: "Billing"
         },
         {
           id: 'q16',
           question: "我可以随时取消订阅吗？",
-          answer: "是的——我们相信每月都要通过提供优质服务来赢得您的订阅。\n\n**如何取消：**\n1. 进入设置 → 账单\n2. 点击“取消订阅”\n3. 确认（无需调查， 无保留策略）\n4. 完成\n\n**取消后的处理：**\n- 您将在当前账单周期结束前保持完整访问权限\n- 生成的策略和脚本仍可访问\n- 在最后一天，您的账户将降级为免费套餐\n- 您的数据将保留，除非您删除它\n\n**退款政策：**\n- 年度计划：30 天内按比例退款\n- 月度计划：当前月无退款，不会收取未来费用\n- 争议：联系 support@owlseer.com\n\n**重新订阅：**\n- 您可以随时重新订阅\n- 您的历史记录和设置会被保留\n- 取消后返回不会有惩罚\n\n验证：🔗 [计费 (/pricing#billing)](/pricing#billing)",
+          answer: "是的——我们相信每月都要通过提供优质服务来赢得您的订阅。\n\n**如何取消：**\n1. 进入设置 → 账单\n2. 点击“取消订阅”\n3. 确认（无需调查， 无保留策略）\n4. 完成\n\n**取消后的处理：**\n- 您将在当前账单周期结束前保持完整访问权限\n- 生成的策略和脚本仍可访问\n- 在最后一天，您的账户将降级为免费套餐\n- 您的数据将保留，除非您删除它\n\n**退款政策：**\n- 年度计划：30 天内按比例退款\n- 月度计划：当前月无退款，不会收取未来费用\n- 争议：联系 support@owlseer.com\n\n**重新订阅：**\n- 您可以随时重新订阅\n- 您的历史记录和设置会被保留\n- 取消后返回不会有惩罚\n\n验证：🔗 [计费 (/social/pricing#billing)](/social/pricing#billing)",
           category: "Billing"
         }
       ]
@@ -1267,9 +1688,41 @@ export const translations = {
     footer: {
       tagline: "创作者的 AI TikTok 策略引擎。\n停止猜测，开始增长。",
       product: "产品",
+      solutions: "解决方案",
+      useCases: "使用场景",
       resources: "资源",
       legal: "法律",
-      rights: "© 2026 OwlSeer. 保留所有权利。"
+      rights: "© 2026 OwlSeer. 保留所有权利。",
+      mobileProductAndSolutions: "产品与解决方案",
+      links: {
+        howItWorks: "工作原理",
+        methodology: "方法论",
+        signals: "30+ 信号",
+        pricing: "价格",
+        trySample: "体验示例",
+        blog: "博客",
+        guides: "指南",
+        glossary: "术语表",
+        faq: "常见问题",
+        contentCreators: "内容创作者",
+        localBusiness: "本地商家",
+        agencies: "机构",
+        brands: "品牌方",
+        ecommerceSellers: "电商卖家",
+        trendPrediction: "趋势预测",
+        contentDiagnosis: "内容诊断",
+        scriptGeneration: "脚本生成",
+        postingSchedule: "发布排期",
+        hashtagStrategy: "标签策略",
+        privacy: "隐私政策",
+        terms: "服务条款",
+        security: "安全",
+        cookies: "Cookie 政策"
+      },
+      meta: {
+        developers: "开发者",
+        sitemap: "站点地图"
+      }
     },
     signalsPage: {
       ctaButton: "优化此指标",
@@ -1291,8 +1744,8 @@ export const translations = {
           task: "理解算法如何通过用户行为来评判你的内容价值。",
           desc: "互动不仅仅是点赞。算法更看重那些代表“深度兴趣”的信号。从黄金 3 秒的留存，到引发分享的冲动，每一个微小的用户行为都是算法是否给你推流的依据。OwlSeer 根据这些信号的权重，精准诊断你的内容短板。",
           linkText: "AER 诊断卡",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "查看真实账号的互动诊断 —— [体验 AER 仪表盘演示](/sample-explorer/dashboard#aer-card)。",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "查看真实账号的互动诊断 —— [体验 AER 仪表盘演示](/social/dashboard#aer-card)。",
           signals: [
             { name: "黄金 3 秒留存 (Hook Rate)", id: "hook-rate", def: "有多少观众坚持看过了前 3 秒。", why: "这是视频的生死线。TikTok 算法极度看重开头。如果开头没留住人，内容再好也无法进入更大的流量池。", how: "我们分析你历史上最成功的开场模式，并结合你所在领域的爆款案例，为你定制“抓人”的开头脚本。" },
             { name: "完播率 (Completion Rate)", id: "watch-through-rate", def: "观众看完整条视频的比例。", why: "完播是内容质量的硬指标。高完播率告诉算法：这条视频值得被更多人看到。它也是判断视频时长是否合理的关键。", how: "我们通过分析数据，找到你账号的最佳视频时长区间，并建议在哪里设置“高潮点”以防止观众流失。" },
@@ -1313,8 +1766,8 @@ export const translations = {
           task: "不再盲目跟风，学会精准踩点。利用数据抓住红利期。",
           desc: "趋势就是流量的放大器。但时机就是一切：太早没人看，太晚汤都没了。OwlSeer 监控全网数据，帮你找到那个“刚刚好”的入场时机，让你的努力事半功倍。",
           linkText: "趋势雷达",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "查看实时趋势数据 —— [探索趋势雷达演示](/sample-explorer/trend-radar)。",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "查看实时趋势数据 —— [探索趋势雷达演示](/social/simulation/trends)。",
           signals: [
             { name: "音频飙升榜 (Sound Velocity)", id: "sound-velocity", def: "BGM 使用量的增长速度。", why: "在 BGM 彻底火烂之前入场，能吃到最大的算法红利。我们预判哪些音乐即将在未来 3 天内爆发。", how: "当某个 BGM 在你所在领域开始起量但尚未饱和时，我们会第一时间向你发出信号。" },
             { name: "标签红利 (Hashtag Momentum)", id: "hashtag-momentum", def: "话题标签的热度上升曲线。", why: "用对标签，精准投喂。处于上升期的标签能带来大量精准的搜索流量和推荐流量。", how: "我们推荐那些竞争较小但热度正在飙升的“蓝海标签”，避开那些已经卷成红海的大词。" },
@@ -1333,13 +1786,13 @@ export const translations = {
           task: "不要猜你的观众喜欢什么，看数据怎么说。",
           desc: "你的粉丝是谁？他们什么时候有空？他们还喜欢看什么？OwlSeer 把模糊的“粉丝”变成清晰的“画像”，让你的每一次发布都像是在对老朋友说话。",
           linkText: "情报中心",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "查看受众深度分析 —— [探索情报中心演示](/sample-explorer/intelligence)。",
+          linkUrl: "/social/intelligence",
+          actionLine: "查看受众深度分析 —— [探索情报中心演示](/social/intelligence)。",
           signals: [
             { name: "涨粉加速度 (Growth Velocity)", id: "follower-growth-velocity", def: "近期粉丝增长的速率变化。", why: "涨粉速度比总量更重要。它反映了你当前的内容策略是否“对路”。", how: "将你的涨粉曲线与发布记录对应，找出那条让你“一夜爆红”的视频，并复制它的成功。" },
             { name: "黄金发布时间 (Active Hours)", id: "active-hour-mapping", def: "你的粉丝最活跃的时间段。", why: "错的时间发对的内容=白发。在粉丝都在线的时候发布，能瞬间获得大量初始数据，助推视频进入更大的流量池。", how: "根据你粉丝的时区和习惯，精确到小时地告诉你：下周二下午 6 点发视频效果最好。" },
             { name: "受众重合度 (Audience Overlap)", id: "audience-overlap", def: "你的粉丝还关注了谁。", why: "他山之石，可以攻玉。了解粉丝喜欢的其他博主，能帮你拓展选题思路，甚至找到合作机会。", how: "分析粉丝关注列表中的高频重合账号，拆解他们的爆款逻辑为你所用。" },
-            { name: "人群画像变迁 (Demo Shifts)", id: "demographic-shifts", def: "粉丝年龄、性别、地域的动态变化。", why: "账号在成长，受众也在变。如果不及时调整内容口吻，很容易造成老粉取关。", how: "敏锐捕捉受众构成的细微变化（比如男性比例增加），及时建议你调整内容风格。" },
+            { name: "人群画像变迁 (Sample Shifts)", id: "demographic-shifts", def: "粉丝年龄、性别、地域的动态变化。", why: "账号在成长，受众也在变。如果不及时调整内容口吻，很容易造成老粉取关。", how: "敏锐捕捉受众构成的细微变化（比如男性比例增加），及时建议你调整内容风格。" },
             { name: "热度衰减率 (Engagement Decay)", id: "engagement-decay", def: "视频发布后热度下降的速度。", why: "是“昙花一现”还是“细水长流”？了解内容的长尾效应，有助于平衡“蹭热点”和“做沉淀”的比例。", how: "帮你规划内容矩阵：用短平快的内容冲流量，用长效内容做沉淀。" },
             { name: "观看路径 (User Journey)", id: "cross-video-journey", def: "看完这个视频后，他们去了哪？", why: "打造“沉浸式”体验。如果一个视频能让观众连着看你十个视频，你的账号权重会高得吓人。", how: "设计“连续剧”式的内容结构，让观众像追剧一样停不下来。" },
             { name: "铁粉粘性 (Loyalty Score)", id: "follower-loyalty-score", def: "老粉对新视频的互动比例。", why: "铁粉是你的基本盘。如果老粉都不看你的新视频，说明账号遇到危机了。", how: "区分“吸粉内容”和“固粉内容”，确保在追求增长的同时不伤老粉的心。" },
@@ -1686,6 +2139,24 @@ export const translations = {
           subtitle: "在样本数据上查看 OwlSeer 如何工作。或者开始免费试用。",
           primary: "开始免费试用",
           secondary: "探索演示"
+        },
+        ui: {
+          loading: "内容加载中...",
+          badge: "正面对比",
+          coreInsight: "核心洞察",
+          tableHeaders: {
+            feature: "功能",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "体验 VidIQ 尚未覆盖的能力",
+          actionButtons: {
+            trendRadar: "趋势雷达",
+            scriptStudio: "脚本工作台",
+            weeklyReport: "每周报告"
+          },
+          platformFocusLabel: "平台专注",
+          transparencyNote: "透明说明"
         }
       }
     },
@@ -1693,6 +2164,7 @@ export const translations = {
     product: '製品',
     pricing: '料金',
     resources: 'リソース',
+    methodology: '方法論',
     login: 'ログイン',
     signup: '無料登録',
     whatIs: 'OwlSeerとは',
@@ -1700,6 +2172,54 @@ export const translations = {
     faq: 'よくある質問',
     security: 'セキュリティとプライバシー',
     blog: 'ブログ',
+    guides: 'ガイド',
+    nav: {
+      solutions: "ソリューション",
+      platform: "プラットフォーム",
+      useCases: "ユースケース",
+      byRole: "役割別",
+      learn: "学ぶ",
+      trustSupport: "信頼とサポート",
+      trustSecurity: "信頼とセキュリティ",
+      language: "言語",
+      glossary: "用語集",
+      links: {
+        signals: "30+シグナル",
+        interactiveSample: "インタラクティブサンプル",
+        trendPrediction: "トレンド予測",
+        contentDiagnosis: "コンテンツ診断",
+        scriptGeneration: "スクリプト生成",
+        postingSchedule: "投稿スケジュール",
+        hashtagStrategy: "ハッシュタグ戦略",
+        contentCreators: "コンテンツクリエイター",
+        localBusiness: "ローカルビジネス",
+        agencies: "代理店",
+        brands: "ブランド",
+        ecommerceSellers: "EC販売者",
+        privacy: "プライバシー",
+        terms: "利用規約",
+        cookies: "Cookie",
+        security: "セキュリティ"
+      },
+      desc: {
+        howItWorks: "3ステップで開始",
+        methodology: "5ステップAIプロセス",
+        signals: "追跡する指標",
+        interactiveSample: "OwlSeerを体験",
+        trySample: "サンプルデータで体験"
+      },
+      actions: {
+        trySample: "サンプルを試す",
+        startFree: "無料で始める",
+        startFreeTrial: "無料トライアルを開始",
+        trySampleCta: "サンプルを試す"
+      },
+      darkMode: {
+        toggle: "ダークモード切替",
+        switchToLight: "ライトモードに切替",
+        switchToDark: "ダークモードに切替"
+      }
+    },
     hero: {
       badge: 'v2.0 リリース',
       title: "次を",
@@ -1707,6 +2227,7 @@ export const translations = {
       subtitle: "{platform}のアナリティクスは、何をすべきか教えてくれません。",
       subtitle2: "私たちが教えます。",
       ctaPrimary: "サンプル",
+      ctaSecondaryButton: "今すぐ始める",
       ctaSecondary: "登録不要",
       ctaInstant: "即時アクセス",
       availableOn: "対応プラットフォーム",
@@ -1717,35 +2238,181 @@ export const translations = {
       }
     },
     productShowcase: {
-      opportunities: { title: "ピーク前にトレンドを発見", desc: "昨日のバイラルを追いかけるのはやめましょう。AIが数百万のシグナルを分析し、ニッチに特化した高ポテンシャルなトピックを見つけます。" },
-      planning: { title: "計画だけでなく、実行を", desc: "戦略を行動に変えます。高成長のリスクと安定した信頼構築コンテンツのバランスが取れた週間制作スケジュールを取得します。" },
-      analytics: { title: "コンテンツDNAを解読", desc: "なぜあなたの動画が成功したのかを正確に理解します。成功を再現するために、コンテンツを構造要素に分解します。" }
+      heading: {
+        title: "インサイトから投稿まで、1つの流れで完結",
+        subtitle: "OwlSeer は戦略と実行のギャップを埋め、シグナルからスクリプトまで自信を持って進められます。"
+      },
+      highlights: {
+        decisionCycle: { label: "意思決定サイクル", desc: "シグナル検知から実行まで、日ではなく分で。" },
+        growthSignal: { label: "成長シグナル", desc: "伸び率とニッチ適合で機会を優先。" },
+        executionQuality: { label: "実行品質", desc: "すべての提案に、納得できる根拠を。" }
+      },
+      labels: {
+        capability: "機能",
+        outcome: "成果",
+        learnMore: "詳しく見る"
+      },
+      opportunities: {
+        step: "ステップ 01",
+        title: "ピーク前にトレンドを発見",
+        desc: "昨日のバイラルを追いかけるのはやめましょう。AIが数百万のシグナルを分析し、ニッチに特化した高ポテンシャルなトピックを見つけます。",
+        statA: "24/7 シグナル監視",
+        statB: "機会優先ランキング",
+        bullets: ["飽和前の伸びる話題を発見。", "ニッチ適合が証明されたテーマを優先。"],
+        mock: {
+          eyebrow: "トレンドレーダー",
+          title: "高適合の機会を検出",
+          score: "スコア 94",
+          metrics: [
+            { label: "勢い", value: "+128%" },
+            { label: "競合", value: "低" },
+            { label: "視聴規模", value: "45M" }
+          ],
+          bullets: ["高パフォーマンスのオーディエンス層と高い重なり。", "推奨投稿ウィンドウは今後 6 時間以内に開始。"]
+        }
+      },
+      planning: {
+        step: "ステップ 02",
+        title: "計画だけでなく、実行を",
+        desc: "戦略を行動に変えます。高成長のリスクと安定した信頼構築コンテンツのバランスが取れた週間制作スケジュールを取得します。",
+        statA: "週間ペース設計",
+        statB: "バランスの取れた構成",
+        bullets: ["提案をそのまま撮影カレンダーに落とし込む。", "クリエイティブを消耗せずに継続。"],
+        mock: {
+          eyebrow: "実行プラン",
+          title: "今週の制作ペース",
+          postCount: "3投稿",
+          schedule: [
+            { day: "月", date: "24", task: "トレンド起点のオープナー", tag: "成長" },
+            { day: "水", date: "26", task: "信頼を作るストーリー", tag: "コミュニティ" },
+            { day: "金", date: "28", task: "転換 CTA 動画", tag: "収益" }
+          ]
+        }
+      },
+      analytics: {
+        step: "ステップ 03",
+        title: "コンテンツDNAを解読",
+        desc: "なぜあなたの動画が成功したのかを正確に理解します。成功を再現するために、コンテンツを構造要素に分解します。",
+        statA: "フレーム単位診断",
+        statB: "再現可能な勝ちパターン",
+        bullets: ["視聴維持と完了率の要因を特定。", "根拠に基づく編集で、より速く改善。"],
+        mock: {
+          eyebrow: "パフォーマンスDNA",
+          title: "すでに勝っている型を再現",
+          pill: "上位 5%",
+          metrics: [
+            { label: "フックの強さ", value: "9.8/10", width: "w-[95%]" },
+            { label: "視聴維持率", value: "72%", width: "w-[72%]" },
+            { label: "CTA完了率", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "パワーハウス",
       title: "支配するために",
       titleHighlight: "必要なすべて",
       subtitle: "現代のクリエイターのための統一OS。バラバラなツールを行き来するのはやめましょう。",
-      copilot: { title: "AI戦略コパイロット", desc: "24時間365日のクリエイティブパートナー。高コンバージョンのスクリプト生成、フックのブレインストーミング、アイデアへの即時フィードバック。" },
-      trend: { title: "トレンドインテリジェンス", desc: "ピーク前に機会を発見。AIが数百万のデータポイントを分析し、*あなたの*次のバイラルトピックを見つけます。", liveSignals: "ライブシグナル" },
-      goals: { title: "スマートゴール", desc: "曖昧な野心を実行可能な日々のタスクに変えます。" },
-      analytics: { title: "詳細分析" },
+      metrics: [
+        { label: "投稿スピード", value: "3倍速" },
+        { label: "計画の確度", value: "シグナル裏付け" },
+        { label: "実行の継続性", value: "毎週のペース" }
+      ],
+      copilot: {
+        title: "AI戦略コパイロット",
+        desc: "24時間365日のクリエイティブパートナー。高コンバージョンのスクリプト生成、フックのブレインストーミング、アイデアへの即時フィードバック。",
+        badge: "リアルタイム生成",
+        chat: {
+          user: "次のニッチ動画のフックをもっと強くして。",
+          assistantLabel: "提案フック",
+          assistant: "よくある導入を真似するのはやめよう。視聴者を引きつける3秒オープナーはこちら。"
+        }
+      },
+      trend: {
+        title: "トレンドインテリジェンス",
+        desc: "ピーク前に機会を発見。AIが数百万のデータポイントを分析し、*あなたの*次のバイラルトピックを見つけます。",
+        liveSignals: "ライブシグナル",
+        list: { viewsLabel: "回視聴" }
+      },
+      goals: {
+        title: "スマートゴール",
+        desc: "曖昧な野心を実行可能な日々のタスクに変えます。",
+        ringLabel: "目標",
+        tasks: [
+          { task: "オープニングフックの別案を録る", done: true },
+          { task: "トレンド候補を確認", done: false },
+          { task: "高意図投稿をスケジュール", done: false }
+        ]
+      },
+      analytics: { title: "詳細分析", badge: "+124% 前年比" },
       features: { scheduling: "スマート予約", prediction: "バイラル予測", multiAccount: "複数アカウント", reports: "即時レポート" }
+    },
+    valueProposition: {
+      badge: "戦略の明確化",
+      title: "何を投稿するか、もう迷わない",
+      subtitle: "OwlSeer が TikTok で次にやるべきことを示します。",
+      cards: [
+        { title: "実行可能なプラン", desc: "3分以内に完全なコンテンツプランを作成。" },
+        { title: "AI スクリプト", desc: "今日すぐ撮れる AI 生成スクリプト。" },
+        { title: "データドリブン", desc: "行き当たりばったりの投稿から卒業。" }
+      ],
+      trust: ["誇大な約束なし", "自動投稿なし", "パスワード不要"],
+      metrics: [
+        { label: "プラン作成", value: "< 3 分" },
+        { label: "分析シグナル", value: "30+" },
+        { label: "投稿リズム", value: "毎週" }
+      ],
+      cta: {
+        primary: "実際の動きを見る",
+        secondary: "仕組みを見る"
+      }
     },
     pricingSection: {
       title: "シンプルで透明な価格設定",
-      subtitle: "14日間の無料トライアルを開始。いつでもキャンセル可能。",
+      subtitle: "7日間の無料トライアルを開始。いつでもキャンセル可能。",
+      labels: { mostPopular: "人気No.1" },
       monthly: "月払い",
       yearly: "年払い",
       save: "20% OFF",
       period: "月",
       plans: {
-        creator: { name: "クリエイター", features: ["最大3つのTikTokアカウント", "AIコンテンツ提案", "基本分析", "コンテンツ予約", "メールサポート"] },
-        growth: { name: "グロース", features: ["最大10個のTikTokアカウント", "高度なAI最適化", "詳細分析", "チームコラボレーション", "優先サポート", "週間コンサルテーション"] },
-        scale: { name: "スケール", features: ["無制限アカウント", "エンタープライズAI", "カスタム分析", "高度なチームツール", "ホワイトラベル", "専任マネージャー", "24/7優先サポート"] }
+        creator: {
+          name: "Basic（個人向け）",
+          summary: "個人クリエイターが素早く運用を立ち上げるためのプラン。",
+          features: [
+            "1アカウント / 1席",
+            "無料動画分析 30件 / 月",
+            "月間 600 クレジット",
+            "AIコンテンツ全工程（診断〜スクリプト）",
+            "ベーシック AI Copilot"
+          ]
+        },
+        growth: {
+          name: "Growth（チーム成長）",
+          summary: "小規模チームで量産体制を作るためのプラン。",
+          features: [
+            "3アカウント / 4席",
+            "無料動画分析 120件 / 月",
+            "月間 1,200 クレジット",
+            "完全なスケジュール & スクリプト運用",
+            "バッチタスク処理",
+            "基本レポート出力"
+          ]
+        },
+        scale: {
+          name: "Pro（拡張運用）",
+          summary: "代理店や複数アカウント運用に最適な上位プラン。",
+          features: [
+            "8アカウント / 10席",
+            "無料動画分析 400件 / 月",
+            "月間 4,000 クレジット",
+            "優先コンピュートキュー",
+            "長文脈対応の高上限 AI Copilot"
+          ]
+        }
       },
       cta: { trial: "無料トライアル開始", buy: "今すぐ購入" },
-      footer: { secure: "安全な支払い", trial: "14日間無料", cancel: "いつでもキャンセル" }
+      footer: { secure: "安全な支払い", trial: "7日間無料", cancel: "いつでもキャンセル" }
     },
     finalCta: {
       title: "未来を見る準備はできましたか？",
@@ -1756,9 +2423,41 @@ export const translations = {
     footer: {
       tagline: "クリエイターのためのAI TikTok戦略。\n推測はやめて、成長を始めましょう。",
       product: "製品",
+      solutions: "ソリューション",
+      useCases: "ユースケース",
       resources: "リソース",
       legal: "法的情報",
-      rights: "© 2026 OwlSeer. All rights reserved."
+      rights: "© 2026 OwlSeer. All rights reserved.",
+      mobileProductAndSolutions: "製品とソリューション",
+      links: {
+        howItWorks: "仕組み",
+        methodology: "方法論",
+        signals: "30+シグナル",
+        pricing: "料金",
+        trySample: "サンプルを試す",
+        blog: "ブログ",
+        guides: "ガイド",
+        glossary: "用語集",
+        faq: "よくある質問",
+        contentCreators: "コンテンツクリエイター",
+        localBusiness: "ローカルビジネス",
+        agencies: "代理店",
+        brands: "ブランド",
+        ecommerceSellers: "EC販売者",
+        trendPrediction: "トレンド予測",
+        contentDiagnosis: "コンテンツ診断",
+        scriptGeneration: "スクリプト生成",
+        postingSchedule: "投稿スケジュール",
+        hashtagStrategy: "ハッシュタグ戦略",
+        privacy: "プライバシーポリシー",
+        terms: "利用規約",
+        security: "セキュリティ",
+        cookies: "Cookieポリシー"
+      },
+      meta: {
+        developers: "開発者",
+        sitemap: "サイトマップ"
+      }
     },
     signalsPage: {
       ctaButton: "Analyze this signal",
@@ -1780,8 +2479,8 @@ export const translations = {
           task: "Understand how OwlSeer measures the way viewers interact with your content.",
           desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
           linkText: "AER card",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/social/dashboard#aer-card).",
           signals: [
             { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
             { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
@@ -1802,8 +2501,8 @@ export const translations = {
           task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
           desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
           linkText: "Trend Radar",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/social/simulation/trends).",
           signals: [
             { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
             { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
@@ -1822,8 +2521,8 @@ export const translations = {
           task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
           desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
           linkText: "Intelligence Hub",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          linkUrl: "/social/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/social/intelligence).",
           signals: [
             { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
             { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
@@ -1864,6 +2563,81 @@ export const translations = {
            button: "Generate My Signal Profile",
            note: "Read-only access. Connects in 30 seconds. Revoke anytime."
         }
+      },
+      compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ：あなたの運用に合うTikTokツールは？",
+          lead: "VidIQはYouTube起点でTikTokへ拡張。OwlSeerは最初からTikTok専用で設計。機能差・強み・適した使い方を比較します。"
+        },
+        tldr: "TikTokが主戦場なら、TikTok専用シグナル分析・トレンド予測・台本生成があるOwlSeer。YouTube中心でTikTokが補助チャネルならVidIQ。違いはプラットフォーム深度です。",
+        table: {
+          title: "機能別比較",
+          rows: [
+            { feature: "主軸プラットフォーム", owlseer: "TikTok（専用）", vidiq: "YouTube（主軸）、TikTok（補助）" },
+            { feature: "TikTokシグナル深度", owlseer: "30+の重み付きシグナル", vidiq: "基本的なTikTok指標" },
+            { feature: "トレンド予測", owlseer: "AI＋速度分析", vidiq: "トレンドトピック一覧" },
+            { feature: "台本生成", owlseer: "データ駆動のHook-Body-CTA", vidiq: "ネイティブ台本生成なし" },
+            { feature: "投稿スケジュール", owlseer: "個別最適のヒートマップ", vidiq: "汎用的な推奨時間" },
+            { feature: "コンテンツ診断", owlseer: "課題検出＋改善提案", vidiq: "パフォーマンス概要" },
+            { feature: "AIコパイロット", owlseer: "対話型アシスタント", vidiq: "対話型AIなし" },
+            { feature: "週次レポート", owlseer: "KPI追跡付き自動化", vidiq: "自動週報なし" },
+            { feature: "ブランドセーフティ", owlseer: "0-100リスクスコア", vidiq: "ブランドセーフティ採点なし" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "OwlSeerを選ぶべきケース",
+          items: [
+            "TikTokが主な、または唯一の成長チャネル",
+            "基本指標を超える30+シグナル深度が必要",
+            "視聴者に合わせたAI台本が必要",
+            "トレンドのタイミングと速度が重要",
+            "KPI付きの自動週次レポートが必要",
+            "対話型AIコパイロットを使いたい"
+          ]
+        },
+        chooseVidIQ: {
+          title: "VidIQを選ぶべきケース",
+          items: [
+            "YouTubeが主なプラットフォーム",
+            "YouTube特化機能（SEO・キーワード）が必要",
+            "TikTokは補助チャネルで基本指標で十分",
+            "すでにYouTube用途でVidIQを利用中"
+          ]
+        },
+        platformFocus: {
+          title: "なぜプラットフォーム特化が重要か",
+          p1: "YouTubeとTikTokでは評価される行動が異なります。YouTubeは検索主導で、タイトル・説明文・サムネイルが発見性を左右。TikTokはアルゴリズム主導で、フック率・視聴維持率・トレンド適合が配信を左右します。",
+          p2: "YouTube向けツールは検索意図を最適化。TikTok向けツールはシグナルパターンを最適化。YouTubeファーストのツールでTikTok戦略を作るのは、海で道路地図を使うようなものです。",
+          highlight: "OwlSeerは、YouTube中心ツールが扱わないTikTok固有指標（AER、フック率、保存率）を追跡します。"
+        },
+        boundary: {
+          transparency: "比較内容は2026年2月時点の公開情報に基づきます。",
+          note: "この比較は広告案件ではありません。適切なツール選定のための実用ガイドとして作成しています。"
+        },
+        cta: {
+          title: "TikTokネイティブ戦略を試しますか？",
+          subtitle: "まずはサンプルデータでOwlSeerを体験。準備ができたら無料トライアルへ。",
+          primary: "無料トライアルを開始",
+          secondary: "サンプルを見る"
+        },
+        ui: {
+          loading: "コンテンツを読み込み中...",
+          badge: "直接比較",
+          coreInsight: "コアインサイト",
+          tableHeaders: {
+            feature: "機能",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "VidIQにない機能を体験",
+          actionButtons: {
+            trendRadar: "トレンドレーダー",
+            scriptStudio: "スクリプトスタジオ",
+            weeklyReport: "週次レポート"
+          },
+          platformFocusLabel: "プラットフォーム特化",
+          transparencyNote: "透明性に関する注記"
+        }
       }
     }
   },
@@ -1871,6 +2645,7 @@ export const translations = {
     product: '제품',
     pricing: '가격',
     resources: '리소스',
+    methodology: '방법론',
     login: '로그인',
     signup: '무료 가입',
     whatIs: 'OwlSeer란?',
@@ -1878,6 +2653,54 @@ export const translations = {
     faq: '자주 묻는 질문',
     security: '보안 및 개인정보',
     blog: '블로그',
+    guides: '가이드',
+    nav: {
+      solutions: "솔루션",
+      platform: "플랫폼",
+      useCases: "사용 사례",
+      byRole: "역할별",
+      learn: "학습",
+      trustSupport: "신뢰 및 지원",
+      trustSecurity: "신뢰 및 보안",
+      language: "언어",
+      glossary: "용어집",
+      links: {
+        signals: "30+ 신호",
+        interactiveSample: "인터랙티브 샘플",
+        trendPrediction: "트렌드 예측",
+        contentDiagnosis: "콘텐츠 진단",
+        scriptGeneration: "스크립트 생성",
+        postingSchedule: "게시 일정",
+        hashtagStrategy: "해시태그 전략",
+        contentCreators: "콘텐츠 크리에이터",
+        localBusiness: "지역 비즈니스",
+        agencies: "에이전시",
+        brands: "브랜드",
+        ecommerceSellers: "이커머스 판매자",
+        privacy: "개인정보",
+        terms: "약관",
+        cookies: "쿠키",
+        security: "보안"
+      },
+      desc: {
+        howItWorks: "3단계로 시작",
+        methodology: "5단계 AI 프로세스",
+        signals: "추적하는 항목",
+        interactiveSample: "OwlSeer 체험",
+        trySample: "샘플 데이터로 체험"
+      },
+      actions: {
+        trySample: "샘플 체험",
+        startFree: "무료로 시작",
+        startFreeTrial: "무료 체험 시작",
+        trySampleCta: "샘플 체험"
+      },
+      darkMode: {
+        toggle: "다크 모드 전환",
+        switchToLight: "라이트 모드로 전환",
+        switchToDark: "다크 모드로 전환"
+      }
+    },
     hero: {
       badge: 'v2.0 출시',
       title: "다음을",
@@ -1885,39 +2708,186 @@ export const translations = {
       subtitle: "{platform} 분석은 무엇을 해야 할지 알려주지 않습니다.",
       subtitle2: "우리가 알려드립니다.",
       ctaPrimary: "샘플 체험",
+      ctaSecondaryButton: "지금 시작하기",
       ctaSecondary: "가입 불필요",
       ctaInstant: "즉시 접속"
     },
     productShowcase: {
-      opportunities: { title: "유행하기 전 트렌드 포착", desc: "어제의 바이럴 히트를 쫓지 마세요. AI가 수백만 개의 신호를 분석하여 틈새 시장에 맞는 잠재력 높은 주제를 찾습니다." },
-      planning: { title: "계획이 아닌 실행", desc: "전략을 행동으로 옮기세요. 고성장 위험과 안정적인 신뢰 구축 콘텐츠의 균형을 맞춘 주간 제작 일정을 받으세요." },
-      analytics: { title: "콘텐츠 DNA 해독", desc: "최고의 영상이 성공한 이유를 정확히 이해하세요. 성공을 복제하기 위해 콘텐츠를 구조적 요소로 분해합니다." }
+      heading: {
+        title: "인사이트부터 게시 준비까지, 한 흐름으로",
+        subtitle: "OwlSeer는 전략과 실행 사이의 간극을 없애 크리에이터가 신호에서 스크립트까지 확신 있게 나아가도록 합니다."
+      },
+      highlights: {
+        decisionCycle: { label: "의사결정 사이클", desc: "신호 탐지부터 실행까지, 며칠이 아닌 몇 분." },
+        growthSignal: { label: "성장 신호", desc: "속도와 니치 적합도로 기회를 우선순위화." },
+        executionQuality: { label: "실행 품질", desc: "모든 추천에 신뢰할 수 있는 근거를 제공합니다." }
+      },
+      labels: {
+        capability: "역량",
+        outcome: "결과",
+        learnMore: "자세히 보기"
+      },
+      opportunities: {
+        step: "단계 01",
+        title: "유행하기 전 트렌드 포착",
+        desc: "어제의 바이럴 히트를 쫓지 마세요. AI가 수백만 개의 신호를 분석하여 틈새 시장에 맞는 잠재력 높은 주제를 찾습니다.",
+        statA: "24/7 신호 스캔",
+        statB: "기회 우선 랭킹",
+        bullets: ["포화되기 전에 떠오르는 주제를 찾습니다.", "검증된 니치 적합 주제에 집중합니다."],
+        mock: {
+          eyebrow: "트렌드 레이더",
+          title: "적합도 높은 기회 감지",
+          score: "점수 94",
+          metrics: [
+            { label: "속도", value: "+128%" },
+            { label: "경쟁", value: "낮음" },
+            { label: "조회 풀", value: "45M" }
+          ],
+          bullets: ["최고 성과 오디언스 세그먼트와 높은 중복.", "추천 게시 창은 다음 6시간 내에 열립니다."]
+        }
+      },
+      planning: {
+        step: "단계 02",
+        title: "계획이 아닌 실행",
+        desc: "전략을 행동으로 옮기세요. 고성장 위험과 안정적인 신뢰 구축 콘텐츠의 균형을 맞춘 주간 제작 일정을 받으세요.",
+        statA: "주간 페이스 맵",
+        statB: "균형 잡힌 콘텐츠 믹스",
+        bullets: ["추천을 정확한 촬영 캘린더로 전환합니다.", "창의력을 소진하지 않고 일관성을 유지합니다."],
+        mock: {
+          eyebrow: "실행 계획",
+          title: "이번 주 제작 리듬",
+          postCount: "게시물 3개",
+          schedule: [
+            { day: "월", date: "24", task: "트렌드 기반 오프너", tag: "성장" },
+            { day: "수", date: "26", task: "신뢰 형성 스토리", tag: "커뮤니티" },
+            { day: "금", date: "28", task: "전환 CTA 영상", tag: "수익" }
+          ]
+        }
+      },
+      analytics: {
+        step: "단계 03",
+        title: "콘텐츠 DNA 해독",
+        desc: "최고의 영상이 성공한 이유를 정확히 이해하세요. 성공을 복제하기 위해 콘텐츠를 구조적 요소로 분해합니다.",
+        statA: "프레임 단위 진단",
+        statB: "재현 가능한 승리 패턴",
+        bullets: ["유지율과 완주를 좌우하는 핵심을 짚어냅니다.", "근거 기반 편집으로 더 빠르게 개선합니다."],
+        mock: {
+          eyebrow: "퍼포먼스 DNA",
+          title: "이미 통하는 것을 재현",
+          pill: "상위 5%",
+          metrics: [
+            { label: "훅 강도", value: "9.8/10", width: "w-[95%]" },
+            { label: "시청 유지율", value: "72%", width: "w-[72%]" },
+            { label: "CTA 완료율", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "파워하우스",
       title: "지배하기 위해",
       titleHighlight: "필요한 모든 것",
       subtitle: "현대 크리에이터를 위한 통합 운영 체제. 분리된 도구들을 오가지 마세요.",
-      copilot: { title: "AI 전략 코파일럿", desc: "24/7 창의적 파트너. 고전환 스크립트 생성, 훅 브레인스토밍, 아이디어에 대한 즉각적인 피드백." },
-      trend: { title: "트렌드 인텔리전스", desc: "정점에 도달하기 전 기회 포착. AI가 수백만 데이터 포인트를 분석하여 *당신의* 다음 바이럴 주제를 찾습니다.", liveSignals: "실시간 신호" },
-      goals: { title: "스마트 목표", desc: "모호한 야망을 실행 가능한 일일 작업으로 전환하세요." },
-      analytics: { title: "심층 분석" },
+      metrics: [
+        { label: "게시 속도", value: "3배 더 빠르게" },
+        { label: "계획 확신", value: "신호 기반" },
+        { label: "실행 일관성", value: "주간 리듬" }
+      ],
+      copilot: {
+        title: "AI 전략 코파일럿",
+        desc: "24/7 창의적 파트너. 고전환 스크립트 생성, 훅 브레인스토밍, 아이디어에 대한 즉각적인 피드백.",
+        badge: "실시간 생성",
+        chat: {
+          user: "다음 니치 영상에 더 강한 훅을 만들어줘.",
+          assistantLabel: "추천 훅",
+          assistant: "뻔한 인트로를 따라 하지 마세요. 시청자를 잡는 3초 오프너는 이겁니다."
+        }
+      },
+      trend: {
+        title: "트렌드 인텔리전스",
+        desc: "정점에 도달하기 전 기회 포착. AI가 수백만 데이터 포인트를 분석하여 *당신의* 다음 바이럴 주제를 찾습니다.",
+        liveSignals: "실시간 신호",
+        list: { viewsLabel: "조회" }
+      },
+      goals: {
+        title: "스마트 목표",
+        desc: "모호한 야망을 실행 가능한 일일 작업으로 전환하세요.",
+        ringLabel: "목표",
+        tasks: [
+          { task: "오프닝 훅 변형 녹화", done: true },
+          { task: "트렌드 후보 검토", done: false },
+          { task: "전환 의도가 높은 게시물 일정화", done: false }
+        ]
+      },
+      analytics: { title: "심층 분석", badge: "+124% 전년 대비" },
       features: { scheduling: "스마트 스케줄링", prediction: "바이럴 예측", multiAccount: "다중 계정", reports: "즉시 보고서" }
+    },
+    valueProposition: {
+      badge: "전략적 명확성",
+      title: "무엇을 올릴지 더 이상 추측하지 마세요",
+      subtitle: "OwlSeer가 TikTok에서 다음에 할 일을 알려드립니다.",
+      cards: [
+        { title: "실행 가능한 플랜", desc: "3분 이내에 완전한 콘텐츠 플랜을 받으세요." },
+        { title: "AI 스크립트", desc: "오늘 바로 촬영할 수 있는 AI 생성 스크립트." },
+        { title: "데이터 기반", desc: "무작위로 올리는 데 지친 크리에이터를 위해." }
+      ],
+      trust: ["기적 같은 약속 없음", "자동 게시 없음", "비밀번호 불필요"],
+      metrics: [
+        { label: "플랜 생성", value: "< 3분" },
+        { label: "분석된 신호", value: "30+" },
+        { label: "게시 리듬", value: "주간" }
+      ],
+      cta: {
+        primary: "직접 보기",
+        secondary: "작동 방식"
+      }
     },
     pricingSection: {
       title: "간단하고 투명한 가격",
-      subtitle: "14일 무료 체험을 시작하세요. 언제든지 취소 가능.",
+      subtitle: "7일 무료 체험을 시작하세요. 언제든지 취소 가능.",
+      labels: { mostPopular: "가장 인기" },
       monthly: "월간",
       yearly: "연간",
       save: "20% 할인",
       period: "월",
       plans: {
-        creator: { name: "크리에이터", features: ["최대 3개 TikTok 계정", "AI 콘텐츠 제안", "기본 분석", "콘텐츠 스케줄링", "이메일 지원"] },
-        growth: { name: "성장", features: ["최대 10개 TikTok 계정", "고급 AI 최적화", "심층 분석", "팀 협업", "우선 지원", "주간 상담"] },
-        scale: { name: "스케일", features: ["무제한 계정", "엔터프라이즈 AI", "맞춤형 분석", "고급 팀 도구", "화이트 라벨 옵션", "전담 매니저", "24/7 우선 지원"] }
+        creator: {
+          name: "Basic (개인 창작)",
+          summary: "1인 크리에이터가 빠르게 운영 루프를 만드는 플랜.",
+          features: [
+            "1계정 / 1좌석",
+            "월 30건 무료 영상 분석",
+            "월 600 크레딧",
+            "AI 콘텐츠 전 과정(진단~스크립트)",
+            "기본형 AI Copilot"
+          ]
+        },
+        growth: {
+          name: "Growth (팀 성장)",
+          summary: "소규모 팀의 대량 제작과 협업을 위한 플랜.",
+          features: [
+            "3계정 / 4좌석",
+            "월 120건 무료 영상 분석",
+            "월 1,200 크레딧",
+            "완전한 일정·스크립트 워크플로",
+            "배치 작업 처리",
+            "기본 리포트 내보내기"
+          ]
+        },
+        scale: {
+          name: "Pro (확장 운영)",
+          summary: "에이전시/멀티 계정 팀의 전환 효율 극대화를 위한 플랜.",
+          features: [
+            "8계정 / 10좌석",
+            "월 400건 무료 영상 분석",
+            "월 4,000 크레딧",
+            "우선 연산 큐",
+            "긴 문맥을 지원하는 고급형 AI Copilot"
+          ]
+        }
       },
       cta: { trial: "무료 체험 시작", buy: "지금 구매" },
-      footer: { secure: "안전한 결제", trial: "14일 무료", cancel: "언제든 취소 가능" }
+      footer: { secure: "안전한 결제", trial: "7일 무료", cancel: "언제든 취소 가능" }
     },
     finalCta: {
       title: "미래를 볼 준비가 되셨나요?",
@@ -1928,9 +2898,41 @@ export const translations = {
     footer: {
       tagline: "크리에이터를 위한 AI TikTok 전략.\n추측은 그만두고 성장을 시작하세요.",
       product: "제품",
+      solutions: "솔루션",
+      useCases: "사용 사례",
       resources: "리소스",
       legal: "법적 고지",
-      rights: "© 2026 OwlSeer. All rights reserved."
+      rights: "© 2026 OwlSeer. All rights reserved.",
+      mobileProductAndSolutions: "제품 및 솔루션",
+      links: {
+        howItWorks: "작동 원리",
+        methodology: "방법론",
+        signals: "30+ 신호",
+        pricing: "가격",
+        trySample: "샘플 체험",
+        blog: "블로그",
+        guides: "가이드",
+        glossary: "용어집",
+        faq: "자주 묻는 질문",
+        contentCreators: "콘텐츠 크리에이터",
+        localBusiness: "지역 비즈니스",
+        agencies: "에이전시",
+        brands: "브랜드",
+        ecommerceSellers: "이커머스 판매자",
+        trendPrediction: "트렌드 예측",
+        contentDiagnosis: "콘텐츠 진단",
+        scriptGeneration: "스크립트 생성",
+        postingSchedule: "게시 일정",
+        hashtagStrategy: "해시태그 전략",
+        privacy: "개인정보 처리방침",
+        terms: "서비스 약관",
+        security: "보안",
+        cookies: "쿠키 정책"
+      },
+      meta: {
+        developers: "개발자",
+        sitemap: "사이트맵"
+      }
     },
     signalsPage: {
       ctaButton: "优化此指标",
@@ -1952,8 +2954,8 @@ export const translations = {
           task: "Understand how OwlSeer measures the way viewers interact with your content.",
           desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
           linkText: "AER card",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/social/dashboard#aer-card).",
           signals: [
             { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
             { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
@@ -1974,8 +2976,8 @@ export const translations = {
           task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
           desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
           linkText: "Trend Radar",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/social/simulation/trends).",
           signals: [
             { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
             { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
@@ -1994,8 +2996,8 @@ export const translations = {
           task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
           desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
           linkText: "Intelligence Hub",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          linkUrl: "/social/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/social/intelligence).",
           signals: [
             { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
             { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
@@ -2036,6 +3038,81 @@ export const translations = {
            button: "Generate My Signal Profile",
            note: "Read-only access. Connects in 30 seconds. Revoke anytime."
         }
+      },
+      compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ: 내 워크플로에 맞는 TikTok 툴은?",
+          lead: "VidIQ는 YouTube에서 시작해 TikTok으로 확장되었습니다. OwlSeer는 처음부터 TikTok 전용으로 설계되었습니다. 기능, 강점, 사용 적합도를 한눈에 비교합니다."
+        },
+        tldr: "TikTok이 핵심 채널이라면 TikTok 전용 신호 분석·트렌드 예측·스크립트 생성을 제공하는 OwlSeer가 적합합니다. YouTube가 주 채널이고 TikTok이 보조 채널이라면 VidIQ가 적합합니다.",
+        table: {
+          title: "기능별 비교",
+          rows: [
+            { feature: "핵심 플랫폼", owlseer: "TikTok 전용", vidiq: "YouTube 중심, TikTok 보조" },
+            { feature: "TikTok 신호 깊이", owlseer: "30개+ 가중 신호", vidiq: "기본 TikTok 지표" },
+            { feature: "트렌드 예측", owlseer: "AI + 속도 분석", vidiq: "인기 주제 목록" },
+            { feature: "스크립트 생성", owlseer: "데이터 기반 Hook-Body-CTA", vidiq: "기본 스크립트 생성 없음" },
+            { feature: "게시 일정", owlseer: "개인화 최적 시간 히트맵", vidiq: "일반 권장 시간" },
+            { feature: "콘텐츠 진단", owlseer: "문제 탐지 + 개선 제안", vidiq: "성과 개요" },
+            { feature: "AI 코파일럿", owlseer: "대화형 어시스턴트", vidiq: "대화형 AI 없음" },
+            { feature: "주간 리포트", owlseer: "KPI 추적 자동화", vidiq: "자동 주간 리포트 없음" },
+            { feature: "브랜드 세이프티", owlseer: "0-100 위험 점수", vidiq: "브랜드 안전 점수 없음" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "이런 경우 OwlSeer 추천",
+          items: [
+            "TikTok이 주요 또는 유일한 성장 채널",
+            "기본 지표를 넘어선 30개+ 신호 분석이 필요",
+            "내 오디언스에 맞춘 AI 스크립트가 필요",
+            "트렌드 타이밍과 속도가 전략에 중요",
+            "KPI 추적이 포함된 자동 주간 리포트가 필요",
+            "대화형 AI 코파일럿을 선호"
+          ]
+        },
+        chooseVidIQ: {
+          title: "이런 경우 VidIQ 추천",
+          items: [
+            "YouTube가 주요 플랫폼",
+            "YouTube 특화 기능(SEO, 키워드)이 필요",
+            "TikTok은 보조 채널이며 기본 지표로 충분",
+            "이미 YouTube 용도로 VidIQ를 사용 중"
+          ]
+        },
+        platformFocus: {
+          title: "왜 플랫폼 집중도가 중요한가",
+          p1: "YouTube와 TikTok은 보상하는 행동이 다릅니다. YouTube는 검색 중심이고 제목·설명·썸네일이 노출을 좌우합니다. TikTok은 알고리즘 중심이며 훅율·시청 유지율·트렌드 적합도가 배포를 좌우합니다.",
+          p2: "YouTube 중심 툴은 검색 의도를 최적화합니다. TikTok 중심 툴은 신호 패턴을 최적화합니다. YouTube 우선 툴로 TikTok 전략을 짜는 것은 바다에서 도로지도를 쓰는 것과 같습니다.",
+          highlight: "OwlSeer는 YouTube 중심 툴이 모델링하지 않는 TikTok 특화 지표(AER, 훅율, 저장율)를 추적합니다."
+        },
+        boundary: {
+          transparency: "비교 내용은 2026년 2월 기준 공개된 제품 정보를 기반으로 합니다.",
+          note: "이 비교는 유료 리뷰가 아닙니다. 크리에이터가 더 나은 선택을 하도록 돕기 위해 작성했습니다."
+        },
+        cta: {
+          title: "TikTok 네이티브 전략을 시작할 준비가 되었나요?",
+          subtitle: "샘플 데이터에서 OwlSeer를 먼저 확인하고, 준비되면 무료 체험을 시작하세요.",
+          primary: "무료 체험 시작",
+          secondary: "샘플 보기"
+        },
+        ui: {
+          loading: "콘텐츠를 불러오는 중...",
+          badge: "정면 비교",
+          coreInsight: "핵심 인사이트",
+          tableHeaders: {
+            feature: "기능",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "VidIQ에 없는 기능을 확인하세요",
+          actionButtons: {
+            trendRadar: "트렌드 레이더",
+            scriptStudio: "스크립트 스튜디오",
+            weeklyReport: "주간 리포트"
+          },
+          platformFocusLabel: "플랫폼 집중도",
+          transparencyNote: "투명성 안내"
+        }
       }
     }
   },
@@ -2043,6 +3120,7 @@ export const translations = {
     product: 'Producto',
     pricing: 'Precios',
     resources: 'Recursos',
+    methodology: 'Metodología',
     login: 'Iniciar sesión',
     signup: 'Registro gratis',
     whatIs: 'Qué es OwlSeer',
@@ -2050,6 +3128,54 @@ export const translations = {
     faq: 'Preguntas frecuentes',
     security: 'Seguridad y Privacidad',
     blog: 'Blog',
+    guides: 'Guías',
+    nav: {
+      solutions: "Soluciones",
+      platform: "Plataforma",
+      useCases: "Casos de uso",
+      byRole: "Por rol",
+      learn: "Aprender",
+      trustSupport: "Confianza y soporte",
+      trustSecurity: "Confianza y seguridad",
+      language: "Idioma",
+      glossary: "Glosario",
+      links: {
+        signals: "30+ señales",
+        interactiveSample: "Muestra interactiva",
+        trendPrediction: "Predicción de tendencias",
+        contentDiagnosis: "Diagnóstico de contenido",
+        scriptGeneration: "Generación de guiones",
+        postingSchedule: "Horario de publicación",
+        hashtagStrategy: "Estrategia de hashtags",
+        contentCreators: "Creadores de contenido",
+        localBusiness: "Negocios locales",
+        agencies: "Agencias",
+        brands: "Marcas",
+        ecommerceSellers: "Vendedores de e-commerce",
+        privacy: "Privacidad",
+        terms: "Términos",
+        cookies: "Cookies",
+        security: "Seguridad"
+      },
+      desc: {
+        howItWorks: "Empieza en 3 pasos",
+        methodology: "Nuestro proceso de IA en 5 pasos",
+        signals: "Lo que rastreamos",
+        interactiveSample: "Ver OwlSeer en acción",
+        trySample: "Verlo con datos reales"
+      },
+      actions: {
+        trySample: "Probar muestra",
+        startFree: "Empieza gratis",
+        startFreeTrial: "Iniciar prueba gratuita",
+        trySampleCta: "Probar muestra"
+      },
+      darkMode: {
+        toggle: "Alternar modo oscuro",
+        switchToLight: "Cambiar a modo claro",
+        switchToDark: "Cambiar a modo oscuro"
+      }
+    },
     hero: {
       badge: 'v2.0 ya disponible',
       title: "Mira lo",
@@ -2057,52 +3183,234 @@ export const translations = {
       subtitle: "Tus analíticas de {platform} no te dicen qué hacer.",
       subtitle2: "Nosotros sí.",
       ctaPrimary: "Probar Muestra",
+      ctaSecondaryButton: "Empezar ahora",
       ctaSecondary: "Sin registro",
       ctaInstant: "Acceso instantáneo"
     },
     productShowcase: {
-      opportunities: { title: "Detecta Tendencias Antes", desc: "Deja de perseguir éxitos virales de ayer. Nuestra IA analiza millones de señales para encontrar temas de alto potencial." },
-      planning: { title: "Ejecución, No Solo Planificación", desc: "Convierte la estrategia en acción. Obtén un calendario de producción semanal equilibrado." },
-      analytics: { title: "Decodifica tu ADN de Contenido", desc: "Entiende exactamente por qué tus mejores videos funcionan. Desglosamos tu contenido en elementos estructurales." }
+      heading: {
+        title: "De insight a publicación lista en un solo flujo",
+        subtitle: "OwlSeer elimina la brecha entre estrategia y ejecución para que los creadores pasen de la señal al guion con confianza."
+      },
+      highlights: {
+        decisionCycle: { label: "Ciclo de decisión", desc: "De la detección de señales a la ejecución en minutos, no en días." },
+        growthSignal: { label: "Señal de crecimiento", desc: "Prioriza oportunidades por velocidad y encaje en tu nicho." },
+        executionQuality: { label: "Calidad de ejecución", desc: "Cada recomendación incluye razonamiento en el que puedes confiar." }
+      },
+      labels: {
+        capability: "Capacidad",
+        outcome: "Resultado",
+        learnMore: "Saber más"
+      },
+      opportunities: {
+        step: "Paso 01",
+        title: "Detecta tendencias antes de que alcancen su pico",
+        desc: "Deja de perseguir éxitos virales de ayer. Nuestra IA analiza millones de señales para encontrar temas de alto potencial adaptados a tu nicho.",
+        statA: "Escaneo de señales 24/7",
+        statB: "Ranking por oportunidades",
+        bullets: ["Encuentra temas en alza antes de la saturación.", "Prioriza temas con encaje probado en tu nicho."],
+        mock: {
+          eyebrow: "Radar de tendencias",
+          title: "Oportunidad de alto encaje detectada",
+          score: "94 puntos",
+          metrics: [
+            { label: "Velocidad", value: "+128%" },
+            { label: "Competencia", value: "Baja" },
+            { label: "Pool de vistas", value: "45M" }
+          ],
+          bullets: [
+            "Alta coincidencia con tu segmento de audiencia con mejor rendimiento.",
+            "La ventana de publicación recomendada se abre en las próximas 6 horas."
+          ]
+        }
+      },
+      planning: {
+        step: "Paso 02",
+        title: "Ejecución, No Solo Planificación",
+        desc: "Convierte la estrategia en acción. Obtén un calendario de producción semanal que equilibre riesgos de crecimiento con contenido estable de confianza.",
+        statA: "Mapa de ritmo semanal",
+        statB: "Mix de contenido equilibrado",
+        bullets: ["Convierte recomendaciones en un calendario exacto de grabación.", "Mantén consistencia sin agotar tu creatividad."],
+        mock: {
+          eyebrow: "Plan de ejecución",
+          title: "Cadencia de producción de esta semana",
+          postCount: "3 publicaciones",
+          schedule: [
+            { day: "Lun", date: "24", task: "Apertura basada en tendencia", tag: "Crecimiento" },
+            { day: "Mié", date: "26", task: "Historia para generar confianza", tag: "Comunidad" },
+            { day: "Vie", date: "28", task: "Video de CTA de conversión", tag: "Ingresos" }
+          ]
+        }
+      },
+      analytics: {
+        step: "Paso 03",
+        title: "Decodifica tu ADN de Contenido",
+        desc: "Entiende exactamente por qué tus mejores videos funcionan. Desglosamos tu contenido en elementos estructurales para replicar el éxito.",
+        statA: "Diagnóstico fotograma a fotograma",
+        statB: "Patrones ganadores repetibles",
+        bullets: ["Identifica qué impulsa la retención y la finalización.", "Itera más rápido con ediciones respaldadas por datos."],
+        mock: {
+          eyebrow: "ADN de rendimiento",
+          title: "Replica lo que ya funciona",
+          pill: "Top 5%",
+          metrics: [
+            { label: "Fuerza del gancho", value: "9.8/10", width: "w-[95%]" },
+            { label: "Retención de audiencia", value: "72%", width: "w-[72%]" },
+            { label: "Finalización de CTA", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "Potencia",
       title: "Todo lo que necesitas para",
       titleHighlight: "dominar",
       subtitle: "Un sistema operativo unificado para creadores modernos.",
-      copilot: { title: "Copiloto de Estrategia AI", desc: "Tu socio creativo 24/7. Genera guiones de alta conversión y obtén retroalimentación instantánea." },
-      trend: { title: "Inteligencia de Tendencias", desc: "Detecta oportunidades antes de que alcancen su punto máximo.", liveSignals: "Señales en Vivo" },
-      goals: { title: "Objetivos Inteligentes", desc: "Convierte ambiciones vagas en tareas diarias procesables." },
-      analytics: { title: "Analítica Profunda" },
+      metrics: [
+        { label: "Velocidad de publicación", value: "3x más rápido" },
+        { label: "Confianza al planificar", value: "Respaldado por señales" },
+        { label: "Consistencia de ejecución", value: "Cadencia semanal" }
+      ],
+      copilot: {
+        title: "Copiloto de Estrategia AI",
+        desc: "Tu socio creativo 24/7. Genera guiones de alta conversión y obtén retroalimentación instantánea.",
+        badge: "Generación en tiempo real",
+        chat: {
+          user: "Dame un gancho más fuerte para mi próximo video de nicho.",
+          assistantLabel: "Gancho sugerido",
+          assistant: "Deja de copiar intros genéricas. Aquí tienes la apertura de 3 segundos que retiene a tus espectadores."
+        }
+      },
+      trend: {
+        title: "Inteligencia de Tendencias",
+        desc: "Detecta oportunidades antes de que alcancen su punto máximo.",
+        liveSignals: "Señales en Vivo",
+        list: { viewsLabel: "vistas" }
+      },
+      goals: {
+        title: "Objetivos Inteligentes",
+        desc: "Convierte ambiciones vagas en tareas diarias procesables.",
+        ringLabel: "Objetivo",
+        tasks: [
+          { task: "Grabar variación del gancho inicial", done: true },
+          { task: "Revisar lista corta de tendencias", done: false },
+          { task: "Programar publicación de alta intención", done: false }
+        ]
+      },
+      analytics: { title: "Analítica Profunda", badge: "+124% interanual" },
       features: { scheduling: "Programación Inteligente", prediction: "Predicción Viral", multiAccount: "Multi-cuenta", reports: "Informes Instantáneos" }
+    },
+    valueProposition: {
+      badge: "Claridad estratégica",
+      title: "Deja de adivinar qué publicar",
+      subtitle: "OwlSeer te dice qué hacer a continuación en TikTok.",
+      cards: [
+        { title: "Planes accionables", desc: "Obtén un plan de contenido completo en menos de 3 minutos." },
+        { title: "Guiones con IA", desc: "Guiones generados por IA listos para grabar hoy." },
+        { title: "Basado en datos", desc: "Para creadores cansados de publicar al azar." }
+      ],
+      trust: ["Sin promesas milagrosas", "Sin autopublicación", "Sin contraseña"],
+      metrics: [
+        { label: "Tiempo del plan", value: "< 3 min" },
+        { label: "Señales analizadas", value: "30+" },
+        { label: "Ritmo de publicación", value: "Semanal" }
+      ],
+      cta: {
+        primary: "Verlo en acción",
+        secondary: "Cómo funciona"
+      }
     },
     pricingSection: {
       title: "Precios Simples y Transparentes",
-      subtitle: "Comienza tu prueba gratuita de 14 días. Cancela cuando quieras.",
+      subtitle: "Comienza tu prueba gratuita de 7 días. Cancela cuando quieras.",
+      labels: { mostPopular: "Más popular" },
       monthly: "Mensual",
       yearly: "Anual",
       save: "20% DTO",
       period: "mes",
       plans: {
-        creator: { name: "Creador", features: ["Hasta 3 cuentas de TikTok", "Sugerencias de contenido AI", "Analítica básica", "Programación de contenido", "Soporte por correo"] },
-        growth: { name: "Crecimiento", features: ["Hasta 10 cuentas de TikTok", "Optimización AI avanzada", "Analítica avanzada", "Colaboración en equipo", "Soporte prioritario", "Consultas semanales"] },
-        scale: { name: "Escala", features: ["Cuentas ilimitadas", "IA Empresarial", "Analítica personalizada", "Herramientas de equipo avanzadas", "Marca blanca", "Gerente dedicado", "Soporte 24/7"] }
+        creator: {
+          name: "Basic",
+          summary: "Plan individual para lanzar rápido tu sistema de contenido.",
+          features: [
+            "1 cuenta / 1 asiento",
+            "30 análisis de video gratis al mes",
+            "600 créditos mensuales",
+            "Flujo completo con IA: diagnóstico y guiones",
+            "AI Copilot básico"
+          ]
+        },
+        growth: {
+          name: "Growth",
+          summary: "Plan para equipos pequeños que necesitan producción escalable.",
+          features: [
+            "3 cuentas / 4 asientos",
+            "120 análisis de video gratis al mes",
+            "1.200 créditos mensuales",
+            "Flujo completo de calendario y guiones",
+            "Procesamiento por lotes",
+            "Exportación de reportes básicos"
+          ]
+        },
+        scale: {
+          name: "Pro",
+          summary: "Plan para agencias y equipos multi-cuenta con máxima eficiencia.",
+          features: [
+            "8 cuentas / 10 asientos",
+            "400 análisis de video gratis al mes",
+            "4.000 créditos mensuales",
+            "Cola de cómputo prioritaria",
+            "AI Copilot con contexto extendido"
+          ]
+        }
       },
       cta: { trial: "Empezar Prueba Gratis", buy: "Comprar Ahora" },
-      footer: { secure: "Pago seguro", trial: "14 días gratis", cancel: "Cancela cuando quieras" }
+      footer: { secure: "Pago seguro", trial: "7 días gratis", cancel: "Cancela cuando quieras" }
     },
     finalCta: {
       title: "¿Listo para ver tu futuro?",
       subtitle: "Únete a miles de creadores que dejaron de adivinar y comenzaron a crecer.",
       start: "Empezar Prueba Gratis",
-      demo: "Ver Demo en Vivo"
+      demo: "Ver Sample en Vivo"
     },
     footer: {
       tagline: "Estrategia de TikTok con IA para creadores.\nDeja de adivinar. Empieza a crecer.",
       product: "Producto",
+      solutions: "Soluciones",
+      useCases: "Casos de uso",
       resources: "Recursos",
       legal: "Legal",
-      rights: "© 2026 OwlSeer. Todos los derechos reservados."
+      rights: "© 2026 OwlSeer. Todos los derechos reservados.",
+      mobileProductAndSolutions: "Producto y soluciones",
+      links: {
+        howItWorks: "Cómo funciona",
+        methodology: "Metodología",
+        signals: "30+ señales",
+        pricing: "Precios",
+        trySample: "Probar muestra",
+        blog: "Blog",
+        guides: "Guías",
+        glossary: "Glosario",
+        faq: "Preguntas frecuentes",
+        contentCreators: "Creadores de contenido",
+        localBusiness: "Negocios locales",
+        agencies: "Agencias",
+        brands: "Marcas",
+        ecommerceSellers: "Vendedores de e-commerce",
+        trendPrediction: "Predicción de tendencias",
+        contentDiagnosis: "Diagnóstico de contenido",
+        scriptGeneration: "Generación de guiones",
+        postingSchedule: "Horario de publicación",
+        hashtagStrategy: "Estrategia de hashtags",
+        privacy: "Política de privacidad",
+        terms: "Términos de servicio",
+        security: "Seguridad",
+        cookies: "Política de cookies"
+      },
+      meta: {
+        developers: "Desarrolladores",
+        sitemap: "Mapa del sitio"
+      }
     },
     signalsPage: {
       hero: {
@@ -2123,8 +3431,8 @@ export const translations = {
           task: "Understand how OwlSeer measures the way viewers interact with your content.",
           desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
           linkText: "AER card",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/social/dashboard#aer-card).",
           signals: [
             { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
             { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
@@ -2145,8 +3453,8 @@ export const translations = {
           task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
           desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
           linkText: "Trend Radar",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/social/simulation/trends).",
           signals: [
             { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
             { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
@@ -2165,8 +3473,8 @@ export const translations = {
           task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
           desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
           linkText: "Intelligence Hub",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          linkUrl: "/social/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/social/intelligence).",
           signals: [
             { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
             { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
@@ -2207,6 +3515,81 @@ export const translations = {
            button: "Generate My Signal Profile",
            note: "Read-only access. Connects in 30 seconds. Revoke anytime."
         }
+      },
+      compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ: ¿qué herramienta TikTok encaja con tu flujo?",
+          lead: "VidIQ nació en YouTube y luego se expandió a TikTok. OwlSeer se diseñó para TikTok desde el primer día. Aquí comparamos funciones, fortalezas y casos de uso."
+        },
+        tldr: "Si TikTok es tu canal principal, elige OwlSeer por su análisis profundo de señales, predicción de tendencias y generación de guiones. Si priorizas YouTube y TikTok es secundario, VidIQ puede ser suficiente.",
+        table: {
+          title: "Comparación función por función",
+          rows: [
+            { feature: "Plataforma principal", owlseer: "TikTok (exclusivo)", vidiq: "YouTube (principal), TikTok (secundario)" },
+            { feature: "Profundidad de señales TikTok", owlseer: "30+ señales ponderadas", vidiq: "Métricas básicas de TikTok" },
+            { feature: "Predicción de tendencias", owlseer: "IA con velocidad", vidiq: "Listado de temas en tendencia" },
+            { feature: "Generación de guiones", owlseer: "Hook-Body-CTA basado en datos", vidiq: "Sin generación nativa de guiones" },
+            { feature: "Horario de publicación", owlseer: "Mapa de calor personalizado", vidiq: "Sugerencias genéricas de horario" },
+            { feature: "Diagnóstico de contenido", owlseer: "Detección de problemas + correcciones", vidiq: "Resumen de rendimiento" },
+            { feature: "Copiloto IA", owlseer: "Asistente conversacional", vidiq: "Sin IA conversacional" },
+            { feature: "Informe semanal", owlseer: "Automatizado con seguimiento KPI", vidiq: "Sin informe semanal automatizado" },
+            { feature: "Brand safety", owlseer: "Escala de riesgo 0-100", vidiq: "Sin puntuación de seguridad de marca" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "Elige OwlSeer si...",
+          items: [
+            "TikTok es tu plataforma principal o única",
+            "Necesitas más de 30 señales, no solo métricas básicas",
+            "Quieres guiones IA personalizados para tu audiencia",
+            "El timing y la velocidad de tendencia importan en tu estrategia",
+            "Necesitas informes semanales automáticos con KPI",
+            "Prefieres un copiloto IA conversacional"
+          ]
+        },
+        chooseVidIQ: {
+          title: "Elige VidIQ si...",
+          items: [
+            "YouTube es tu plataforma principal",
+            "Necesitas funciones específicas de YouTube (SEO, keywords)",
+            "TikTok es secundario y te bastan métricas básicas",
+            "Ya usas VidIQ para tu canal de YouTube"
+          ]
+        },
+        platformFocus: {
+          title: "Por qué importa el enfoque de plataforma",
+          p1: "YouTube y TikTok premian comportamientos distintos. YouTube es búsqueda: títulos, descripciones y miniaturas determinan descubrimiento. TikTok es algoritmo: hook rate, retención y ajuste a tendencia determinan distribución.",
+          p2: "Una herramienta diseñada para YouTube optimiza intención de búsqueda. Una herramienta diseñada para TikTok optimiza patrones de señales. Usar una herramienta YouTube-first para estrategia TikTok es como usar un mapa de carreteras en el océano.",
+          highlight: "OwlSeer rastrea métricas específicas de TikTok (AER, hook rate, save rate) que las herramientas centradas en YouTube no modelan."
+        },
+        boundary: {
+          transparency: "La comparación se basa en información pública de producto a febrero de 2026.",
+          note: "No es una reseña pagada. La publicamos para ayudarte a elegir con criterio."
+        },
+        cta: {
+          title: "¿Listo para una estrategia nativa de TikTok?",
+          subtitle: "Prueba OwlSeer con datos de muestra o inicia tu prueba gratis.",
+          primary: "Iniciar prueba gratis",
+          secondary: "Ver muestra"
+        },
+        ui: {
+          loading: "Cargando contenido...",
+          badge: "Cara a cara",
+          coreInsight: "Insight clave",
+          tableHeaders: {
+            feature: "Función",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "Descubre lo que VidIQ no ofrece",
+          actionButtons: {
+            trendRadar: "Radar de tendencias",
+            scriptStudio: "Estudio de guiones",
+            weeklyReport: "Informe semanal"
+          },
+          platformFocusLabel: "Enfoque de plataforma",
+          transparencyNote: "Nota de transparencia"
+        }
       }
     }
   },
@@ -2214,6 +3597,7 @@ export const translations = {
     product: 'Produit',
     pricing: 'Tarifs',
     resources: 'Ressources',
+    methodology: 'Méthodologie',
     login: 'Connexion',
     signup: 'Inscription gratuite',
     whatIs: "Qu'est-ce que OwlSeer",
@@ -2221,6 +3605,54 @@ export const translations = {
     faq: 'FAQ',
     security: 'Sécurité et Confidentialité',
     blog: 'Blog',
+    guides: 'Guides',
+    nav: {
+      solutions: "Solutions",
+      platform: "Plateforme",
+      useCases: "Cas d’usage",
+      byRole: "Par rôle",
+      learn: "Apprendre",
+      trustSupport: "Confiance & support",
+      trustSecurity: "Confiance & sécurité",
+      language: "Langue",
+      glossary: "Glossaire",
+      links: {
+        signals: "30+ signaux",
+        interactiveSample: "Exemple interactif",
+        trendPrediction: "Prédiction de tendances",
+        contentDiagnosis: "Diagnostic de contenu",
+        scriptGeneration: "Génération de scripts",
+        postingSchedule: "Planning de publication",
+        hashtagStrategy: "Stratégie de hashtags",
+        contentCreators: "Créateurs de contenu",
+        localBusiness: "Commerce local",
+        agencies: "Agences",
+        brands: "Marques",
+        ecommerceSellers: "Vendeurs e-commerce",
+        privacy: "Confidentialité",
+        terms: "Conditions",
+        cookies: "Cookies",
+        security: "Sécurité"
+      },
+      desc: {
+        howItWorks: "Démarrer en 3 étapes",
+        methodology: "Notre process IA en 5 étapes",
+        signals: "Ce que nous suivons",
+        interactiveSample: "Voir OwlSeer en action",
+        trySample: "Le voir sur des données réelles"
+      },
+      actions: {
+        trySample: "Essayer l’exemple",
+        startFree: "Commencer gratuitement",
+        startFreeTrial: "Démarrer l’essai gratuit",
+        trySampleCta: "Essayer l’exemple"
+      },
+      darkMode: {
+        toggle: "Basculer en mode sombre",
+        switchToLight: "Passer en mode clair",
+        switchToDark: "Passer en mode sombre"
+      }
+    },
     hero: {
       badge: 'v2.0 est en ligne',
       title: "Voir la",
@@ -2228,39 +3660,189 @@ export const translations = {
       subtitle: "Vos analyses {platform} ne vous disent pas quoi faire.",
       subtitle2: "Nous le faisons.",
       ctaPrimary: "Essayer la démo",
+      ctaSecondaryButton: "Commencer maintenant",
       ctaSecondary: "Pas d'inscription",
       ctaInstant: "Accès instantané"
     },
     productShowcase: {
-      opportunities: { title: "Repérez les Tendances", desc: "Arrêtez de chasser les succès viraux d'hier. Notre IA analyse des millions de signaux pour trouver des sujets à fort potentiel." },
-      planning: { title: "Exécution, Pas Juste Planification", desc: "Transformez la stratégie en action. Obtenez un calendrier de production hebdomadaire équilibré." },
-      analytics: { title: "Décodez votre ADN de Contenu", desc: "Comprenez exactement pourquoi vos meilleures vidéos fonctionnent. Nous décomposons votre contenu." }
+      heading: {
+        title: "De l'insight à un contenu prêt à publier, en un seul flux",
+        subtitle: "OwlSeer comble l'écart entre stratégie et exécution pour que les créateurs passent du signal au script en toute confiance."
+      },
+      highlights: {
+        decisionCycle: { label: "Cycle de décision", desc: "De la détection du signal à l'exécution en minutes, pas en jours." },
+        growthSignal: { label: "Signal de croissance", desc: "Priorisez les opportunités selon la vitesse et l'adéquation à votre niche." },
+        executionQuality: { label: "Qualité d'exécution", desc: "Chaque recommandation inclut un raisonnement fiable." }
+      },
+      labels: {
+        capability: "Capacité",
+        outcome: "Résultat",
+        learnMore: "En savoir plus"
+      },
+      opportunities: {
+        step: "Étape 01",
+        title: "Repérez les tendances avant leur apogée",
+        desc: "Arrêtez de chasser les succès viraux d'hier. Notre IA analyse des millions de signaux pour trouver des sujets à fort potentiel adaptés à votre niche.",
+        statA: "Scan de signaux 24/7",
+        statB: "Classement orienté opportunités",
+        bullets: ["Repérez les sujets en hausse avant la saturation.", "Priorisez les sujets dont l'adéquation à votre niche est prouvée."],
+        mock: {
+          eyebrow: "Radar de tendances",
+          title: "Opportunité à forte adéquation détectée",
+          score: "Score 94",
+          metrics: [
+            { label: "Vitesse", value: "+128%" },
+            { label: "Concurrence", value: "Faible" },
+            { label: "Pool de vues", value: "45M" }
+          ],
+          bullets: [
+            "Forte correspondance avec votre segment d'audience le plus performant.",
+            "La fenêtre de publication recommandée s'ouvre dans les prochaines 6 heures."
+          ]
+        }
+      },
+      planning: {
+        step: "Étape 02",
+        title: "Exécution, Pas Juste Planification",
+        desc: "Transformez la stratégie en action. Obtenez un calendrier de production hebdomadaire qui équilibre les risques de croissance et un contenu stable de confiance.",
+        statA: "Carte de cadence hebdomadaire",
+        statB: "Mix de contenu équilibré",
+        bullets: ["Transformez les recommandations en calendrier de tournage précis.", "Gardez la constance sans épuiser votre créativité."],
+        mock: {
+          eyebrow: "Plan d'exécution",
+          title: "Cadence de production de la semaine",
+          postCount: "3 publications",
+          schedule: [
+            { day: "Lun", date: "24", task: "Ouverture axée tendance", tag: "Croissance" },
+            { day: "Mer", date: "26", task: "Histoire qui renforce la confiance", tag: "Communauté" },
+            { day: "Ven", date: "28", task: "Vidéo CTA de conversion", tag: "Revenus" }
+          ]
+        }
+      },
+      analytics: {
+        step: "Étape 03",
+        title: "Décodez votre ADN de Contenu",
+        desc: "Comprenez exactement pourquoi vos meilleures vidéos fonctionnent. Nous décomposons votre contenu en éléments structurels pour reproduire le succès.",
+        statA: "Diagnostic image par image",
+        statB: "Schémas gagnants reproductibles",
+        bullets: ["Identifiez ce qui stimule la rétention et la complétion.", "Itérez plus vite grâce à des ajustements basés sur les données."],
+        mock: {
+          eyebrow: "ADN de performance",
+          title: "Reproduisez ce qui gagne déjà",
+          pill: "Top 5%",
+          metrics: [
+            { label: "Force de l'accroche", value: "9.8/10", width: "w-[95%]" },
+            { label: "Rétention d'audience", value: "72%", width: "w-[72%]" },
+            { label: "Complétion du CTA", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "Puissance",
       title: "Tout ce dont vous avez besoin pour",
       titleHighlight: "dominer",
       subtitle: "Un système d'exploitation unifié pour les créateurs modernes.",
-      copilot: { title: "Copilote Stratégie IA", desc: "Votre partenaire créatif 24/7. Générez des scripts à haute conversion et obtenez des retours instantanés." },
-      trend: { title: "Intelligence des Tendances", desc: "Repérez les opportunités avant qu'elles n'atteignent leur apogée.", liveSignals: "Signaux en Direct" },
-      goals: { title: "Objectifs Intelligents", desc: "Transformez des ambitions vagues en tâches quotidiennes réalisables." },
-      analytics: { title: "Analytique Approfondie" },
+      metrics: [
+        { label: "Vitesse de publication", value: "3x plus rapide" },
+        { label: "Confiance de planification", value: "Basée sur les signaux" },
+        { label: "Régularité d'exécution", value: "Cadence hebdomadaire" }
+      ],
+      copilot: {
+        title: "Copilote Stratégie IA",
+        desc: "Votre partenaire créatif 24/7. Générez des scripts à haute conversion et obtenez des retours instantanés.",
+        badge: "Génération en temps réel",
+        chat: {
+          user: "Donne-moi une accroche plus forte pour ma prochaine vidéo de niche.",
+          assistantLabel: "Accroche suggérée",
+          assistant: "Arrêtez de copier des intros génériques. Voici l'ouverture de 3 secondes qui retient vos spectateurs."
+        }
+      },
+      trend: {
+        title: "Intelligence des Tendances",
+        desc: "Repérez les opportunités avant qu'elles n'atteignent leur apogée.",
+        liveSignals: "Signaux en Direct",
+        list: { viewsLabel: "vues" }
+      },
+      goals: {
+        title: "Objectifs Intelligents",
+        desc: "Transformez des ambitions vagues en tâches quotidiennes réalisables.",
+        ringLabel: "Objectif",
+        tasks: [
+          { task: "Enregistrer une variation d'accroche", done: true },
+          { task: "Revoir la shortlist de tendances", done: false },
+          { task: "Planifier un post à forte intention", done: false }
+        ]
+      },
+      analytics: { title: "Analytique Approfondie", badge: "+124% sur un an" },
       features: { scheduling: "Planification Intelligente", prediction: "Prédiction Virale", multiAccount: "Multi-comptes", reports: "Rapports Instantanés" }
+    },
+    valueProposition: {
+      badge: "Clarté stratégique",
+      title: "Arrêtez de deviner quoi publier",
+      subtitle: "OwlSeer vous dit quoi faire ensuite sur TikTok.",
+      cards: [
+        { title: "Plans actionnables", desc: "Obtenez un plan de contenu complet en moins de 3 minutes." },
+        { title: "Scripts IA", desc: "Des scripts générés par IA, prêts à tourner aujourd'hui." },
+        { title: "Piloté par les données", desc: "Pour les créateurs fatigués de publier au hasard." }
+      ],
+      trust: ["Pas de promesses miracles", "Pas d'auto-publication", "Aucun mot de passe requis"],
+      metrics: [
+        { label: "Délai du plan", value: "< 3 min" },
+        { label: "Signaux analysés", value: "30+" },
+        { label: "Rythme de publication", value: "Hebdomadaire" }
+      ],
+      cta: {
+        primary: "Voir en action",
+        secondary: "Comment ça marche"
+      }
     },
     pricingSection: {
       title: "Tarification Simple et Transparente",
-      subtitle: "Commencez votre essai gratuit de 14 jours. Annulez à tout moment.",
+      subtitle: "Commencez votre essai gratuit de 7 jours. Annulez à tout moment.",
+      labels: { mostPopular: "Le plus populaire" },
       monthly: "Mensuel",
       yearly: "Annuel",
       save: "-20%",
       period: "mois",
       plans: {
-        creator: { name: "Créateur", features: ["Jusqu'à 3 comptes TikTok", "Suggestions de contenu IA", "Analytique de base", "Planification de contenu", "Support par email"] },
-        growth: { name: "Croissance", features: ["Jusqu'à 10 comptes TikTok", "Optimisation IA avancée", "Analytique avancée", "Collaboration d'équipe", "Support prioritaire", "Consultations hebdomadaires"] },
-        scale: { name: "Échelle", features: ["Comptes illimités", "IA Entreprise", "Analytique personnalisée", "Outils d'équipe avancés", "Marque blanche", "Gestionnaire dédié", "Support 24/7"] }
+        creator: {
+          name: "Basic",
+          summary: "Plan solo pour lancer rapidement une machine de contenu.",
+          features: [
+            "1 compte / 1 siège",
+            "30 analyses vidéo gratuites / mois",
+            "600 crédits mensuels",
+            "Chaîne IA complète : diagnostic + scripts",
+            "AI Copilot de base"
+          ]
+        },
+        growth: {
+          name: "Growth",
+          summary: "Plan équipe pour industrialiser la production de contenu.",
+          features: [
+            "3 comptes / 4 sièges",
+            "120 analyses vidéo gratuites / mois",
+            "1 200 crédits mensuels",
+            "Workflow planning + scripts complet",
+            "Traitement de tâches par lot",
+            "Export de rapports standards"
+          ]
+        },
+        scale: {
+          name: "Pro",
+          summary: "Plan pour agences et équipes multi-comptes à haute performance.",
+          features: [
+            "8 comptes / 10 sièges",
+            "400 analyses vidéo gratuites / mois",
+            "4 000 crédits mensuels",
+            "File de calcul prioritaire",
+            "AI Copilot avec contexte long"
+          ]
+        }
       },
       cta: { trial: "Essai Gratuit", buy: "Acheter Maintenant" },
-      footer: { secure: "Paiement sécurisé", trial: "14 jours gratuits", cancel: "Annulez à tout moment" }
+      footer: { secure: "Paiement sécurisé", trial: "7 jours gratuits", cancel: "Annulez à tout moment" }
     },
     finalCta: {
       title: "Prêt à voir votre futur ?",
@@ -2271,9 +3853,41 @@ export const translations = {
     footer: {
       tagline: "Stratégie TikTok par IA pour les créateurs.\nArrêtez de deviner. Commencez à grandir.",
       product: "Produit",
+      solutions: "Solutions",
+      useCases: "Cas d’usage",
       resources: "Ressources",
       legal: "Légal",
-      rights: "© 2026 OwlSeer. Tous droits réservés."
+      rights: "© 2026 OwlSeer. Tous droits réservés.",
+      mobileProductAndSolutions: "Produit et solutions",
+      links: {
+        howItWorks: "Comment ça marche",
+        methodology: "Méthodologie",
+        signals: "30+ signaux",
+        pricing: "Tarifs",
+        trySample: "Essayer l’exemple",
+        blog: "Blog",
+        guides: "Guides",
+        glossary: "Glossaire",
+        faq: "FAQ",
+        contentCreators: "Créateurs de contenu",
+        localBusiness: "Commerce local",
+        agencies: "Agences",
+        brands: "Marques",
+        ecommerceSellers: "Vendeurs e-commerce",
+        trendPrediction: "Prédiction de tendances",
+        contentDiagnosis: "Diagnostic de contenu",
+        scriptGeneration: "Génération de scripts",
+        postingSchedule: "Planning de publication",
+        hashtagStrategy: "Stratégie de hashtags",
+        privacy: "Politique de confidentialité",
+        terms: "Conditions d’utilisation",
+        security: "Sécurité",
+        cookies: "Politique des cookies"
+      },
+      meta: {
+        developers: "Développeurs",
+        sitemap: "Plan du site"
+      }
     },
     signalsPage: {
       hero: {
@@ -2294,8 +3908,8 @@ export const translations = {
           task: "Understand how OwlSeer measures the way viewers interact with your content.",
           desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
           linkText: "AER card",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/social/dashboard#aer-card).",
           signals: [
             { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
             { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
@@ -2316,8 +3930,8 @@ export const translations = {
           task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
           desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
           linkText: "Trend Radar",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/social/simulation/trends).",
           signals: [
             { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
             { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
@@ -2336,8 +3950,8 @@ export const translations = {
           task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
           desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
           linkText: "Intelligence Hub",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          linkUrl: "/social/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/social/intelligence).",
           signals: [
             { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
             { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
@@ -2378,6 +3992,81 @@ export const translations = {
            button: "Generate My Signal Profile",
            note: "Read-only access. Connects in 30 seconds. Revoke anytime."
         }
+      },
+      compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ : quel outil TikTok correspond à votre workflow ?",
+          lead: "VidIQ est né sur YouTube puis s’est étendu à TikTok. OwlSeer a été conçu pour TikTok dès le départ. Cette page compare les fonctions, les points forts et les cas d’usage."
+        },
+        tldr: "Choisissez OwlSeer si TikTok est votre canal principal et que vous voulez des signaux natifs, de la prédiction de tendances et des scripts générés par IA. Choisissez VidIQ si YouTube reste prioritaire et TikTok secondaire.",
+        table: {
+          title: "Comparaison fonctionnalité par fonctionnalité",
+          rows: [
+            { feature: "Plateforme principale", owlseer: "TikTok (exclusif)", vidiq: "YouTube (principal), TikTok (secondaire)" },
+            { feature: "Profondeur des signaux TikTok", owlseer: "30+ signaux pondérés", vidiq: "Métriques TikTok de base" },
+            { feature: "Prédiction des tendances", owlseer: "IA + vitesse", vidiq: "Liste de sujets tendance" },
+            { feature: "Génération de scripts", owlseer: "Hook-Body-CTA piloté par la donnée", vidiq: "Pas de génération native" },
+            { feature: "Planning de publication", owlseer: "Heatmap personnalisée", vidiq: "Suggestions génériques" },
+            { feature: "Diagnostic de contenu", owlseer: "Détection de problèmes + correctifs", vidiq: "Vue d’ensemble performance" },
+            { feature: "Copilote IA", owlseer: "Assistant conversationnel", vidiq: "Pas d’IA conversationnelle" },
+            { feature: "Rapport hebdomadaire", owlseer: "Automatisé avec suivi KPI", vidiq: "Pas de rapport hebdomadaire automatisé" },
+            { feature: "Brand safety", owlseer: "Score de risque 0-100", vidiq: "Pas de score brand safety" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "Choisissez OwlSeer si...",
+          items: [
+            "TikTok est votre plateforme principale ou unique",
+            "Vous voulez plus de 30 signaux au-delà des métriques basiques",
+            "Vous avez besoin de scripts IA adaptés à votre audience",
+            "Le timing et la vitesse des tendances sont stratégiques",
+            "Vous voulez des rapports hebdomadaires automatiques avec KPI",
+            "Vous préférez un copilote IA conversationnel"
+          ]
+        },
+        chooseVidIQ: {
+          title: "Choisissez VidIQ si...",
+          items: [
+            "YouTube est votre plateforme principale",
+            "Vous avez besoin de fonctions YouTube spécifiques (SEO, mots-clés)",
+            "TikTok est secondaire et les métriques de base suffisent",
+            "Vous utilisez déjà VidIQ pour YouTube"
+          ]
+        },
+        platformFocus: {
+          title: "Pourquoi le focus plateforme est décisif",
+          p1: "YouTube et TikTok récompensent des comportements différents. YouTube est piloté par la recherche : titres, descriptions et miniatures gouvernent la découverte. TikTok est piloté par l’algorithme : hook rate, rétention et alignement tendance gouvernent la distribution.",
+          p2: "Un outil conçu pour YouTube optimise l’intention de recherche. Un outil conçu pour TikTok optimise les patterns de signaux. Utiliser un outil YouTube-first pour TikTok revient à naviguer en mer avec une carte routière.",
+          highlight: "OwlSeer suit des métriques spécifiques TikTok (AER, hook rate, save rate) que les outils YouTube-first ne modélisent pas."
+        },
+        boundary: {
+          transparency: "Comparatif basé sur les informations publiques disponibles en février 2026.",
+          note: "Ce comparatif n’est pas sponsorisé. Il sert à aider les créateurs à choisir de manière éclairée."
+        },
+        cta: {
+          title: "Prêt à tester une stratégie native TikTok ?",
+          subtitle: "Découvrez OwlSeer sur des données d’exemple, ou lancez votre essai gratuit.",
+          primary: "Commencer l’essai gratuit",
+          secondary: "Voir l’exemple"
+        },
+        ui: {
+          loading: "Chargement du contenu...",
+          badge: "Face à face",
+          coreInsight: "Insight clé",
+          tableHeaders: {
+            feature: "Fonction",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "Découvrez ce qu’il manque à VidIQ",
+          actionButtons: {
+            trendRadar: "Radar de tendances",
+            scriptStudio: "Studio de scripts",
+            weeklyReport: "Rapport hebdomadaire"
+          },
+          platformFocusLabel: "Focus plateforme",
+          transparencyNote: "Note de transparence"
+        }
       }
     }
   },
@@ -2385,6 +4074,7 @@ export const translations = {
     product: 'Produkt',
     pricing: 'Preise',
     resources: 'Ressourcen',
+    methodology: 'Methodik',
     login: 'Anmelden',
     signup: 'Kostenlos registrieren',
     whatIs: 'Was ist OwlSeer',
@@ -2392,59 +4082,289 @@ export const translations = {
     faq: 'FAQ',
     security: 'Sicherheit & Datenschutz',
     blog: 'Blog',
+    guides: 'Guides',
+    nav: {
+      solutions: "Lösungen",
+      platform: "Plattform",
+      useCases: "Anwendungsfälle",
+      byRole: "Nach Rolle",
+      learn: "Lernen",
+      trustSupport: "Vertrauen & Support",
+      trustSecurity: "Vertrauen & Sicherheit",
+      language: "Sprache",
+      glossary: "Glossar",
+      links: {
+        signals: "30+ Signale",
+        interactiveSample: "Interaktives Sample",
+        trendPrediction: "Trendprognose",
+        contentDiagnosis: "Content-Diagnose",
+        scriptGeneration: "Skriptgenerierung",
+        postingSchedule: "Posting-Zeitplan",
+        hashtagStrategy: "Hashtag-Strategie",
+        contentCreators: "Content Creator",
+        localBusiness: "Lokales Unternehmen",
+        agencies: "Agenturen",
+        brands: "Marken",
+        ecommerceSellers: "E-Commerce-Verkäufer",
+        privacy: "Datenschutz",
+        terms: "Bedingungen",
+        cookies: "Cookies",
+        security: "Sicherheit"
+      },
+      desc: {
+        howItWorks: "In 3 Schritten starten",
+        methodology: "Unser 5‑Schritte‑KI‑Prozess",
+        signals: "Was wir messen",
+        interactiveSample: "OwlSeer in Aktion sehen",
+        trySample: "Mit echten Daten sehen"
+      },
+      actions: {
+        trySample: "Sample testen",
+        startFree: "Kostenlos starten",
+        startFreeTrial: "Kostenlose Testversion starten",
+        trySampleCta: "Sample testen"
+      },
+      darkMode: {
+        toggle: "Dark Mode umschalten",
+        switchToLight: "Zum Light Mode wechseln",
+        switchToDark: "Zum Dark Mode wechseln"
+      }
+    },
     hero: {
       badge: 'v2.0 ist live',
       title: "Sieh das",
       titleHighlight: "Nächste",
       subtitle: "Deine {platform}-Analysen sagen dir nicht, was du tun sollst.",
       subtitle2: "Wir schon.",
-      ctaPrimary: "Demo ausprobieren",
+      ctaPrimary: "Sample ausprobieren",
+      ctaSecondaryButton: "Jetzt starten",
       ctaSecondary: "Keine Anmeldung",
       ctaInstant: "Sofortiger Zugang"
     },
     productShowcase: {
-      opportunities: { title: "Trends vor dem Höhepunkt erkennen", desc: "Hör auf, viralen Hits von gestern hinterherzujagen. Unsere KI analysiert Millionen von Signalen." },
-      planning: { title: "Ausführung, nicht nur Planung", desc: "Verwandle Strategie in Aktion. Erhalte einen wöchentlichen Produktionsplan." },
-      analytics: { title: "Entschlüssele deine Content-DNA", desc: "Verstehe genau, warum deine besten Videos funktionieren. Wir zerlegen deinen Content." }
+      heading: {
+        title: "Von Insight zu veröffentlichungsfertigem Output – in einem Flow",
+        subtitle: "OwlSeer schließt die Lücke zwischen Strategie und Umsetzung, damit Creator sicher von Signal zu Skript kommen."
+      },
+      highlights: {
+        decisionCycle: { label: "Entscheidungszyklus", desc: "Von der Signalerkennung zur Umsetzung in Minuten, nicht Tagen." },
+        growthSignal: { label: "Wachstumssignal", desc: "Priorisiere Chancen nach Dynamik und Nischen-Fit." },
+        executionQuality: { label: "Ausführungsqualität", desc: "Jede Empfehlung enthält nachvollziehbare Gründe." }
+      },
+      labels: {
+        capability: "Fähigkeit",
+        outcome: "Ergebnis",
+        learnMore: "Mehr erfahren"
+      },
+      opportunities: {
+        step: "Schritt 01",
+        title: "Trends vor dem Höhepunkt erkennen",
+        desc: "Hör auf, viralen Hits von gestern hinterherzujagen. Unsere KI analysiert Millionen von Signalen, um Themen mit hohem Potenzial für deine Nische zu finden.",
+        statA: "24/7 Signal-Scan",
+        statB: "Chancen-orientiertes Ranking",
+        bullets: ["Finde steigende Themen vor der Sättigung.", "Priorisiere Themen mit bewiesenem Nischen-Fit."],
+        mock: {
+          eyebrow: "Trend-Radar",
+          title: "Chance mit hohem Fit erkannt",
+          score: "Score 94",
+          metrics: [
+            { label: "Dynamik", value: "+128%" },
+            { label: "Wettbewerb", value: "Niedrig" },
+            { label: "View-Pool", value: "45M" }
+          ],
+          bullets: [
+            "Hohe Überschneidung mit deinem Top-Audience-Segment.",
+            "Das empfohlene Posting-Fenster öffnet sich in den nächsten 6 Stunden."
+          ]
+        }
+      },
+      planning: {
+        step: "Schritt 02",
+        title: "Ausführung, nicht nur Planung",
+        desc: "Mach aus Strategie Umsetzung. Erhalte einen wöchentlichen Produktionsplan, der Wachstumsrisiken und stabilen Trust-Content ausbalanciert.",
+        statA: "Wochenrhythmus-Plan",
+        statB: "Ausgewogener Content-Mix",
+        bullets: ["Mach aus Empfehlungen einen konkreten Drehkalender.", "Bleib konsistent, ohne kreative Energie zu verbrennen."],
+        mock: {
+          eyebrow: "Umsetzungsplan",
+          title: "Produktionsrhythmus dieser Woche",
+          postCount: "3 Posts",
+          schedule: [
+            { day: "Mo", date: "24", task: "Trend-basierter Opener", tag: "Wachstum" },
+            { day: "Mi", date: "26", task: "Story zum Vertrauensaufbau", tag: "Community" },
+            { day: "Fr", date: "28", task: "Conversion-CTA-Video", tag: "Umsatz" }
+          ]
+        }
+      },
+      analytics: {
+        step: "Schritt 03",
+        title: "Entschlüssele deine Content-DNA",
+        desc: "Verstehe genau, warum deine besten Videos funktionieren. Wir zerlegen deinen Content in Strukturelemente, um Erfolg zu replizieren.",
+        statA: "Diagnose auf Frame-Ebene",
+        statB: "Wiederholbare Erfolgs-Muster",
+        bullets: ["Erkenne, was Retention und Completion antreibt.", "Iteriere schneller mit datenbasierten Änderungen."],
+        mock: {
+          eyebrow: "Performance-DNA",
+          title: "Repliziere, was bereits funktioniert",
+          pill: "Top 5%",
+          metrics: [
+            { label: "Hook-Stärke", value: "9.8/10", width: "w-[95%]" },
+            { label: "Zuschauerbindung", value: "72%", width: "w-[72%]" },
+            { label: "CTA-Abschluss", value: "38%", width: "w-[38%]" }
+          ]
+        }
+      }
     },
     coreFeatures: {
       badge: "Kraftpaket",
       title: "Alles was du brauchst um zu",
       titleHighlight: "dominieren",
       subtitle: "Ein einheitliches Betriebssystem für moderne Creator.",
-      copilot: { title: "KI-Strategie-Copilot", desc: "Dein kreativer Partner rund um die Uhr. Generiere Skripte mit hoher Konversion." },
-      trend: { title: "Trend-Intelligenz", desc: "Erkenne Chancen, bevor sie ihren Höhepunkt erreichen.", liveSignals: "Live-Signale" },
-      goals: { title: "Smarte Ziele", desc: "Verwandle vage Ambitionen in umsetzbare tägliche Aufgaben." },
-      analytics: { title: "Tiefenanalyse" },
+      metrics: [
+        { label: "Posting-Geschwindigkeit", value: "3× schneller" },
+        { label: "Planungssicherheit", value: "Signal-basiert" },
+        { label: "Umsetzungskonstanz", value: "Wöchentlicher Rhythmus" }
+      ],
+      copilot: {
+        title: "KI-Strategie-Copilot",
+        desc: "Dein kreativer Partner rund um die Uhr. Generiere Skripte mit hoher Konversion.",
+        badge: "Echtzeit-Generierung",
+        chat: {
+          user: "Gib mir einen stärkeren Hook für mein nächstes Nischen-Video.",
+          assistantLabel: "Vorgeschlagener Hook",
+          assistant: "Hör auf, generische Intros zu kopieren. Hier ist der 3-Sekunden-Opener, der deine Zuschauer hält."
+        }
+      },
+      trend: {
+        title: "Trend-Intelligenz",
+        desc: "Erkenne Chancen, bevor sie ihren Höhepunkt erreichen.",
+        liveSignals: "Live-Signale",
+        list: { viewsLabel: "Aufrufe" }
+      },
+      goals: {
+        title: "Smarte Ziele",
+        desc: "Verwandle vage Ambitionen in umsetzbare tägliche Aufgaben.",
+        ringLabel: "Ziel",
+        tasks: [
+          { task: "Variation des Opening-Hooks aufnehmen", done: true },
+          { task: "Trend-Shortlist prüfen", done: false },
+          { task: "High-Intent-Post planen", done: false }
+        ]
+      },
+      analytics: { title: "Tiefenanalyse", badge: "+124% ggü. Vorjahr" },
       features: { scheduling: "Smarte Planung", prediction: "Virale Vorhersage", multiAccount: "Multi-Account", reports: "Sofortberichte" }
+    },
+    valueProposition: {
+      badge: "Strategische Klarheit",
+      title: "Hör auf zu raten, was du posten sollst",
+      subtitle: "OwlSeer sagt dir, was du als Nächstes auf TikTok tun solltest.",
+      cards: [
+        { title: "Umsetzbare Pläne", desc: "Erhalte in unter 3 Minuten einen vollständigen Content-Plan." },
+        { title: "KI-Skripte", desc: "KI-generierte Skripte, die du heute drehen kannst." },
+        { title: "Datengetrieben", desc: "Für Creator, die genug von Zufallsposts haben." }
+      ],
+      trust: ["Keine Wunder-Versprechen", "Kein Auto-Posting", "Kein Passwort erforderlich"],
+      metrics: [
+        { label: "Plan-Erstellung", value: "< 3 Min." },
+        { label: "Analysierte Signale", value: "30+" },
+        { label: "Veröffentlichungsrhythmus", value: "Wöchentlich" }
+      ],
+      cta: {
+        primary: "In Aktion sehen",
+        secondary: "So funktioniert's"
+      }
     },
     pricingSection: {
       title: "Einfache, transparente Preise",
-      subtitle: "Starte deine 14-tägige kostenlose Testversion. Jederzeit kündbar.",
+      subtitle: "Starte deine 7-tägige kostenlose Testversion. Jederzeit kündbar.",
+      labels: { mostPopular: "Am beliebtesten" },
       monthly: "Monatlich",
       yearly: "Jährlich",
       save: "20% SPAREN",
       period: "Monat",
       plans: {
-        creator: { name: "Creator", features: ["Bis zu 3 TikTok-Konten", "KI-Inhaltsvorschläge", "Basis-Analytik", "Inhaltsplanung", "E-Mail-Support"] },
-        growth: { name: "Wachstum", features: ["Bis zu 10 TikTok-Konten", "Erweiterte KI-Optimierung", "Erweiterte Analytik", "Team-Zusammenarbeit", "Bevorzugter Support", "Wöchentliche Beratung"] },
-        scale: { name: "Skalierung", features: ["Unbegrenzte Konten", "Enterprise KI", "Benutzerdefinierte Analytik", "Erweiterte Team-Tools", "White-Label", "Dedizierter Manager", "24/7 Prioritäts-Support"] }
+        creator: {
+          name: "Basic",
+          summary: "Solo-Plan für einen schnellen Start in den Content-Flywheel.",
+          features: [
+            "1 Konto / 1 Sitz",
+            "30 kostenlose Videoanalysen pro Monat",
+            "600 monatliche Credits",
+            "End-to-End KI-Workflow von Diagnose bis Skript",
+            "Basis-AI-Copilot"
+          ]
+        },
+        growth: {
+          name: "Growth",
+          summary: "Team-Plan für skalierbare Produktion und Zusammenarbeit.",
+          features: [
+            "3 Konten / 4 Sitze",
+            "120 kostenlose Videoanalysen pro Monat",
+            "1.200 monatliche Credits",
+            "Vollständiger Planungs- und Skript-Workflow",
+            "Batch-Verarbeitung von Aufgaben",
+            "Basis-Reportexport"
+          ]
+        },
+        scale: {
+          name: "Pro",
+          summary: "Plan für Agenturen und Multi-Account-Teams mit Höchstleistung.",
+          features: [
+            "8 Konten / 10 Sitze",
+            "400 kostenlose Videoanalysen pro Monat",
+            "4.000 monatliche Credits",
+            "Priorisierte Compute-Warteschlange",
+            "AI-Copilot mit erweitertem Kontextfenster"
+          ]
+        }
       },
       cta: { trial: "Kostenlos testen", buy: "Jetzt kaufen" },
-      footer: { secure: "Sichere Zahlung", trial: "14 Tage kostenlos", cancel: "Jederzeit kündbar" }
+      footer: { secure: "Sichere Zahlung", trial: "7 Tage kostenlos", cancel: "Jederzeit kündbar" }
     },
     finalCta: {
       title: "Bereit, deine Zukunft zu sehen?",
       subtitle: "Schließe dich Tausenden von Creatorn an, die aufgehört haben zu raten und angefangen haben zu wachsen.",
       start: "Kostenlos starten",
-      demo: "Live-Demo ansehen"
+      demo: "Live-Sample ansehen"
     },
     footer: {
       tagline: "KI-gestützte TikTok-Strategie für Creator.\nHör auf zu raten. Fang an zu wachsen.",
       product: "Produkt",
+      solutions: "Lösungen",
+      useCases: "Anwendungsfälle",
       resources: "Ressourcen",
       legal: "Rechtliches",
-      rights: "© 2026 OwlSeer. Alle Rechte vorbehalten."
+      rights: "© 2026 OwlSeer. Alle Rechte vorbehalten.",
+      mobileProductAndSolutions: "Produkt & Lösungen",
+      links: {
+        howItWorks: "So funktioniert’s",
+        methodology: "Methodik",
+        signals: "30+ Signale",
+        pricing: "Preise",
+        trySample: "Sample testen",
+        blog: "Blog",
+        guides: "Guides",
+        glossary: "Glossar",
+        faq: "FAQ",
+        contentCreators: "Content Creator",
+        localBusiness: "Lokales Unternehmen",
+        agencies: "Agenturen",
+        brands: "Marken",
+        ecommerceSellers: "E-Commerce-Verkäufer",
+        trendPrediction: "Trendprognose",
+        contentDiagnosis: "Content-Diagnose",
+        scriptGeneration: "Skriptgenerierung",
+        postingSchedule: "Posting-Zeitplan",
+        hashtagStrategy: "Hashtag-Strategie",
+        privacy: "Datenschutzerklärung",
+        terms: "Nutzungsbedingungen",
+        security: "Sicherheit",
+        cookies: "Cookie-Richtlinie"
+      },
+      meta: {
+        developers: "Entwickler",
+        sitemap: "Sitemap"
+      }
     },
     signalsPage: {
       hero: {
@@ -2465,8 +4385,8 @@ export const translations = {
           task: "Understand how OwlSeer measures the way viewers interact with your content.",
           desc: "Engagement signals quantify the relationship between your content and your audience. Each signal captures a different dimension of viewer behavior — from the first three seconds of a video to the moment someone taps \"share.\" OwlSeer weights these signals based on their correlation with actual growth outcomes.",
           linkText: "AER card",
-          linkUrl: "/sample-explorer/dashboard#aer-card",
-          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/sample-explorer/dashboard#aer-card).",
+          linkUrl: "/social/dashboard#aer-card",
+          actionLine: "See engagement signals on real account data — [explore the Dashboard demo](/social/dashboard#aer-card).",
           signals: [
             { name: "Hook Rate", id: "hook-rate", def: "Percentage of viewers who watch past the first 3 seconds of your video.", why: "TikTok's algorithm heavily weights early retention. Hook rate is the single most important factor for For You Page distribution. A video that loses viewers in the first 3 seconds rarely gets pushed to broader audiences.", how: "We analyze successful hook patterns in your content history and recommend opening strategies that match your audience's preferences. If your hook rate trends below your niche average, OwlSeer flags it as an improvement priority." },
             { name: "Watch-Through Rate", id: "watch-through-rate", def: "Completion percentage across different video lengths.", why: "Completion signals content quality to the algorithm. Videos that hold attention longer get prioritized for wider distribution. Watch-through rate also reveals optimal video length for your specific audience.", how: "We determine your optimal video length range and identify pacing patterns — transitions, information density, visual changes — that maximize completion for your audience." },
@@ -2487,8 +4407,8 @@ export const translations = {
           task: "Learn how OwlSeer tracks platform-wide and niche trends to help you act at the right time.",
           desc: "Trend signals monitor what is gaining traction across TikTok. The goal is timing: participating in a trend too early means low volume, too late means saturation. OwlSeer's trend signals help you find the optimal participation window for your niche.",
           linkText: "Trend Radar",
-          linkUrl: "/sample-explorer/trend-radar",
-          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/sample-explorer/trend-radar).",
+          linkUrl: "/social/simulation/trends",
+          actionLine: "See trend signals on live data — [explore the Trend Radar demo](/social/simulation/trends).",
           signals: [
             { name: "Sound Velocity", id: "sound-velocity", def: "Rate of sound adoption across TikTok, measured as new video creations using a specific sound per hour.", why: "Early sound adoption increases viral potential before the sound becomes oversaturated. Sound velocity predicts whether a sound will peak in days or weeks.", how: "We alert you to rising sounds in your niche with optimal participation windows — typically when velocity is accelerating but before the sound reaches peak saturation." },
             { name: "Hashtag Momentum", id: "hashtag-momentum", def: "Growth rate of hashtag usage over a rolling 7-day window.", why: "Timing hashtag participation maximizes reach. Too early means low search volume, too late means your content competes with thousands of similar posts.", how: "We recommend optimal hashtag timing based on momentum curves and track competition level to avoid oversaturated tags." },
@@ -2507,8 +4427,8 @@ export const translations = {
           task: "Discover how OwlSeer maps your audience's behavior, demographics, and growth trajectory.",
           desc: "Audience signals describe who watches your content, when they watch, and how your audience composition changes over time. These signals shape scheduling, format selection, and long-term growth strategy.",
           linkText: "Intelligence Hub",
-          linkUrl: "/sample-explorer/intelligence",
-          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/sample-explorer/intelligence).",
+          linkUrl: "/social/intelligence",
+          actionLine: "See audience insights on real data — [explore the Intelligence Hub demo](/social/intelligence).",
           signals: [
             { name: "Follower Growth Velocity", id: "follower-growth-velocity", def: "Rate of follower acquisition over a rolling 30-day window, measured as net new followers per day.", why: "Velocity indicates content-market fit and growth trajectory. Accelerating velocity suggests strategy alignment. Decelerating velocity signals a need to adjust.", how: "We correlate content types and posting patterns with growth velocity changes to identify which activities drive follower acquisition." },
             { name: "Active Hour Mapping", id: "active-hour-mapping", def: "When your audience is most engaged, mapped by day of week and hour (adjusted to your time zone).", why: "Posting timing affects initial distribution. Early engagement signals (views and interactions in the first 30-60 minutes) determine whether TikTok pushes a video to broader audiences.", how: "We generate personalized posting schedules based on your audience's active hours, visible in the best-time heatmap." },
@@ -2548,6 +4468,81 @@ export const translations = {
             desc: "Connect your TikTok account and OwlSeer will generate your full signal profile in 3 minutes — including every signal value, niche benchmarks, and your top 3 improvement priorities.",
             button: "Generate My Signal Profile",
             note: "Read-only access. Connects in 30 seconds. Revoke anytime."
+        }
+      },
+      compareVidIQ: {
+        hero: {
+          title: "OwlSeer vs VidIQ: Welches TikTok-Tool passt zu deinem Workflow?",
+          lead: "VidIQ stammt aus dem YouTube-Umfeld und wurde auf TikTok erweitert. OwlSeer wurde von Anfang an für TikTok entwickelt. Dieser Vergleich zeigt Funktionen, Stärken und passende Einsatzfälle."
+        },
+        tldr: "Wenn TikTok dein Hauptkanal ist, nimm OwlSeer für tiefes Signal-Scoring, Trendprognosen und datenbasierte Skripte. Wenn YouTube im Fokus steht und TikTok nur ergänzend läuft, passt eher VidIQ.",
+        table: {
+          title: "Funktionsvergleich im Detail",
+          rows: [
+            { feature: "Hauptplattform", owlseer: "TikTok (exklusiv)", vidiq: "YouTube (primär), TikTok (sekundär)" },
+            { feature: "TikTok-Signaltiefe", owlseer: "30+ gewichtete Signale", vidiq: "Basis-TikTok-Metriken" },
+            { feature: "Trendprognose", owlseer: "KI + Geschwindigkeitsanalyse", vidiq: "Liste trendender Themen" },
+            { feature: "Skriptgenerierung", owlseer: "Datengetriebenes Hook-Body-CTA", vidiq: "Keine native Skriptgenerierung" },
+            { feature: "Posting-Zeitplan", owlseer: "Personalisierte Heatmap", vidiq: "Generische Zeitvorschläge" },
+            { feature: "Content-Diagnose", owlseer: "Problemerkennung + Fixes", vidiq: "Performance-Überblick" },
+            { feature: "KI-Copilot", owlseer: "Konversationeller Assistent", vidiq: "Keine konversationelle KI" },
+            { feature: "Wochenreport", owlseer: "Automatisch mit KPI-Tracking", vidiq: "Kein automatischer Wochenreport" },
+            { feature: "Brand Safety", owlseer: "0-100 Risikoskala", vidiq: "Kein Brand-Safety-Scoring" }
+          ]
+        },
+        chooseOwlSeer: {
+          title: "Wähle OwlSeer, wenn...",
+          items: [
+            "TikTok dein primärer oder einziger Wachstumskanal ist",
+            "du mehr als Basis-Metriken und 30+ Signale brauchst",
+            "du KI-Skripte für deine Zielgruppe möchtest",
+            "Trend-Timing und Trendgeschwindigkeit strategisch wichtig sind",
+            "du automatische Wochenreports mit KPI-Tracking willst",
+            "du einen konversationellen KI-Copilot bevorzugst"
+          ]
+        },
+        chooseVidIQ: {
+          title: "Wähle VidIQ, wenn...",
+          items: [
+            "YouTube deine Hauptplattform ist",
+            "du YouTube-spezifische Funktionen (SEO, Keywords) brauchst",
+            "TikTok nur ein Nebenkanal ist und Basis-Metriken reichen",
+            "du VidIQ bereits für YouTube im Einsatz hast"
+          ]
+        },
+        platformFocus: {
+          title: "Warum Plattformfokus entscheidend ist",
+          p1: "YouTube und TikTok belohnen unterschiedliches Verhalten. YouTube ist suchgetrieben – Titel, Beschreibung und Thumbnail steuern die Auffindbarkeit. TikTok ist algorithmusgetrieben – Hook-Rate, Retention und Trend-Fit steuern die Distribution.",
+          p2: "Ein YouTube-zentriertes Tool optimiert Suchintention. Ein TikTok-zentriertes Tool optimiert Signalmuster. Ein YouTube-first-Tool für TikTok-Strategie ist wie eine Straßenkarte für die Seefahrt.",
+          highlight: "OwlSeer trackt TikTok-spezifische Kennzahlen (AER, Hook-Rate, Save-Rate), die YouTube-first-Tools nicht modellieren."
+        },
+        boundary: {
+          transparency: "Der Vergleich basiert auf öffentlich verfügbaren Produktinformationen (Stand: Februar 2026).",
+          note: "Dieser Vergleich ist kein bezahltes Review. Er soll Creator:innen bei einer fundierten Entscheidung unterstützen."
+        },
+        cta: {
+          title: "Bereit für eine TikTok-native Strategie?",
+          subtitle: "Teste OwlSeer zuerst mit Beispieldaten oder starte direkt deinen kostenlosen Test.",
+          primary: "Kostenlos testen",
+          secondary: "Sample ansehen"
+        },
+        ui: {
+          loading: "Inhalte werden geladen...",
+          badge: "Direktvergleich",
+          coreInsight: "Kern-Insight",
+          tableHeaders: {
+            feature: "Funktion",
+            owlseer: "OwlSeer",
+            competitor: "VidIQ"
+          },
+          missingBlockTitle: "Erlebe, was VidIQ nicht liefert",
+          actionButtons: {
+            trendRadar: "Trend Radar",
+            scriptStudio: "Script Studio",
+            weeklyReport: "Wochenreport"
+          },
+          platformFocusLabel: "Plattformfokus",
+          transparencyNote: "Transparenzhinweis"
         }
       }
     }

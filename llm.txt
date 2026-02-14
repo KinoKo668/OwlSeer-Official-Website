@@ -1,0 +1,50 @@
+# OwlSeer
+
+## Overview
+- OwlSeer is an AI foresight platform for TikTok creators.
+- Core promise: "Know What Will Grow Before You Post."
+- Core value: analyze 30+ weighted predictive signals and return practical decisions before publishing.
+- Primary pain points solved:
+  - random posting with no feedback loop
+  - late trend participation on already saturated topics/sounds
+  - disconnected workflow across strategy, diagnosis, scheduling, and scripting
+- Outcome: creators move from guesswork to a closed-loop, data-backed content system.
+
+## Key Capabilities
+- Signal Intelligence (30+ weighted signals):
+  - 12 engagement signals, 10 trend signals, 8+ audience signals.
+  - Produces account-level signal profile, risk flags, and growth priorities.
+- Agent-driven execution chain:
+  - Account diagnosis agent -> root-cause analysis + fixes.
+  - Goal/planning agent -> weekly content roadmap + cadence.
+  - Script agent -> hook/body/CTA scripts with rationale.
+  - Scheduling agent -> time-window and content-slot planning.
+- Trend and hotspot engine:
+  - Trend knowledge graph + trend lifecycle modeling for rising-topic detection.
+  - Hotspot timing recommendations (enter/exit windows, saturation risk).
+- Credits and cost governance:
+  - External pricing uses a 4x cost buffer; internal risk control uses a 6x model.
+  - All AI usage is unified under Credits, including Copilot conversations.
+- Data and trust boundaries:
+  - Uses official TikTok API with OAuth 2.0 read-only authorization.
+  - No password storage; no DM/draft/posting control access.
+
+## Pricing & Plans
+Source of truth: `pricing_strategy保守定价V2.1.md` (Conservative Pricing v2.1).
+Display rule for current UI: monthly Credits are shown in K-units (raw Credits divided by 1,000).
+
+| Plan | Monthly | Annual (-20%) | Accounts | Seats | Free Video Analyses / Month | Monthly Credits (UI) | Monthly Credits (Raw) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Basic | $39 | $31 | 1 | 1 | 20-30 | 60 | 60,000 |
+| Growth | $75 | $60 | 3 | 4 | 60-100 | 120 | 120,000 |
+| Pro | $245 | $196 | 8 | 10 | 200-300 | 400 | 400,000 |
+
+Plan limits and tiering notes:
+- Basic: solo workflow, Basic Copilot tier, no batch tasks, no report export, no priority compute queue.
+- Growth: includes batch task processing, complete scheduling/script workflow, and basic report export.
+- Pro: includes all Growth capabilities plus priority compute queue, high-capacity Copilot, and advanced export.
+
+Credits policy (internal accounting):
+- 1 raw Credit = $0.0001.
+- Consumption first uses included monthly base quotas; overage then deducts Credits.
+- 4x external billing map (raw Credits per action): video analysis 1,200; scheduling 100; topic recommendation 40; script generation 40; account diagnosis 200; goal parsing 120; RapidAPI 1.

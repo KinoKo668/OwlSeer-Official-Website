@@ -16,13 +16,18 @@ import {
   MessageCircle,
   Share2,
   Eye,
-  AlertCircle
+  AlertCircle,
+  Scan,
+  Smartphone,
+  Check
 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { translations as globalTranslations } from '../../data/translations';
 import { Navbar } from '../layout/Navbar';
 import { Footer } from '../layout/Footer';
 import { SEO } from '../SEO';
+import { getPageSEO, getCanonicalUrl, generateAlternates } from '../../data/seoConfig';
+import { AuroraBackground } from '../ui/aurora-background';
 
 // --- Translations ---
 const pageTranslations = {
@@ -35,7 +40,7 @@ const pageTranslations = {
       title: "Find Out Why Your TikTok Content Underperforms",
       lead: "OwlSeer analyzes every video across 12 engagement signals to show exactly where you gain or lose your audience — and what to do about it.",
       ctaPrimary: "Start Free Trial",
-      ctaSecondary: "Try Intelligence Demo"
+      ctaSecondary: "Try Intelligence Sample"
     },
     tldr: {
       content: "Low views have a cause. OwlSeer's Intelligence module diagnoses content issues by analyzing 12 engagement signals including hook rate, watch-through rate, share rate, and comment sentiment. Each issue is surfaced with severity, explanation, and a specific recommended fix. Content diagnosis turns vague frustration into actionable improvement.",
@@ -110,7 +115,7 @@ const pageTranslations = {
       title: "Diagnose Your Content",
       desc: "Connect your account and find out exactly what to fix.",
       primary: "Start Free Trial",
-      secondary: "Try Intelligence Demo"
+      secondary: "Try Intelligence Sample"
     }
   },
   zh: {
@@ -202,71 +207,266 @@ const pageTranslations = {
   }
 };
 
+const localizedPageTranslations = {
+  ...pageTranslations,
+  ja: {
+    ...pageTranslations.en,
+    meta: {
+      title: "TikTokコンテンツ診断（AI） | OwlSeer",
+      description: "なぜ伸びないかを12シグナルで診断し、具体的な改善アクションを提示します。"
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "なぜTikTok動画が伸びないのかを特定",
+      lead: "12のエンゲージメントシグナルで動画を診断し、どこで視聴者を失っているかを可視化します。",
+      ctaPrimary: "無料トライアル開始",
+      ctaSecondary: "診断サンプルを見る"
+    },
+    tldr: { ...pageTranslations.en.tldr, content: "低再生には原因があります。OwlSeerは12シグナルを分析して課題の重症度・理由・具体的修正案まで提示します。", link: "インテリジェンスモジュール" },
+    problem: { ...pageTranslations.en.problem, title: "当てずっぽうの改善ループ" },
+    solution: { ...pageTranslations.en.solution, title: "OwlSeerの診断フロー" },
+    evidence: { ...pageTranslations.en.evidence, title: "実際の診断出力例" },
+    conversion: { ...pageTranslations.en.conversion, title: "TikTokリンクで3シグナルを無料診断", button: "コンテンツを診断する" },
+    boundary: { ...pageTranslations.en.boundary, title: "透明性ボックス" },
+    cta: { ...pageTranslations.en.cta, title: "あなたのコンテンツを診断", desc: "アカウント連携で改善ポイントを即把握。", primary: "無料トライアル開始", secondary: "診断サンプルを見る" }
+  },
+  ko: {
+    ...pageTranslations.en,
+    meta: {
+      title: "AI TikTok 콘텐츠 진단 | OwlSeer",
+      description: "성과가 낮은 이유를 12개 신호로 진단하고 실행 가능한 수정안을 제공합니다."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "TikTok 콘텐츠가 부진한 이유를 찾으세요",
+      lead: "12개 참여 신호로 영상별 문제 지점을 찾아 무엇을 고쳐야 하는지 명확히 제시합니다.",
+      ctaPrimary: "무료 체험 시작",
+      ctaSecondary: "진단 샘플 보기"
+    },
+    tldr: { ...pageTranslations.en.tldr, content: "낮은 조회수에는 원인이 있습니다. OwlSeer는 문제의 심각도, 원인, 구체적 수정안을 함께 제공합니다." },
+    problem: { ...pageTranslations.en.problem, title: "추측 기반 개선 루프" },
+    solution: { ...pageTranslations.en.solution, title: "OwlSeer 진단 방식" },
+    evidence: { ...pageTranslations.en.evidence, title: "실제 진단 예시" },
+    conversion: { ...pageTranslations.en.conversion, title: "링크 붙여넣고 3개 신호 무료 진단", button: "내 콘텐츠 진단" },
+    boundary: { ...pageTranslations.en.boundary, title: "투명성 박스" },
+    cta: { ...pageTranslations.en.cta, title: "콘텐츠 진단 시작", desc: "연결 후 어떤 부분을 고칠지 즉시 확인하세요.", primary: "무료 체험 시작", secondary: "진단 샘플 보기" }
+  },
+  es: {
+    ...pageTranslations.en,
+    meta: {
+      title: "Diagnóstico de contenido TikTok con IA | OwlSeer",
+      description: "Detecta por qué tus videos no rinden y recibe fixes concretos basados en 12 señales."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Descubre por qué tu contenido TikTok rinde mal",
+      lead: "OwlSeer analiza 12 señales de engagement para mostrarte exactamente qué corregir.",
+      ctaPrimary: "Iniciar prueba gratis",
+      ctaSecondary: "Ver muestra de diagnóstico"
+    },
+    tldr: { ...pageTranslations.en.tldr, content: "Las vistas bajas tienen causa. OwlSeer detecta problemas, los prioriza y te da acciones claras para mejorar." },
+    problem: { ...pageTranslations.en.problem, title: "El ciclo de adivinar" },
+    solution: { ...pageTranslations.en.solution, title: "Cómo diagnostica OwlSeer" },
+    evidence: { ...pageTranslations.en.evidence, title: "Cómo se ve un diagnóstico real" },
+    conversion: { ...pageTranslations.en.conversion, title: "Pega un link y revisa 3 señales", button: "Diagnosticar mi contenido" },
+    boundary: { ...pageTranslations.en.boundary, title: "Marco de transparencia" },
+    cta: { ...pageTranslations.en.cta, title: "Diagnostica tu contenido", desc: "Conecta tu cuenta y descubre qué corregir primero.", primary: "Iniciar prueba gratis", secondary: "Ver muestra de diagnóstico" }
+  },
+  fr: {
+    ...pageTranslations.en,
+    meta: {
+      title: "Diagnostic de contenu TikTok par IA | OwlSeer",
+      description: "Identifiez pourquoi vos vidéos sous-performent et obtenez des correctifs précis via 12 signaux."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Identifiez pourquoi votre contenu TikTok sous-performe",
+      lead: "OwlSeer analyse 12 signaux d’engagement pour montrer précisément quoi corriger.",
+      ctaPrimary: "Démarrer l’essai gratuit",
+      ctaSecondary: "Voir l’exemple diagnostic"
+    },
+    tldr: { ...pageTranslations.en.tldr, content: "Les faibles vues ont une cause. OwlSeer détecte les problèmes, les hiérarchise et propose des actions concrètes." },
+    problem: { ...pageTranslations.en.problem, title: "Le cycle de l’approximation" },
+    solution: { ...pageTranslations.en.solution, title: "Comment OwlSeer diagnostique" },
+    evidence: { ...pageTranslations.en.evidence, title: "Exemple de diagnostic concret" },
+    conversion: { ...pageTranslations.en.conversion, title: "Collez un lien TikTok, testez 3 signaux", button: "Diagnostiquer mon contenu" },
+    boundary: { ...pageTranslations.en.boundary, title: "Cadre de transparence" },
+    cta: { ...pageTranslations.en.cta, title: "Diagnostiquez votre contenu", desc: "Connectez votre compte et priorisez les correctifs.", primary: "Démarrer l’essai gratuit", secondary: "Voir l’exemple diagnostic" }
+  },
+  de: {
+    ...pageTranslations.en,
+    meta: {
+      title: "TikTok Content-Diagnose mit KI | OwlSeer",
+      description: "Finde heraus, warum Videos unterperformen, und erhalte konkrete Fixes auf Basis von 12 Signalen."
+    },
+    hero: {
+      ...pageTranslations.en.hero,
+      title: "Finde heraus, warum dein TikTok-Content nicht performt",
+      lead: "OwlSeer analysiert 12 Engagement-Signale und zeigt dir präzise, was du verbessern solltest.",
+      ctaPrimary: "Kostenlos testen",
+      ctaSecondary: "Diagnose-Sample ansehen"
+    },
+    tldr: { ...pageTranslations.en.tldr, content: "Niedrige Views haben Ursachen. OwlSeer erkennt Probleme, bewertet Prioritäten und liefert konkrete Maßnahmen." },
+    problem: { ...pageTranslations.en.problem, title: "Der Guessing-Loop" },
+    solution: { ...pageTranslations.en.solution, title: "So diagnostiziert OwlSeer" },
+    evidence: { ...pageTranslations.en.evidence, title: "So sieht eine echte Diagnose aus" },
+    conversion: { ...pageTranslations.en.conversion, title: "TikTok-Link einfügen, 3 Signale prüfen", button: "Content diagnostizieren" },
+    boundary: { ...pageTranslations.en.boundary, title: "Transparenz-Box" },
+    cta: { ...pageTranslations.en.cta, title: "Diagnostiziere deinen Content", desc: "Verbinde dein Konto und finde die wichtigsten Fixes.", primary: "Kostenlos testen", secondary: "Diagnose-Sample ansehen" }
+  }
+};
+
 // --- Components ---
 
-const DiagnosisScanAnimation = () => {
+const HighFidelityScan = () => {
   return (
-    <div className="w-full aspect-video bg-gray-900 rounded-xl relative overflow-hidden border border-gray-800 shadow-2xl">
-      {/* Video Content Placeholder */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30">
-        <Play className="w-16 h-16 text-white" />
-      </div>
+    <div className="w-full h-[420px] bg-slate-900 rounded-[2.5rem] relative overflow-hidden border border-slate-800 shadow-2xl group">
+      {/* Background Grid & Elements */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:32px_32px] opacity-20" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#1AAE82]/10 rounded-full blur-[80px]" />
       
-      {/* Scanning Line */}
-      <motion.div 
-        className="absolute top-0 bottom-0 w-1 bg-[#1AAE82] shadow-[0_0_20px_#1AAE82]"
-        animate={{ left: ['0%', '100%'] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Pop-up Issues */}
-      <motion.div 
-        className="absolute top-1/4 left-[10%]"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: [0, 1, 1, 0], scale: [0, 1, 1, 0] }}
-        transition={{ duration: 3, repeat: Infinity, times: [0, 0.1, 0.8, 1], delay: 0.3 }}
-      >
-        <div className="bg-red-500/90 text-white text-xs px-2 py-1 rounded shadow-lg backdrop-blur-sm flex items-center gap-1">
-          <AlertCircle className="w-3 h-3" /> Weak Hook
+      {/* Main Content Area */}
+      <div className="absolute inset-4 md:inset-8 flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-start mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#1AAE82]/20 flex items-center justify-center text-[#1AAE82]">
+              <Smartphone className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Target Video</div>
+              <div className="text-white font-mono text-sm">@user_video_092.mp4</div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <div className="px-2 py-1 bg-slate-800 rounded text-[10px] font-bold text-slate-400 uppercase tracking-wider border border-slate-700">
+              HD 1080p
+            </div>
+            <div className="px-2 py-1 bg-slate-800 rounded text-[10px] font-bold text-slate-400 uppercase tracking-wider border border-slate-700">
+              60 FPS
+            </div>
+          </div>
         </div>
-      </motion.div>
 
-      <motion.div 
-        className="absolute bottom-1/3 left-[40%]"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: [0, 1, 1, 0], scale: [0, 1, 1, 0] }}
-        transition={{ duration: 3, repeat: Infinity, times: [0, 0.4, 0.8, 1], delay: 1.2 }}
-      >
-        <div className="bg-yellow-500/90 text-white text-xs px-2 py-1 rounded shadow-lg backdrop-blur-sm flex items-center gap-1">
-          <Clock className="w-3 h-3" /> Pacing Dip
+        {/* Central Visualization */}
+        <div className="flex-1 relative flex items-center justify-center">
+           {/* Radar / Scan Effect */}
+           <div className="relative w-64 h-64">
+             <div className="absolute inset-0 border-2 border-[#1AAE82]/30 rounded-full animate-[spin_10s_linear_infinite]" />
+             <div className="absolute inset-4 border border-dashed border-[#1AAE82]/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+             <div className="absolute inset-0 rounded-full bg-[#1AAE82]/5 blur-xl animate-pulse" />
+             
+             {/* Center Icon */}
+             <div className="absolute inset-0 flex items-center justify-center">
+               <Activity className="w-12 h-12 text-[#1AAE82]" />
+             </div>
+
+             {/* Scanning Beam */}
+             <div className="absolute inset-0 bg-gradient-to-t from-[#1AAE82]/20 to-transparent w-full h-1/2 origin-bottom animate-[spin_4s_linear_infinite]" style={{borderBottom: '1px solid #1AAE82'}} />
+             
+             {/* Detected Points */}
+             <motion.div 
+               className="absolute top-10 right-10 w-3 h-3 bg-red-500 rounded-full shadow-[0_0_10px_red]"
+               animate={{ opacity: [0, 1, 0] }}
+               transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+             />
+             <motion.div 
+               className="absolute bottom-16 left-12 w-3 h-3 bg-yellow-500 rounded-full shadow-[0_0_10px_orange]"
+               animate={{ opacity: [0, 1, 0] }}
+               transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+             />
+           </div>
+
+           {/* Floating Info Cards */}
+           <motion.div 
+             className="absolute top-1/2 right-4 md:right-0 translate-x-0 md:translate-x-4 bg-slate-800/90 backdrop-blur border border-slate-700 p-3 rounded-xl shadow-xl flex items-center gap-3 w-48"
+             initial={{ opacity: 0, x: 20 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ delay: 1 }}
+           >
+             <div className="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center text-red-500">
+               <AlertCircle className="w-4 h-4" />
+             </div>
+             <div>
+               <div className="text-[10px] text-slate-400 uppercase font-bold">Alert</div>
+               <div className="text-white text-xs font-bold">Weak Hook Detected</div>
+             </div>
+           </motion.div>
+
+           <motion.div 
+             className="absolute bottom-10 left-0 -translate-x-4 bg-slate-800/90 backdrop-blur border border-slate-700 p-3 rounded-xl shadow-xl flex items-center gap-3 w-44"
+             initial={{ opacity: 0, x: -20 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ delay: 1.5 }}
+           >
+             <div className="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-500">
+               <Clock className="w-4 h-4" />
+             </div>
+             <div>
+               <div className="text-[10px] text-slate-400 uppercase font-bold">Warning</div>
+               <div className="text-white text-xs font-bold">Pacing Dip (8s)</div>
+             </div>
+           </motion.div>
         </div>
-      </motion.div>
+
+        {/* Footer Metrics */}
+        <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-800 pt-6">
+          {[
+            { label: 'Signals', value: '12/12', color: 'text-[#1AAE82]' },
+            { label: 'Score', value: '72', color: 'text-yellow-400' },
+            { label: 'Status', value: 'Analyzing', color: 'text-blue-400' }
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">{stat.label}</div>
+              <div className={`font-mono text-lg font-bold ${stat.color}`}>{stat.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
 const IssueCard = ({ issue }: { issue: any }) => (
-  <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-md transition-all">
-    <div className="flex items-start justify-between mb-4">
-      <h4 className="font-bold text-lg text-gray-900 dark:text-white">{issue.title}</h4>
-      <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${
-        issue.severity === 'HIGH' || issue.severity === '高'
-          ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 animate-pulse'
-          : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
-      }`}>
-        {issue.severity}
-      </span>
-    </div>
-    <div className="space-y-4">
-      <div>
-        <div className="text-xs font-semibold text-gray-500 uppercase mb-1">Problem</div>
-        <p className="text-sm text-gray-600 dark:text-gray-300">{issue.why}</p>
-      </div>
-      <div className="bg-green-50 dark:bg-green-900/10 p-3 rounded-lg border border-green-100 dark:border-green-900/30">
-        <div className="text-xs font-semibold text-[#1AAE82] uppercase mb-1 flex items-center gap-1">
-          <Zap className="w-3 h-3" /> Fix
+  <div className="bg-white dark:bg-slate-900 rounded-[2rem] border border-gray-200 dark:border-slate-800 p-8 shadow-sm hover:shadow-xl hover:shadow-[#1AAE82]/5 transition-all duration-300 group hover:-translate-y-1">
+    <div className="flex items-start justify-between mb-6">
+      <div className="flex items-center gap-4">
+        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg ${
+          issue.severity === 'HIGH' || issue.severity === '高'
+            ? 'bg-red-50 text-red-500 shadow-red-500/10 dark:bg-red-900/20'
+            : 'bg-yellow-50 text-yellow-500 shadow-yellow-500/10 dark:bg-yellow-900/20'
+        }`}>
+          {issue.severity === 'HIGH' || issue.severity === '高' ? <AlertCircle /> : <AlertTriangle />}
         </div>
-        <p className="text-sm text-gray-800 dark:text-gray-200 font-medium">{issue.fix}</p>
+        <div>
+           <h4 className="font-bold text-xl text-gray-900 dark:text-white leading-tight">{issue.title}</h4>
+           <div className="flex items-center gap-2 mt-1">
+             <div className={`w-1.5 h-1.5 rounded-full ${
+               issue.severity === 'HIGH' || issue.severity === '高' ? 'bg-red-500' : 'bg-yellow-500'
+             }`} />
+             <span className={`text-xs font-bold uppercase tracking-wider ${
+               issue.severity === 'HIGH' || issue.severity === '高' ? 'text-red-500' : 'text-yellow-500'
+             }`}>
+               {issue.severity} Priority
+             </span>
+           </div>
+        </div>
+      </div>
+    </div>
+    
+    <div className="space-y-6">
+      <div className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-gray-100 dark:border-slate-800">
+        <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+          <Search className="w-3 h-3" /> Analysis
+        </div>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed font-medium">{issue.why}</p>
+      </div>
+      
+      <div className="relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-[#1AAE82] before:rounded-full">
+        <div className="text-xs font-bold text-[#1AAE82] uppercase tracking-wider mb-2 flex items-center gap-2">
+          <Zap className="w-3 h-3" /> Recommended Fix
+        </div>
+        <p className="text-gray-900 dark:text-white font-bold text-lg leading-snug">{issue.fix}</p>
       </div>
     </div>
   </div>
@@ -284,21 +484,25 @@ export const ContentDiagnosisPage = ({
   setIsDarkMode: (isDark: boolean) => void 
 }) => {
   const { language, setLanguage } = useLanguage();
-  const t = (pageTranslations as any)[language] || pageTranslations.en;
+  const t = (localizedPageTranslations as any)[language] || localizedPageTranslations.en;
   const globalT = globalTranslations[language] || globalTranslations.en;
+  const canonicalPath = '/use-cases/content-diagnosis';
+  const seo = getPageSEO('contentDiagnosis', language);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] font-sans text-gray-900 dark:text-white selection:bg-[#1AAE82]/30 transition-colors duration-300">
       <SEO 
-        title={t.meta.title}
-        description={t.meta.description}
-        keywords={["tiktok content diagnosis", "video analytics", "tiktok engagement", "content optimization"]}
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={getCanonicalUrl(canonicalPath, language)}
+        alternates={generateAlternates(canonicalPath)}
         lang={language}
       />
 
       <Navbar 
-        onTrySample={() => onNavigate('/simulation')}
-        onSignUp={() => onNavigate('/auth')}
+        onTrySample={() => onNavigate('/social/simulation')}
+        onSignUp={() => onNavigate('/social/auth')}
         onNavigate={onNavigate}
         language={language}
         setLanguage={setLanguage}
@@ -307,90 +511,103 @@ export const ContentDiagnosisPage = ({
         t={globalT} 
       />
 
-      <main className="pt-24 pb-20">
-        {/* Hero Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1AAE82]/10 text-[#1AAE82] text-xs font-bold uppercase tracking-wider mb-6 border border-[#1AAE82]/20">
-              <Activity className="w-3 h-3" /> New Feature
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-gray-900 dark:text-white font-display">
-              {t.hero.title}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-              {t.hero.lead}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => onNavigate('/auth')}
-                className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
-              >
-                {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => onNavigate('/simulation/intelligence')}
-                className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2"
-              >
-                <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
-              </button>
-            </div>
-          </motion.div>
-        </section>
+      <main className="bg-white dark:bg-[#020617]">
+        {/* Hero Section with Aurora Background */}
+        <div className="relative overflow-hidden">
+          <AuroraBackground 
+            colorStops={isDarkMode ? ['#020617', '#1AAE82', '#020617'] : ['#FFFFFF', '#E0F2FE', '#FFFFFF']} 
+            speed={0.3} 
+            blend={0.5}
+            baseColor={isDarkMode ? 0.0 : 1.0}
+            className="absolute inset-0 z-0 opacity-40"
+          />
+          
+          <section className="relative z-10 pt-40 pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1AAE82]/10 text-[#1AAE82] text-sm font-bold uppercase tracking-widest mb-8 border border-[#1AAE82]/20 backdrop-blur-md">
+                <Activity className="w-4 h-4" /> 
+                <span className="opacity-90">Content Intelligence</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.1] text-gray-900 dark:text-white font-display max-w-5xl mx-auto">
+                {t.hero.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed font-normal opacity-90">
+                {t.hero.lead}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                <button 
+                  onClick={() => onNavigate('/social/auth')}
+                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-xl shadow-[#1AAE82]/20 hover:shadow-[#1AAE82]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={() => onNavigate('/social/simulation/intelligence')}
+                  className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2 hover:border-gray-300 dark:hover:border-slate-600"
+                >
+                  <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
+                </button>
+              </div>
+            </motion.div>
+          </section>
+        </div>
 
-        {/* TL;DR Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="bg-[#FEFCE8] dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-2xl p-6 md:p-8 relative">
-            <div className="absolute -top-3 -left-3 bg-yellow-400 text-yellow-900 p-2 rounded-full shadow-sm">
-              <Zap className="w-5 h-5" fill="currentColor" />
-            </div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-500 mb-3 ml-2">TL;DR</h3>
-            <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed font-medium">
-              {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
-                <React.Fragment key={i}>
-                  {part}
-                  {i < arr.length - 1 && (
-                    <button 
-                      onClick={() => onNavigate('/simulation/intelligence')}
-                      className="text-[#1AAE82] underline decoration-2 underline-offset-2 hover:text-[#15956F] font-bold mx-1"
-                    >
-                      {t.tldr.link}
-                    </button>
-                  )}
-                </React.Fragment>
-              ))}
-            </p>
+        {/* Core Insight Section (Replaced TL;DR) */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mb-32 -mt-10 relative z-20">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] p-10 md:p-14 shadow-2xl border border-white/50 dark:border-slate-700/50 ring-1 ring-black/5 flex flex-col md:flex-row gap-10 items-center text-center md:text-left">
+             <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">Core Insight</h3>
+                <p className="text-xl md:text-2xl text-gray-900 dark:text-white leading-relaxed font-medium">
+                  {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
+                    <React.Fragment key={i}>
+                      {part}
+                      {i < arr.length - 1 && (
+                        <button 
+                          onClick={() => onNavigate('/social/simulation/intelligence')}
+                          className="text-[#1AAE82] text-[1em] font-bold hover:text-[#15956F] transition-colors inline-flex items-center gap-1 border-b-2 border-[#1AAE82]/30 hover:border-[#1AAE82] mx-1"
+                        >
+                          {t.tldr.link}
+                        </button>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </p>
+             </div>
           </div>
         </section>
 
         {/* Problem Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1">
-              <DiagnosisScanAnimation />
+              <HighFidelityScan />
             </div>
             <div className="order-1 lg:order-2">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl">
-                  <AlertTriangle className="w-6 h-6" />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 bg-red-50 dark:bg-red-900/10 text-red-500 dark:text-red-400 rounded-2xl border border-red-100 dark:border-red-900/20">
+                  <AlertTriangle className="w-6 h-6" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t.problem.title}</h2>
-                  <p className="text-[#1AAE82] font-medium">{t.problem.task}</p>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white font-display">{t.problem.title}</h2>
+                  <p className="text-[#1AAE82] font-medium mt-1">{t.problem.task}</p>
                 </div>
               </div>
-              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 <p>{t.problem.desc1}</p>
                 <p>{t.problem.desc2}</p>
                 <p>{t.problem.desc3}</p>
                 <button 
-                  onClick={() => onNavigate('/signals')}
-                  className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mt-2"
+                  onClick={() => onNavigate('/social/signals')}
+                  className="text-[#1AAE82] font-bold hover:text-[#15956F] flex items-center gap-2 mt-4 group transition-colors"
                 >
-                  {t.problem.action} <ArrowRight className="w-4 h-4" />
+                  {t.problem.action} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>
@@ -398,34 +615,45 @@ export const ContentDiagnosisPage = ({
         </section>
 
         {/* Solution Section */}
-        <section className="bg-gray-50 dark:bg-slate-900/50 py-24 mb-32">
-          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.solution.title}</h2>
-              <p className="text-xl text-gray-500 dark:text-gray-400">{t.solution.task}</p>
+        <section className="bg-gray-50 dark:bg-slate-900/50 py-32 mb-32 relative overflow-hidden">
+          {/* Decorative lines */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-800 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-800 to-transparent" />
+
+          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-display">{t.solution.title}</h2>
+              <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t.solution.task}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {t.solution.layers.map((layer: any, i: number) => (
-                <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm relative overflow-hidden group hover:border-[#1AAE82] transition-colors">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <h1 className="text-6xl font-bold text-[#1AAE82]">{layer.id}</h1>
+                <div key={i} className="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-gray-200 dark:border-slate-800 shadow-xl relative overflow-hidden group hover:border-[#1AAE82] transition-colors duration-300">
+                  <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <h1 className="text-8xl font-bold text-[#1AAE82] font-display">{layer.id}</h1>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{layer.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  
+                  <div className="w-14 h-14 rounded-2xl bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-[#1AAE82] mb-8 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                    {i === 0 && <Search className="w-6 h-6" />}
+                    {i === 1 && <BarChart2 className="w-6 h-6" />}
+                    {i === 2 && <CheckCircle2 className="w-6 h-6" />}
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-display">{layer.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                     {layer.desc}
                   </p>
                 </div>
               ))}
             </div>
             
-            <div className="mt-12 text-center">
+            <div className="mt-16 text-center">
               <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-6">
                 {t.solution.note}
               </p>
               <button 
-                onClick={() => onNavigate('/simulation/intelligence')}
-                className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mx-auto"
+                onClick={() => onNavigate('/social/simulation/intelligence')}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-full font-bold text-[#1AAE82] hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors shadow-sm"
               >
                 {t.solution.action} <ArrowRight className="w-4 h-4" />
               </button>
@@ -435,11 +663,13 @@ export const ContentDiagnosisPage = ({
 
         {/* Evidence Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <div className="flex flex-col md:flex-row items-start gap-12">
+          <div className="flex flex-col md:flex-row items-start gap-16">
             <div className="flex-1">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{t.evidence.title}</h2>
-              <p className="text-[#1AAE82] font-medium mb-6">{t.evidence.task}</p>
-              <p className="text-gray-500 dark:text-gray-400 mb-8">{t.evidence.subtitle}</p>
+              <div className="mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-display">{t.evidence.title}</h2>
+                <p className="text-[#1AAE82] font-medium text-lg">{t.evidence.task}</p>
+              </div>
+              <p className="text-gray-500 dark:text-gray-400 mb-8 font-medium uppercase tracking-wider text-sm">{t.evidence.subtitle}</p>
               
               <div className="space-y-6">
                 {t.evidence.issues.map((issue: any, i: number) => (
@@ -447,34 +677,50 @@ export const ContentDiagnosisPage = ({
                 ))}
               </div>
             </div>
+            
             <div className="flex-1 sticky top-32">
-              <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8">
-                <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                  <BarChart2 className="w-5 h-5 text-[#1AAE82]" /> Impact Analysis
+              <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-10 relative overflow-hidden shadow-2xl">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#1AAE82]/5 rounded-full blur-[60px] pointer-events-none" />
+                
+                <h3 className="font-bold text-xl mb-6 flex items-center gap-3 text-gray-900 dark:text-white">
+                  <div className="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                    <BarChart2 className="w-5 h-5 text-[#1AAE82]" /> 
+                  </div>
+                  Impact Analysis
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8 text-lg">
                   {t.evidence.data}
                 </p>
-                <div className="aspect-video bg-white dark:bg-slate-800 rounded-xl border border-gray-100 dark:border-slate-700 shadow-sm mb-6 flex items-end justify-around p-4 pb-0 overflow-hidden">
-                   {/* Dummy Chart */}
-                   <div className="w-16 bg-gray-200 dark:bg-slate-700 h-[40%] rounded-t-md relative group">
-                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold">4.1%</div>
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-gray-500">1-Seg</div>
+                
+                {/* Enhanced Chart Visualization */}
+                <div className="aspect-[16/9] bg-white dark:bg-slate-800 rounded-3xl border border-gray-100 dark:border-slate-700 shadow-sm mb-8 flex items-end justify-around p-8 pb-0 overflow-hidden relative">
+                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:24px_24px] opacity-50" />
+                   
+                   {/* Bar 1 */}
+                   <div className="w-20 bg-gray-200 dark:bg-slate-700 h-[40%] rounded-t-2xl relative group hover:h-[42%] transition-all duration-300">
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-sm font-bold bg-gray-200 dark:bg-slate-700 px-2 py-1 rounded">4.1%</div>
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-500 uppercase tracking-wider">1-Seg</div>
                    </div>
-                   <div className="w-16 bg-[#1AAE82] h-[58%] rounded-t-md relative group shadow-[0_0_15px_rgba(26,174,130,0.3)]">
-                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-[#1AAE82]">5.8%</div>
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-white/80">3-Seg</div>
+                   
+                   {/* Bar 2 (Hero) */}
+                   <div className="w-20 bg-gradient-to-t from-[#1AAE82] to-emerald-400 h-[65%] rounded-t-2xl relative group shadow-[0_0_20px_rgba(26,174,130,0.3)] hover:h-[68%] transition-all duration-300">
+                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-xl font-bold text-[#1AAE82] bg-white dark:bg-slate-900 px-3 py-1 rounded-lg shadow-lg">5.8%</div>
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-bold text-white/90 uppercase tracking-wider">3-Seg</div>
                    </div>
-                   <div className="w-16 bg-gray-200 dark:bg-slate-700 h-[45%] rounded-t-md relative group">
-                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold">4.5%</div>
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-gray-500">2-Seg</div>
+                   
+                   {/* Bar 3 */}
+                   <div className="w-20 bg-gray-200 dark:bg-slate-700 h-[45%] rounded-t-2xl relative group hover:h-[47%] transition-all duration-300">
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-sm font-bold bg-gray-200 dark:bg-slate-700 px-2 py-1 rounded">4.5%</div>
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-500 uppercase tracking-wider">2-Seg</div>
                    </div>
                 </div>
+                
                 <button 
-                  onClick={() => onNavigate('/simulation/dashboard')}
-                  className="w-full py-3 bg-[#1AAE82] text-white rounded-lg font-bold hover:bg-[#15956F] transition-colors"
+                  onClick={() => onNavigate('/social/simulation/dashboard')}
+                  className="w-full py-4 bg-[#1AAE82] text-white rounded-xl font-bold hover:bg-[#15956F] transition-all shadow-lg shadow-[#1AAE82]/20 hover:shadow-[#1AAE82]/40 hover:-translate-y-1 flex items-center justify-center gap-2"
                 >
-                  {t.evidence.action.split('—')[0]}
+                  {t.evidence.action.split('—')[0]} <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -482,81 +728,86 @@ export const ContentDiagnosisPage = ({
         </section>
 
         {/* Contextual Conversion (Mini Tool) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto mb-24">
-          <div className="bg-gradient-to-br from-[#111827] to-[#0f172a] rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#1AAE82]/20 rounded-full blur-[80px]" />
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mb-32">
+          <div className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-[2.5rem] p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl border border-white/5">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#1AAE82]/20 rounded-full blur-[100px] animate-pulse-slow" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]" />
             
-            <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-4 font-display">{t.conversion.title}</h3>
-              <p className="text-gray-300 mb-8 max-w-lg mx-auto">
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-[#1AAE82] mb-6 backdrop-blur-md border border-white/10">
+                <Smartphone className="w-8 h-8" />
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-bold mb-6 font-display">{t.conversion.title}</h3>
+              <p className="text-gray-400 mb-10 max-w-lg mx-auto text-lg leading-relaxed">
                 {t.conversion.desc}
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mb-6">
+              <div className="w-full max-w-2xl bg-white/5 backdrop-blur-md rounded-2xl p-2 border border-white/10 flex flex-col sm:flex-row gap-2 mb-8">
                 <input 
                   type="text" 
                   placeholder={t.conversion.placeholder}
-                  className="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm"
+                  className="flex-1 px-6 py-4 bg-transparent text-white placeholder-gray-500 focus:outline-none"
                 />
                 <button 
-                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-full transition-colors shadow-lg"
+                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-[#1AAE82]/25"
                 >
                   {t.conversion.button}
                 </button>
               </div>
               
-              <div className="grid grid-cols-3 gap-4 opacity-50">
-                <div className="h-20 bg-white/5 rounded-xl border border-white/10 border-dashed flex flex-col items-center justify-center">
-                  <div className="text-xs text-gray-400 mb-1">Hook Rate</div>
-                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                </div>
-                <div className="h-20 bg-white/5 rounded-xl border border-white/10 border-dashed flex flex-col items-center justify-center">
-                  <div className="text-xs text-gray-400 mb-1">Pacing</div>
-                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                </div>
-                <div className="h-20 bg-white/5 rounded-xl border border-white/10 border-dashed flex flex-col items-center justify-center">
-                  <div className="text-xs text-gray-400 mb-1">Structure</div>
-                  <div className="w-8 h-2 bg-gray-600 rounded-full"></div>
-                </div>
+              <div className="grid grid-cols-3 gap-6 w-full max-w-2xl">
+                {[
+                  { label: 'Hook Rate', icon: <Eye className="w-4 h-4" /> },
+                  { label: 'Pacing', icon: <Clock className="w-4 h-4" /> },
+                  { label: 'Structure', icon: <BarChart2 className="w-4 h-4" /> }
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/5 rounded-xl border border-white/5 py-4 flex flex-col items-center justify-center gap-2">
+                    <div className="text-gray-500">{item.icon}</div>
+                    <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{item.label}</div>
+                  </div>
+                ))}
               </div>
               
-              <p className="text-xs text-gray-500 mt-6">{t.conversion.note}</p>
+              <p className="text-xs text-gray-500 mt-8 flex items-center gap-2">
+                <CheckCircle2 className="w-3 h-3 text-[#1AAE82]" /> {t.conversion.note}
+              </p>
             </div>
           </div>
         </section>
 
         {/* Boundary Box */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="border border-gray-200 dark:border-slate-800 rounded-xl p-6 bg-gray-50/50 dark:bg-slate-900/50">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <Lock size={18} className="text-gray-400" /> {t.boundary.title}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-32">
+          <div className="border border-gray-200 dark:border-slate-800 rounded-2xl p-8 bg-gray-50/50 dark:bg-slate-900/30 backdrop-blur-sm">
+            <h3 className="font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 text-lg">
+              <Lock size={20} className="text-gray-400" /> {t.boundary.title}
             </h3>
-            <div className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
-              <p><strong className="text-gray-700 dark:text-gray-300">Data:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Limitations:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Note:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
+            <div className="space-y-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p><strong className="text-gray-900 dark:text-gray-200">Data:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
+              <p><strong className="text-gray-900 dark:text-gray-200">Limitations:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
+              <p><strong className="text-gray-900 dark:text-gray-200">Note:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight font-display">
             {t.cta.title}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto font-light">
             {t.cta.desc}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <button 
-              onClick={() => onNavigate('/auth')}
-              className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+              onClick={() => onNavigate('/social/auth')}
+              className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-xl shadow-xl hover:shadow-2xl hover:shadow-[#1AAE82]/30 transition-all duration-300 hover:-translate-y-1"
             >
               {t.cta.primary}
             </button>
             <button 
-              onClick={() => onNavigate('/simulation/intelligence')}
-              className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all"
+              onClick={() => onNavigate('/social/simulation/intelligence')}
+              className="px-10 py-5 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium text-xl transition-all hover:shadow-lg"
             >
               {t.cta.secondary}
             </button>

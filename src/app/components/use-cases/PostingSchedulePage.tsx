@@ -16,6 +16,8 @@ import { translations as globalTranslations } from '../../data/translations';
 import { Navbar } from '../layout/Navbar';
 import { Footer } from '../layout/Footer';
 import { SEO } from '../SEO';
+import { getPageSEO, getCanonicalUrl, generateAlternates } from '../../data/seoConfig';
+import { AuroraBackground } from '../ui/aurora-background';
 
 // --- Translations ---
 const pageTranslations = {
@@ -28,9 +30,10 @@ const pageTranslations = {
       title: "Find Your Best Time to Post on TikTok — Based on Your Audience",
       lead: "OwlSeer maps your audience's active hours and generates personalized posting schedules. Stop following generic advice and start posting when your specific viewers are watching.",
       ctaPrimary: "Start Free Trial",
-      ctaSecondary: "Try Scheduling Demo"
+      ctaSecondary: "Try Scheduling Sample"
     },
     tldr: {
+      title: "The Core Concept", // Renamed from TL;DR
       content: "Generic \"best time to post\" articles do not know your audience. OwlSeer's active hour mapping signal tracks when your specific followers and viewers are on TikTok. The best-time heatmap shows optimal hours by day of week, and scheduling places your content at those times with AI-recommended best-time badges.",
       link: "active hour mapping"
     },
@@ -84,7 +87,7 @@ const pageTranslations = {
       title: "Find Your Best Posting Times",
       desc: "Connect your account. Your personalized heatmap generates after 2 weeks of data.",
       primary: "Start Free Trial",
-      secondary: "Try Scheduling Demo"
+      secondary: "Try Scheduling Sample"
     }
   },
   zh: {
@@ -99,6 +102,7 @@ const pageTranslations = {
       ctaSecondary: "试用排程演示"
     },
     tldr: {
+      title: "核心理念",
       content: "通用的“最佳发布时间”文章并不了解你的受众。OwlSeer 的活跃时间映射信号追踪你的特定关注者和观众何时在 TikTok 上。最佳时间热力图显示每周各天的最佳时间，排程功能利用 AI 推荐的最佳时间标签将你的内容安排在这些时间。",
       link: "活跃时间映射"
     },
@@ -154,6 +158,65 @@ const pageTranslations = {
       primary: "开始免费试用",
       secondary: "试用排程演示"
     }
+  }
+};
+
+const localizedPageTranslations = {
+  ...pageTranslations,
+  ja: {
+    ...pageTranslations.en,
+    meta: { title: "TikTok最適投稿時間（AI） | OwlSeer", description: "視聴者の行動データから最適な投稿時間帯を算出し、個別スケジュールを作成します。" },
+    hero: { ...pageTranslations.en.hero, title: "あなたの視聴者に基づくTikTok最適投稿時間", lead: "一般論ではなく、あなたのオーディエンス行動に基づく投稿時間を提案します。", ctaPrimary: "無料トライアル開始", ctaSecondary: "スケジュールサンプルを見る" },
+    tldr: { ...pageTranslations.en.tldr, title: "コアコンセプト", content: "汎用的な“ベスト時間”記事ではなく、あなたの視聴者の実データで判断します。", link: "アクティブ時間マッピング" },
+    problem: { ...pageTranslations.en.problem, title: "なぜ一般的な投稿時間が機能しないか" },
+    solution: { ...pageTranslations.en.solution, title: "OwlSeerがスケジュールを個別最適化する方法" },
+    conversion: { ...pageTranslations.en.conversion, title: "投稿時間の調査に毎週何時間使っていますか？", button: "最適時間を見つける" },
+    boundary: { ...pageTranslations.en.boundary, title: "透明性ボックス" },
+    cta: { ...pageTranslations.en.cta, title: "最適な投稿時間を見つける", desc: "アカウント連携後、データ蓄積で個別ヒートマップを生成。", primary: "無料トライアル開始", secondary: "スケジュールサンプルを見る" }
+  },
+  ko: {
+    ...pageTranslations.en,
+    meta: { title: "TikTok 최적 게시 시간 AI | OwlSeer", description: "내 오디언스의 활동 데이터를 기반으로 개인화된 게시 시간표를 제공합니다." },
+    hero: { ...pageTranslations.en.hero, title: "내 오디언스 기반 TikTok 최적 게시 시간", lead: "일반 추천이 아닌 내 시청자 행동 데이터로 최적 시간을 제안합니다.", ctaPrimary: "무료 체험 시작", ctaSecondary: "스케줄 샘플 보기" },
+    tldr: { ...pageTranslations.en.tldr, title: "핵심 개념", content: "범용 ‘베스트 시간’이 아니라 내 계정 데이터로 결정합니다." },
+    problem: { ...pageTranslations.en.problem, title: "일반 게시 시간이 실패하는 이유" },
+    solution: { ...pageTranslations.en.solution, title: "OwlSeer 개인화 스케줄링 방식" },
+    conversion: { ...pageTranslations.en.conversion, title: "게시 시간 조사에 주당 몇 시간을 쓰시나요?", button: "내 최적 시간 찾기" },
+    boundary: { ...pageTranslations.en.boundary, title: "투명성 박스" },
+    cta: { ...pageTranslations.en.cta, title: "최적 게시 시간 찾기", desc: "계정 연결 후 개인화 히트맵을 확인하세요.", primary: "무료 체험 시작", secondary: "스케줄 샘플 보기" }
+  },
+  es: {
+    ...pageTranslations.en,
+    meta: { title: "Mejor hora para publicar en TikTok con IA | OwlSeer", description: "Calcula horarios óptimos según actividad real de tu audiencia." },
+    hero: { ...pageTranslations.en.hero, title: "Encuentra tu mejor hora para publicar en TikTok", lead: "Publica cuando tu audiencia realmente está activa, no cuando lo dice un artículo genérico.", ctaPrimary: "Iniciar prueba gratis", ctaSecondary: "Ver muestra de programación" },
+    tldr: { ...pageTranslations.en.tldr, title: "Concepto clave", content: "Los horarios genéricos no conocen tu audiencia; OwlSeer sí." },
+    problem: { ...pageTranslations.en.problem, title: "Por qué fallan los horarios genéricos" },
+    solution: { ...pageTranslations.en.solution, title: "Cómo OwlSeer personaliza tu calendario" },
+    conversion: { ...pageTranslations.en.conversion, title: "¿Cuánto tiempo gastas investigando horarios?", button: "Encontrar mis mejores horas" },
+    boundary: { ...pageTranslations.en.boundary, title: "Marco de transparencia" },
+    cta: { ...pageTranslations.en.cta, title: "Encuentra tus mejores horarios", desc: "Conecta tu cuenta y activa tu heatmap personalizado.", primary: "Iniciar prueba gratis", secondary: "Ver muestra de programación" }
+  },
+  fr: {
+    ...pageTranslations.en,
+    meta: { title: "Meilleur horaire TikTok par IA | OwlSeer", description: "Identifiez vos créneaux optimaux selon l’activité réelle de votre audience." },
+    hero: { ...pageTranslations.en.hero, title: "Trouvez votre meilleur horaire de publication TikTok", lead: "Publiez quand votre audience est active, pas selon des conseils génériques.", ctaPrimary: "Démarrer l’essai gratuit", ctaSecondary: "Voir l’exemple planning" },
+    tldr: { ...pageTranslations.en.tldr, title: "Concept clé", content: "Les horaires génériques ne connaissent pas votre audience. OwlSeer l’analyse en continu." },
+    problem: { ...pageTranslations.en.problem, title: "Pourquoi les horaires génériques échouent" },
+    solution: { ...pageTranslations.en.solution, title: "Comment OwlSeer personnalise votre planning" },
+    conversion: { ...pageTranslations.en.conversion, title: "Combien d’heures passez-vous à chercher le bon timing ?", button: "Trouver mes meilleurs horaires" },
+    boundary: { ...pageTranslations.en.boundary, title: "Cadre de transparence" },
+    cta: { ...pageTranslations.en.cta, title: "Trouvez vos meilleurs horaires", desc: "Connectez votre compte pour générer une heatmap personnalisée.", primary: "Démarrer l’essai gratuit", secondary: "Voir l’exemple planning" }
+  },
+  de: {
+    ...pageTranslations.en,
+    meta: { title: "Beste TikTok-Postingzeit mit KI | OwlSeer", description: "Finde optimale Zeitfenster basierend auf deinem echten Audience-Verhalten." },
+    hero: { ...pageTranslations.en.hero, title: "Finde deine beste TikTok-Postingzeit", lead: "Poste dann, wenn deine Audience wirklich online ist – statt nach generischen Tipps.", ctaPrimary: "Kostenlos testen", ctaSecondary: "Scheduling-Sample ansehen" },
+    tldr: { ...pageTranslations.en.tldr, title: "Kernkonzept", content: "Generische Postingzeiten kennen deine Audience nicht. OwlSeer schon." },
+    problem: { ...pageTranslations.en.problem, title: "Warum generische Postingzeiten scheitern" },
+    solution: { ...pageTranslations.en.solution, title: "So personalisiert OwlSeer deinen Plan" },
+    conversion: { ...pageTranslations.en.conversion, title: "Wie viel Zeit verbringst du mit Timing-Recherche?", button: "Meine besten Zeiten finden" },
+    boundary: { ...pageTranslations.en.boundary, title: "Transparenz-Box" },
+    cta: { ...pageTranslations.en.cta, title: "Finde deine besten Postingzeiten", desc: "Konto verbinden und personalisierte Heatmap erhalten.", primary: "Kostenlos testen", secondary: "Scheduling-Sample ansehen" }
   }
 };
 
@@ -298,21 +361,25 @@ export const PostingSchedulePage = ({
   setIsDarkMode: (isDark: boolean) => void 
 }) => {
   const { language, setLanguage } = useLanguage();
-  const t = (pageTranslations as any)[language] || pageTranslations.en;
+  const t = (localizedPageTranslations as any)[language] || localizedPageTranslations.en;
   const globalT = globalTranslations[language] || globalTranslations.en;
+  const canonicalPath = '/use-cases/posting-schedule';
+  const seo = getPageSEO('postingSchedule', language);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] font-sans text-gray-900 dark:text-white selection:bg-[#1AAE82]/30 transition-colors duration-300">
       <SEO 
-        title={t.meta.title}
-        description={t.meta.description}
-        keywords={["tiktok posting schedule", "best time to post tiktok", "tiktok analytics", "social media scheduling"]}
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        canonicalUrl={getCanonicalUrl(canonicalPath, language)}
+        alternates={generateAlternates(canonicalPath)}
         lang={language}
       />
 
       <Navbar 
-        onTrySample={() => onNavigate('/simulation')}
-        onSignUp={() => onNavigate('/auth')}
+        onTrySample={() => onNavigate('/social/simulation')}
+        onSignUp={() => onNavigate('/social/auth')}
         onNavigate={onNavigate}
         language={language}
         setLanguage={setLanguage}
@@ -321,90 +388,111 @@ export const PostingSchedulePage = ({
         t={globalT} 
       />
 
-      <main className="pt-24 pb-20">
-        {/* Hero Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1AAE82]/10 text-[#1AAE82] text-xs font-bold uppercase tracking-wider mb-6 border border-[#1AAE82]/20">
-              <Calendar className="w-3 h-3" /> New Feature
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-gray-900 dark:text-white font-display">
-              {t.hero.title}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-              {t.hero.lead}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => onNavigate('/auth')}
-                className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
-              >
-                {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => onNavigate('/simulation/scheduling')}
-                className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2"
-              >
-                <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
-              </button>
-            </div>
-          </motion.div>
-        </section>
+      <main className="bg-white dark:bg-[#020617]">
+        {/* Hero Section with Aurora Background */}
+        <div className="relative overflow-hidden">
+          <AuroraBackground 
+            colorStops={isDarkMode ? ['#020617', '#1AAE82', '#020617'] : ['#FFFFFF', '#1AAE82', '#FFFFFF']} 
+            speed={0.3} 
+            blend={0.5}
+            baseColor={isDarkMode ? 0.0 : 1.0}
+            className="absolute inset-0 z-0 opacity-30"
+          />
+          
+          <section className="relative z-10 pt-40 pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1AAE82]/5 border border-[#1AAE82]/20 text-[#1AAE82] text-sm font-semibold tracking-wide mb-8 backdrop-blur-sm">
+                <Calendar className="w-4 h-4" /> 
+                <span className="opacity-90">New Feature</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-gray-900 dark:text-white font-display max-w-5xl mx-auto">
+                {t.hero.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed font-normal opacity-90">
+                {t.hero.lead}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                <button 
+                  onClick={() => onNavigate('/social/auth')}
+                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-xl shadow-[#1AAE82]/20 hover:shadow-[#1AAE82]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  {t.hero.ctaPrimary} <ArrowRight className="w-5 h-5" />
+                </button>
+                <button 
+                  onClick={() => onNavigate('/social/simulation/scheduling')}
+                  className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all flex items-center justify-center gap-2 hover:border-gray-300 dark:hover:border-slate-600"
+                >
+                  <Play className="w-4 h-4" /> {t.hero.ctaSecondary}
+                </button>
+              </div>
+            </motion.div>
+          </section>
+        </div>
 
-        {/* TL;DR Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="bg-[#FEFCE8] dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-2xl p-6 md:p-8 relative">
-            <div className="absolute -top-3 -left-3 bg-yellow-400 text-yellow-900 p-2 rounded-full shadow-sm">
-              <Zap className="w-5 h-5" fill="currentColor" />
-            </div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-yellow-700 dark:text-yellow-500 mb-3 ml-2">TL;DR</h3>
-            <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed font-medium">
-              {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
-                <React.Fragment key={i}>
-                  {part}
-                  {i < arr.length - 1 && (
-                    <button 
-                      onClick={() => onNavigate('/signals')}
-                      className="text-[#1AAE82] underline decoration-2 underline-offset-2 hover:text-[#15956F] font-bold mx-1"
-                    >
-                      {t.tldr.link}
-                    </button>
-                  )}
-                </React.Fragment>
-              ))}
-            </p>
+        {/* Core Concept Section (Redesigned TL;DR) */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mb-32 -mt-10 relative z-20">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-100 dark:border-slate-800 ring-1 ring-black/5">
+             <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="flex-shrink-0 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-900/30">
+                   <Zap className="w-8 h-8 text-[#1AAE82]" strokeWidth={1.5} />
+                </div>
+                <div>
+                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 font-display">
+                     {t.tldr.title}
+                   </h3>
+                   <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-2">
+                     {t.tldr.content.split(t.tldr.link).map((part: string, i: number, arr: string[]) => (
+                        <React.Fragment key={i}>
+                          {part}
+                          {i < arr.length - 1 && (
+                            <button 
+                              onClick={() => onNavigate('/social/signals')}
+                              className="text-[#1AAE82] text-[1em] font-bold hover:text-[#15956F] transition-colors inline-flex items-center gap-0.5 border-b-2 border-[#1AAE82]/20 hover:border-[#1AAE82] mx-1"
+                            >
+                              {t.tldr.link}
+                            </button>
+                          )}
+                        </React.Fragment>
+                      ))}
+                   </p>
+                </div>
+             </div>
           </div>
         </section>
 
         {/* Problem Section */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1 relative group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <HeatmapPreview />
             </div>
             <div className="order-1 lg:order-2">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl">
-                  <AlertTriangle className="w-6 h-6" />
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 bg-red-50 dark:bg-red-900/10 text-red-500 dark:text-red-400 rounded-2xl border border-red-100 dark:border-red-900/20">
+                  <AlertTriangle className="w-6 h-6" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t.problem.title}</h2>
-                  <p className="text-[#1AAE82] font-medium">{t.problem.task}</p>
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white font-display">{t.problem.title}</h2>
+                  <p className="text-[#1AAE82] font-medium mt-1">{t.problem.task}</p>
                 </div>
               </div>
-              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 <p>{t.problem.desc1}</p>
                 <p>{t.problem.desc2}</p>
                 <p>{t.problem.desc3}</p>
                 <button 
-                  onClick={() => onNavigate('/signals')}
-                  className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mt-2"
+                  onClick={() => onNavigate('/social/signals')}
+                  className="text-[#1AAE82] font-bold hover:text-[#15956F] flex items-center gap-2 mt-4 group transition-colors"
                 >
-                  {t.problem.action} <ArrowRight className="w-4 h-4" />
+                  {t.problem.action} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>
@@ -412,78 +500,82 @@ export const PostingSchedulePage = ({
         </section>
 
         {/* Solution Section */}
-        <section className="bg-gray-50 dark:bg-slate-900/50 py-24 mb-32">
-          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t.solution.title}</h2>
-              <p className="text-xl text-gray-500 dark:text-gray-400">{t.solution.task}</p>
+        <section className="bg-gray-50 dark:bg-slate-900/50 py-32 mb-32 relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-800 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-800 to-transparent" />
+          
+          <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-display">{t.solution.title}</h2>
+              <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t.solution.task}</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
               {t.solution.tools.map((tool: any, i: number) => (
-                <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-[#1AAE82]/10 text-[#1AAE82] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">
+                <div key={i} className="group bg-white dark:bg-slate-900 p-10 rounded-3xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/10 text-[#1AAE82] rounded-2xl flex items-center justify-center mb-8 font-bold text-xl group-hover:scale-110 transition-transform duration-300">
                     {i + 1}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{tool.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{tool.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                     {tool.desc}
                   </p>
                 </div>
               ))}
             </div>
             
-            <div className="mt-12 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-6">
+            <div className="text-center">
+              <p className="text-gray-500 dark:text-gray-400 italic mb-8 max-w-2xl mx-auto">
                 {t.solution.note}
               </p>
               <button 
-                onClick={() => onNavigate('/simulation/intelligence')}
-                className="text-[#1AAE82] font-bold hover:underline flex items-center gap-1 mx-auto"
+                onClick={() => onNavigate('/social/simulation/intelligence')}
+                className="text-[#1AAE82] font-bold hover:text-[#15956F] flex items-center gap-2 mx-auto text-lg transition-colors group"
               >
-                {t.solution.action} <ArrowRight className="w-4 h-4" />
+                {t.solution.action} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
         </section>
 
         {/* Contextual Conversion (ROI Calculator) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto mb-24">
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-32">
           <ROICalculator t={t.conversion} />
         </section>
 
         {/* Boundary Box */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-24">
-          <div className="border border-gray-200 dark:border-slate-800 rounded-xl p-6 bg-gray-50/50 dark:bg-slate-900/50">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <Lock size={18} className="text-gray-400" /> {t.boundary.title}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-32">
+          <div className="border border-gray-200 dark:border-slate-800 rounded-2xl p-8 bg-gray-50/50 dark:bg-slate-900/30 backdrop-blur-sm">
+            <h3 className="font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3 text-lg">
+              <Lock size={20} className="text-gray-400" /> {t.boundary.title}
             </h3>
-            <div className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
-              <p><strong className="text-gray-700 dark:text-gray-300">Data:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Limitations:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
-              <p><strong className="text-gray-700 dark:text-gray-300">Note:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
+            <div className="space-y-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p><strong className="text-gray-900 dark:text-gray-200">Data:</strong> {t.boundary.data.replace("Data we use:", "")}</p>
+              <p><strong className="text-gray-900 dark:text-gray-200">Limitations:</strong> {t.boundary.limit.replace("What we do not do:", "")}</p>
+              <p><strong className="text-gray-900 dark:text-gray-200">Note:</strong> {t.boundary.note.replace("Variability note:", "")}</p>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight font-display">
             {t.cta.title}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto font-light">
             {t.cta.desc}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <button 
-              onClick={() => onNavigate('/auth')}
-              className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+              onClick={() => onNavigate('/social/auth')}
+              className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-xl shadow-xl hover:shadow-2xl hover:shadow-[#1AAE82]/30 transition-all duration-300 hover:-translate-y-1"
             >
               {t.cta.primary}
             </button>
             <button 
-              onClick={() => onNavigate('/simulation/scheduling')}
-              className="px-8 py-4 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium transition-all"
+              onClick={() => onNavigate('/social/simulation/scheduling')}
+              className="px-10 py-5 bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-full font-medium text-xl transition-all hover:shadow-lg"
             >
               {t.cta.secondary}
             </button>

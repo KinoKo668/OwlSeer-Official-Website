@@ -18,7 +18,7 @@ export function MobileSettingsPage({
   onNavigate,
 }: MobileSettingsPageProps) {
   return (
-    <div className="flex flex-col h-screen bg-[#fafafa]">
+    <div className="simulation-overview-theme simulation-dark-surface flex flex-col h-screen bg-sidebar transition-colors duration-300">
       {/* Header with Back Button */}
       <div className="bg-white border-b border-[#e0e0e0] flex-shrink-0">
         <div className="px-4 py-4">

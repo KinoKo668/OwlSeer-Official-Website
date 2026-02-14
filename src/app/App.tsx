@@ -1,28 +1,19 @@
 import React from 'react';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { RoutePreloader } from './components/RoutePreloader';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { IPhoneWrapper } from './components/iphone-simulator';
+import { addLanguagePrefix, isPublicPage, stripLanguagePrefix, useLanguage } from './contexts';
+import { getLanguageFromPathname } from './i18n/routing';
 
 // Lazy load all page components for better performance and code splitting
-const AuthPage = React.lazy(() => import('./components/AuthPage').then(m => ({ default: m.AuthPage })));
-const ContentProfile = React.lazy(() => import('./components/ContentProfile').then(m => ({ default: m.ContentProfile })));
-const AccountConnection = React.lazy(() => import('./components/AccountConnection').then(m => ({ default: m.AccountConnection })));
-const CreatorStruggles = React.lazy(() => import('./components/CreatorStruggles').then(m => ({ default: m.CreatorStruggles })));
-const GoalSetting = React.lazy(() => import('./components/GoalSetting').then(m => ({ default: m.GoalSetting })));
-const AIProcessing = React.lazy(() => import('./components/AIProcessing').then(m => ({ default: m.AIProcessing })));
-const InsightCheckpoint = React.lazy(() => import('./components/InsightCheckpoint').then(m => ({ default: m.InsightCheckpoint })));
-const DevTools = React.lazy(() => import('./components/DevTools').then(m => ({ default: m.DevTools })));
-const SidebarDemo = React.lazy(() => import('./components/SidebarDemo').then(m => ({ default: m.SidebarDemo })));
 const Copilot = React.lazy(() => import('./components/Copilot').then(m => ({ default: m.Copilot })));
-const DashboardMonitor = React.lazy(() => import('./components/DashboardMonitor').then(m => ({ default: m.DashboardMonitor })));
 const Dashboard = React.lazy(() => import('./components/Dashboard').then(m => ({ default: m.Dashboard })));
+const DashboardMonitor = React.lazy(() => import('./components/DashboardMonitor').then(m => ({ default: m.DashboardMonitor })));
 const AccountIntelligence = React.lazy(() => import('./components/AccountIntelligence').then(m => ({ default: m.AccountIntelligence })));
 const ContentLibrary = React.lazy(() => import('./components/ContentLibrary').then(m => ({ default: m.ContentLibrary })));
 const HashtagRadar = React.lazy(() => import('./components/HashtagRadar').then(m => ({ default: m.HashtagRadar })));
 const SchedulingSlotsNew = React.lazy(() => import('./components/SchedulingSlotsNew').then(m => ({ default: m.SchedulingSlotsNew })));
 const ContentStudio = React.lazy(() => import('./components/ContentStudioNew').then(m => ({ default: m.ContentStudio })));
-const ContentStudioDemo = React.lazy(() => import('./components/ContentStudioDemo').then(m => ({ default: m.ContentStudioDemo })));
 const SettingsLayout = React.lazy(() => import('./components/SettingsLayout').then(m => ({ default: m.SettingsLayout })));
 const SettingsOverview = React.lazy(() => import('./components/settings/SettingsOverview').then(m => ({ default: m.SettingsOverview })));
 const AccountSettings = React.lazy(() => import('./components/settings/AccountSettings').then(m => ({ default: m.AccountSettings })));
@@ -33,23 +24,34 @@ const ContentAutomationSettings = React.lazy(() => import('./components/settings
 const NotificationsSettings = React.lazy(() => import('./components/settings/NotificationsSettings').then(m => ({ default: m.NotificationsSettings })));
 const SecurityPrivacySettings = React.lazy(() => import('./components/settings/SecurityPrivacySettings').then(m => ({ default: m.SecurityPrivacySettings })));
 const TeamSettings = React.lazy(() => import('./components/settings/TeamSettings').then(m => ({ default: m.TeamSettings })));
-const WeeklyReportDemo = React.lazy(() => import('./components/WeeklyReportDemo').then(m => ({ default: m.WeeklyReportDemo })));
 const ReportsArchive = React.lazy(() => import('./components/ReportsArchive').then(m => ({ default: m.ReportsArchive })));
 const WeeklyReportDetail = React.lazy(() => import('./components/WeeklyReportDetail').then(m => ({ default: m.WeeklyReportDetail })));
-const AccountSelection = React.lazy(() => import('./components/AccountSelection').then(m => ({ default: m.AccountSelection })));
 const LandingPage = React.lazy(() => import('./components/LandingPage').then(m => ({ default: m.LandingPage })));
 const SignalsPage = React.lazy(() => import('./components/SignalsPage').then(m => ({ default: m.SignalsPage })));
 const HowItWorksPage = React.lazy(() => import('./components/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
 const FeaturesPage = React.lazy(() => import('./components/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
 const PricingPage = React.lazy(() => import('./components/PricingPage').then(m => ({ default: m.PricingPage })));
 const BlogPage = React.lazy(() => import('./components/BlogPage').then(m => ({ default: m.BlogPage })));
+const TrendsPage = React.lazy(() => import('./components/TrendsPage').then(m => ({ default: m.TrendsPage })));
 const GuidesPage = React.lazy(() => import('./components/GuidesPage').then(m => ({ default: m.GuidesPage })));
+const GuideDetailPage = React.lazy(() => import('./components/guides/GuideDetailPage').then(m => ({ default: m.GuideDetailPage })));
 const BlogPostPage = React.lazy(() => import('./components/BlogPostPage').then(m => ({ default: m.BlogPostPage })));
 const FAQPage = React.lazy(() => import('./components/FAQPage').then(m => ({ default: m.FAQPage })));
 const ContactPage = React.lazy(() => import('./components/ContactPage').then(m => ({ default: m.ContactPage })));
+const LinksPage = React.lazy(() => import('./components/LinksPage').then(m => ({ default: m.LinksPage })));
+const ToolsPage = React.lazy(() => import('./components/ToolsPage').then(m => ({ default: m.ToolsPage })));
+const AboutPage = React.lazy(() => import('./components/AboutPage').then(m => ({ default: m.AboutPage })));
+const PressPage = React.lazy(() => import('./components/PressPage').then(m => ({ default: m.PressPage })));
+const CommerceComingSoonPage = React.lazy(() => import('./components/CommerceComingSoonPage').then(m => ({ default: m.CommerceComingSoonPage })));
+const AdsComingSoonPage = React.lazy(() => import('./components/AdsComingSoonPage').then(m => ({ default: m.AdsComingSoonPage })));
+const ShareReportPage = React.lazy(() => import('./components/ShareReportPage').then(m => ({ default: m.ShareReportPage })));
 const LegalPage = React.lazy(() => import('./components/LegalPage').then(m => ({ default: m.LegalPage })));
 const MethodologyPage = React.lazy(() => import('./components/MethodologyPage').then(m => ({ default: m.MethodologyPage })));
-const ContentDiagnosisPage = React.lazy(() => import('./components/ContentDiagnosisPage').then(m => ({ default: m.ContentDiagnosisPage })));
+const GlossaryPage = React.lazy(() => import('./components/glossary/GlossaryPage').then(m => ({ default: m.GlossaryPage })));
+const FypGlossaryPage = React.lazy(() => import('./components/glossary/FypGlossaryPage').then(m => ({ default: m.FypGlossaryPage })));
+const ContentDiagnosisPage = React.lazy(() => import('./components/use-cases/ContentDiagnosisPage').then(m => ({ default: m.ContentDiagnosisPage })));
+const PostingSchedulePage = React.lazy(() => import('./components/use-cases/PostingSchedulePage').then(m => ({ default: m.PostingSchedulePage })));
+const ScriptGenerationPage = React.lazy(() => import('./components/use-cases/ScriptGenerationPage').then(m => ({ default: m.ScriptGenerationPage })));
 const ContentCreatorsPage = React.lazy(() => import('./components/solutions/ContentCreatorsPage').then(m => ({ default: m.ContentCreatorsPage })));
 const TrendPredictionPage = React.lazy(() => import('./components/use-cases/TrendPredictionPage').then(m => ({ default: m.TrendPredictionPage })));
 const EcommerceSellersPage = React.lazy(() => import('./components/solutions/EcommerceSellersPage').then(m => ({ default: m.EcommerceSellersPage })));
@@ -61,6 +63,24 @@ const LocalBusinessPage = React.lazy(() => import('./components/solutions/LocalB
 const AgenciesPage = React.lazy(() => import('./components/solutions/AgenciesPage').then(m => ({ default: m.AgenciesPage })));
 const HashtagStrategyPage = React.lazy(() => import('./components/use-cases/HashtagStrategyPage').then(m => ({ default: m.HashtagStrategyPage })));
 import { SimulationProvider, SimulationPageWrapper } from './components/SimulationPageWrapper';
+
+const SOCIAL_BASE_PATH = '/social';
+const LEGACY_SOCIAL_EXEMPT_PREFIXES = ['/sample-explorer', '/trust/', '/share'];
+
+function stripSocialPrefix(pathname: string): string {
+  if (pathname === SOCIAL_BASE_PATH || pathname === `${SOCIAL_BASE_PATH}/`) return '/';
+  if (pathname.startsWith(`${SOCIAL_BASE_PATH}/`)) {
+    return pathname.slice(SOCIAL_BASE_PATH.length);
+  }
+  return pathname;
+}
+
+function toSocialPath(pathname: string): string {
+  const normalized = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  if (normalized === '/') return SOCIAL_BASE_PATH;
+  if (normalized === SOCIAL_BASE_PATH || normalized.startsWith(`${SOCIAL_BASE_PATH}/`)) return normalized;
+  return `${SOCIAL_BASE_PATH}${normalized}`;
+}
 
 // Loading fallback component
 function LoadingFallback() {
@@ -79,10 +99,10 @@ import { useTheme } from 'next-themes';
 export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [userRole, setUserRole] = React.useState<'creator' | 'brand' | null>(null);
+  const { language } = useLanguage();
 
   // Global Theme State via next-themes
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   // We use resolvedTheme to determine if it's currently dark, which handles 'system' preference too
   const isDarkMode = resolvedTheme === 'dark';
   
@@ -91,74 +111,85 @@ export default function App() {
     setTheme(isDark ? 'dark' : 'light');
   }, [setTheme]);
 
-  const [userNiches, setUserNiches] = React.useState<string[]>([]);
-  const [userLocation, setUserLocation] = React.useState<string | null>(null);
-  const [userStruggles, setUserStruggles] = React.useState<string[]>([]);
   const [settingsSection, setSettingsSection] = React.useState<string>('overview');
   const [copilotPrefilledQuestion, setCopilotPrefilledQuestion] = React.useState<string | null>(null);
   const [intelligenceTab, setIntelligenceTab] = React.useState<'overview' | 'reports'>('overview');
   const [autoOpenAddAccountModal, setAutoOpenAddAccountModal] = React.useState(false);
 
-  // Account Management State
-  const [currentAccountId, setCurrentAccountId] = React.useState<string>('1');
-  const [tiktokAccounts] = React.useState([
-    {
-      id: '1',
-      username: 'techreviewsarah',
-      displayName: 'Sarah Chen',
-      avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
-      level: 5 as const,
-      followers: 125000,
-      isConnected: true,
-    },
-    {
-      id: '2',
-      username: 'sarahtech',
-      displayName: 'Sarah | Tech Tips',
-      avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tech',
-      level: 3 as const,
-      followers: 45000,
-      isConnected: true,
-    },
-    {
-      id: '3',
-      username: 'dailygadgets',
-      displayName: 'Daily Gadgets',
-      avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gadgets',
-      level: 2 as const,
-      followers: 12000,
-      isConnected: true,
-    },
-  ]);
+  React.useEffect(() => {
+    const pathWithoutLanguage = stripLanguagePrefix(location.pathname);
+    const urlLanguage = getLanguageFromPathname(location.pathname);
 
-  const currentAccount = tiktokAccounts.find(acc => acc.id === currentAccountId) || tiktokAccounts[0];
+    if (pathWithoutLanguage === SOCIAL_BASE_PATH || pathWithoutLanguage === `${SOCIAL_BASE_PATH}/`) {
+      const localizedHome = urlLanguage ? addLanguagePrefix('/', urlLanguage) : '/';
+      const target = `${localizedHome}${location.search}${location.hash}`;
+      const current = `${location.pathname}${location.search}${location.hash}`;
+      if (target !== current) {
+        navigate(target, { replace: true });
+      }
+      return;
+    }
 
-  const handleAccountSwitch = React.useCallback((accountId: string) => {
-    setCurrentAccountId(accountId);
-  }, []);
+    const normalizedPublicPath = stripSocialPrefix(pathWithoutLanguage);
+    if (normalizedPublicPath === '/compare' || normalizedPublicPath.startsWith('/compare/')) {
+      const vsPath = normalizedPublicPath.replace(/^\/compare(?=\/|$)/, '/vs');
+      const socialPath = toSocialPath(vsPath);
+      const localizedPath = urlLanguage ? addLanguagePrefix(socialPath, urlLanguage) : socialPath;
+      const target = `${localizedPath}${location.search}${location.hash}`;
+      const current = `${location.pathname}${location.search}${location.hash}`;
+      if (target !== current) {
+        navigate(target, { replace: true });
+      }
+      return;
+    }
 
-  const handleManageAccounts = React.useCallback(() => {
-    navigate('/settings');
-    setSettingsSection('connected');
-  }, [navigate]);
+    if (pathWithoutLanguage === '/' || pathWithoutLanguage.startsWith(`${SOCIAL_BASE_PATH}/`)) return;
+
+    if (LEGACY_SOCIAL_EXEMPT_PREFIXES.some(prefix => pathWithoutLanguage.startsWith(prefix))) {
+      return;
+    }
+
+    const socialPath = toSocialPath(pathWithoutLanguage);
+    const localizedPath = urlLanguage ? addLanguagePrefix(socialPath, urlLanguage) : socialPath;
+    const target = `${localizedPath}${location.search}${location.hash}`;
+    const current = `${location.pathname}${location.search}${location.hash}`;
+    if (target !== current) {
+      navigate(target, { replace: true });
+    }
+  }, [location.hash, location.pathname, location.search, navigate]);
 
   // Determine current page from location path
   const getCurrentPage = React.useCallback(() => {
-    const path = location.pathname.substring(1) || 'landing';
+    const path = stripSocialPrefix(stripLanguagePrefix(location.pathname)).substring(1) || 'landing';
     return path;
-  }, [location]);
+  }, [location.pathname]);
 
   // Enhanced navigation handler that supports prefilled questions for Copilot
   const handleNavigateWithQuestion = React.useCallback((page: string, question?: string) => {
+    const normalizedPage = page.trim().toLowerCase();
+
+    // Keep "Start Free / Sign up" CTAs on the current page.
+    if (
+      normalizedPage === 'auth' ||
+      normalizedPage.startsWith('auth?') ||
+      normalizedPage === '/auth' ||
+      normalizedPage.startsWith('/auth?') ||
+      normalizedPage === '/social/auth' ||
+      normalizedPage.startsWith('/social/auth?') ||
+      normalizedPage.includes('signup')
+    ) {
+      return;
+    }
+
     if (page === 'settings-add-account') {
-      navigate('/settings');
+      navigate('/social/simulation/settings');
       setSettingsSection('connected');
       setAutoOpenAddAccountModal(true);
       return;
     }
 
     if (page === 'settings-connected') {
-      navigate('/settings');
+      navigate('/social/simulation/settings');
       setSettingsSection('connected');
       setAutoOpenAddAccountModal(false);
       return;
@@ -168,16 +199,21 @@ export default function App() {
     setAutoOpenAddAccountModal(false);
 
     // Determine if we are currently in simulation mode
-    const isSimulation = location.pathname.startsWith('/simulation');
+    const normalizedCurrentPath = stripSocialPrefix(stripLanguagePrefix(location.pathname));
+    const isSimulation = normalizedCurrentPath.startsWith('/simulation');
     let route = page;
 
-    if (isSimulation) {
+    if (page === 'trends') {
+      route = '/simulation/trends';
+    } else if (page === 'trends-hub') {
+      route = '/trends';
+    } else if (isSimulation) {
       // Map navigation to simulation routes where available
       if (page === 'home') {
         route = '/simulation';
       } else if (page === 'dashboard') {
         route = '/simulation/dashboard';
-      } else if (page === 'hashtag' || page === 'trends') {
+      } else if (page === 'hashtag') {
         route = '/simulation/trends';
       } else if (page === 'studio') {
         route = '/simulation/studio';
@@ -197,16 +233,30 @@ export default function App() {
         route = '/simulation/reports-archive';
       } else {
         // Fallback for pages without simulation version
-        if (page === 'landing') route = '/';
-        else if (!page.startsWith('/')) route = '/' + page;
+        route = page === 'landing' ? '/' : (page.startsWith('/') ? page : `/${page}`);
       }
     } else {
       // Standard routing
-      if (page === 'landing') route = '/';
-      else if (!page.startsWith('/')) route = '/' + page;
+      route = page === 'landing' ? '/' : (page.startsWith('/') ? page : `/${page}`);
     }
 
-    navigate(route);
+    if (route !== '/' && !route.startsWith('http://') && !route.startsWith('https://')) {
+      route = toSocialPath(route);
+    }
+
+    const localizedRoute = (() => {
+      // Only localize internal routes.
+      if (route.startsWith('http://') || route.startsWith('https://')) return route;
+      try {
+        const url = new URL(route, window.location.origin);
+        const localizedPathname = isPublicPage(url.pathname) ? addLanguagePrefix(url.pathname, language) : url.pathname;
+        return `${localizedPathname}${url.search}${url.hash}`;
+      } catch {
+        return route;
+      }
+    })();
+
+    navigate(localizedRoute);
     
     if (page === 'copilot' && question) {
       setCopilotPrefilledQuestion(question);
@@ -214,20 +264,24 @@ export default function App() {
       // Only clear prefilled question when navigating away from copilot
       setCopilotPrefilledQuestion(null);
     }
-  }, [navigate, location.pathname]);
+  }, [language, location.pathname, navigate]);
 
   const commonProps = {
     onNavigate: handleNavigateWithQuestion,
-    // Add current page prop for DevTools
     currentPage: getCurrentPage(),
     onPageChange: (page: string) => handleNavigateWithQuestion(page)
   };
+
+  const routesLocation = React.useMemo(() => {
+    const pathname = stripSocialPrefix(stripLanguagePrefix(location.pathname));
+    return pathname === location.pathname ? location : { ...location, pathname };
+  }, [location]);
 
   return (
     <ErrorBoundary>
       <SimulationProvider>
         <React.Suspense fallback={<LoadingFallback />}>
-          <Routes>
+          <Routes location={routesLocation}>
           {/* Landing & Public Pages */}
           <Route path="/" element={
             <>
@@ -236,7 +290,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="landing" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/signals" element={
@@ -246,7 +299,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="signals" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/how-it-works" element={
@@ -256,7 +308,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="how-it-works" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/features" element={
@@ -266,7 +317,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="features" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/pricing" element={
@@ -276,7 +326,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="pricing" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/blog" element={
@@ -286,7 +335,60 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="blog" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/trends" element={
+            <>
+              <TrendsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/tools" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/tools/category/:vertical" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/tools/category/:vertical/:toolSlug" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/tools/:toolSlug" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/blog/category/:vertical" element={
+            <>
+              <BlogPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/guides" element={
@@ -296,7 +398,33 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="guides" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/guides/:slug" element={
+            <>
+              <GuideDetailPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/glossary" element={
+            <>
+              <GlossaryPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/glossary/fyp" element={
+            <>
+              <FypGlossaryPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/blog-post" element={
@@ -306,7 +434,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="blog-post" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/faq" element={
@@ -316,7 +443,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="faq" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/contact" element={
@@ -326,7 +452,60 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="contact" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/share/:reportId" element={
+            <>
+              <ShareReportPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/links" element={
+            <>
+              <LinksPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/about" element={
+            <>
+              <AboutPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/press" element={
+            <>
+              <PressPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/commerce" element={
+            <>
+              <CommerceComingSoonPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/ads" element={
+            <>
+              <AdsComingSoonPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/methodology" element={
@@ -336,7 +515,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="methodology" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/use-cases/content-diagnosis" element={
@@ -346,7 +524,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="content-diagnosis" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/solutions/ecommerce" element={
@@ -356,7 +533,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-ecommerce" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/solutions/content-creators" element={
@@ -366,7 +542,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-content-creators" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/solutions/agencies" element={
@@ -376,7 +551,15 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-agencies" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/vs/tubespanner" element={
+            <>
+              <TubeSpannerComparePage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/compare/tubespanner" element={
@@ -386,7 +569,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-tubespanner" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/use-cases/trend-prediction" element={
@@ -396,7 +578,24 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="use-cases-trend-prediction" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/use-cases/posting-schedule" element={
+            <>
+              <PostingSchedulePage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/use-cases/script-generation" element={
+            <>
+              <ScriptGenerationPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/use-cases/hashtag-strategy" element={
@@ -406,7 +605,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="use-cases-hashtag-strategy" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/solutions/brands" element={
@@ -416,7 +614,15 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-brands" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/vs/all" element={
+            <>
+              <AiToolsComparisonPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/compare/all" element={
@@ -426,7 +632,15 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-all" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/vs/ai-tools-comparison" element={
+            <>
+              <AiToolsComparisonPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/compare/ai-tools-comparison" element={
@@ -436,7 +650,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-ai-tools-comparison" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/solutions/local-business" element={
@@ -446,7 +659,15 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-local-business" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/vs/owlseer-vs-vidiq" element={
+            <>
+              <CompareVidIQPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/compare/owlseer-vs-vidiq" element={
@@ -456,7 +677,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-vidiq" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           
@@ -468,7 +688,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="landing" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/signals" element={
@@ -478,7 +697,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="signals" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/how-it-works" element={
@@ -488,7 +706,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="how-it-works" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/features" element={
@@ -498,7 +715,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="features" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/pricing" element={
@@ -508,7 +724,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="pricing" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/blog" element={
@@ -518,7 +733,51 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="blog" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/tools" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/tools/category/:vertical" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/tools/category/:vertical/:toolSlug" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/tools/:toolSlug" element={
+            <>
+              <ToolsPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/blog/category/:vertical" element={
+            <>
+              <BlogPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/zh/guides" element={
@@ -528,7 +787,33 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="guides" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/guides/:slug" element={
+            <>
+              <GuideDetailPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/glossary" element={
+            <>
+              <GlossaryPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/glossary/fyp" element={
+            <>
+              <FypGlossaryPage
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/zh/blog-post" element={
@@ -538,7 +823,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="blog-post" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/faq" element={
@@ -548,7 +832,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="faq" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/contact" element={
@@ -558,7 +841,15 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="contact" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/share/:reportId" element={
+            <>
+              <ShareReportPage
+                {...commonProps}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/zh/methodology" element={
@@ -568,7 +859,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="methodology" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/use-cases/content-diagnosis" element={
@@ -578,7 +868,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="content-diagnosis" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/use-cases/trend-prediction" element={
@@ -588,7 +877,24 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="use-cases-trend-prediction" onPageChange={handleNavigateWithQuestion} />
+            </>
+          } />
+          <Route path="/zh/use-cases/posting-schedule" element={
+            <>
+              <PostingSchedulePage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
+            </>
+          } />
+          <Route path="/zh/use-cases/script-generation" element={
+            <>
+              <ScriptGenerationPage 
+                onNavigate={handleNavigateWithQuestion}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+              />
             </>
           } />
           <Route path="/zh/use-cases/hashtag-strategy" element={
@@ -598,7 +904,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="use-cases-hashtag-strategy" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/solutions/brands" element={
@@ -608,7 +913,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-brands" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/compare/all" element={
@@ -618,7 +922,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-all" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/compare/ai-tools-comparison" element={
@@ -628,7 +931,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-ai-tools-comparison" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/solutions/ecommerce" element={
@@ -638,7 +940,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-ecommerce" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/solutions/content-creators" element={
@@ -648,7 +949,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-content-creators" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/solutions/agencies" element={
@@ -658,7 +958,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-agencies" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/compare/tubespanner" element={
@@ -668,7 +967,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-tubespanner" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/solutions/local-business" element={
@@ -678,7 +976,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="solutions-local-business" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/compare/owlseer-vs-vidiq" element={
@@ -688,7 +985,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="compare-vidiq" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/privacy" element={
@@ -699,7 +995,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="privacy" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/terms" element={
@@ -710,7 +1005,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="terms" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/security" element={
@@ -721,7 +1015,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="security" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/zh/cookies" element={
@@ -732,7 +1025,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="cookies" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
 
@@ -745,7 +1037,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="privacy" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/terms" element={
@@ -756,7 +1047,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="terms" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/security" element={
@@ -767,7 +1057,6 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="security" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/cookies" element={
@@ -778,133 +1067,21 @@ export default function App() {
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
               />
-              <DevTools currentPage="cookies" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
 
-          {/* Onboarding Flow */}
-          <Route path="/auth" element={
-            <>
-              <IPhoneWrapper>
-                <AuthPage onContinue={() => navigate('/account-selection')} />
-              </IPhoneWrapper>
-              <DevTools currentPage="auth" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/account-selection" element={
-            <>
-              <IPhoneWrapper>
-                <AccountSelection 
-                  onContinue={() => navigate('/home')}
-                  onBack={() => navigate('/auth')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="account-selection" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/account-connection" element={
-            <>
-              <IPhoneWrapper>
-                <AccountConnection 
-                  onContinue={() => navigate('/content-profile')}
-                  onBack={() => navigate('/auth')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="account-connection" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/content-profile" element={
-            <>
-              <IPhoneWrapper>
-                <ContentProfile 
-                  onContinue={(data: any) => {
-                    setUserRole(data.identity);
-                    setUserNiches(data.niches);
-                    setUserLocation(data.location);
-                    navigate('/creator-struggles');
-                  }} 
-                  onBack={() => navigate('/account-connection')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="content-profile" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/creator-struggles" element={
-            <>
-              <IPhoneWrapper>
-                <CreatorStruggles 
-                  onContinue={(struggles) => {
-                    setUserStruggles(struggles);
-                    navigate('/goal-setting');
-                  }} 
-                  onBack={() => navigate('/content-profile')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="creator-struggles" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/goal-setting" element={
-            <>
-              <IPhoneWrapper>
-                <GoalSetting 
-                  onContinue={(goal) => {
-                    console.log('Selected goal:', goal);
-                    navigate('/ai-processing');
-                  }}
-                  onBack={() => navigate('/creator-struggles')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="goal-setting" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/ai-processing" element={
-            <>
-              <IPhoneWrapper>
-                <AIProcessing 
-                  onComplete={() => navigate('/insight-checkpoint')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="ai-processing" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/insight-checkpoint" element={
-            <>
-              <IPhoneWrapper>
-                <InsightCheckpoint 
-                  onContinue={() => navigate('/home')}
-                  onBack={() => navigate('/ai-processing')}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="insight-checkpoint" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-
-          {/* App Features */}
-          <Route path="/home" element={
-            <>
-              <RoutePreloader />
-              <IPhoneWrapper>
-                <Dashboard onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="home" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/sidebar-demo" element={
-            <>
-              <IPhoneWrapper>
-                <SidebarDemo />
-              </IPhoneWrapper>
-              <DevTools currentPage="sidebar-demo" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/copilot" element={
-            <>
-              <IPhoneWrapper>
-                <Copilot onNavigate={handleNavigateWithQuestion} prefilledQuestion={copilotPrefilledQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="copilot" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
+          {/* Legacy App Entry Points -> Simulation */}
+          <Route path="/auth" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/account-selection" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/account-connection" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/content-profile" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/creator-struggles" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/goal-setting" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/ai-processing" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/insight-checkpoint" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/home" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/sidebar-demo" element={<Navigate to="/social/simulation/dashboard" replace />} />
+          <Route path="/copilot" element={<Navigate to="/social/simulation/copilot" replace />} />
           <Route path="/simulation" element={
             <>
               <IPhoneWrapper>
@@ -912,7 +1089,6 @@ export default function App() {
                   <Dashboard onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/dashboard" element={
@@ -922,7 +1098,6 @@ export default function App() {
                   <DashboardMonitor onNavigate={handleNavigateWithQuestion} isSimulation={true} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-dashboard" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/trends" element={
@@ -932,7 +1107,6 @@ export default function App() {
                   <HashtagRadar onNavigate={handleNavigateWithQuestion} isSimulation={true} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-trends" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/studio" element={
@@ -942,7 +1116,6 @@ export default function App() {
                   <ContentStudio onNavigate={handleNavigateWithQuestion} isSimulation={true} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-studio" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/copilot" element={
@@ -952,7 +1125,6 @@ export default function App() {
                   <Copilot onNavigate={handleNavigateWithQuestion} prefilledQuestion={copilotPrefilledQuestion} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-copilot" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/intelligence" element={
@@ -965,7 +1137,6 @@ export default function App() {
                   />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-intelligence" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/library" element={
@@ -975,7 +1146,6 @@ export default function App() {
                   <ContentLibrary onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-library" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/scheduling" element={
@@ -985,7 +1155,6 @@ export default function App() {
                   <SchedulingSlotsNew onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-scheduling" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/settings" element={
@@ -1009,7 +1178,6 @@ export default function App() {
                   </SettingsLayout>
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-settings" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/weekly-report-detail" element={
@@ -1025,7 +1193,6 @@ export default function App() {
                   />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-weekly-report-detail" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
           <Route path="/simulation/reports-archive" element={
@@ -1035,136 +1202,42 @@ export default function App() {
                   <ReportsArchive onNavigate={handleNavigateWithQuestion} />
                 </SimulationPageWrapper>
               </IPhoneWrapper>
-              <DevTools currentPage="simulation-reports-archive" onPageChange={handleNavigateWithQuestion} />
             </>
           } />
-          <Route path="/dashboard" element={
-            <>
-              <IPhoneWrapper>
-                <DashboardMonitor onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="dashboard" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/monitor" element={
-            <>
-              <IPhoneWrapper>
-                <DashboardMonitor onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="monitor" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/intelligence" element={
-            <>
-              <IPhoneWrapper>
-                <AccountIntelligence 
-                  onNavigate={handleNavigateWithQuestion} 
-                  initialTab={intelligenceTab}
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="intelligence" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/library" element={
-            <>
-              <IPhoneWrapper>
-                <ContentLibrary onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="library" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/hashtag" element={
-            <>
-              <IPhoneWrapper>
-                <HashtagRadar onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="hashtag" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/trends" element={
-            <>
-              <IPhoneWrapper>
-                <HashtagRadar onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="trends" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/scheduling" element={
-            <>
-              <IPhoneWrapper>
-                <SchedulingSlotsNew onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="scheduling" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/studio" element={
-            <>
-              <IPhoneWrapper>
-                <ContentStudio onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="studio" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/studio-demo" element={
-            <>
-              <IPhoneWrapper>
-                <ContentStudioDemo onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="studio-demo" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/settings" element={
-            <>
-              <IPhoneWrapper>
-                <SettingsLayout 
-                  onNavigate={handleNavigateWithQuestion}
-                  activeSection={settingsSection}
-                  onSectionChange={setSettingsSection}
-                >
-                  {settingsSection === 'overview' && <SettingsOverview onNavigateToSection={setSettingsSection} />}
-                  {settingsSection === 'account' && <AccountSettings />}
-                  {settingsSection === 'connected' && <ConnectedAccountsSettings autoOpenAddModal={autoOpenAddAccountModal} />}
-                  {settingsSection === 'billing' && <BillingUsageSettings />}
-                  {settingsSection === 'ai' && <AIPreferencesSettings />}
-                  {settingsSection === 'content' && <ContentAutomationSettings />}
-                  {settingsSection === 'notifications' && <NotificationsSettings />}
-                  {settingsSection === 'security' && <SecurityPrivacySettings />}
-                  {settingsSection === 'team' && <TeamSettings />}
-                </SettingsLayout>
-              </IPhoneWrapper>
-              <DevTools currentPage="settings" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/weekly-report" element={
-            <>
-              <IPhoneWrapper>
-                <WeeklyReportDemo onBack={() => navigate('/home')} />
-              </IPhoneWrapper>
-              <DevTools currentPage="weekly-report" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/reports-archive" element={
-            <>
-              <IPhoneWrapper>
-                <ReportsArchive onNavigate={handleNavigateWithQuestion} />
-              </IPhoneWrapper>
-              <DevTools currentPage="reports-archive" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
-          <Route path="/weekly-report-detail" element={
-            <>
-              <IPhoneWrapper>
-                <WeeklyReportDetail 
-                  onNavigate={handleNavigateWithQuestion}
-                  onBackToReports={() => {
-                    setIntelligenceTab('reports');
-                    navigate('/intelligence');
-                  }} 
-                />
-              </IPhoneWrapper>
-              <DevTools currentPage="weekly-report-detail" onPageChange={handleNavigateWithQuestion} />
-            </>
-          } />
+          <Route path="/dashboard" element={<Navigate to="/social/simulation/dashboard" replace />} />
+          <Route path="/monitor" element={<Navigate to="/social/simulation/dashboard" replace />} />
+          <Route path="/intelligence" element={<Navigate to="/social/simulation/intelligence" replace />} />
+          <Route path="/library" element={<Navigate to="/social/simulation/library" replace />} />
+          <Route path="/hashtag" element={<Navigate to="/social/simulation/trends" replace />} />
+          <Route path="/trend-radar" element={<Navigate to="/social/simulation/trends" replace />} />
+          <Route path="/scheduling" element={<Navigate to="/social/simulation/scheduling" replace />} />
+          <Route path="/studio" element={<Navigate to="/social/simulation/studio" replace />} />
+          <Route path="/studio-demo" element={<Navigate to="/social/simulation/studio" replace />} />
+          <Route path="/settings" element={<Navigate to="/social/simulation/settings" replace />} />
+          <Route path="/weekly-report" element={<Navigate to="/social/simulation/intelligence" replace />} />
+          <Route path="/reports-archive" element={<Navigate to="/social/simulation/reports-archive" replace />} />
+          <Route path="/weekly-report-detail" element={<Navigate to="/social/simulation/weekly-report-detail" replace />} />
+
+          {/* Sample Explorer URL aliases */}
+          <Route path="/sample-explorer" element={<Navigate to="/social/simulation" replace />} />
+          <Route path="/sample-explorer/intelligence" element={<Navigate to="/social/simulation/intelligence#this-weeks-brief" replace />} />
+          <Route path="/sample-explorer/dashboard" element={<Navigate to="/social/simulation/dashboard" replace />} />
+          <Route path="/sample-explorer/copilot" element={<Navigate to="/social/simulation/copilot" replace />} />
+          <Route path="/sample-explorer/content-library" element={<Navigate to="/social/simulation/library" replace />} />
+          <Route path="/sample-explorer/scheduling" element={<Navigate to="/social/simulation/scheduling" replace />} />
+          <Route path="/sample-explorer/trend-radar" element={<Navigate to="/social/simulation/trends" replace />} />
+          <Route path="/sample-explorer/weekly-report" element={<Navigate to="/social/simulation/intelligence" replace />} />
+          <Route path="/sample-explorer/script-studio" element={<Navigate to="/social/simulation/studio" replace />} />
+          <Route path="/zh/sample-explorer" element={<Navigate to="/zh/social/simulation" replace />} />
+          <Route path="/zh/sample-explorer/intelligence" element={<Navigate to="/zh/social/simulation/intelligence#this-weeks-brief" replace />} />
+          <Route path="/zh/sample-explorer/dashboard" element={<Navigate to="/zh/social/simulation/dashboard" replace />} />
+          <Route path="/zh/sample-explorer/copilot" element={<Navigate to="/zh/social/simulation/copilot" replace />} />
+          <Route path="/zh/sample-explorer/content-library" element={<Navigate to="/zh/social/simulation/library" replace />} />
+          <Route path="/zh/sample-explorer/scheduling" element={<Navigate to="/zh/social/simulation/scheduling" replace />} />
+          <Route path="/zh/sample-explorer/trend-radar" element={<Navigate to="/zh/social/simulation/trends" replace />} />
+          <Route path="/zh/sample-explorer/weekly-report" element={<Navigate to="/zh/social/simulation/intelligence" replace />} />
+          <Route path="/zh/sample-explorer/script-studio" element={<Navigate to="/zh/social/simulation/studio" replace />} />
+          <Route path="/trust/data-security" element={<Navigate to="/social/security" replace />} />
 
           {/* Catch-all redirect */}
           <Route path="*" element={<Navigate to="/" replace />} />

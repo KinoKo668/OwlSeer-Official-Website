@@ -14,7 +14,7 @@ import {
   Footer 
 } from '../layout/Footer';
 import { SEO } from '../SEO';
-import { seoConfig, generateAlternates } from '../../data/seoConfig';
+import { getCanonicalUrl, seoConfig, generateAlternates } from '../../data/seoConfig';
 import { translations } from '../../data/translations';
 import { 
   ArrowRight, 
@@ -68,8 +68,8 @@ const localContent = {
       items: [
         { name: "Hook Rate", link: "/signals#hook-rate", desc: "The metric most closely tied to FYP qualification" },
         { name: "Watch-Through Rate", link: "/signals#watch-through-rate", desc: "Completion rate that signals content quality" },
-        { name: "Engagement Rate", link: "/glossary", desc: "Combined interaction metric" },
-        { name: "Trend Radar", link: "/sample-explorer/trend-radar", desc: "OwlSeer's trend detection tool" }
+        { name: "Engagement Rate", link: "/social/glossary", desc: "Combined interaction metric" },
+        { name: "Trend Radar", link: "/social/simulation/trends", desc: "OwlSeer's trend detection tool" }
       ]
     },
     boundary: {
@@ -126,8 +126,8 @@ const localContent = {
       items: [
         { name: "钩子率 (Hook Rate)", link: "/signals#hook-rate", desc: "与 FYP 资格最密切相关的指标" },
         { name: "完播率 (Watch-Through Rate)", link: "/signals#watch-through-rate", desc: "标志内容质量的完成率" },
-        { name: "互动率 (Engagement Rate)", link: "/glossary", desc: "综合互动指标" },
-        { name: "趋势雷达 (Trend Radar)", link: "/sample-explorer/trend-radar", desc: "OwlSeer 的趋势检测工具" }
+        { name: "互动率 (Engagement Rate)", link: "/social/glossary", desc: "综合互动指标" },
+        { name: "趋势雷达 (Trend Radar)", link: "/social/simulation/trends", desc: "OwlSeer 的趋势检测工具" }
       ]
     },
     boundary: {
@@ -219,7 +219,7 @@ export function FypGlossaryPage({ onNavigate, isDarkMode, setIsDarkMode }: { onN
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl('/glossary/fyp', language)}
         lang={language}
         alternates={generateAlternates('/glossary/fyp')}
       />
@@ -356,7 +356,7 @@ export function FypGlossaryPage({ onNavigate, isDarkMode, setIsDarkMode }: { onN
                     key={idx}
                     href={item.link}
                     onClick={(e) => {
-                      if (item.link === '/glossary') {
+                      if (item.link === '/social/glossary') {
                          e.preventDefault();
                          handleNavigate('glossary');
                       }

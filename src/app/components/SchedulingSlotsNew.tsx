@@ -948,24 +948,20 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
         className={`group relative p-2 rounded-lg hover:shadow-md transition-all cursor-move ${
           isDragging ? 'opacity-40 shadow-2xl scale-105' : ''
         } ${item.status === 'due' ? 'ring-2 ring-[#D97706]/30' : ''} ${
-          isAI ? 'bg-[#faf5ff] border border-dashed border-[#d8b4fe]' : 'bg-white border-t border-r border-b border-[#E5E7EB]'
+          isAI
+            ? 'bg-violet-50 border border-dashed border-violet-300 dark:bg-violet-950/35 dark:border-violet-700'
+            : 'bg-card border border-border'
         }`}
-        style={{ 
-          borderLeft: isAI ? `6px solid #a855f7` : `6px solid ${getSlotTypeColor(item.labels)}`,
-          // Override border styles if AI
-          ...(isAI ? {} : {
-             borderTop: '1px solid #E5E7EB',
-             borderRight: '1px solid #E5E7EB',
-             borderBottom: '1px solid #E5E7EB',
-          })
+        style={{
+          borderLeft: isAI ? '6px solid #a855f7' : `6px solid ${getSlotTypeColor(item.labels)}`,
         }}
       >
         <div className="flex items-start gap-2 mb-1">
           <div className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">
-            <GripVertical className="w-3 h-3 text-[#999999]" />
+            <GripVertical className="w-3 h-3 text-muted-foreground" />
           </div>
           {isAI && (
-             <div className="flex-shrink-0 text-[#a855f7] mt-0.5">
+             <div className="flex-shrink-0 text-violet-600 dark:text-violet-300 mt-0.5">
                <Sparkles className="w-3 h-3" />
              </div>
           )}
@@ -975,24 +971,24 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
                <TrendingUp className="w-3 h-3" />
              </div>
           )}
-          <p className={`${isAI ? 'text-[#6b21a8]' : 'text-[#1a1a1a]'} line-clamp-2 flex-1`} style={{ fontSize: '12px', fontWeight: '600' }}>
+          <p className={`${isAI ? 'text-violet-700 dark:text-violet-200' : 'text-foreground'} line-clamp-2 flex-1`} style={{ fontSize: '12px', fontWeight: '600' }}>
             {parseHashtags(item.title)}
           </p>
         </div>
         {item.timeSlot && !showFooterDate && (
-          <div className="flex items-center gap-1 text-[#666666] mb-1">
+          <div className="flex items-center gap-1 text-muted-foreground mb-1">
             <Clock className="w-3 h-3" />
             <span style={{ fontSize: '10px' }}>{item.timeSlot}</span>
           </div>
         )}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-[#666666]" style={{ fontSize: '10px' }}>
+            <span className="text-muted-foreground" style={{ fontSize: '10px' }}>
               {getStatusLabel(item.status)}
             </span>
           </div>
           {showTimeDelta && (
-            <span className="text-[#999999]" style={{ fontSize: '9px' }}>
+            <span className="text-muted-foreground" style={{ fontSize: '9px' }}>
               {formatTimeDelta(item.timeDelta!)}
             </span>
           )}
@@ -1000,13 +996,13 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
 
         {/* AI Actions for Compact Card */}
         {isAI && onAccept && onReject && (
-           <div className="absolute top-1 right-1 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-[#faf5ff] pl-2">
+           <div className="absolute top-1 right-1 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-violet-50 dark:bg-violet-950/35 pl-2">
              <button
                onClick={(e) => {
                  e.stopPropagation();
                  onAccept(item.id);
                }}
-               className="p-1 rounded hover:bg-[#d8b4fe] text-[#a855f7]"
+               className="p-1 rounded hover:bg-violet-200 dark:hover:bg-violet-800/70 text-violet-700 dark:text-violet-200"
                title="Accept"
              >
                <CheckCircle2 className="w-3 h-3" />
@@ -1016,7 +1012,7 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
                  e.stopPropagation();
                  onReject(item.id);
                }}
-               className="p-1 rounded hover:bg-red-100 text-red-500"
+               className="p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40 text-red-500 dark:text-red-300"
                title="Dismiss"
              >
                <X className="w-3 h-3" />
@@ -1034,23 +1030,20 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
       className={`group relative p-3 rounded-xl hover:shadow-lg transition-all cursor-move ${
         isDragging ? 'opacity-40 shadow-2xl scale-105 rotate-2' : ''
       } ${item.status === 'due' ? 'ring-2 ring-[#D97706]/30' : ''} ${
-        isAI ? 'bg-[#faf5ff] border border-dashed border-[#d8b4fe]' : 'bg-white border-t border-r border-b border-[#E5E7EB]'
+        isAI
+          ? 'bg-violet-50 border border-dashed border-violet-300 dark:bg-violet-950/35 dark:border-violet-700'
+          : 'bg-card border border-border'
       }`}
-      style={{ 
-        borderLeft: isAI ? `6px solid #a855f7` : `6px solid ${getSlotTypeColor(item.labels)}`,
-         ...(isAI ? {} : {
-             borderTop: '1px solid #E5E7EB',
-             borderRight: '1px solid #E5E7EB',
-             borderBottom: '1px solid #E5E7EB',
-          })
+      style={{
+        borderLeft: isAI ? '6px solid #a855f7' : `6px solid ${getSlotTypeColor(item.labels)}`,
       }}
     >
       <div className="flex items-start gap-2 mb-2">
         <div className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">
-          <GripVertical className="w-4 h-4 text-[#999999]" />
+          <GripVertical className="w-4 h-4 text-muted-foreground" />
         </div>
         {isAI && (
-           <div className="flex-shrink-0 text-[#a855f7] mt-0.5">
+           <div className="flex-shrink-0 text-violet-600 dark:text-violet-300 mt-0.5">
              <Sparkles className="w-4 h-4" />
            </div>
         )}
@@ -1060,40 +1053,38 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
              <TrendingUp className="w-4 h-4" />
            </div>
         )}
-        <h4 className={`${isAI ? 'text-[#6b21a8]' : 'text-[#1a1a1a]'} line-clamp-2 flex-1`} style={{ fontSize: '13px', fontWeight: '600' }}>
+        <h4 className={`${isAI ? 'text-violet-700 dark:text-violet-200' : 'text-foreground'} line-clamp-2 flex-1`} style={{ fontSize: '13px', fontWeight: '600' }}>
           {parseHashtags(item.title)}
         </h4>
       </div>
 
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <span
-          className="px-2 py-0.5 rounded border"
-          style={{ 
-            fontSize: '10px', 
-            fontWeight: '600',
-            borderColor: isAI ? '#d8b4fe' : '#e0e0e0',
-            color: isAI ? '#a855f7' : '#666666',
-            backgroundColor: isAI ? '#f3e8ff' : '#fafafa'
-          }}
+          className={`px-2 py-0.5 rounded border ${
+            isAI
+              ? 'border-violet-300 bg-violet-100 text-violet-700 dark:border-violet-700 dark:bg-violet-900/50 dark:text-violet-200'
+              : 'border-border bg-muted text-muted-foreground'
+          }`}
+          style={{ fontSize: '10px', fontWeight: '600' }}
         >
           {getStatusLabel(item.status)}
         </span>
         {showTimeDelta && (
-          <span className="text-[#666666]" style={{ fontSize: '10px' }}>
+          <span className="text-muted-foreground" style={{ fontSize: '10px' }}>
             {formatTimeDelta(item.timeDelta!)}
           </span>
         )}
       </div>
 
       {!showFooterDate && item.timeSlot && (
-        <div className="flex items-center gap-1.5 text-[#666666] mb-2">
+        <div className="flex items-center gap-1.5 text-muted-foreground mb-2">
           <Clock className="w-3 h-3" />
           <span style={{ fontSize: '11px' }}>{item.timeSlot}</span>
         </div>
       )}
 
       {showFooterDate && item.date && (
-        <div className="flex items-center gap-1.5 text-[#666666] mb-2">
+        <div className="flex items-center gap-1.5 text-muted-foreground mb-2">
           <CalendarIcon className="w-3 h-3" />
           <span style={{ fontSize: '11px' }}>
             {item.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -1109,7 +1100,7 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
       )}
 
       {isAI && item.suggestionReason && (
-        <div className="mb-2 p-2 bg-[#f3e8ff] rounded text-[#6b21a8] text-[11px] leading-snug">
+        <div className="mb-2 p-2 bg-violet-100 text-violet-700 dark:bg-violet-900/50 dark:text-violet-200 rounded text-[11px] leading-snug">
           {item.suggestionReason}
         </div>
       )}
@@ -1140,7 +1131,7 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
                  e.stopPropagation();
                  onAccept(item.id);
                }}
-               className="flex items-center gap-1 px-2 py-1 rounded bg-[#a855f7] text-white hover:bg-[#9333ea] transition-colors"
+               className="flex items-center gap-1 px-2 py-1 rounded bg-violet-600 text-white hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-400 transition-colors"
                style={{ fontSize: '10px', fontWeight: '600' }}
              >
                <CheckCircle2 className="w-3 h-3" />
@@ -1151,7 +1142,7 @@ const DraggableContentCard = ({ item, onClick, compact = false, showFooterDate =
                  e.stopPropagation();
                  onReject(item.id);
                }}
-               className="flex items-center gap-1 px-2 py-1 rounded border border-red-200 text-red-500 hover:bg-red-50 transition-colors"
+               className="flex items-center gap-1 px-2 py-1 rounded border border-red-200 dark:border-red-700/70 text-red-500 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
                style={{ fontSize: '10px', fontWeight: '600' }}
              >
                <X className="w-3 h-3" />
@@ -1364,18 +1355,20 @@ function CalendarView({ items, currentDate, timeGranularity, onItemClick, onDate
           onClick={onClick}
           className={`group h-full px-1.5 py-1 rounded-md cursor-move hover:shadow-lg transition-all flex items-center relative overflow-hidden ${
             item.status === 'due' ? 'ring-1 ring-[#D97706]/30' : ''
-          } ${isDragging ? 'opacity-50 scale-105' : ''}`}
+          } ${isDragging ? 'opacity-50 scale-105' : ''} ${
+            isAI
+              ? 'bg-violet-50 border border-dashed border-violet-300 dark:bg-violet-950/35 dark:border-violet-700'
+              : 'bg-card border border-border'
+          }`}
           style={{
-            borderLeft: isAI ? `4px solid #a855f7` : `4px solid ${getSlotTypeColor(item.labels)}`,
-            borderTop: isAI ? '1px dashed #d8b4fe' : '1px solid #e0e0e0',
-            borderRight: isAI ? '1px dashed #d8b4fe' : '1px solid #e0e0e0',
-            borderBottom: isAI ? '1px dashed #d8b4fe' : '1px solid #e0e0e0',
-            backgroundColor: isAI ? '#faf5ff' : '#ffffff',
+            borderLeftWidth: '4px',
+            borderLeftStyle: 'solid',
+            borderLeftColor: isAI ? '#a855f7' : getSlotTypeColor(item.labels),
           }}
         >
           {/* AI Icon */}
           {isAI && (
-            <div className="mr-1.5 flex-shrink-0 text-[#a855f7]">
+            <div className="mr-1.5 flex-shrink-0 text-violet-600 dark:text-violet-300">
               <Sparkles className="w-3 h-3" />
             </div>
           )}
@@ -1387,19 +1380,19 @@ function CalendarView({ items, currentDate, timeGranularity, onItemClick, onDate
              </div>
           )}
 
-          <p className={`${isAI ? 'text-[#6b21a8]' : 'text-[#1a1a1a]'} line-clamp-1 flex-1`} style={{ fontSize: '10px', fontWeight: '600' }}>
+          <p className={`${isAI ? 'text-violet-700 dark:text-violet-200' : 'text-foreground'} line-clamp-1 flex-1`} style={{ fontSize: '10px', fontWeight: '600' }}>
             {parseHashtags(item.title)}
           </p>
 
           {/* AI Actions - Visible on Hover */}
           {isAI && (
-            <div className="absolute right-0 top-0 bottom-0 flex items-center bg-[#faf5ff] pl-1 pr-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute right-0 top-0 bottom-0 flex items-center bg-violet-50 dark:bg-violet-950/35 pl-1 pr-1 opacity-0 group-hover:opacity-100 transition-opacity">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onAcceptSuggestion(item.id);
                 }}
-                className="p-0.5 rounded hover:bg-[#d8b4fe] text-[#a855f7] mr-1"
+                className="p-0.5 rounded hover:bg-violet-200 dark:hover:bg-violet-800/70 text-violet-700 dark:text-violet-200 mr-1"
                 title="Accept suggestion"
               >
                 <CheckCircle2 className="w-3.5 h-3.5" />
@@ -1409,7 +1402,7 @@ function CalendarView({ items, currentDate, timeGranularity, onItemClick, onDate
                   e.stopPropagation();
                   onRejectSuggestion(item.id);
                 }}
-                className="p-0.5 rounded hover:bg-red-100 text-red-500"
+                className="p-0.5 rounded hover:bg-red-100 dark:hover:bg-red-900/40 text-red-500 dark:text-red-300"
                 title="Dismiss"
               >
                 <X className="w-3.5 h-3.5" />
@@ -1619,8 +1612,8 @@ function CalendarView({ items, currentDate, timeGranularity, onItemClick, onDate
 
         {/* Mobile view - simplified list */}
         <div className="lg:hidden p-4">
-          <div className="bg-white rounded-[12px] border border-[#e0e0e0] p-4 mb-4">
-            <p className="text-[#666666] text-center" style={{ fontSize: '13px' }}>
+          <div className="bg-card rounded-[12px] border border-border p-4 mb-4">
+            <p className="text-muted-foreground text-center" style={{ fontSize: '13px' }}>
               Time axis view is optimized for desktop. Switch to Month view or use desktop for full calendar.
             </p>
           </div>
@@ -1628,12 +1621,12 @@ function CalendarView({ items, currentDate, timeGranularity, onItemClick, onDate
             const dayItems = getItemsForDate(day);
             if (dayItems.length === 0) return null;
             return (
-              <div key={day.toDateString()} className="bg-white rounded-[12px] border border-[#e0e0e0] p-4 mb-3">
+              <div key={day.toDateString()} className="bg-card rounded-[12px] border border-border p-4 mb-3">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-[#1a1a1a]" style={{ fontSize: '14px', fontWeight: '700' }}>
+                  <h3 className="text-foreground" style={{ fontSize: '14px', fontWeight: '700' }}>
                     {day.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                   </h3>
-                  <span className="text-[#666666]" style={{ fontSize: '12px' }}>
+                  <span className="text-muted-foreground" style={{ fontSize: '12px' }}>
                     {dayItems.length} item{dayItems.length > 1 ? 's' : ''}
                   </span>
                 </div>
@@ -1642,18 +1635,15 @@ function CalendarView({ items, currentDate, timeGranularity, onItemClick, onDate
                     <div
                       key={item.id}
                       onClick={() => onItemClick(item)}
-                      className="p-3 rounded-lg cursor-move hover:bg-[#fafafa] hover:shadow-md transition-all"
+                      className="p-3 rounded-lg cursor-move hover:bg-muted hover:shadow-md transition-all bg-card border border-border"
                       style={{ 
                         borderLeft: `6px solid ${getSlotTypeColor(item.labels)}`,
-                        borderTop: '1px solid #e0e0e0',
-                        borderRight: '1px solid #e0e0e0',
-                        borderBottom: '1px solid #e0e0e0',
                       }}
                     >
-                      <p className="text-[#1a1a1a] mb-2" style={{ fontSize: '13px', fontWeight: '600' }}>
+                      <p className="text-foreground mb-2" style={{ fontSize: '13px', fontWeight: '600' }}>
                         {parseHashtags(item.title)}
                       </p>
-                      <div className="flex items-center gap-3 text-[#666666]">
+                      <div className="flex items-center gap-3 text-muted-foreground">
                         {item.timeSlot && (
                           <div className="flex items-center gap-1">
                             <Clock className="w-3 h-3" />
@@ -1826,7 +1816,7 @@ function KanbanView({ items, onItemClick, onStatusChange }: KanbanViewProps) {
           }`}
         >
           {columnItems.map(item => (
-            <div key={item.id} className="bg-white rounded-xl border border-[#e0e0e0]">
+            <div key={item.id} className="bg-card rounded-xl border border-border">
               <DraggableContentCard 
                 item={item} 
                 onClick={() => onItemClick(item)} 
@@ -2885,7 +2875,7 @@ export function SchedulingSlotsNew({
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex h-screen bg-[#fafafa]">
+      <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
         <SidebarPro
           activeItem="scheduling"
           onNavigate={onNavigate}

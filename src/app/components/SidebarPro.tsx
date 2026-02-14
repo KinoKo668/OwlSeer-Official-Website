@@ -343,6 +343,7 @@ export function SidebarPro({
           className="relative w-full h-full" 
           style={{ 
             overflow: 'hidden',
+            backgroundColor: 'inherit',
           }}
         >
           {/* Edge Patch - Prevents 1px bleed on right edge */}
@@ -350,7 +351,7 @@ export function SidebarPro({
             className="absolute right-0 top-0 h-full"
             style={{
               width: '1px',
-              background: 'var(--sidebar)',
+              backgroundColor: 'inherit',
               pointerEvents: 'none',
               zIndex: 10,
             }}
@@ -411,7 +412,7 @@ export function SidebarPro({
                   {!isExpanded && isCollapsedStable && isLogoHovered && (
                     <motion.button
                       onClick={handleToggleCollapse}
-                      className="absolute left-0 top-0 w-10 h-10 flex items-center justify-center rounded-lg bg-sidebar hover:bg-sidebar-accent transition-colors border border-sidebar-border shadow-sm"
+                      className="absolute left-0 top-0 w-10 h-10 flex items-center justify-center rounded-lg bg-inherit hover:bg-sidebar-accent transition-colors border border-sidebar-border shadow-sm"
                       title="Show sidebar"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ 

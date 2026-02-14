@@ -26,9 +26,9 @@ export function CopilotCTAButton({ question, context, size = 'md', variant = 'se
   };
 
   const variantClasses = {
-    primary: 'bg-[#1a1a1a] text-white hover:bg-[#404040]',
-    secondary: 'bg-white text-[#1a1a1a] border border-[#e0e0e0] hover:bg-[#f5f5f5]',
-    ghost: 'bg-transparent text-[#666666] hover:bg-[#f5f5f5] hover:text-[#1a1a1a]',
+    primary: 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-700 dark:hover:bg-slate-200',
+    secondary: 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800',
+    ghost: 'bg-transparent text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white',
   };
 
   return (

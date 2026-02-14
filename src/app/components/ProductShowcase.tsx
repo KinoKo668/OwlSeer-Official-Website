@@ -1,392 +1,344 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'motion/react';
-import { Target, Calendar, BarChart2, ArrowRight, CheckCircle2, Sparkles, TrendingUp } from 'lucide-react';
+import React from 'react';
+import { motion } from 'motion/react';
+import {
+  ArrowRight,
+  BarChart2,
+  Calendar,
+  CheckCircle2,
+  Clock3,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  TrendingUp
+} from 'lucide-react';
+import { usePerformance } from '../contexts';
 
-// --- Mock Components for Visual Showcase ---
+const cardReveal = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' }
+};
 
-const MockOpportunityCard = () => (
-  <div className="w-full max-w-2xl mx-auto p-6">
-    <div className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-1 shadow-2xl shadow-emerald-500/10 border border-white/20 dark:border-white/10 overflow-hidden group">
-      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-400 opacity-50" />
-      <div className="absolute -right-20 -top-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-colors duration-700" />
-      
-      <div className="relative p-6 md:p-8">
-        <div className="flex justify-between items-start mb-8">
-          <div className="flex gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-900/20 dark:to-teal-900/20 flex items-center justify-center border border-emerald-100/50 dark:border-emerald-800/50 backdrop-blur-sm">
-              <Sparkles className="w-7 h-7 text-emerald-500" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Eco-Minimalism</h3>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-100/50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">Trending</span>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Lifestyle & Home Decor • High Velocity</p>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 font-display">94<span className="text-lg text-emerald-600/60 dark:text-emerald-400/60">%</span></div>
-            <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Match Score</div>
-          </div>
+const defaultOpportunityMock = {
+  eyebrow: 'Trend Radar',
+  title: 'High-fit opportunity detected',
+  score: '94 score',
+  metrics: [
+    { label: 'Velocity', value: '+128%' },
+    { label: 'Competition', value: 'Low' },
+    { label: 'View Pool', value: '45M' }
+  ],
+  bullets: ['High overlap with your top-performing audience segment.', 'Recommended posting window opens in the next 6 hours.']
+};
+
+const MockOpportunityCard = ({ t }: { t?: any }) => {
+  const content = t || defaultOpportunityMock;
+  const metrics = content.metrics || defaultOpportunityMock.metrics;
+  const bullets = content.bullets || defaultOpportunityMock.bullets;
+
+  return (
+    <div className="perf-lite-card rounded-[24px] border border-emerald-100/80 bg-white/85 p-5 shadow-[0_26px_70px_-45px_rgba(16,185,129,0.6)] backdrop-blur-md dark:border-emerald-500/20 dark:bg-slate-900/70">
+      <div className="mb-5 flex items-start justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700/80 dark:text-emerald-300/80">
+            {content.eyebrow || defaultOpportunityMock.eyebrow}
+          </p>
+          <h4 className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{content.title || defaultOpportunityMock.title}</h4>
         </div>
-
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-gray-50/50 dark:bg-slate-800/50 rounded-2xl p-4 border border-gray-100/50 dark:border-slate-700/50 backdrop-blur-sm">
-            <div className="text-xs text-gray-400 font-medium mb-1">Growth</div>
-            <div className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-1">
-              +128% <TrendingUp className="w-3 h-3 text-emerald-500" />
-            </div>
-          </div>
-          <div className="bg-gray-50/50 dark:bg-slate-800/50 rounded-2xl p-4 border border-gray-100/50 dark:border-slate-700/50 backdrop-blur-sm">
-            <div className="text-xs text-gray-400 font-medium mb-1">Competition</div>
-            <div className="text-lg font-bold text-gray-900 dark:text-white">Low</div>
-          </div>
-          <div className="bg-gray-50/50 dark:bg-slate-800/50 rounded-2xl p-4 border border-gray-100/50 dark:border-slate-700/50 backdrop-blur-sm">
-            <div className="text-xs text-gray-400 font-medium mb-1">Avg. Views</div>
-            <div className="text-lg font-bold text-gray-900 dark:text-white">45.2K</div>
-          </div>
+        <div className="rounded-xl bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+          {content.score || defaultOpportunityMock.score}
         </div>
-
-        <div className="space-y-3">
-          <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Why it fits you</h4>
-          <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-            <span>Matches your audience's interest in sustainable living</span>
+      </div>
+      <div className="grid grid-cols-3 gap-3">
+        {metrics.map((item: any) => (
+          <div key={`${item.label}-${item.value}`} className="rounded-xl border border-emerald-100/80 bg-white/70 px-3 py-2 dark:border-emerald-500/20 dark:bg-slate-900/70">
+            <div className="text-[10px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">{item.label}</div>
+            <div className="mt-1 text-base font-semibold text-slate-900 dark:text-white">{item.value}</div>
           </div>
-          <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-            <span>Format aligns with your top-performing "Day in Life" videos</span>
-          </div>
-        </div>
+        ))}
+      </div>
+      <div className="mt-5 space-y-2">
+        {bullets.map((bullet: string) => (
+          <p key={bullet} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            {bullet}
+          </p>
+        ))}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const MockPlanningCard = () => (
-  <div className="w-full max-w-2xl mx-auto p-6">
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-amber-500/10 border border-white/20 dark:border-white/10 overflow-hidden">
-      <div className="p-6 border-b border-gray-100/50 dark:border-slate-800/50 flex justify-between items-center">
+const defaultPlanningMock = {
+  eyebrow: 'Execution Plan',
+  title: "This week's production cadence",
+  postCount: '3 posts',
+  schedule: [
+    { day: 'Mon', date: '24', task: 'Trend-first opener', tag: 'Growth' },
+    { day: 'Wed', date: '26', task: 'Trust-building story', tag: 'Community' },
+    { day: 'Fri', date: '28', task: 'Conversion CTA video', tag: 'Revenue' }
+  ]
+};
+
+const MockPlanningCard = ({ t }: { t?: any }) => {
+  const content = t || defaultPlanningMock;
+  const schedule = content.schedule || defaultPlanningMock.schedule;
+
+  return (
+    <div className="perf-lite-card rounded-[24px] border border-amber-100/80 bg-white/85 p-5 shadow-[0_26px_70px_-45px_rgba(245,158,11,0.55)] backdrop-blur-md dark:border-amber-500/20 dark:bg-slate-900/70">
+      <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="font-bold text-gray-900 dark:text-white text-lg">Content Calendar</h3>
-          <p className="text-xs text-gray-500">October 24 - 30</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600/80 dark:text-amber-300/80">
+            {content.eyebrow || defaultPlanningMock.eyebrow}
+          </p>
+          <h4 className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{content.title || defaultPlanningMock.title}</h4>
         </div>
-        <div className="flex -space-x-2">
-           <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-slate-900" />
-           <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white dark:border-slate-900" />
-           <div className="w-8 h-8 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-bold border-2 border-white dark:border-slate-900">+3</div>
+        <div className="rounded-xl bg-amber-500/10 px-3 py-1 text-sm font-semibold text-amber-700 dark:text-amber-300">
+          {content.postCount || defaultPlanningMock.postCount}
         </div>
       </div>
-      <div className="p-6 space-y-4">
-        {[
-          { day: 'Mon', title: 'Product Teaser', type: 'Growth', color: 'bg-amber-500' },
-          { day: 'Wed', title: 'Behind the Scenes', type: 'Trust', color: 'bg-blue-500' },
-          { day: 'Fri', title: 'User Q&A', type: 'Community', color: 'bg-emerald-500' },
-        ].map((item, i) => (
-          <div key={i} className="flex items-center gap-4 group cursor-pointer">
-            <div className="w-12 text-center">
-              <div className="text-xs font-bold text-gray-400 uppercase">{item.day}</div>
-              <div className="text-lg font-bold text-gray-900 dark:text-white">2{4 + i*2}</div>
+      <div className="space-y-3">
+        {schedule.map((item: any, index: number) => (
+          <div
+            key={`${item.day}-${item.date}-${index}`}
+            className="grid grid-cols-[44px_1fr_auto] items-center gap-3 rounded-xl border border-amber-100/80 bg-white/70 px-3 py-2 dark:border-amber-500/20 dark:bg-slate-900/70"
+          >
+            <div className="text-center">
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">{item.day}</div>
+              <div className="text-base font-semibold text-slate-900 dark:text-white">{item.date}</div>
             </div>
-            <div className="flex-1 bg-gray-50/50 dark:bg-slate-800/50 rounded-2xl p-4 border border-gray-100/50 dark:border-slate-800/50 group-hover:border-amber-200 dark:group-hover:border-amber-800 transition-colors relative overflow-hidden backdrop-blur-sm">
-              <div className={`absolute left-0 top-0 bottom-0 w-1 ${item.color}`} />
-              <div className="flex justify-between items-center relative z-10">
-                <span className="font-semibold text-gray-900 dark:text-white">{item.title}</span>
-                <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${item.color} bg-opacity-10 text-${item.color.replace('bg-', '')} uppercase tracking-wide`}>
-                  {item.type}
-                </span>
-              </div>
+            <div className="text-sm font-medium text-slate-700 dark:text-slate-200">{item.task}</div>
+            <span className="rounded-lg bg-amber-500/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
+              {item.tag}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const defaultAnalyticsMock = {
+  eyebrow: 'Performance DNA',
+  title: 'Replicate what already wins',
+  pill: 'Top 5%',
+  metrics: [
+    { label: 'Hook Strength', value: '9.8/10', width: 'w-[95%]' },
+    { label: 'Audience Retention', value: '72%', width: 'w-[72%]' },
+    { label: 'CTA Completion', value: '38%', width: 'w-[38%]' }
+  ]
+};
+
+const MockAnalyticsCard = ({ t }: { t?: any }) => {
+  const content = t || defaultAnalyticsMock;
+  const metrics = content.metrics || defaultAnalyticsMock.metrics;
+
+  return (
+    <div className="perf-lite-card rounded-[24px] border border-sky-100/80 bg-white/85 p-5 shadow-[0_26px_70px_-45px_rgba(14,165,233,0.55)] backdrop-blur-md dark:border-sky-500/20 dark:bg-slate-900/70">
+      <div className="mb-5 flex items-start justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700/80 dark:text-sky-300/80">
+            {content.eyebrow || defaultAnalyticsMock.eyebrow}
+          </p>
+          <h4 className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{content.title || defaultAnalyticsMock.title}</h4>
+        </div>
+        <span className="rounded-xl bg-sky-500/10 px-3 py-1 text-sm font-semibold text-sky-700 dark:text-sky-300">
+          {content.pill || defaultAnalyticsMock.pill}
+        </span>
+      </div>
+      <div className="space-y-4">
+        {metrics.map((item: any) => (
+          <div key={`${item.label}-${item.value}`}>
+            <div className="mb-1 flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
+              <span>{item.label}</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-200">{item.value}</span>
+            </div>
+            <div className="h-2 overflow-hidden rounded-full bg-slate-200/70 dark:bg-slate-800">
+              <div className={`h-full rounded-full bg-gradient-to-r from-sky-500 to-emerald-500 ${item.width}`} />
             </div>
           </div>
         ))}
       </div>
-      <div className="bg-amber-50/50 dark:bg-amber-900/10 p-4 flex items-center justify-center gap-2 text-sm font-medium text-amber-700 dark:text-amber-400 backdrop-blur-sm">
-        <Sparkles className="w-4 h-4" /> AI Suggestion: Add a Hook variation for Wed
-      </div>
     </div>
-  </div>
-);
+  );
+};
 
-const MockAnalyticsCard = () => (
-  <div className="w-full max-w-2xl mx-auto p-6">
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-indigo-500/10 border border-white/20 dark:border-white/10 overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl" />
-      
-      <div className="p-8">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Content DNA</h3>
-             <p className="text-sm text-gray-500">Analysis of your top performing video</p>
-          </div>
-          <div className="px-3 py-1 bg-indigo-100/50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-lg text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
-            Viral Hit
-          </div>
-        </div>
+type WorkflowFeature = {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  accent: string;
+  accentText: string;
+  statA: string;
+  statB: string;
+  bullets: string[];
+  component: React.ReactNode;
+  link: string;
+};
 
-        <div className="space-y-6">
-          <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span className="font-medium text-gray-700 dark:text-gray-300">Hook Strength</span>
-              <span className="font-bold text-indigo-600">9.8/10</span>
-            </div>
-            <div className="h-2 w-full bg-gray-100/50 dark:bg-slate-800 rounded-full overflow-hidden backdrop-blur-sm">
-              <div className="h-full bg-indigo-500 w-[98%] rounded-full" />
-            </div>
-            <p className="text-xs text-gray-500 mt-1.5">First 3s retention is 40% above average</p>
-          </div>
+export function ProductShowcase({ t, onNavigate }: { t: any; onNavigate: (page: string) => void }) {
+  const { reduceMotion } = usePerformance();
+  const revealProps = reduceMotion ? {} : cardReveal;
 
-          <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span className="font-medium text-gray-700 dark:text-gray-300">Pacing</span>
-              <span className="font-bold text-indigo-600">Perfect</span>
-            </div>
-            <div className="flex gap-1 h-2 w-full">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className={`h-full rounded-full flex-1 ${i % 3 === 0 ? 'bg-indigo-500' : 'bg-indigo-200/50 dark:bg-indigo-900/50'}`} />
-              ))}
-            </div>
-            <p className="text-xs text-gray-500 mt-1.5">Visual changes every 2.4s match audience attention span</p>
-          </div>
-
-          <div className="flex gap-4 pt-4">
-             <div className="flex-1 bg-indigo-50/50 dark:bg-indigo-900/20 rounded-xl p-3 text-center backdrop-blur-sm">
-               <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Keywords</div>
-               <div className="font-bold text-indigo-700 dark:text-indigo-300">#budget #tech</div>
-             </div>
-             <div className="flex-1 bg-indigo-50/50 dark:bg-indigo-900/20 rounded-xl p-3 text-center backdrop-blur-sm">
-               <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Sentiment</div>
-               <div className="font-bold text-indigo-700 dark:text-indigo-300">Positive</div>
-             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-// Removed static features array as it's now inside the component
-
-
-export function ProductShowcase({ t }: { t: any }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeFeature, setActiveFeature] = useState(0);
-
-  const features = [
+  const features: WorkflowFeature[] = [
     {
       id: 'opportunities',
+      step: t?.opportunities?.step || 'Step 01',
       title: t?.opportunities?.title || 'Spot Trends Before They Peak',
-      description: t?.opportunities?.desc || 'Stop chasing yesterday’s viral hits. Our AI analyzes millions of signals to find high-potential topics tailored specifically to your niche.',
-      icon: <Target className="w-6 h-6" />,
-      color: '#10B981', // Emerald
-      component: <MockOpportunityCard />
+      description:
+        t?.opportunities?.desc ||
+        'Stop chasing yesterday’s viral hits. Our AI analyzes millions of signals to find high-potential topics tailored specifically to your niche.',
+      icon: <Target className="h-5 w-5" />,
+      accent: 'from-emerald-500/20 via-emerald-500/5 to-transparent',
+      accentText: 'text-emerald-600 dark:text-emerald-300',
+      statA: t?.opportunities?.statA || '24/7 signal scan',
+      statB: t?.opportunities?.statB || 'Opportunity-first ranking',
+      bullets: t?.opportunities?.bullets || ['Find rising topics before saturation.', 'Prioritize topics with proven niche fit.'],
+      component: <MockOpportunityCard t={t?.opportunities?.mock} />,
+      link: '/social/use-cases/trend-prediction'
     },
     {
       id: 'planning',
+      step: t?.planning?.step || 'Step 02',
       title: t?.planning?.title || 'Execution, Not Just Planning',
-      description: t?.planning?.desc || 'Turn strategy into action. Get a weekly production schedule that balances high-growth risks with stable, trust-building content.',
-      icon: <Calendar className="w-6 h-6" />,
-      color: '#F59E0B', // Amber
-      component: <MockPlanningCard />
+      description:
+        t?.planning?.desc ||
+        'Turn strategy into action. Get a weekly production schedule that balances high-growth risks with stable, trust-building content.',
+      icon: <Calendar className="h-5 w-5" />,
+      accent: 'from-amber-500/20 via-amber-500/5 to-transparent',
+      accentText: 'text-amber-600 dark:text-amber-300',
+      statA: t?.planning?.statA || 'Weekly cadence map',
+      statB: t?.planning?.statB || 'Balanced content mix',
+      bullets: t?.planning?.bullets || ['Convert recommendations into an exact shoot calendar.', 'Maintain consistency without burning creative energy.'],
+      component: <MockPlanningCard t={t?.planning?.mock} />,
+      link: '/social/use-cases/posting-schedule'
     },
     {
       id: 'analytics',
+      step: t?.analytics?.step || 'Step 03',
       title: t?.analytics?.title || 'Decode Your Content DNA',
-      description: t?.analytics?.desc || 'Understand exactly why your best videos perform. We break down your content into structural elements to replicate success.',
-      icon: <BarChart2 className="w-6 h-6" />,
-      color: '#6366F1', // Indigo
-      component: <MockAnalyticsCard />
+      description:
+        t?.analytics?.desc ||
+        'Understand exactly why your best videos perform. We break down your content into structural elements to replicate success.',
+      icon: <BarChart2 className="h-5 w-5" />,
+      accent: 'from-sky-500/20 via-sky-500/5 to-transparent',
+      accentText: 'text-sky-600 dark:text-sky-300',
+      statA: t?.analytics?.statA || 'Frame-level diagnosis',
+      statB: t?.analytics?.statB || 'Repeatable winning patterns',
+      bullets: t?.analytics?.bullets || ['Pinpoint what drives retention and completion.', 'Iterate faster with evidence-backed edits.'],
+      component: <MockAnalyticsCard t={t?.analytics?.mock} />,
+      link: '/social/use-cases/content-diagnosis'
     }
   ];
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const springScroll = useSpring(scrollYProgress, { stiffness: 50, damping: 20, restDelta: 0.001 });
-
-  // Map scroll progress to active feature index
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      // Divide the scroll progress (0 to 1) into 3 sections
-      // Use a slightly different logic to snap better
-      // 0 - 0.33 -> 0
-      // 0.33 - 0.66 -> 1
-      // 0.66 - 1 -> 2
-      const step = 1 / features.length;
-      // Add a small buffer to avoid flickering at the edges
-      const index = Math.min(Math.floor((latest + 0.05) / step), features.length - 1);
-      setActiveFeature(index);
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  // Parallax effects for the screen
-  const screenScale = useTransform(springScroll, [0, 0.5, 1], [0.95, 1, 0.95]); 
-  const screenRotateX = useTransform(springScroll, [0, 0.5, 1], [2, 0, -2]); 
-  const screenY = useTransform(springScroll, [0, 1], [20, -20]); 
-
-  // Smooth scroll translation for the text list
-  // We want the text list to scroll such that the active item is centered in the container.
-  // The container is h-[600px].
-  // Each item is h-[400px].
-  // Total height = 1200px.
-  // When progress is 0 (Feature 0): Center of Feature 0 (200px) should be at Center of Container (300px).
-  // Offset = 300 - 200 = 100px.
-  // When progress is 1 (Feature 2): Center of Feature 2 (1000px) should be at Center of Container (300px).
-  // Offset = 300 - 1000 = -700px.
-  // Range: [100px, -700px] -> Apply -50px bias -> [50, -750]
-  
-  const textTranslateY = useTransform(springScroll, [0, 1], [50, -750]);
 
   return (
-    <section ref={containerRef} className="relative py-12 transition-colors duration-300 z-10">
-      {/* Desktop Layout: Sticky - TEMPORARILY DISABLED
-      <div className="hidden md:flex sticky top-0 h-screen flex-col justify-center overflow-hidden pt-20">
-        
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 h-full flex flex-row items-center gap-24">
-          
-          <div className="w-1/3 h-[600px] relative z-10 overflow-hidden">
-             <div className="absolute inset-0 flex flex-col items-center">
-                <motion.div 
-                  className="flex flex-col w-full"
-                  style={{ y: textTranslateY }}
-                >
-                  {features.map((feature, index) => (
-                    <motion.div
-                      key={feature.id}
-                      animate={{ 
-                        opacity: activeFeature === index ? 1 : 0.3,
-                        scale: activeFeature === index ? 1 : 0.95,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="h-[400px] flex flex-col justify-center cursor-pointer"
-                      onClick={() => {
-                         // Optional: Scroll to this section
-                      }}
-                    >
-                      <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-display leading-tight">
-                        {feature.title}
-                      </h3>
-                      <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
-                        {feature.description}
-                      </p>
-                      
-                      <motion.div 
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ 
-                          height: activeFeature === index ? 'auto' : 0,
-                          opacity: activeFeature === index ? 1 : 0
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-6">
-                          <button 
-                            className="flex items-center gap-2 text-sm font-bold transition-colors hover:underline" 
-                            style={{ color: feature.color }}
-                            aria-label={`Learn more about ${feature.title}`}
-                          >
-                            Learn more <ArrowRight className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-             </div>
-          </div>
+    <section
+      className="perf-content-auto relative overflow-hidden py-20 md:py-24 lg:py-28"
+      aria-label="Product workflow showcase"
+    >
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div {...revealProps} className="mx-auto max-w-3xl text-center">
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900 sm:mt-6 sm:text-3xl md:text-5xl dark:text-white">
+            {t?.heading?.title || 'From insight to publish-ready output in one flow'}
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:mt-4 sm:text-base md:text-lg dark:text-slate-300">
+            {t?.heading?.subtitle ||
+              'OwlSeer removes the gap between strategy and execution so creators can move from signal to script with confidence.'}
+          </p>
+        </motion.div>
 
-          <div className="w-2/3 flex items-center justify-center relative perspective-1000 h-full">
-            <motion.div
-              style={{ 
-                scale: screenScale,
-                rotateX: screenRotateX,
-                y: screenY,
-              }}
-              className="relative w-full aspect-[16/10] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200/50 dark:border-slate-800/50 overflow-hidden backdrop-blur-xl"
+        <motion.div
+          {...revealProps}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.5, delay: 0.05 }}
+          className="mt-8 grid gap-3 sm:mt-10 sm:gap-4 sm:grid-cols-3"
+        >
+          <div className="perf-lite-card rounded-2xl border border-white/80 bg-white/70 px-4 py-3 shadow-[0_20px_55px_-45px_rgba(15,23,42,0.85)] backdrop-blur-md dark:border-white/10 dark:bg-slate-900/55">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <Clock3 className="h-4 w-4 text-emerald-500" />
+              {t?.highlights?.decisionCycle?.label || 'Decision Cycle'}
+            </div>
+            <p className="mt-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+              {t?.highlights?.decisionCycle?.desc || 'Signal detection to execution in minutes, not days.'}
+            </p>
+          </div>
+          <div className="perf-lite-card rounded-2xl border border-white/80 bg-white/70 px-4 py-3 shadow-[0_20px_55px_-45px_rgba(15,23,42,0.85)] backdrop-blur-md dark:border-white/10 dark:bg-slate-900/55">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <TrendingUp className="h-4 w-4 text-emerald-500" />
+              {t?.highlights?.growthSignal?.label || 'Growth Signal'}
+            </div>
+            <p className="mt-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+              {t?.highlights?.growthSignal?.desc || 'Prioritize opportunities with velocity and niche fit.'}
+            </p>
+          </div>
+          <div className="perf-lite-card rounded-2xl border border-white/80 bg-white/70 px-4 py-3 shadow-[0_20px_55px_-45px_rgba(15,23,42,0.85)] backdrop-blur-md dark:border-white/10 dark:bg-slate-900/55">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <ShieldCheck className="h-4 w-4 text-emerald-500" />
+              {t?.highlights?.executionQuality?.label || 'Execution Quality'}
+            </div>
+            <p className="mt-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+              {t?.highlights?.executionQuality?.desc || 'Every recommendation includes reasoning you can trust.'}
+            </p>
+          </div>
+        </motion.div>
+
+        <div className="mt-10 space-y-6 sm:mt-12 sm:space-y-8">
+          {features.map((feature, index) => (
+            <motion.article
+              key={feature.id}
+              {...revealProps}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.45, delay: 0.08 * index }}
+              className={`perf-heavy-card group relative grid gap-6 rounded-[28px] border border-white/85 bg-white/70 p-5 shadow-[0_32px_95px_-60px_rgba(15,23,42,0.9)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/55 sm:gap-8 sm:p-6 md:rounded-[34px] md:p-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] ${index % 2 === 1 ? 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1' : ''}`}
             >
-              <div className="absolute top-0 left-0 right-0 h-8 bg-gray-50 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 flex items-center px-4 gap-2 z-20">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                </div>
-                <div className="mx-auto w-1/3 h-4 bg-gray-200/50 dark:bg-slate-700/50 rounded-full flex items-center justify-center text-[8px] text-gray-400 font-medium">
-                  owlseer.app
-                </div>
-              </div>
+              <div className={`pointer-events-none absolute inset-0 rounded-[28px] bg-gradient-to-r ${feature.accent} opacity-70 md:rounded-[34px]`} />
+              <div className="relative">
+                <h3 className="mt-4 text-xl font-semibold tracking-tight text-slate-900 sm:mt-5 sm:text-2xl md:text-[2rem] dark:text-white">{feature.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:mt-4 sm:text-base dark:text-slate-300">{feature.description}</p>
 
-              <div className="absolute inset-0 pt-8 bg-gray-50/50 dark:bg-slate-900/50">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeFeature}
-                    initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="w-full h-full flex flex-col items-center justify-center p-4"
-                  >
-                    <div className="relative w-full h-full flex items-center justify-center">
-                       <div className="transform scale-[0.85] origin-center w-full">
-                         {features[activeFeature].component}
-                       </div>
-                       <motion.div 
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.3 }}
-                          className="absolute bottom-4 right-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur shadow-lg border border-gray-100 dark:border-slate-700 px-3 py-1.5 rounded-full flex items-center gap-1.5 z-10"
-                        >
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                          </span>
-                          <span className="text-[10px] font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Live Preview</span>
-                       </motion.div>
+                <div className="mt-5 space-y-2.5 sm:mt-6">
+                  {feature.bullets.map((bullet) => (
+                    <p key={bullet} className="flex items-start gap-2.5 text-[13px] text-slate-600 sm:text-sm dark:text-slate-300">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                      {bullet}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-white/80 bg-white/70 px-4 py-3 dark:border-white/10 dark:bg-slate-950/45">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                      {t?.labels?.capability || 'Capability'}
                     </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-      */}
+                    <div className="mt-1 text-sm font-semibold text-slate-800 dark:text-slate-100">{feature.statA}</div>
+                  </div>
+                  <div className="rounded-2xl border border-white/80 bg-white/70 px-4 py-3 dark:border-white/10 dark:bg-slate-950/45">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                      {t?.labels?.outcome || 'Outcome'}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-800 dark:text-slate-100">{feature.statB}</div>
+                  </div>
+                </div>
 
-      {/* Unified Layout (formerly Mobile) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-12">
-        {features.map((feature, index) => (
-          <div key={feature.id} className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-            <div className="md:w-1/3">
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-display leading-tight">
-                {feature.title}
-              </h3>
-              <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
-                {feature.description}
-              </p>
-              <button 
-                className="flex items-center gap-2 text-sm font-bold transition-colors hover:underline" 
-                style={{ color: feature.color }}
-                aria-label={`Learn more about ${feature.title}`}
-              >
-                Learn more <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-            
-            {/* Visual Card */}
-            <div className="w-full md:w-2/3 aspect-[4/3] md:aspect-[16/10] bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-200 dark:border-slate-800 overflow-hidden relative">
-              <div className="absolute top-0 left-0 right-0 h-6 md:h-8 bg-gray-50 dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 flex items-center px-3 md:px-4 gap-1.5 md:gap-2 z-20">
-                <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-400/80" />
-                <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-yellow-400/80" />
-                <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-400/80" />
+                <button
+                  type="button"
+                  onClick={() => onNavigate(feature.link)}
+                  className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-transform duration-300 group-hover:translate-x-1 sm:mt-7 ${feature.accentText}`}
+                  aria-label={`Learn more about ${feature.title}`}
+                >
+                  {t?.labels?.learnMore || 'Learn more'}
+                  <ArrowRight className="h-4 w-4" />
+                </button>
               </div>
-              <div className="absolute inset-0 pt-6 md:pt-8 bg-gray-50/50 dark:bg-slate-900/50 p-4 overflow-hidden flex items-center justify-center">
-                <div className="transform scale-[0.6] md:scale-[0.85] origin-center w-[166%] md:w-full h-[166%] md:h-full flex items-center justify-center">
-                   {feature.component}
+
+              <div className="relative flex items-center">
+                <div className="perf-heavy-card w-full rounded-[24px] border border-white/85 bg-gradient-to-b from-white/90 to-white/55 p-3 shadow-[0_28px_75px_-50px_rgba(15,23,42,0.9)] backdrop-blur-xl sm:rounded-[30px] sm:p-4 dark:border-white/10 dark:from-slate-900/85 dark:to-slate-900/55">
+                  {feature.component}
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );

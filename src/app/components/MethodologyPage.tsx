@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView } from 'motion/react';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
-import { useLanguage, usePerformance } from '../contexts';
+import { useLanguage } from '../contexts';
 import { translations as globalTranslations } from '../data/translations';
+import { AuroraBackground } from './ui/aurora-background';
 import { 
   ArrowRight,
-  CheckCircle2,
   Lock,
   Database,
-  ShieldCheck
+  ShieldCheck,
+  Search,
+  BrainCircuit,
+  Zap,
+  LineChart,
+  FileText,
+  Sparkles
 } from 'lucide-react';
 
 // Define the structure of the translation object for type safety
@@ -53,7 +59,7 @@ const pageTranslations = {
       subtitle: "From raw data ingestion to LSTM-based forecasting—we break down the transparent, white-box process behind our AI's 94% accuracy."
     },
     tldr: {
-      title: "TL;DR",
+      title: "Core Philosophy",
       content: "We track 30+ signals across 50M+ videos, identify rising patterns before they peak, and generate scripts tailored to your niche. No guessing, just math."
     },
     steps: [
@@ -129,7 +135,7 @@ const pageTranslations = {
       subtitle: "从原始数据摄入到基于 LSTM 的预测模型——我们将为您拆解 AI 背后透明的白盒流程，以及它是如何实现 94% 准确率的。"
     },
     tldr: {
-      title: "太长不看 (TL;DR)",
+      title: "核心理念",
       content: "我们追踪 5000 万+ 视频中的 30+ 个信号，在趋势见顶前识别上升模式，并生成为您利基市场量身定制的脚本。没有猜测，只有数学。"
     },
     steps: [
@@ -220,11 +226,13 @@ export const MethodologyPage = ({
     document.title = t.metaTitle;
   }, [language, t.metaTitle]);
 
+  const stepIcons = [Search, BrainCircuit, Zap, LineChart, FileText];
+
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+    <div className="min-h-screen bg-white dark:bg-[#020617] text-gray-900 dark:text-white font-sans selection:bg-[#1AAE82]/30">
       <Navbar 
-        onTrySample={() => onNavigate && onNavigate('/simulation')}
-        onSignUp={() => onNavigate && onNavigate('/auth')}
+        onTrySample={() => onNavigate && onNavigate('/social/simulation')}
+        onSignUp={() => onNavigate && onNavigate('/social/auth')}
         onNavigate={onNavigate}
         language={language}
         setLanguage={setLanguage}
@@ -233,114 +241,144 @@ export const MethodologyPage = ({
         t={globalT}
       />
 
-      <main className="pt-24 md:pt-32 pb-24">
-        {/* Hero Section - Swiss Style Grid */}
-        <section className="container mx-auto px-6 max-w-5xl mb-24 md:mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-12 text-black dark:text-white max-w-4xl">
-              {t.hero.title}
-            </h1>
-            
-            <div className="grid grid-cols-12 gap-8 border-t border-black dark:border-white pt-8">
-              <div className="col-span-12 md:col-span-4">
-                 <span className="text-xs font-mono uppercase tracking-widest text-gray-500">
-                   {new Date().getFullYear()} / Predictive Model
-                 </span>
+      <main className="pt-[72px] relative bg-white dark:bg-[#020617]">
+        <AuroraBackground 
+          colorStops={isDarkMode ? ['#020617', '#1AAE82', '#020617'] : ['#FFFFFF', '#E0F2FE', '#FFFFFF']} 
+          speed={0.4} 
+          blend={0.5}
+          baseColor={isDarkMode ? 0.0 : 1.0}
+          className="absolute inset-0 z-0 opacity-40 pointer-events-none fixed"
+        />
+
+        {/* Hero Section */}
+        <section className="relative z-10 pt-32 pb-32">
+          <div className="container mx-auto px-6 max-w-5xl text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1AAE82]/10 text-[#1AAE82] text-sm font-bold uppercase tracking-widest mb-8 border border-[#1AAE82]/20 backdrop-blur-md">
+                <BrainCircuit className="w-4 h-4" /> 
+                <span className="opacity-90">Our Methodology</span>
               </div>
-              <div className="col-span-12 md:col-span-8">
-                <p className="text-xl md:text-2xl font-light leading-relaxed text-gray-900 dark:text-gray-100 mb-12">
-                  {t.hero.subtitle}
-                </p>
+
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight leading-[1.1] mb-8 text-gray-900 dark:text-white drop-shadow-sm">
+                {t.hero.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl font-light leading-relaxed text-gray-600 dark:text-gray-300 mb-16 max-w-3xl mx-auto">
+                {t.hero.subtitle}
+              </p>
+              
+              {/* Core Philosophy Glass Card */}
+              <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-10 rounded-[2rem] border border-white/50 dark:border-slate-700/50 shadow-2xl relative overflow-hidden group hover:border-[#1AAE82]/30 transition-colors">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#1AAE82]/5 rounded-full blur-[60px] group-hover:bg-[#1AAE82]/10 transition-colors" />
                 
-                {/* Executive Summary (Formerly TL;DR) */}
-                <div className="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl border-l-4 border-black dark:border-white">
-                  <span className="block text-xs font-bold uppercase tracking-widest mb-4 text-gray-500">
-                    Core Philosophy
-                  </span>
-                  <p className="text-lg md:text-xl font-medium leading-relaxed text-black dark:text-white">
-                    {t.tldr.content}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Process Steps - Editorial List Layout */}
-        <section className="container mx-auto px-6 max-w-5xl mb-32">
-          <div className="border-b border-black dark:border-white mb-12 pb-4">
-             <h2 className="text-sm font-bold uppercase tracking-widest text-gray-500">The Process</h2>
-          </div>
-
-          <div className="space-y-0">
-            {t.steps.map((step: any, index: number) => (
-              <div 
-                key={step.id}
-                className="grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-t border-gray-200 dark:border-gray-800 first:border-t-0"
-              >
-                {/* Number & Title */}
-                <div className="md:col-span-4 pr-8">
-                  <span className="block text-sm font-mono text-gray-400 mb-4">0{step.id}</span>
-                  <h3 className="text-2xl md:text-3xl font-bold leading-tight">
-                    {step.title}
-                  </h3>
-                </div>
-
-                {/* Description & Details */}
-                <div className="md:col-span-8">
-                  <p className="text-xl text-gray-900 dark:text-white mb-8 leading-relaxed font-medium">
-                    {step.desc}
-                  </p>
-                  
-                  <div className="grid md:grid-cols-2 gap-8 mb-8">
-                    {step.details.map((detail: string, i: number) => (
-                      <div key={i} className="flex gap-3">
-                         <div className="mt-1.5 w-1.5 h-1.5 bg-black dark:bg-white rounded-full shrink-0" />
-                         <span className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                           {detail}
-                         </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Human Note - Typography Driven */}
-                  <div className="mt-8 pt-8 border-t border-dashed border-gray-300 dark:border-gray-700">
-                    <p className="font-serif italic text-lg text-gray-500 dark:text-gray-400">
-                      "{step.humanNote}"
-                    </p>
+                <div className="relative z-10">
+                  <div className="flex flex-col md:flex-row items-center gap-6 justify-center text-center md:text-left">
+                    <div className="w-16 h-16 rounded-2xl bg-[#1AAE82]/10 flex items-center justify-center text-[#1AAE82] shrink-0">
+                       <Sparkles className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold uppercase tracking-[0.2em] mb-3 text-gray-400">
+                        {t.tldr.title}
+                      </span>
+                      <p className="text-xl md:text-2xl font-medium leading-relaxed text-gray-900 dark:text-white">
+                        "{t.tldr.content}"
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
+            </motion.div>
           </div>
         </section>
 
-        {/* Transparency Section - Minimal Grid */}
-        <section className="bg-gray-50 dark:bg-gray-900 py-24">
+        {/* Process Steps */}
+        <section className="relative z-10 pb-32">
           <div className="container mx-auto px-6 max-w-5xl">
-            <div className="mb-16 border-b border-black dark:border-white pb-6">
-              <h2 className="text-3xl font-bold tracking-tight">{t.transparency.title}</h2>
+            <div className="space-y-12">
+              {t.steps.map((step: any, index: number) => {
+                const Icon = stepIcons[index] || Search;
+                return (
+                  <motion.div 
+                    key={step.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="group relative"
+                  >
+                    {/* Connecting Line */}
+                    {index !== t.steps.length - 1 && (
+                      <div className="absolute left-[2.25rem] top-24 bottom-[-3rem] w-px bg-gradient-to-b from-[#1AAE82]/50 to-transparent z-0 hidden md:block" />
+                    )}
+
+                    <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-gray-100 dark:border-slate-800 p-8 md:p-12 shadow-lg hover:shadow-2xl hover:shadow-[#1AAE82]/5 transition-all duration-500 relative overflow-hidden">
+                      <div className="flex flex-col md:flex-row gap-8 relative z-10">
+                        {/* Icon / Number */}
+                        <div className="shrink-0">
+                          <div className="w-18 h-18 md:w-20 md:h-20 rounded-3xl bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 flex flex-col items-center justify-center text-[#1AAE82] shadow-sm group-hover:scale-110 transition-transform duration-500">
+                            <Icon className="w-8 h-8 mb-1" />
+                            <span className="text-xs font-mono font-bold opacity-60">0{step.id}</span>
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex-1">
+                          <h3 className="text-2xl md:text-3xl font-bold font-display mb-4 text-gray-900 dark:text-white group-hover:text-[#1AAE82] transition-colors">
+                            {step.title}
+                          </h3>
+                          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                            {step.desc}
+                          </p>
+                          
+                          <div className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-gray-100 dark:border-slate-700 mb-8">
+                            <div className="grid md:grid-cols-2 gap-6">
+                              {step.details.map((detail: string, i: number) => (
+                                <div key={i} className="flex gap-3 items-start">
+                                   <div className="mt-1.5 w-1.5 h-1.5 bg-[#1AAE82] rounded-full shrink-0 shadow-[0_0_8px_#1AAE82]" />
+                                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 leading-relaxed">
+                                     {detail}
+                                   </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400 italic">
+                            <div className="h-px w-8 bg-gray-300 dark:bg-slate-700" />
+                            <p className="text-base font-serif">"{step.humanNote}"</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Transparency Section */}
+        <section className="relative z-10 py-24 bg-gray-50/50 dark:bg-slate-900/50 border-y border-gray-100 dark:border-slate-800">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold font-display text-gray-900 dark:text-white mb-4">{t.transparency.title}</h2>
+              <div className="w-20 h-1 bg-[#1AAE82] mx-auto rounded-full" />
             </div>
             
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid md:grid-cols-3 gap-8">
               {t.transparency.items.map((item: any, i: number) => (
-                <div key={i} className="group">
-                  <div className="mb-6">
-                     {/* Map icons manually to avoid complex dynamic component rendering issues if strictly needed, 
-                         but here we rely on the object passing. 
-                         However, to be safe and cleaner, we just use the index to render consistent icons 
-                         since we are in a mapped loop of a static object structure. 
-                     */}
-                     {i === 0 && <Lock className="w-8 h-8 text-black dark:text-white" strokeWidth={1.5} />}
-                     {i === 1 && <Database className="w-8 h-8 text-black dark:text-white" strokeWidth={1.5} />}
-                     {i === 2 && <ShieldCheck className="w-8 h-8 text-black dark:text-white" strokeWidth={1.5} />}
+                <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-800 text-center hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-lg">
+                  <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#1AAE82]/10 flex items-center justify-center text-[#1AAE82]">
+                     {i === 0 && <Lock className="w-7 h-7" />}
+                     {i === 1 && <Database className="w-7 h-7" />}
+                     {i === 2 && <ShieldCheck className="w-7 h-7" />}
                   </div>
-                  <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{item.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-medium">
                     {item.desc}
                   </p>
                 </div>
@@ -349,17 +387,21 @@ export const MethodologyPage = ({
           </div>
         </section>
 
-        {/* CTA Section - Big & Bold */}
-        <section className="container mx-auto px-6 max-w-5xl py-32 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tighter">
-            {t.cta.title}
-          </h2>
-          <button 
-            onClick={() => onNavigate && onNavigate('/auth')}
-            className="inline-flex items-center gap-3 px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-full text-lg font-bold hover:scale-105 transition-transform duration-300"
-          >
-            {t.cta.button} <ArrowRight className="w-5 h-5" />
-          </button>
+        {/* CTA Section */}
+        <section className="relative z-10 py-32 text-center overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1AAE82]/10 rounded-full blur-[100px] -z-10" />
+          
+          <div className="container mx-auto px-6 max-w-4xl">
+            <h2 className="text-5xl md:text-7xl font-bold mb-10 tracking-tight font-display text-gray-900 dark:text-white">
+              {t.cta.title}
+            </h2>
+            <button 
+              onClick={() => onNavigate && onNavigate('/social/auth')}
+              className="inline-flex items-center gap-3 px-12 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full text-xl font-bold shadow-2xl hover:shadow-[#1AAE82]/40 hover:-translate-y-1 transition-all duration-300"
+            >
+              {t.cta.button} <ArrowRight className="w-6 h-6" />
+            </button>
+          </div>
         </section>
       </main>
 

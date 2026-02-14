@@ -81,7 +81,7 @@ export function SettingsLayout({
 
   // Desktop: Show full layout with sidebar and tabs
   return (
-    <div className="flex h-screen bg-[#fafafa]">
+    <div className="simulation-overview-theme simulation-dark-surface flex h-screen bg-sidebar transition-colors duration-300">
       <SidebarPro
         activeItem="settings"
         onNavigate={onNavigate}

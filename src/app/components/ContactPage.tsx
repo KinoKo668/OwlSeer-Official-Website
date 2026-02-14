@@ -21,10 +21,7 @@ import {
   ArrowRight,
   HelpCircle,
   Clock,
-  MapPin,
-  Twitter,
-  Linkedin,
-  Instagram
+  MapPin
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -45,9 +42,10 @@ import {
 } from "./ui/accordion";
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
+import { SocialLinks } from './layout/SocialLinks';
 import { translations } from '../data/translations';
 import { SEO } from './SEO';
-import { seoConfig, structuredDataSchemas, generateAlternates } from '../data/seoConfig';
+import { getCanonicalUrl, seoConfig, getLocalizedStructuredDataSchemas, generateAlternates } from '../data/seoConfig';
 
 interface ContactPageProps {
   onNavigate: (page: any) => void;
@@ -84,6 +82,7 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
 
   // Get SEO config
   const seo = seoConfig.contact[language as 'en' | 'zh'] || seoConfig.contact.en;
+  const localizedSchemas = getLocalizedStructuredDataSchemas(language);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] font-sans text-gray-900 dark:text-gray-100 selection:bg-[#1AAE82]/30">
@@ -92,10 +91,10 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
         title={seo.title}
         description={seo.description}
         keywords={seo.keywords}
-        canonicalUrl={seo.canonicalUrl}
+        canonicalUrl={getCanonicalUrl('/contact', language)}
         lang={language}
         alternates={generateAlternates('/contact')}
-        structuredData={structuredDataSchemas.contactPage}
+        structuredData={localizedSchemas.contactPage}
       />
       
       <Navbar 
@@ -154,29 +153,6 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 text-purple-500">
-                      <MessageSquare className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Live Chat</h3>
-                      <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Available Mon-Fri, 9am - 6pm EST.</p>
-                      <button className="text-purple-500 hover:underline mt-2 inline-block font-medium">Start a chat</button>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-500">
-                      <MapPin className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Office</h3>
-                      <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                        123 AI Boulevard, Tech District<br />
-                        San Francisco, CA 94107
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </motion.div>
 
@@ -213,17 +189,9 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
                  initial={{ opacity: 0 }}
                  animate={{ opacity: 1 }}
                  transition={{ delay: 0.4 }}
-                 className="flex gap-4"
+                 className="pt-1"
               >
-                <a href="#" className="p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-500 hover:text-[#1AAE82] transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a href="#" className="p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-500 hover:text-[#1AAE82] transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="#" className="p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-500 hover:text-[#1AAE82] transition-colors">
-                  <Instagram className="w-5 h-5" />
-                </a>
+                <SocialLinks className="flex items-center gap-5" />
               </motion.div>
             </div>
 
@@ -346,7 +314,7 @@ export function ContactPage({ onNavigate, isDarkMode, setIsDarkMode }: ContactPa
         </div>
       </main>
 
-      <Footer t={t.footer} onNavigate={handleNavigate} />
+      <Footer t={t.footer} onNavigate={handleNavigate} showSocialLinks={false} />
     </div>
   );
 }

@@ -567,7 +567,7 @@ export const Dashboard = memo(function Dashboard({ onNavigate }: { onNavigate?: 
   // Show mobile version on small screens
   if (isMobile) {
     return (
-      <div onClick={() => trigger()}>
+      <div className="simulation-overview-theme h-screen bg-sidebar" onClick={() => trigger()}>
         <HomeMobile onNavigate={onNavigate} />
       </div>
     );
@@ -575,7 +575,7 @@ export const Dashboard = memo(function Dashboard({ onNavigate }: { onNavigate?: 
 
   // Show desktop version on larger screens
   return (
-    <div className="flex h-screen bg-sidebar" onClick={() => trigger()}>
+    <div className="simulation-overview-theme flex h-screen bg-sidebar" onClick={() => trigger()}>
       {/* Sidebar - Hidden on mobile, shown on desktop */}
       <SidebarPro 
         activeItem="home" 
