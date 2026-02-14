@@ -538,18 +538,19 @@ export const Navbar = memo(({
         <div className="hidden md:flex items-center justify-end gap-3">
           <button 
             className={`${navTextButtonBaseClass} text-gray-700 hover:bg-white/44 hover:text-[#15956F] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] dark:text-slate-100 dark:hover:bg-white/12 dark:hover:text-[#6EE7C7] dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]`}
-            onClick={onTrySample}
+            onClick={onSignUp}
           >
-            {navActions.trySample || "Try Sample"}
+            {navActions.login || "Log in"}
           </button>
           
           <button 
             onClick={onSignUp}
-            className={`group relative overflow-hidden ${navTextButtonBaseClass} border border-white/64 bg-white/56 font-bold text-[#0F172A] shadow-[0_12px_30px_-20px_rgba(15,23,42,0.55),inset_0_1px_0_rgba(255,255,255,0.92)] hover:shadow-[0_18px_36px_-22px_rgba(16,185,129,0.4),inset_0_1px_0_rgba(255,255,255,0.96)] dark:border-white/16 dark:bg-white/12 dark:text-white dark:shadow-[0_14px_32px_-22px_rgba(2,6,23,0.88),inset_0_1px_0_rgba(255,255,255,0.18)]`}
+            className={`${capsuleRadiusClass} group relative inline-flex h-9 items-center justify-center overflow-hidden px-5 text-base font-bold bg-gray-900 text-white shadow-[0_16px_40px_-22px_rgba(15,23,42,0.55)] transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_26px_58px_-26px_rgba(16,185,129,0.68)] dark:bg-white dark:text-gray-900`}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1AAE82]/90 to-[#15956F]/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <span className="relative flex items-center gap-2">
-              {navActions.startFree || "Start Free"} <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#149A74] via-[#1AAE82] to-[#2DD4BF] bg-[length:180%_100%] opacity-0 transition-[opacity,background-position] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[position:100%_0] group-hover:opacity-100" />
+            <div className="pointer-events-none absolute -left-1/3 top-[-130%] h-[340%] w-1/3 -translate-x-full rotate-[20deg] bg-white/40 opacity-0 blur-xl transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[420%] group-hover:opacity-70 dark:bg-white/35" />
+            <span className="relative flex items-center gap-2 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
+              {navActions.startFree || "Start Free"} <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5" />
             </span>
           </button>
         </div>
@@ -558,9 +559,13 @@ export const Navbar = memo(({
           <div className="md:hidden flex items-center gap-3">
             <button 
                 onClick={onSignUp}
-                className={`${capsuleRadiusClass} inline-flex h-8 items-center justify-center border border-white/62 bg-white/58 px-3.5 text-sm font-bold text-[#0F172A] shadow-[0_10px_22px_-16px_rgba(15,23,42,0.45),inset_0_1px_0_rgba(255,255,255,0.9)] transition-[background-color,color,box-shadow] duration-300 dark:border-white/16 dark:bg-white/12 dark:text-white dark:shadow-[0_12px_24px_-16px_rgba(2,6,23,0.86),inset_0_1px_0_rgba(255,255,255,0.2)]`}
+                className={`${capsuleRadiusClass} group relative inline-flex h-8 items-center justify-center overflow-hidden bg-gray-900 px-3.5 text-sm font-bold text-white shadow-[0_10px_22px_-16px_rgba(15,23,42,0.45)] transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_18px_36px_-20px_rgba(16,185,129,0.58)] dark:bg-white dark:text-gray-900`}
               >
-                {navActions.startFree || "Start Free"}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#149A74] via-[#1AAE82] to-[#2DD4BF] bg-[length:180%_100%] opacity-0 transition-[opacity,background-position] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[position:100%_0] group-hover:opacity-100" />
+                <div className="pointer-events-none absolute -left-1/3 top-[-130%] h-[340%] w-1/3 -translate-x-full rotate-[20deg] bg-white/40 opacity-0 blur-xl transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[420%] group-hover:opacity-70 dark:bg-white/35" />
+                <span className="relative transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
+                  {navActions.startFree || "Start Free"}
+                </span>
             </button>
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
@@ -759,10 +764,10 @@ export const Navbar = memo(({
 
               <div className="pt-6 space-y-3 pb-8">
                 <button 
-                   onClick={onTrySample}
+                   onClick={onSignUp}
                    className="w-full py-3.5 text-center font-bold text-gray-900 dark:text-white bg-white border border-gray-200 dark:bg-slate-800 dark:border-slate-700 rounded-xl shadow-sm"
                 >
-                  {navActions.trySample || "Try Sample"}
+                  {navActions.login || "Log in"}
                 </button>
                 <button 
                   onClick={onSignUp}

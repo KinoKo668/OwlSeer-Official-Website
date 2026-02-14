@@ -109,14 +109,6 @@ const pageTranslations = {
       },
       comparison: "This mix took 5 seconds with Trend Radar. Manual research to reach the same conclusion would take 30-45 minutes of hashtag browsing."
     },
-    conversion: {
-      title: "See 5 trending hashtags in your niche",
-      desc: "Enter your niche to see what's rising and what's saturated. Data updates every 6-12 hours.",
-      placeholder: "Select Niche",
-      niches: ["Tech", "Beauty", "Fitness", "Education", "Food", "Comedy", "Business"],
-      button: "See My Hashtags",
-      note: "Free preview of 5 tags · Connect account for personalized mix"
-    },
     boundary: {
       title: "Boundary Box",
       data: "Data we use: Publicly available TikTok hashtag usage data — post counts, view totals, and growth rates. Match scores use your account's content history and audience profile.",
@@ -215,14 +207,6 @@ const pageTranslations = {
       },
       comparison: "这个组合用趋势雷达只花了 5 秒。手动研究得出相同结论需要 30-45 分钟的标签浏览。"
     },
-    conversion: {
-      title: "查看你利基中的 5 个趋势标签",
-      desc: "输入你的利基，看看哪些正在上升，哪些已经饱和。数据每 6-12 小时更新。",
-      placeholder: "选择利基",
-      niches: ["科技", "美妆", "健身", "教育", "美食", "喜剧", "商业"],
-      button: "查看我的标签",
-      note: "免费预览 5 个标签 · 连接账号获取个性化组合"
-    },
     boundary: {
       title: "边界框",
       data: "我们使用的数据：公开可用的 TikTok 标签使用数据——帖子数、总观看量和增长率。匹配分数使用你的账号内容历史和受众资料。",
@@ -299,15 +283,6 @@ const localizedPageTranslations = {
       title: "ハッシュタグデータ実例",
       task: "指標が選定にどう効くかを確認。"
     },
-    conversion: {
-      ...pageTranslations.en.conversion,
-      title: "あなたのニッチで上昇中のタグを確認",
-      desc: "ニッチを選択して上昇タグと飽和タグを可視化。",
-      placeholder: "ニッチを選択",
-      niches: ["テック", "ビューティー", "フィットネス", "教育", "フード", "コメディ", "ビジネス"],
-      button: "タグを確認",
-      note: "5タグを無料表示 · 連携後に個別提案を提供"
-    },
     boundary: {
       ...pageTranslations.en.boundary,
       title: "透明性ボックス"
@@ -360,15 +335,6 @@ const localizedPageTranslations = {
       ...pageTranslations.en.evidence,
       title: "해시태그 데이터 실제 사례",
       task: "지표가 선택에 미치는 영향을 확인하세요."
-    },
-    conversion: {
-      ...pageTranslations.en.conversion,
-      title: "내 니치의 상승 해시태그 5개 보기",
-      desc: "니치를 선택해 상승/포화 태그를 확인하세요.",
-      placeholder: "니치 선택",
-      niches: ["테크", "뷰티", "피트니스", "교육", "푸드", "코미디", "비즈니스"],
-      button: "내 해시태그 보기",
-      note: "5개 무료 미리보기 · 연결 시 개인화 조합 제공"
     },
     boundary: {
       ...pageTranslations.en.boundary,
@@ -423,15 +389,6 @@ const localizedPageTranslations = {
       title: "Hashtags en acción",
       task: "Cómo las métricas guían decisiones concretas."
     },
-    conversion: {
-      ...pageTranslations.en.conversion,
-      title: "Mira 5 hashtags en tendencia en tu nicho",
-      desc: "Selecciona tu nicho y detecta qué sube y qué se satura.",
-      placeholder: "Seleccionar nicho",
-      niches: ["Tecnología", "Belleza", "Fitness", "Educación", "Comida", "Comedia", "Negocios"],
-      button: "Ver mis hashtags",
-      note: "5 etiquetas gratis · Conecta tu cuenta para mezcla personalizada"
-    },
     boundary: {
       ...pageTranslations.en.boundary,
       title: "Marco de transparencia"
@@ -485,15 +442,6 @@ const localizedPageTranslations = {
       title: "Les données hashtags en action",
       task: "Comment les métriques orientent les choix concrets."
     },
-    conversion: {
-      ...pageTranslations.en.conversion,
-      title: "Voir 5 hashtags tendances dans votre niche",
-      desc: "Sélectionnez votre niche et identifiez ce qui monte.",
-      placeholder: "Sélectionner une niche",
-      niches: ["Tech", "Beauté", "Fitness", "Éducation", "Food", "Comédie", "Business"],
-      button: "Voir mes hashtags",
-      note: "Aperçu gratuit de 5 tags · Connectez votre compte pour personnaliser"
-    },
     boundary: {
       ...pageTranslations.en.boundary,
       title: "Cadre de transparence"
@@ -546,15 +494,6 @@ const localizedPageTranslations = {
       ...pageTranslations.en.evidence,
       title: "Hashtag-Daten in der Praxis",
       task: "So steuern Metriken konkrete Entscheidungen."
-    },
-    conversion: {
-      ...pageTranslations.en.conversion,
-      title: "Sieh 5 trendende Hashtags in deiner Nische",
-      desc: "Wähle deine Nische und erkenne steigende oder gesättigte Tags.",
-      placeholder: "Nische auswählen",
-      niches: ["Tech", "Beauty", "Fitness", "Bildung", "Food", "Comedy", "Business"],
-      button: "Meine Hashtags anzeigen",
-      note: "5 Tags kostenlos · Konto verbinden für personalisierte Mischung"
     },
     boundary: {
       ...pageTranslations.en.boundary,
@@ -823,10 +762,19 @@ export const HashtagStrategyPage = ({
               </div>
 
               <div className="space-y-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-                <p>{t.problem.desc1}</p>
-                <p>{t.problem.desc2}</p>
+                <div className="space-y-4">
+                  {t.problem.mistakes.map((mistake: any) => (
+                    <div
+                      key={mistake.title}
+                      className="rounded-2xl border border-red-100 bg-white/90 p-4 dark:border-red-900/20 dark:bg-slate-900/60"
+                    >
+                      <p className="font-semibold text-gray-900 dark:text-white">{mistake.title}</p>
+                      <p className="mt-1 text-base text-gray-600 dark:text-gray-400">{mistake.desc}</p>
+                    </div>
+                  ))}
+                </div>
                 <div className="rounded-r-2xl border-l-4 border-red-500 bg-red-50 p-6 dark:bg-red-900/10">
-                  <p className="font-medium italic text-red-900 dark:text-red-200">"{t.problem.cost}"</p>
+                  <p className="font-medium italic text-red-900 dark:text-red-200">{t.problem.fix}</p>
                 </div>
                 <button
                   onClick={() => onNavigate('/social/signals')}
@@ -997,35 +945,6 @@ export const HashtagStrategyPage = ({
               </div>
               <div className="relative z-10 mt-8 rounded-xl border border-white/10 bg-white/5 p-4 text-sm italic text-slate-300">
                 "{t.evidence.comparison}"
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto mb-32 max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-[#0F172A] to-[#1E293B] p-10 text-white shadow-2xl md:p-14">
-            <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-[#1AAE82]/20 blur-[100px]" />
-            <div className="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-blue-500/10 blur-[80px]" />
-
-            <div className="relative z-10 grid gap-8 md:grid-cols-2 md:items-center">
-              <div>
-                <h3 className="mb-4 text-3xl font-bold md:text-4xl">{t.conversion.title}</h3>
-                <p className="mb-6 text-lg text-slate-300">{t.conversion.desc}</p>
-                <p className="text-xs uppercase tracking-widest text-slate-400">{t.conversion.note}</p>
-              </div>
-
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-                <select className="mb-4 w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-[#1AAE82]">
-                  <option className="bg-slate-900">{t.conversion.placeholder}</option>
-                  {t.conversion.niches.map((niche: string) => (
-                    <option key={niche} value={niche} className="bg-slate-900">
-                      {niche}
-                    </option>
-                  ))}
-                </select>
-                <button className="w-full rounded-2xl bg-[#1AAE82] px-8 py-4 font-bold text-white shadow-lg shadow-[#1AAE82]/20 transition-all hover:-translate-y-0.5 hover:bg-[#15956F] hover:shadow-[#1AAE82]/40">
-                  {t.conversion.button}
-                </button>
               </div>
             </div>
           </div>

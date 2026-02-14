@@ -15,7 +15,6 @@ import {
   ThumbsUp,
   MessageCircle,
   Share2,
-  Eye,
   AlertCircle,
   Scan,
   Smartphone,
@@ -723,55 +722,6 @@ export const ContentDiagnosisPage = ({
                   {t.evidence.action.split('—')[0]} <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contextual Conversion (Mini Tool) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto mb-32">
-          <div className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-[2.5rem] p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl border border-white/5">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#1AAE82]/20 rounded-full blur-[100px] animate-pulse-slow" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]" />
-            
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-[#1AAE82] mb-6 backdrop-blur-md border border-white/10">
-                <Smartphone className="w-8 h-8" />
-              </div>
-              
-              <h3 className="text-3xl md:text-4xl font-bold mb-6 font-display">{t.conversion.title}</h3>
-              <p className="text-gray-400 mb-10 max-w-lg mx-auto text-lg leading-relaxed">
-                {t.conversion.desc}
-              </p>
-              
-              <div className="w-full max-w-2xl bg-white/5 backdrop-blur-md rounded-2xl p-2 border border-white/10 flex flex-col sm:flex-row gap-2 mb-8">
-                <input 
-                  type="text" 
-                  placeholder={t.conversion.placeholder}
-                  className="flex-1 px-6 py-4 bg-transparent text-white placeholder-gray-500 focus:outline-none"
-                />
-                <button 
-                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-[#1AAE82]/25"
-                >
-                  {t.conversion.button}
-                </button>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-6 w-full max-w-2xl">
-                {[
-                  { label: 'Hook Rate', icon: <Eye className="w-4 h-4" /> },
-                  { label: 'Pacing', icon: <Clock className="w-4 h-4" /> },
-                  { label: 'Structure', icon: <BarChart2 className="w-4 h-4" /> }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white/5 rounded-xl border border-white/5 py-4 flex flex-col items-center justify-center gap-2">
-                    <div className="text-gray-500">{item.icon}</div>
-                    <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{item.label}</div>
-                  </div>
-                ))}
-              </div>
-              
-              <p className="text-xs text-gray-500 mt-8 flex items-center gap-2">
-                <CheckCircle2 className="w-3 h-3 text-[#1AAE82]" /> {t.conversion.note}
-              </p>
             </div>
           </div>
         </section>

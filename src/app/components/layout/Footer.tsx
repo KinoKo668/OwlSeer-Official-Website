@@ -74,8 +74,6 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
       items: [
         { label: links.blog || "Blog", action: () => handleNav('blog') },
         { label: links.guides || "Guides", action: () => handleNav('guides') },
-        { label: links.trends || "Trends", action: () => handleNav('trends-hub') },
-        { label: links.tools || "Tools", action: () => handleNav('tools') },
         { label: links.glossary || "Glossary", action: () => handleNav('glossary') },
         { label: links.faq || "FAQ", action: () => handleNav('faq') },
         { label: links.contact || "Contact", action: () => handleNav('contact') },

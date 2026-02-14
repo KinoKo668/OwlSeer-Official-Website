@@ -15,12 +15,8 @@ import {
   Calendar, 
   FileText, 
   TrendingUp, 
-  Search,
   Sparkles,
-  Users,
-  Clock,
   Check,
-  CirclePlay,
   Lock
 } from 'lucide-react';
 
@@ -197,137 +193,6 @@ const CountUpStat = ({ target, suffix = "", label, subLabel }: { target: number,
   );
 };
 
-// 3. Mini Tool (Glass Widget)
-const RecommendationTool = ({ content }: { content: any }) => {
-  const ui = content.ui || {};
-  const [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
-
-  const handleGenerate = () => {
-    if (!username) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setResult({
-        trend: content.mock.trend,
-        relevance: 87,
-        topic: content.mock.topic,
-        time: content.mock.time
-      });
-    }, 1500);
-  };
-
-  return (
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 rounded-[2.5rem] p-8 md:p-14 shadow-2xl max-w-4xl mx-auto relative overflow-hidden group">
-      {/* Decorative Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#1AAE82]/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-[#1AAE82]/20 transition-colors duration-500" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
-
-      <div className="mb-10 border-b border-gray-100 dark:border-slate-800 pb-8 relative z-10 text-center">
-        <h3 className="text-3xl md:text-4xl font-bold font-display mb-4 text-gray-900 dark:text-white">
-          {content.title}
-        </h3>
-        <p className="text-lg text-gray-500 dark:text-gray-400 font-medium max-w-2xl mx-auto">
-          {content.subtitle}
-        </p>
-      </div>
-
-      {!result ? (
-        <div className="space-y-8 relative z-10 max-w-2xl mx-auto">
-          <div className="relative group/input">
-            <span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold font-mono text-2xl text-gray-300 group-focus-within/input:text-[#1AAE82] transition-colors">@</span>
-            <input 
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder={content.placeholder}
-              className="w-full pl-14 pr-6 py-6 bg-gray-50 dark:bg-slate-800 border-2 border-gray-100 dark:border-slate-700 rounded-2xl font-mono text-xl outline-none focus:border-[#1AAE82] transition-all placeholder:text-gray-400 text-gray-900 dark:text-white shadow-inner"
-            />
-          </div>
-          <button 
-            onClick={handleGenerate}
-            disabled={!username || loading}
-            className={`w-full py-6 font-bold text-xl rounded-2xl transition-all shadow-xl flex items-center justify-center gap-3 ${
-              !username || loading
-                ? 'bg-gray-200 text-gray-500 cursor-not-allowed dark:bg-slate-800 dark:text-slate-600' 
-                : 'bg-[#1AAE82] hover:bg-[#15956F] text-white hover:shadow-[#1AAE82]/30 hover:-translate-y-1'
-            }`}
-          >
-            {loading ? (
-              <>
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                {ui.processing || 'PROCESSING...'}
-              </>
-            ) : (
-              <>
-                <Zap className="w-5 h-5 fill-current" />
-                {content.button.default}
-              </>
-            )}
-          </button>
-        </div>
-      ) : (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-6 relative z-10"
-        >
-          <div className="flex items-center justify-between bg-gray-50 dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-slate-700">
-            <div className="font-mono font-bold text-xl text-gray-900 dark:text-white flex items-center gap-2">
-              <span className="text-gray-400">@</span>{username}
-            </div>
-            <button onClick={() => setResult(null)} className="px-4 py-2 text-xs font-bold uppercase hover:bg-gray-200 dark:hover:bg-slate-700 rounded-lg text-gray-500 transition-colors">{ui.reset || 'Reset'}</button>
-          </div>
-
-          <div className="grid gap-6">
-            <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-gray-100 dark:border-slate-700 flex justify-between items-center shadow-lg relative overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-2 bg-[#1AAE82]" />
-              <div>
-                <div className="text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2 text-gray-500">
-                  <TrendingUp className="w-4 h-4 text-[#1AAE82]" /> {ui.trendDetected || 'Trend Detected'}
-                </div>
-                <div className="font-bold text-2xl text-gray-900 dark:text-white">"{result.trend}"</div>
-              </div>
-              <div className="text-right pl-6 border-l border-gray-100 dark:border-slate-700">
-                <div className="text-4xl font-mono font-bold text-[#1AAE82]">{result.relevance}%</div>
-                <div className="text-xs font-bold uppercase text-gray-400 mt-1">{ui.matchScore || 'Match Score'}</div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-gray-100 dark:border-slate-700 hover:border-[#1AAE82]/30 transition-colors">
-                <div className="text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2 text-gray-500">
-                  <Zap className="w-4 h-4 text-[#1AAE82]" /> {ui.recommendedTopic || 'Recommended Topic'}
-                </div>
-                <div className="font-bold text-lg text-gray-900 dark:text-white leading-snug">"{result.topic}"</div>
-              </div>
-              <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-gray-100 dark:border-slate-700 hover:border-[#1AAE82]/30 transition-colors">
-                <div className="text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2 text-gray-500">
-                  <Calendar className="w-4 h-4 text-[#1AAE82]" /> {ui.bestPostTime || 'Best Post Time'}
-                </div>
-                <div className="font-bold font-mono text-xl text-gray-900 dark:text-white flex items-center gap-2">
-                  {result.time} <span className="text-xs font-normal text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-1 rounded">{ui.localTime || 'Local Time'}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center pt-8">
-            <p className="text-xs font-mono text-gray-500 mb-6 uppercase tracking-wider">{content.result.disclaimer}</p>
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold text-lg rounded-full shadow-lg hover:shadow-[#1AAE82]/30 transition-all hover:-translate-y-1"
-            >
-              {content.result.cta} <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </motion.div>
-      )}
-    </div>
-  );
-};
-
 export function ContentCreatorsPage({ onNavigate, isDarkMode, setIsDarkMode }: { onNavigate: (page: any) => void, isDarkMode: boolean, setIsDarkMode: (isDark: boolean) => void }) {
   const { language, setLanguage } = useLanguage();
   const t = translations[language as keyof typeof translations] || translations.en;
@@ -338,6 +203,39 @@ export function ContentCreatorsPage({ onNavigate, isDarkMode, setIsDarkMode }: {
   const handleNavigate = (page: string) => {
     onNavigate(page);
   };
+  const [activeSolutionIndex, setActiveSolutionIndex] = useState(0);
+  const previewScenarios = [
+    {
+      label: 'Weekly Plan',
+      confidence: '92%',
+      speed: '< 3m',
+      window: 'Mon 09:00',
+      outputs: ['5-10 niche-fit topics generated', 'Each topic includes confidence + reason', 'Priority order based on opportunity score']
+    },
+    {
+      label: 'Trend Radar',
+      confidence: '94%',
+      speed: 'Realtime',
+      window: 'Next 6h',
+      outputs: ['Rising signals detected before saturation', 'Velocity and competition scored', 'Recommended posting window highlighted']
+    },
+    {
+      label: 'Script Builder',
+      confidence: '89%',
+      speed: '< 60s',
+      window: 'Ready now',
+      outputs: ['Hook + body + CTA in one draft', 'Format and hashtag suggestions included', 'Optimized for audience retention']
+    },
+    {
+      label: 'Posting Cadence',
+      confidence: '90%',
+      speed: 'Weekly',
+      window: 'Best slots',
+      outputs: ['Balanced growth and consistency mix', 'Audience activity time blocks mapped', 'Clear weekly shoot and publish plan']
+    }
+  ];
+  const activeScenario = previewScenarios[activeSolutionIndex] || previewScenarios[0];
+  const activeSolutionItem = content.solution.items[activeSolutionIndex] || content.solution.items[0];
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#020617] font-sans text-gray-900 dark:text-white selection:bg-[#1AAE82]/20 selection:text-[#1AAE82]">
@@ -469,7 +367,14 @@ export function ContentCreatorsPage({ onNavigate, isDarkMode, setIsDarkMode }: {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.1 }}
-                      className="group p-8 bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 hover:shadow-xl hover:shadow-[#1AAE82]/5 transition-all duration-300 hover:-translate-x-[-10px]"
+                      onMouseEnter={() => setActiveSolutionIndex(idx)}
+                      onFocus={() => setActiveSolutionIndex(idx)}
+                      onClick={() => setActiveSolutionIndex(idx)}
+                      className={`group cursor-pointer p-8 rounded-[2rem] border transition-all duration-300 hover:-translate-x-[-10px] ${
+                        activeSolutionIndex === idx
+                          ? 'bg-white dark:bg-slate-800 border-[#1AAE82]/40 shadow-xl shadow-[#1AAE82]/10'
+                          : 'bg-white dark:bg-slate-800 border-gray-100 dark:border-slate-700 hover:shadow-xl hover:shadow-[#1AAE82]/5'
+                      }`}
                     >
                       <div className="flex items-start gap-6">
                         <div className="w-14 h-14 rounded-2xl bg-[#1AAE82]/10 flex items-center justify-center flex-shrink-0 text-[#1AAE82] group-hover:scale-110 transition-transform">
@@ -487,21 +392,76 @@ export function ContentCreatorsPage({ onNavigate, isDarkMode, setIsDarkMode }: {
                   ))}
                 </div>
                 <div className="mt-16">
-                  <a href="/" className="inline-flex items-center gap-3 font-bold uppercase tracking-widest text-sm text-[#1AAE82] hover:underline decoration-2 underline-offset-8 transition-all">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('simulation')}
+                    className="inline-flex items-center gap-3 font-bold uppercase tracking-widest text-sm text-[#1AAE82] hover:underline decoration-2 underline-offset-8 transition-all"
+                  >
                     {content.solution.action} <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </button>
                 </div>
               </div>
               
-              <div className="relative sticky top-32">
-                <div className="bg-white/30 dark:bg-slate-800/30 backdrop-blur-md border border-white/40 dark:border-slate-700/50 p-3 rounded-[2.5rem] shadow-2xl">
-                  <div className="aspect-[4/3] bg-gray-100 dark:bg-slate-900 flex items-center justify-center rounded-[2rem] border border-gray-200 dark:border-slate-800 overflow-hidden relative group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#1AAE82]/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="text-center">
-                      <div className="w-20 h-20 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg text-[#1AAE82]">
-                        <CirclePlay className="w-10 h-10" />
+              <div className="relative sticky top-24">
+                <div className="bg-white/55 dark:bg-slate-800/40 backdrop-blur-md border border-white/50 dark:border-slate-700/50 p-4 rounded-[2.5rem] shadow-2xl">
+                  <div className="bg-[#F6F7FB] dark:bg-slate-900 rounded-[2rem] border border-gray-200 dark:border-slate-800 relative p-6 md:p-7">
+                    <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#1AAE82]/10 to-transparent pointer-events-none" />
+                    <div className="relative flex flex-col gap-3">
+                      <div className="flex items-center justify-between mb-5">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-white/80 dark:bg-slate-800/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#1AAE82] border border-[#1AAE82]/20">
+                          <span className="h-1.5 w-1.5 rounded-full bg-[#1AAE82]" />
+                          Interactive Preview
+                        </span>
+                        <span className="text-xs font-mono uppercase tracking-widest text-gray-500 dark:text-gray-400">{activeScenario.label}</span>
                       </div>
-                      <span className="font-mono text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400">Interactive Preview</span>
+
+                      <div className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 p-4 shadow-sm">
+                        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{activeSolutionItem?.title}</h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{activeSolutionItem?.desc}</p>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="rounded-xl bg-white/90 dark:bg-slate-800 px-3 py-2 border border-gray-100 dark:border-slate-700">
+                          <div className="text-[10px] uppercase tracking-wider text-gray-500">Confidence</div>
+                          <div className="text-sm font-bold text-[#1AAE82]">{activeScenario.confidence}</div>
+                        </div>
+                        <div className="rounded-xl bg-white/90 dark:bg-slate-800 px-3 py-2 border border-gray-100 dark:border-slate-700">
+                          <div className="text-[10px] uppercase tracking-wider text-gray-500">Speed</div>
+                          <div className="text-sm font-bold text-gray-900 dark:text-white">{activeScenario.speed}</div>
+                        </div>
+                        <div className="rounded-xl bg-white/90 dark:bg-slate-800 px-3 py-2 border border-gray-100 dark:border-slate-700">
+                          <div className="text-[10px] uppercase tracking-wider text-gray-500">Window</div>
+                          <div className="text-sm font-bold text-gray-900 dark:text-white">{activeScenario.window}</div>
+                        </div>
+                      </div>
+
+                      <div className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 p-4">
+                        <ul className="space-y-2.5">
+                          {activeScenario.outputs.map((line) => (
+                            <li key={line} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                              <Check className="w-4 h-4 text-[#1AAE82] mt-0.5 shrink-0" />
+                              <span>{line}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="pt-1 flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleNavigate('simulation')}
+                          className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-4 py-2 text-xs font-bold text-white hover:bg-[#1AAE82] transition-colors"
+                        >
+                          Open Sample <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleNavigate('auth')}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 dark:border-slate-600 bg-white/90 dark:bg-slate-800 px-4 py-2 text-xs font-bold text-gray-700 dark:text-gray-200 hover:border-[#1AAE82]/40 hover:text-[#1AAE82] transition-colors"
+                        >
+                          Start Free
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -510,14 +470,7 @@ export function ContentCreatorsPage({ onNavigate, isDarkMode, setIsDarkMode }: {
           </div>
         </section>
 
-        {/* 5. MINI TOOL */}
-        <section className="py-32 relative z-10">
-          <div className="max-w-7xl mx-auto px-6">
-             <RecommendationTool content={{ ...content.miniTool, ui: content.ui }} />
-          </div>
-        </section>
-
-        {/* 6. RESULTS */}
+        {/* 5. RESULTS */}
         <section className="py-32 bg-gray-50 dark:bg-slate-900/50 border-y border-gray-100 dark:border-white/5 relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-24">

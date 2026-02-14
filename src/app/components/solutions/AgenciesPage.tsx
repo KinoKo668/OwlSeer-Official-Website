@@ -592,6 +592,7 @@ const DashboardPreview = () => {
     { name: "@OrganicBeautyCo", color: "text-green-500", bg: "bg-green-500" },
     { name: "@TechStartupHQ", color: "text-purple-500", bg: "bg-purple-500" }
   ];
+  const activeClient = clients[activeTab] || clients[0];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -630,74 +631,67 @@ const DashboardPreview = () => {
       </div>
 
       {/* Body */}
-      <div className="p-8 relative min-h-[400px]">
-        {clients.map((client, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ 
-              opacity: activeTab === idx ? 1 : 0, 
-              x: activeTab === idx ? 0 : 20,
-              pointerEvents: activeTab === idx ? 'auto' : 'none'
-            }}
-            transition={{ duration: 0.5, ease: "circOut" }}
-            className="absolute inset-0 p-8"
-          >
-            <div className="flex items-center justify-between mb-10">
+      <div className="p-8">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+        >
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center gap-4">
+              <div className={`w-14 h-14 rounded-2xl ${activeClient.bg} bg-opacity-10 flex items-center justify-center ${activeClient.color}`}>
+                <Users className="w-7 h-7" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{activeClient.name}</h3>
+                <p className="text-sm font-medium text-gray-500 uppercase tracking-wide">Agency Managed Account</p>
+              </div>
+            </div>
+            <div className="px-4 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Active
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 mb-10">
+            <div className="p-5 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/50">
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Engagement</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white font-display">{(4.2 + activeTab).toFixed(1)}%</div>
+              <div className="text-xs text-green-500 font-bold flex items-center gap-1 mt-1">
+                <TrendingUp className="w-3 h-3" /> +{12 + activeTab}%
+              </div>
+            </div>
+            <div className="p-5 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/50">
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Followers</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white font-display">{(12.5 + activeTab * 2).toFixed(1)}k</div>
+              <div className="text-xs text-green-500 font-bold flex items-center gap-1 mt-1">
+                <TrendingUp className="w-3 h-3" /> +{5 + activeTab}%
+              </div>
+            </div>
+            <div className="p-5 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/50">
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Trend Matches</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white font-display">{8 + activeTab}</div>
+              <div className="text-xs text-blue-500 font-bold mt-1">New this week</div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl border-l-4 border-blue-500 shadow-sm">
               <div className="flex items-center gap-4">
-                <div className={`w-14 h-14 rounded-2xl ${client.bg} bg-opacity-10 flex items-center justify-center ${client.color}`}>
-                  <Users className="w-7 h-7" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{client.name}</h3>
-                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wide">Agency Managed Account</p>
-                </div>
+                <Bot className="w-6 h-6 text-blue-500" />
+                <span className="text-base font-bold text-gray-700 dark:text-gray-200">Weekly Report Generated</span>
               </div>
-              <div className="px-4 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Active
-              </div>
+              <span className="text-xs font-mono text-gray-400">2m ago</span>
             </div>
-
-            <div className="grid grid-cols-3 gap-6 mb-10">
-              <div className="p-5 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/50">
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Engagement</div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white font-display">{(4.2 + idx).toFixed(1)}%</div>
-                <div className="text-xs text-green-500 font-bold flex items-center gap-1 mt-1">
-                  <TrendingUp className="w-3 h-3" /> +{12 + idx}%
-                </div>
+            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl border-l-4 border-purple-500 shadow-sm">
+              <div className="flex items-center gap-4">
+                <FileText className="w-6 h-6 text-purple-500" />
+                <span className="text-base font-bold text-gray-700 dark:text-gray-200">3 New Scripts Ready</span>
               </div>
-              <div className="p-5 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/50">
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Followers</div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white font-display">{(12.5 + idx * 2).toFixed(1)}k</div>
-                <div className="text-xs text-green-500 font-bold flex items-center gap-1 mt-1">
-                  <TrendingUp className="w-3 h-3" /> +{5 + idx}%
-                </div>
-              </div>
-              <div className="p-5 bg-gray-50 dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/50">
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Trend Matches</div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white font-display">{8 + idx}</div>
-                <div className="text-xs text-blue-500 font-bold mt-1">New this week</div>
-              </div>
+              <span className="text-xs font-mono text-gray-400">1h ago</span>
             </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                <div className="flex items-center gap-4">
-                  <Bot className="w-6 h-6 text-blue-500" />
-                  <span className="text-base font-bold text-gray-700 dark:text-gray-200">Weekly Report Generated</span>
-                </div>
-                <span className="text-xs font-mono text-gray-400">2m ago</span>
-              </div>
-              <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl border-l-4 border-purple-500 shadow-sm">
-                <div className="flex items-center gap-4">
-                  <FileText className="w-6 h-6 text-purple-500" />
-                  <span className="text-base font-bold text-gray-700 dark:text-gray-200">3 New Scripts Ready</span>
-                </div>
-                <span className="text-xs font-mono text-gray-400">1h ago</span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   );

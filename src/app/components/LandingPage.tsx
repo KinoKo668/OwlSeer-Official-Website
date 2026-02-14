@@ -232,9 +232,14 @@ const Hero = memo(({ onTrySample, onSignUp, t }: { onTrySample: () => void, onSi
         <motion.p
           {...animationConfig}
           transition={{ ...animationConfig.transition, delay: reduceMotion ? 0 : 0.2 } as any}
-          className="mx-auto mb-8 max-w-xl text-base font-normal leading-relaxed tracking-normal text-gray-500 dark:text-gray-300 sm:mb-10 sm:max-w-2xl sm:text-lg md:text-xl"
+          className="mx-auto mb-8 max-w-3xl text-lg font-medium leading-relaxed tracking-[0.01em] text-gray-600 dark:text-gray-200 sm:mb-10 sm:text-xl md:text-2xl"
         >
-          {renderSubtitle(t.subtitle)}
+          <span className="relative inline-block">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-700 via-slate-600 to-[#1AAE82] dark:from-slate-100 dark:via-slate-200 dark:to-[#5EEAD4]">
+              {renderSubtitle(t.subtitle)}
+            </span>
+            <span className="pointer-events-none absolute -bottom-1 left-1/2 h-[2px] w-[88%] -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-[#1AAE82]/60 to-transparent"></span>
+          </span>
           {t.subtitle2 ? (
             <>
               <br className="hidden md:block" />

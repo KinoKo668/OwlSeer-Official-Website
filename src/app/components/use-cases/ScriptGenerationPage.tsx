@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { 
   PenTool, 
   Clock, 
@@ -8,12 +8,8 @@ import {
   Zap, 
   Play, 
   FileText,
-  Mic,
-  Hash,
   Sparkles,
   Lock,
-  Calendar,
-  ChevronRight
 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { translations as globalTranslations } from '../../data/translations';
@@ -921,41 +917,6 @@ export const ScriptGenerationPage = ({
           </div>
           
           <p className="text-center mt-12 text-gray-500 italic text-lg">{t.workflow.stat}</p>
-        </section>
-
-        {/* Contextual Conversion (Mini Tool) */}
-        <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-32">
-          <div className="bg-gradient-to-br from-[#111827] to-[#0f172a] rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#1AAE82]/20 rounded-full blur-[100px] pointer-events-none" />
-            
-            <div className="relative z-10">
-              <h3 className="text-3xl font-bold mb-6 font-display">{t.conversion.title}</h3>
-              <p className="text-gray-300 mb-10 max-w-lg mx-auto text-lg leading-relaxed">
-                {t.conversion.desc}
-              </p>
-              
-              <div className="flex flex-col gap-4 max-w-md mx-auto mb-8">
-                <select className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm cursor-pointer hover:bg-white/10 transition-colors text-lg">
-                   <option className="bg-slate-900 text-gray-400">{t.conversion.nichePlaceholder}</option>
-                   {t.conversion.niches.map((niche: string) => (
-                     <option key={niche} value={niche} className="bg-slate-900">{niche}</option>
-                   ))}
-                </select>
-                <input 
-                  type="text" 
-                  placeholder={t.conversion.topicPlaceholder}
-                  className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1AAE82] backdrop-blur-sm hover:bg-white/10 transition-colors text-lg"
-                />
-                <button 
-                  className="px-8 py-4 bg-[#1AAE82] hover:bg-[#15956F] text-white font-bold rounded-xl transition-colors shadow-lg hover:shadow-[#1AAE82]/30 text-lg mt-2"
-                >
-                  {t.conversion.button}
-                </button>
-              </div>
-              
-              <p className="text-sm text-gray-500">{t.conversion.note}</p>
-            </div>
-          </div>
         </section>
 
         {/* Boundary Box */}

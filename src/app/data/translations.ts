@@ -58,6 +58,7 @@ export const translations = {
         trySample: "See it on real data"
       },
       actions: {
+        login: "Log in",
         trySample: "Try Sample",
         startFree: "Start Free",
         startFreeTrial: "Start Free Trial",
@@ -119,7 +120,7 @@ export const translations = {
       badge: 'v2.0 is now live',
       title: "See What's",
       titleHighlight: "Next",
-      subtitle: "Stop guessing. Get AI-backed trends and scripts built from your data.",
+      subtitle: "Turn your data into a winning content strategy.",
       subtitle2: "",
       ctaPrimary: "Try Sample",
       ctaSecondaryButton: "Start Now",
@@ -1156,6 +1157,7 @@ export const translations = {
         trySample: "在示例数据上体验"
       },
       actions: {
+        login: "登录",
         trySample: "体验示例",
         startFree: "免费开始",
         startFreeTrial: "开始免费试用",
@@ -2209,6 +2211,7 @@ export const translations = {
         trySample: "サンプルデータで体験"
       },
       actions: {
+        login: "ログイン",
         trySample: "サンプルを試す",
         startFree: "無料で始める",
         startFreeTrial: "無料トライアルを開始",
@@ -2690,6 +2693,7 @@ export const translations = {
         trySample: "샘플 데이터로 체험"
       },
       actions: {
+        login: "로그인",
         trySample: "샘플 체험",
         startFree: "무료로 시작",
         startFreeTrial: "무료 체험 시작",
@@ -3165,6 +3169,7 @@ export const translations = {
         trySample: "Verlo con datos reales"
       },
       actions: {
+        login: "Iniciar sesión",
         trySample: "Probar muestra",
         startFree: "Empieza gratis",
         startFreeTrial: "Iniciar prueba gratuita",
@@ -3642,6 +3647,7 @@ export const translations = {
         trySample: "Le voir sur des données réelles"
       },
       actions: {
+        login: "Connexion",
         trySample: "Essayer l’exemple",
         startFree: "Commencer gratuitement",
         startFreeTrial: "Démarrer l’essai gratuit",
@@ -4119,6 +4125,7 @@ export const translations = {
         trySample: "Mit echten Daten sehen"
       },
       actions: {
+        login: "Anmelden",
         trySample: "Sample testen",
         startFree: "Kostenlos starten",
         startFreeTrial: "Kostenlose Testversion starten",

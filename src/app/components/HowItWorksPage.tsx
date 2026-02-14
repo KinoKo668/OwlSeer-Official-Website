@@ -16,7 +16,6 @@ import {
   Users,
   Shield,
   Clock,
-  Play,
   CheckCircle2,
   BarChart3,
   Calendar,
@@ -280,7 +279,7 @@ export const HowItWorksPage = ({
       />
 
       <Navbar 
-        onTrySample={() => onNavigate('landing')} 
+        onTrySample={() => onNavigate('simulation')} 
         onSignUp={() => onNavigate('auth')}
         onNavigate={onNavigate}
         language={language}
@@ -320,11 +319,25 @@ export const HowItWorksPage = ({
              </p>
              
              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               <Link to="/social/pricing" className="inline-flex items-center justify-center px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all shadow-xl shadow-[#1AAE82]/20 hover:-translate-y-1">
-                 {t.hero.cta}
-               </Link>
-               <button className="inline-flex items-center justify-center px-10 py-5 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white rounded-full font-bold text-lg hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors gap-3">
-                 <Play className="w-5 h-5 fill-current" /> {t.hero.video}
+               <button
+                 onClick={() => onNavigate('simulation')}
+                 className="group relative w-full overflow-hidden rounded-full bg-gray-900 px-7 py-3.5 shadow-[0_16px_40px_-22px_rgba(15,23,42,0.55)] will-change-transform transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[0_26px_58px_-26px_rgba(16,185,129,0.68)] dark:bg-white sm:w-auto sm:px-8 sm:py-4"
+               >
+                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#149A74] via-[#1AAE82] to-[#2DD4BF] bg-[length:180%_100%] opacity-0 transition-[opacity,background-position] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[position:100%_0] group-hover:opacity-100" />
+                 <div className="pointer-events-none absolute -left-1/3 top-[-130%] h-[340%] w-1/3 -translate-x-full rotate-[20deg] bg-white/40 opacity-0 blur-xl transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[420%] group-hover:opacity-70 dark:bg-white/35" />
+                 <span className="relative flex items-center justify-center gap-3 text-base font-bold text-white transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white dark:text-gray-900 sm:text-lg">
+                   {navT.hero?.ctaPrimary || 'Try Sample'}
+                   <ArrowRight className="w-5 h-5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5" />
+                 </span>
+               </button>
+               <button
+                 onClick={() => onNavigate('auth')}
+                 className="group flex w-full items-center justify-center gap-2.5 rounded-full px-6 py-3.5 font-semibold text-gray-600 transition-all hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-white sm:w-auto sm:py-4"
+               >
+                 <div className="flex items-center justify-center">
+                   <Zap className="w-4 h-4 text-[#1AAE82] fill-[#1AAE82] opacity-80 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100" />
+                 </div>
+                 <span className="text-[15px]">{navT.hero?.ctaSecondaryButton || 'Start Now'}</span>
                </button>
              </div>
            </motion.div>
@@ -444,12 +457,18 @@ export const HowItWorksPage = ({
                 {t.cta.desc}
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link to="/social/pricing" className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-lg">
-                  {t.cta.primary}
-                </Link>
-                <Link to="/social/simulation" className="px-10 py-5 bg-white/10 border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-colors backdrop-blur-sm">
-                  {t.cta.secondary}
-                </Link>
+                <button
+                  onClick={() => onNavigate('simulation')}
+                  className="px-10 py-5 bg-[#1AAE82] hover:bg-[#15956F] text-white rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-lg"
+                >
+                  {navT.hero?.ctaPrimary || 'Try Sample'}
+                </button>
+                <button
+                  onClick={() => onNavigate('auth')}
+                  className="px-10 py-5 bg-white/10 border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-colors backdrop-blur-sm"
+                >
+                  {navT.hero?.ctaSecondaryButton || 'Start Now'}
+                </button>
               </div>
             </div>
           </div>
