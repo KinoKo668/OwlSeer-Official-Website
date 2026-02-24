@@ -24,6 +24,24 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
     setMobileSectionOpen(mobileSectionOpen === section ? null : section);
   };
 
+  const renderFooterLink = (
+    item: { label: string; href?: string; action?: () => void },
+    className: string
+  ) => (
+    <a
+      href={item.href || '#'}
+      onClick={(event) => {
+        if (!item.href && item.action) {
+          event.preventDefault();
+          item.action();
+        }
+      }}
+      className={className}
+    >
+      {item.label}
+    </a>
+  );
+
   const handleNav = (page: string) => {
     if (onNavigate) {
       onNavigate(page);
@@ -114,10 +132,19 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
     }
   ];
 
+  const mobileSections = [
+    { key: 'mobile-product', section: footerSections[0] },
+    { key: 'mobile-solutions', section: footerSections[1] },
+    { key: 'mobile-use-cases', section: footerSections[2] },
+    { key: 'mobile-resources', section: footerSections[3] },
+    { key: 'mobile-legal', section: footerSections[4] },
+    { key: 'mobile-compare', section: footerSections[5] },
+  ];
+
   return (
-  <footer className="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 pt-16 pb-8 transition-colors duration-300">
+  <footer className="bg-white dark:bg-slate-900 pt-16 pb-8 transition-colors duration-300">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col lg:flex-row gap-12 mb-16">
+      <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 mb-14 lg:mb-16">
         <div className="lg:w-1/5">
           <div className="flex items-center gap-2 mb-6">
             <OwlSeerLogo className="h-8 w-auto text-gray-900 dark:text-white" />
@@ -135,18 +162,7 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
               <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
                 {section.items.map((item, index) => (
                   <li key={`${section.title}-${index}`}>
-                    <a
-                      href={item.href || '#'}
-                      onClick={(event) => {
-                        if (!item.href) {
-                          event.preventDefault();
-                          item.action();
-                        }
-                      }}
-                      className="transition-colors hover:text-[#1AAE82] dark:hover:text-[#1AAE82] whitespace-nowrap"
-                    >
-                      {item.label}
-                    </a>
+                    {renderFooterLink(item, 'transition-colors hover:text-[#1AAE82] dark:hover:text-[#1AAE82] whitespace-nowrap')}
                   </li>
                 ))}
               </ul>
@@ -155,126 +171,52 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
         </div>
 
         {/* Mobile View */}
-        <div className="lg:hidden w-full space-y-4">
-           {/* Product & Solutions Accordion */}
-           <div className="border-b border-gray-100 dark:border-slate-800 pb-4">
-             <button 
-               onClick={() => toggleSection('prod-sol')}
-               className="flex items-center justify-between w-full py-2 text-base font-bold text-gray-900 dark:text-white"
-             >
-               {t?.mobileProductAndSolutions || "Product & Solutions"}
-               <ChevronDown className={`w-4 h-4 transition-transform ${mobileSectionOpen === 'prod-sol' ? 'rotate-180' : ''}`} />
-             </button>
-             <AnimatePresence>
-               {mobileSectionOpen === 'prod-sol' && (
-                 <motion.div
-                   initial={{ height: 0, opacity: 0 }}
-                   animate={{ height: 'auto', opacity: 1 }}
-                   exit={{ height: 0, opacity: 0 }}
-                   className="overflow-hidden"
-                 >
-                   <div className="py-4 space-y-6">
-                     {[footerSections[0], footerSections[1], footerSections[2]].map((section) => (
-                       <div key={section.title}>
-                         <h5 className="text-xs font-bold text-gray-400 uppercase mb-3">{section.title}</h5>
-                         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                           {section.items.map((item) => (
-                             <li key={item.label}>
-                               <a
-                                 href={item.href || '#'}
-                                 onClick={(e) => {
-                                   if (!item.href) {
-                                     e.preventDefault();
-                                     item.action();
-                                   }
-                                 }}
-                                 className="block py-1"
-                               >
-                                 {item.label}
-                               </a>
-                             </li>
-                           ))}
-                         </ul>
-                       </div>
-                     ))}
-                   </div>
-                 </motion.div>
-               )}
-             </AnimatePresence>
-           </div>
-
-           {/* Resources & Trust Accordion */}
-           <div className="border-b border-gray-100 dark:border-slate-800 pb-4">
-             <button 
-               onClick={() => toggleSection('res-trust')}
-               className="flex items-center justify-between w-full py-2 text-base font-bold text-gray-900 dark:text-white"
-             >
-               {t?.resources || "Resources"}
-               <ChevronDown className={`w-4 h-4 transition-transform ${mobileSectionOpen === 'res-trust' ? 'rotate-180' : ''}`} />
-             </button>
-             <AnimatePresence>
-               {mobileSectionOpen === 'res-trust' && (
-                 <motion.div
-                   initial={{ height: 0, opacity: 0 }}
-                   animate={{ height: 'auto', opacity: 1 }}
-                   exit={{ height: 0, opacity: 0 }}
-                   className="overflow-hidden"
-                 >
-                     <div className="py-4 space-y-6">
-                     {[footerSections[3], footerSections[5]].map((section) => (
-                       <div key={section.title}>
-                         <h5 className="text-xs font-bold text-gray-400 uppercase mb-3">{section.title}</h5>
-                         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                           {section.items.map((item) => (
-                             <li key={item.label}>
-                               <a
-                                 href={item.href || '#'}
-                                 onClick={(e) => {
-                                   if (!item.href) {
-                                     e.preventDefault();
-                                     item.action();
-                                   }
-                                 }}
-                                 className="block py-1"
-                               >
-                                 {item.label}
-                               </a>
-                             </li>
-                           ))}
-                         </ul>
-                       </div>
-                     ))}
-                   </div>
-                 </motion.div>
-               )}
-             </AnimatePresence>
-           </div>
-
-           {/* Legal (Always Visible) */}
-           <div className="pt-2">
-             <h4 className="font-bold text-gray-900 dark:text-white mb-4">{t?.legal || "Legal"}</h4>
-             <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-gray-600 dark:text-gray-400">
-               {footerSections[4].items.map((item) => (
-                 <a
-                   key={item.label}
-                   href={item.href || '#'}
-                   onClick={(e) => {
-                     if (!item.href) {
-                       e.preventDefault();
-                       item.action();
-                     }
-                   }}
-                 >
-                   {item.label}
-                 </a>
-               ))}
-             </div>
-           </div>
+        <div className="lg:hidden w-full">
+          <div className="overflow-hidden rounded-xl bg-white/80 dark:bg-slate-900/50">
+            {mobileSections.map(({ key, section }) => {
+              const isOpen = mobileSectionOpen === key;
+              return (
+                <div key={key}>
+                  <button
+                    onClick={() => toggleSection(key)}
+                    aria-expanded={isOpen}
+                    aria-controls={`${key}-panel`}
+                    className="flex min-h-[48px] w-full items-center justify-between px-4 py-3 text-left text-base font-semibold text-gray-900 dark:text-white"
+                  >
+                    <span>{section.title}</span>
+                    <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`${key}-panel`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-4 pb-4 space-y-1">
+                          {section.items.map((item) => (
+                            <div key={`${key}-${item.label}`}>
+                              {renderFooterLink(
+                                item,
+                                'block rounded-md px-2 py-2.5 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-800/80 hover:text-[#1AAE82] dark:hover:text-[#1AAE82]'
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
       
       {showIcpRegistration ? (
-        <div className="border-t border-gray-100 dark:border-slate-800 py-[16px]">
+        <div className="py-[16px]">
           <div className="mx-auto max-w-5xl text-center text-[13px] leading-6 text-[#666] dark:text-gray-300">
             <p>
               <span className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5">
@@ -319,7 +261,7 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
           </div>
         </div>
       ) : (
-        <div className="border-t border-gray-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-gray-500 dark:text-gray-400">
             {t?.rights || "© 2026 OwlSeer. All rights reserved."}
           </div>
