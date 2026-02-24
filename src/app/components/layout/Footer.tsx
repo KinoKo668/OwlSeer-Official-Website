@@ -12,11 +12,13 @@ interface FooterProps {
 }
 
 export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) => {
+  const SITE_ORIGIN = 'https://www.owlseer.com';
   const { language } = useLanguage();
   const [mobileSectionOpen, setMobileSectionOpen] = useState<string | null>(null);
   const links = t?.links || {};
-  const meta = t?.meta || {};
   const isZh = language === 'zh';
+  const showIcpRegistration = language === 'zh';
+  const getAbsolutePublicUrl = (path: string) => `${SITE_ORIGIN}${addLanguagePrefix(path, language)}`;
 
   const toggleSection = (section: string) => {
     setMobileSectionOpen(mobileSectionOpen === section ? null : section);
@@ -31,6 +33,7 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
        if (page === 'blog') (window as any).navigateToBlog?.();
        if (page === 'trends-hub') window.location.href = addLanguagePrefix('/social/trends', language);
        if (page === 'tools') window.location.href = addLanguagePrefix('/social/tools', language);
+       if (page === 'about') window.location.href = addLanguagePrefix('/social/about', language);
        if (page === 'faq') (window as any).navigateToFAQ?.();
        if (page === 'contact') (window as any).navigateToContact?.();
        if (page === 'security') (window as any).navigateToSecurity?.();
@@ -74,6 +77,7 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
       items: [
         { label: links.blog || "Blog", action: () => handleNav('blog') },
         { label: links.guides || "Guides", action: () => handleNav('guides') },
+        { label: links.about || (isZh ? "关于我们" : "About Us"), action: () => handleNav('about') },
         { label: links.glossary || "Glossary", action: () => handleNav('glossary') },
         { label: links.faq || "FAQ", action: () => handleNav('faq') },
         { label: links.contact || "Contact", action: () => handleNav('contact') },
@@ -82,10 +86,22 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
     {
       title: t?.legal || "Legal",
       items: [
-        { label: links.privacy || "Privacy", action: () => handleNav('privacy') },
-        { label: links.terms || "Terms", action: () => handleNav('terms') },
-        { label: links.cookies || "Cookies", action: () => handleNav('cookies') },
-        { label: links.security || "Security", action: () => handleNav('security') },
+        {
+          label: links.privacy || (isZh ? "隐私政策" : "Privacy Policy"),
+          href: getAbsolutePublicUrl('/social/privacy')
+        },
+        {
+          label: links.terms || (isZh ? "用户协议" : "Terms of Service"),
+          href: getAbsolutePublicUrl('/social/terms')
+        },
+        {
+          label: links.cookies || (isZh ? "Cookie 政策" : "Cookie Policy"),
+          href: getAbsolutePublicUrl('/social/cookies')
+        },
+        {
+          label: links.security || (isZh ? "安全声明" : "Security"),
+          href: getAbsolutePublicUrl('/social/security')
+        },
       ]
     },
     {
@@ -120,10 +136,12 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
                 {section.items.map((item, index) => (
                   <li key={`${section.title}-${index}`}>
                     <a
-                      href="#"
+                      href={item.href || '#'}
                       onClick={(event) => {
-                        event.preventDefault();
-                        item.action();
+                        if (!item.href) {
+                          event.preventDefault();
+                          item.action();
+                        }
                       }}
                       className="transition-colors hover:text-[#1AAE82] dark:hover:text-[#1AAE82] whitespace-nowrap"
                     >
@@ -137,7 +155,7 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
         </div>
 
         {/* Mobile View */}
-        <div className="md:hidden w-full space-y-4">
+        <div className="lg:hidden w-full space-y-4">
            {/* Product & Solutions Accordion */}
            <div className="border-b border-gray-100 dark:border-slate-800 pb-4">
              <button 
@@ -161,7 +179,20 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
                          <h5 className="text-xs font-bold text-gray-400 uppercase mb-3">{section.title}</h5>
                          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                            {section.items.map((item) => (
-                             <li key={item.label}><a href="#" onClick={(e) => { e.preventDefault(); item.action(); }} className="block py-1">{item.label}</a></li>
+                             <li key={item.label}>
+                               <a
+                                 href={item.href || '#'}
+                                 onClick={(e) => {
+                                   if (!item.href) {
+                                     e.preventDefault();
+                                     item.action();
+                                   }
+                                 }}
+                                 className="block py-1"
+                               >
+                                 {item.label}
+                               </a>
+                             </li>
                            ))}
                          </ul>
                        </div>
@@ -195,7 +226,20 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
                          <h5 className="text-xs font-bold text-gray-400 uppercase mb-3">{section.title}</h5>
                          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                            {section.items.map((item) => (
-                             <li key={item.label}><a href="#" onClick={(e) => { e.preventDefault(); item.action(); }} className="block py-1">{item.label}</a></li>
+                             <li key={item.label}>
+                               <a
+                                 href={item.href || '#'}
+                                 onClick={(e) => {
+                                   if (!item.href) {
+                                     e.preventDefault();
+                                     item.action();
+                                   }
+                                 }}
+                                 className="block py-1"
+                               >
+                                 {item.label}
+                               </a>
+                             </li>
                            ))}
                          </ul>
                        </div>
@@ -211,28 +255,98 @@ export const Footer = ({ t, onNavigate, showSocialLinks = true }: FooterProps) =
              <h4 className="font-bold text-gray-900 dark:text-white mb-4">{t?.legal || "Legal"}</h4>
              <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-gray-600 dark:text-gray-400">
                {footerSections[4].items.map((item) => (
-                 <a key={item.label} href="#" onClick={(e) => { e.preventDefault(); item.action(); }}>{item.label}</a>
+                 <a
+                   key={item.label}
+                   href={item.href || '#'}
+                   onClick={(e) => {
+                     if (!item.href) {
+                       e.preventDefault();
+                       item.action();
+                     }
+                   }}
+                 >
+                   {item.label}
+                 </a>
                ))}
              </div>
            </div>
         </div>
       </div>
       
-      <div className="border-t border-gray-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          {t?.rights || "© 2026 OwlSeer. All rights reserved."}
+      {showIcpRegistration ? (
+        <div className="border-t border-gray-100 dark:border-slate-800 py-[16px]">
+          <div className="mx-auto max-w-5xl text-center text-[13px] leading-6 text-[#666] dark:text-gray-300">
+            <p>
+              <span className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5">
+                <span>© 2026 赤光智算科技（深圳）有限公司 版权所有</span>
+                <span className="hidden text-[#C8C8C8] sm:inline">|</span>
+                <span>地址：深圳市南山区软件产业基地5E栋208</span>
+                <span className="hidden text-[#C8C8C8] sm:inline">|</span>
+                <span>
+                  联系电话：
+                  <span className="font-medium text-[#333] dark:text-gray-100">0755-88888888</span>
+                  <span className="ml-1">（可替换占位符）</span>
+                </span>
+              </span>
+            </p>
+            <p className="mt-1">
+              <span className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5">
+                <span>ICP备案：</span>
+                <a
+                  href="https://beian.miit.gov.cn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#666] underline-offset-2 hover:underline dark:text-gray-300"
+                >
+                  粤ICP备2026008280号
+                </a>
+                <span className="text-[#C8C8C8]">|</span>
+                <a
+                  href={getAbsolutePublicUrl('/social/privacy')}
+                  className="text-[#666] underline-offset-2 hover:underline dark:text-gray-300"
+                >
+                  隐私政策
+                </a>
+                <span className="text-[#C8C8C8]">|</span>
+                <a
+                  href={getAbsolutePublicUrl('/social/terms')}
+                  className="text-[#666] underline-offset-2 hover:underline dark:text-gray-300"
+                >
+                  用户协议
+                </a>
+              </span>
+            </p>
+          </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-6">
-          <a
-            href="/social/llm.txt"
-            aria-hidden="true"
-            tabIndex={-1}
-            className="pointer-events-none select-none text-[1px] leading-none text-white dark:text-slate-900"
-          >
-            llm.txt
-          </a>
+      ) : (
+        <div className="border-t border-gray-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            {t?.rights || "© 2026 OwlSeer. All rights reserved."}
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+            <a
+              href={getAbsolutePublicUrl('/social/privacy')}
+              className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82]"
+            >
+              {links.privacy || "Privacy Policy"}
+            </a>
+            <a
+              href={getAbsolutePublicUrl('/social/terms')}
+              className="hover:text-[#1AAE82] dark:hover:text-[#1AAE82]"
+            >
+              {links.terms || "Terms of Service"}
+            </a>
+            <a
+              href="/social/llm.txt"
+              aria-hidden="true"
+              tabIndex={-1}
+              className="pointer-events-none select-none text-[1px] leading-none text-white dark:text-slate-900"
+            >
+              llm.txt
+            </a>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   </footer>
   );

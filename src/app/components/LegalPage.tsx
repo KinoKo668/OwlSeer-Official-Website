@@ -32,17 +32,24 @@ interface LegalPageProps {
   setIsDarkMode: (isDark: boolean) => void;
 }
 
-const LEGAL_NAV = [
-  { id: 'privacy', label: 'Privacy Policy', icon: Shield },
-  { id: 'terms', label: 'Terms of Service', icon: FileText },
-  { id: 'security', label: 'Security Statement', icon: Lock },
-  { id: 'cookies', label: 'Cookie Policy', icon: Cookie },
-];
-
 export function LegalPage({ onNavigate, activeSection, isDarkMode, setIsDarkMode }: LegalPageProps) {
   // Use global language context
   const { language, setLanguage } = useLanguage();
+  const isZh = language === 'zh';
   const t = translations[language as keyof typeof translations] || translations.en;
+  const legalNav = isZh
+    ? [
+        { id: 'privacy', label: '隐私政策', icon: Shield },
+        { id: 'terms', label: '用户协议', icon: FileText },
+        { id: 'security', label: '安全声明', icon: Lock },
+        { id: 'cookies', label: 'Cookie 政策', icon: Cookie },
+      ]
+    : [
+        { id: 'privacy', label: 'Privacy Policy', icon: Shield },
+        { id: 'terms', label: 'Terms of Service', icon: FileText },
+        { id: 'security', label: 'Security Statement', icon: Lock },
+        { id: 'cookies', label: 'Cookie Policy', icon: Cookie },
+      ];
 
   const handleNavigate = (page: string) => {
     onNavigate(page);
@@ -105,10 +112,12 @@ export function LegalPage({ onNavigate, activeSection, isDarkMode, setIsDarkMode
         <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
             <h1 className="text-3xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
-              Legal Center
+              {isZh ? '法律中心' : 'Legal Center'}
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-lg max-w-2xl mx-auto">
-              Transparency, trust, and compliance. Everything you need to know about our policies.
+              {isZh
+                ? '透明、可信、合规。你可以在这里查看与服务相关的各项政策。'
+                : 'Transparency, trust, and compliance. Everything you need to know about our policies.'}
             </p>
           </div>
         </div>
@@ -120,10 +129,12 @@ export function LegalPage({ onNavigate, activeSection, isDarkMode, setIsDarkMode
             <div className="lg:w-64 flex-shrink-0">
               <div className="sticky top-24 bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-sm">
                 <div className="p-4 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-800">
-                  <h3 className="font-bold text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">Documents</h3>
+                  <h3 className="font-bold text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    {isZh ? '文档' : 'Documents'}
+                  </h3>
                 </div>
                 <nav className="p-2 space-y-1">
-                  {LEGAL_NAV.map((item) => {
+                  {legalNav.map((item) => {
                     const Icon = item.icon;
                     const isActive = activeSection === item.id;
                     return (

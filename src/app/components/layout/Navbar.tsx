@@ -62,6 +62,7 @@ export const Navbar = memo(({
       if (page === 'blog') (window as any).navigateToBlog?.();
       if (page === 'trends-hub') window.location.href = addLanguagePrefix('/social/trends', language);
       if (page === 'tools') window.location.href = addLanguagePrefix('/social/tools', language);
+      if (page === 'about') window.location.href = addLanguagePrefix('/social/about', language);
        if (page === 'faq') (window as any).navigateToFAQ?.();
        if (page === 'contact') (window as any).navigateToContact?.();
        if (page === 'security') (window as any).navigateToSecurity?.();
@@ -403,13 +404,13 @@ export const Navbar = memo(({
                         <div className="space-y-4">
                           <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{(t?.compare as string) || (language === 'zh' ? '对比' : 'Compare')}</div>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('compare/ai-tools-comparison'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareAiTools || "AI Tools Comparison"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareAiTools || (language === 'zh' ? 'AI 工具对比' : 'AI Tools Comparison')}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('compare/tubespanner'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareTubeSpanner || "OwlSeer vs TubeSpanner"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareTubeSpanner || (language === 'zh' ? 'OwlSeer 对比 TubeSpanner' : 'OwlSeer vs TubeSpanner')}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('compare/owlseer-vs-vidiq'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareVidIQ || "OwlSeer vs VidIQ"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.compareVidIQ || (language === 'zh' ? 'OwlSeer 对比 VidIQ' : 'OwlSeer vs VidIQ')}</div>
                           </a>
                         </div>
                       </div>
@@ -460,11 +461,14 @@ export const Navbar = memo(({
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('guides'); }} className="block group/item">
                             <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{t.guides}</div>
                           </a>
+                          <a href="#" onClick={(e) => { e.preventDefault(); handleNav('about'); }} className="block group/item">
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.about || (language === 'zh' ? '关于我们' : 'About Us')}</div>
+                          </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('trends-hub'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.trends || "Trends"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.trends || (language === 'zh' ? '趋势' : 'Trends')}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('tools'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.tools || "Tools"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.tools || (language === 'zh' ? '工具' : 'Tools')}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('glossary'); }} className="block group/item">
                             <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{nav.glossary || "Glossary"}</div>
@@ -481,7 +485,7 @@ export const Navbar = memo(({
                             <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.terms || "Terms"}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.cookies || "Cookies"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.cookies || (language === 'zh' ? 'Cookie 政策' : 'Cookies')}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="block group/item">
                             <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.security || "Security"}</div>
@@ -490,7 +494,7 @@ export const Navbar = memo(({
                             <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{t.faq}</div>
                           </a>
                           <a href="#" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="block group/item">
-                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.contact || "Contact"}</div>
+                            <div className="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover/item:text-[#1AAE82] transition-colors">{navLinks.contact || (language === 'zh' ? '联系我们' : 'Contact')}</div>
                           </a>
                         </div>
                       </div>
@@ -711,8 +715,9 @@ export const Navbar = memo(({
                     >
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('blog'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.blog}</a>
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('guides'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.guides}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('trends-hub'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.trends || "Trends"}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('tools'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.tools || "Tools"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('about'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.about || (language === 'zh' ? '关于我们' : 'About Us')}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('trends-hub'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.trends || (language === 'zh' ? '趋势' : 'Trends')}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('tools'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.tools || (language === 'zh' ? '工具' : 'Tools')}</a>
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('glossary'); }} className="block text-sm text-gray-600 dark:text-gray-400">{nav.glossary || "Glossary"}</a>
                     </motion.div>
                   )}
@@ -741,10 +746,10 @@ export const Navbar = memo(({
                     >
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('privacy'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.privacy || "Privacy"}</a>
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('terms'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.terms || "Terms"}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.cookies || "Cookies"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('cookies'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.cookies || (language === 'zh' ? 'Cookie 政策' : 'Cookies')}</a>
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('security'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.security || "Security"}</a>
                       <a href="#" onClick={(e) => { e.preventDefault(); handleNav('faq'); }} className="block text-sm text-gray-600 dark:text-gray-400">{t.faq}</a>
-                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.contact || "Contact"}</a>
+                      <a href="#" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="block text-sm text-gray-600 dark:text-gray-400">{navLinks.contact || (language === 'zh' ? '联系我们' : 'Contact')}</a>
                     </motion.div>
                   )}
                 </AnimatePresence>
